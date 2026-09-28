@@ -1,0 +1,63 @@
+rules_version = '2';
+
+// Règles de sécurité (voir CLAUDE.md, sections 4 et 6).
+// Tout ce qui n'est pas explicitement autorisé est refusé.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function connecte() {
+      return request.auth != null;
+    }
+
+    function moi() {
+      return request.auth.uid;
+    }
+
+    // Rôles : custom claims attribués par une Cloud Function, jamais par l'app.
+    function estAdmin() {
+      return connecte() && request.auth.token.admin == true;
+    }
+
+    function estSecretariat() {
+      return connecte()
+        && (request.auth.token.secretariat == true || estAdmin());
+    }
+
+    function texte(v, max) {
+      return v is string && v.size() > 0 && v.size() <= max;
+    }
+
+    // ----- Profils des membres -----
+    match /users/{uid} {
+      // Chacun le sien ; le secrétariat et l'administrateur tiennent le
+      // fichier des membres.
+      allow read: if (connecte() && uid == moi()) || estSecretariat();
+
+      // Création : consentement explicite daté par le serveur.
+      allow create: if connecte() && uid == moi()
+        && request.resource.data.keys().hasOnly([
+          'nom', 'email', 'langue', 'consentementLe', 'createdAt'])
+        && texte(request.resource.data.nom, 100)
+        && request.resource.data.email is string
+        && request.resource.data.langue in ['fr', 'nl']
+        && request.resource.data.consentementLe == request.time;
+
+      // Modification par soi-même : jamais les rôles ni le consentement.
+      allow update: if connecte() && uid == moi()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nom', 'langue', 'photoUrl', 'jetonsNotif', 'decalageMin'])
+        && texte(request.resource.data.nom, 100)
+        && request.resource.data.langue in ['fr', 'nl']
+        && request.resource.data.get('jetonsNotif', []) is list
+        && request.resource.data.get('jetonsNotif', []).size() <= 20
+        && (request.resource.data.get('photoUrl', null) == null
+          || (request.resource.data.photoUrl is string
+            && request.resource.data.photoUrl.matches('https://.+')
+            && request.resource.data.photoUrl.size() <= 1000));
+
+      allow delete: if connecte() && uid == moi();
+    }
+
+    // `systeme/*` : réservé aux Cloud Functions (aucun accès depuis l'app).
+  }
+}

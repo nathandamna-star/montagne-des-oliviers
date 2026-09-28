@@ -188,3 +188,17 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   `estResponsableProvider` (branché sur les custom claims à l'étape 2). Barre du bas sur téléphone,
   `NavigationRail` à partir de 800 px de large (ordinateur, site web).
 - Vérifier avant chaque commit : `flutter analyze`, `flutter test` ; la CI construit aussi la version web.
+- Auth (étape 2, `lib/features/auth/`) : e-mail + mot de passe, Google (web : fenêtre Firebase ; mobile :
+  google_sign_in avec les identifiants clients de `firebase_options.dart`), Apple (iPhone seulement). Sans compte :
+  Accueil, Agenda, Médias ; Groupes et Profil affichent `ConnexionRequise`. Profil `users/{uid}` (nom, email,
+  langue fr|nl, `consentementLe` = heure serveur vérifiée par les règles) ; compte Google/Apple sans profil →
+  écran de consentement `/connexion/profil` (redirection du routeur). Google et Apple isolés derrière
+  `ConnexionFournisseurs`, fonctions derrière `FonctionsRoles` (remplacés dans les tests, voir `test/helpers.dart`).
+- Rôles : custom claims `admin`, `secretariat`, `tresorier` (`rolesProvider`, `estResponsableProvider`,
+  `estAdminProvider`), recopiés dans `users.roles` par le serveur. Fonctions `revendiquerAdmin` (compte dont
+  l'e-mail est le paramètre `EMAIL_ADMIN`, une seule fois, trace dans `systeme/admin` ; dans l'app : appui long
+  sur la carte « Bonjour … » du Profil) et `definirRoles` (administrateur ; par e-mail ; impossible de retirer
+  son propre rôle d'admin) — écran Responsables → Rôles des responsables.
+- Règles : `firebase/firestore.rules` (fichier des membres lisible par secrétariat et admin), tests
+  `cd firebase && npm install && npm test` ; fonctions : `functions/` (Node 22, europe-west1), logique pure dans
+  `roles.js`, tests `cd functions && npm install && npm test` (Java 21 requis pour l'émulateur).

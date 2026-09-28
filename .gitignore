@@ -46,3 +46,10 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Firebase
+node_modules/
+*.log
+.firebase/
+functions/.env.*
+!functions/.env.local
