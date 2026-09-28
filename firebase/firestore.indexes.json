@@ -4,20 +4,57 @@
       "collectionGroup": "actualites",
       "queryScope": "COLLECTION",
       "fields": [
-        { "fieldPath": "publie", "order": "ASCENDING" },
-        { "fieldPath": "visibilite", "order": "ASCENDING" },
-        { "fieldPath": "publieLe", "order": "DESCENDING" }
+        {
+          "fieldPath": "publie",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "visibilite",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "publieLe",
+          "order": "DESCENDING"
+        }
       ]
     },
     {
       "collectionGroup": "evenements",
       "queryScope": "COLLECTION",
       "fields": [
-        { "fieldPath": "publie", "order": "ASCENDING" },
-        { "fieldPath": "visibilite", "order": "ASCENDING" },
-        { "fieldPath": "fin", "order": "ASCENDING" }
+        {
+          "fieldPath": "publie",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "visibilite",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "fin",
+          "order": "ASCENDING"
+        }
       ]
     }
   ],
-  "fieldOverrides": []
+  "fieldOverrides": [
+    {
+      "collectionGroup": "rencontres",
+      "fieldPath": "debut",
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "DESCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    }
+  ]
 }

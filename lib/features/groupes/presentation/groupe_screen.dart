@@ -11,6 +11,7 @@ import '../../../shared/widgets/etat_vide.dart';
 import '../../auth/auth_providers.dart';
 import '../domain/groupe.dart';
 import '../groupes_providers.dart';
+import 'carte_rencontre.dart';
 import 'libelles_groupes.dart';
 
 /// Page d'un groupe : discussion, appel, membres ; gestion pour ses
@@ -166,6 +167,24 @@ class _Groupe extends ConsumerWidget {
                     ),
                   ),
                 ),
+              if (membre || secretariat) ...[
+                const SizedBox(height: 24),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        l10n.calendrier,
+                        style: theme.textTheme.titleMedium,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () => context.push(Routes.calendrier(g.id)),
+                      child: Text(l10n.voirTout),
+                    ),
+                  ],
+                ),
+                ..._prochaines(context, ref),
+              ],
               const SizedBox(height: 24),
               Row(
                 children: [
@@ -254,6 +273,21 @@ class _Groupe extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  List<Widget> _prochaines(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final liste = ref.watch(rencontresProvider(groupe.id)).value ?? const [];
+    if (liste.isEmpty) {
+      return [
+        Text(
+          l10n.aucunRendezVous,
+          style: Theme.of(context).textTheme.bodyMedium
+              ?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
+        ),
+      ];
+    }
+    return [for (final r in liste.take(3)) CarteRencontre(rencontre: r)];
   }
 
   /// Choisir des personnes parmi les comptes de l'église.

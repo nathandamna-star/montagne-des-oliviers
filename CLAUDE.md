@@ -250,3 +250,18 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   retire les jetons expirés ; toucher → discussion. Appel intégré (Agora), calendriers de répétition et de modération :
   étape suivante des groupes.
 - Éditeurs : lecture ponctuelle (`lire(id)`, `get()`) plutôt que `.first` d'un flux.
+- Calendriers des groupes (étape 6 bis) : `groupes/{gid}/rencontres/{rid}` (`Rencontre` : type reunion|repetition|
+  moderation|appel, titre, debut, fin, lieu, notes, chants [{titre, lien https}], roles uid → instrument, moderateur,
+  remplacement aucun|demande, deroule [étapes], modeAppel externe, rappelEnvoye par le serveur, remis à false si la
+  date change). Page du groupe → 3 prochains + « Tout voir » (`/groupes/:id/calendrier`), fiche
+  (`…/calendrier/:rid`), éditeur admin (`…/:rid/modifier`, « nouvelle » : type proposé selon le groupe — louange →
+  répétition demain 19 h, modération → culte du dimanche 10 h avec `derouleCulte`). Présences
+  `…/presences/{uid}` (Je viens / Je ne viens pas / Peut-être). Modération : le modérateur demande un remplaçant,
+  un autre membre « Je remplace ».
+- Fonctions : `nouvelleRencontre` (prévient les membres), `demandeRemplacement` (prévient les autres membres),
+  `rappelsRencontres` (toutes les heures : rappel dans les 24 h, au modérateur seulement pour une modération ;
+  index de groupe de collections sur `rencontres.debut`). Envoi commun : `envoyerAuxComptes`. Toucher →
+  `{type: 'rencontre', id, rid}`.
+- À FAIRE PLUS TARD (demandé par le porteur) : liens **Facebook** et **YouTube** de l'église (comptes pas encore
+  créés) : champs `facebookUrl`, `youtubeUrl` dans `parametres/eglise`, saisis par l'admin, boutons sur l'Accueil
+  et dans Médias (étape 10) ; le direct YouTube utilisera la même chaîne.

@@ -1,9 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../core/horloge.dart';
 import '../auth/auth_providers.dart';
 import 'data/groupes_repository.dart';
 import 'domain/groupe.dart';
+import 'domain/rencontre.dart';
 
 final groupesRepositoryProvider = Provider<GroupesRepository>(
   (ref) => GroupesRepository(ref.watch(firestoreProvider)),
@@ -91,3 +93,24 @@ final nonLuProvider = Provider.family<bool, Groupe>((ref, g) {
   final lu = ref.watch(lecturesGroupesProvider)[g.id] ?? 0;
   return dm.le.millisecondsSinceEpoch > lu;
 });
+
+/// Rendez-vous à venir d'un groupe (depuis le début de la journée).
+final rencontresProvider = StreamProvider.family<List<Rencontre>, String>((
+  ref,
+  id,
+) {
+  final n = ref.watch(horlogeProvider)();
+  return ref
+      .watch(groupesRepositoryProvider)
+      .rencontres(id, depuis: DateTime(n.year, n.month, n.day));
+});
+
+final rencontreProvider = StreamProvider.family<Rencontre?, (String, String)>(
+  (ref, ids) => ref.watch(groupesRepositoryProvider).rencontre(ids.$1, ids.$2),
+);
+
+final presencesProvider =
+    StreamProvider.family<Map<String, Reponse>, (String, String)>(
+      (ref, ids) =>
+          ref.watch(groupesRepositoryProvider).presences(ids.$1, ids.$2),
+    );

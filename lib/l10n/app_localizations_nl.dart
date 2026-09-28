@@ -888,4 +888,130 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get groupeAutre => 'Andere';
+
+  @override
+  String get ajouterChant => 'Lied toevoegen';
+
+  @override
+  String get ajouterRendezVous => 'Afspraak toevoegen';
+
+  @override
+  String get appelAvecLien =>
+      'De knop « Deelnemen aan oproep » opent de link van de groep. Bellen in de app komt binnenkort.';
+
+  @override
+  String get appelSansLien =>
+      'Voeg een oproeplink toe aan de groep (✏️ op de groepspagina) zodat de leden kunnen deelnemen.';
+
+  @override
+  String get aucunModerateur => 'Nog geen leider';
+
+  @override
+  String get aucunRendezVous => 'Geen afspraken gepland.';
+
+  @override
+  String get calendrier => 'Kalender';
+
+  @override
+  String calendrierDe(String nom) {
+    return 'Kalender · $nom';
+  }
+
+  @override
+  String chantNumero(int n) {
+    return 'Lied $n';
+  }
+
+  @override
+  String get chantsAPreparer => 'Liederen voor te bereiden';
+
+  @override
+  String get demanderRemplacant => 'Ik ben niet beschikbaar: vervanger vragen';
+
+  @override
+  String get deroule => 'Verloop van de dienst';
+
+  @override
+  String get derouleAide => 'Eén onderdeel per regel.';
+
+  @override
+  String get finalementDisponible => 'Ik ben toch beschikbaar';
+
+  @override
+  String get instrumentAide =>
+      'Instrument of stem (leeg als hij/zij niet speelt)';
+
+  @override
+  String get jeRemplace => 'Ik vervang';
+
+  @override
+  String get lienChant => 'Link naar audio, partituur of tekst (optioneel)';
+
+  @override
+  String get maReponse => 'Mijn antwoord';
+
+  @override
+  String get moderateur => 'Leider van de dienst';
+
+  @override
+  String moderePar(String nom) {
+    return 'Geleid door $nom';
+  }
+
+  @override
+  String get modifier => 'Bewerken';
+
+  @override
+  String get modifierRendezVous => 'Afspraak bewerken';
+
+  @override
+  String get ouvrirLien => 'Link openen';
+
+  @override
+  String get presences => 'Aanwezigheden';
+
+  @override
+  String get quiJoueQuoi => 'Wie speelt wat';
+
+  @override
+  String remplacantRecherche(String nom) {
+    return '$nom zoekt een vervanger';
+  }
+
+  @override
+  String get remplacementDemande => 'Er wordt een vervanger gezocht.';
+
+  @override
+  String get rendezVousIndisponible =>
+      'Deze afspraak is niet meer beschikbaar.';
+
+  @override
+  String get retirer => 'Verwijderen';
+
+  @override
+  String get supprimerRendezVous => 'Deze afspraak verwijderen?';
+
+  @override
+  String get titreCulteDimanche => 'Zondagsdienst';
+
+  @override
+  String get rencontreReunion => 'Samenkomst';
+
+  @override
+  String get rencontreRepetition => 'Repetitie';
+
+  @override
+  String get rencontreModeration => 'Leiding van de dienst';
+
+  @override
+  String get rencontreAppel => 'Groepsoproep';
+
+  @override
+  String get reponseOui => 'Ik kom';
+
+  @override
+  String get reponseNon => 'Ik kom niet';
+
+  @override
+  String get reponsePeutEtre => 'Misschien';
 }

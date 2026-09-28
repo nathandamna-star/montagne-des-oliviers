@@ -3,18 +3,23 @@
 // chaque fonction vérifie elle-même qui l'appelle.
 import { initializeApp } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
-import { FieldValue, getFirestore } from 'firebase-admin/firestore';
+import { FieldValue, Timestamp, getFirestore } from 'firebase-admin/firestore';
 import { setGlobalOptions } from 'firebase-functions/v2';
 import { defineString } from 'firebase-functions/params';
 import { HttpsError, onCall } from 'firebase-functions/v2/https';
-import { onDocumentCreated, onDocumentWritten } from 'firebase-functions/v2/firestore';
+import { onDocumentCreated, onDocumentUpdated, onDocumentWritten } from 'firebase-functions/v2/firestore';
+import { onSchedule } from 'firebase-functions/v2/scheduler';
 import { getMessaging } from 'firebase-admin/messaging';
 import { logger } from 'firebase-functions';
 import { nouveauxClaims, normaliser, rolesDe } from './roles.js';
 import {
   doitNotifier, messagesActualite, messagesEvenement, totalInscrits,
+  quand,
 } from './notifications.js';
-import { apercu, destinataires, notificationMessage } from './groupes.js';
+import {
+  apercu, destinataires, destinatairesRappel, notificationMessage, notificationRappel,
+  notificationRemplacement, notificationRencontre, rappelsDus, remplacementVientDEtreDemande,
+} from './groupes.js';
 
 initializeApp();
 
@@ -165,25 +170,100 @@ export const nouveauMessageGroupe = onDocumentCreated(
         le: message.createdAt ?? FieldValue.serverTimestamp(),
       },
     });
-    if (process.env.FUNCTIONS_EMULATOR === 'true') return;
-    for (const uid of destinataires(groupe.membres, message.auteur)) {
-      const refProfil = db.doc(`users/${uid}`);
-      const profil = (await refProfil.get()).data();
-      const jetons = profil?.jetonsNotif ?? [];
-      if (jetons.length === 0) continue;
-      const { notification, data } = notificationMessage(
-        groupe, event.params.gid, message, profil.langue,
-      );
-      const res = await getMessaging().sendEachForMulticast({ tokens: jetons, notification, data });
-      // Jetons expirés : on les retire du profil.
-      const invalides = jetons.filter((_, i) => {
-        const code = res.responses[i].error?.code;
-        return code === 'messaging/registration-token-not-registered'
-          || code === 'messaging/invalid-registration-token';
-      });
-      if (invalides.length > 0) {
-        await refProfil.update({ jetonsNotif: FieldValue.arrayRemove(...invalides) });
-      }
+    await envoyerAuxComptes(
+      destinataires(groupe.membres, message.auteur),
+      (langue) => notificationMessage(groupe, event.params.gid, message, langue),
+    );
+  },
+);
+
+/**
+ * Envoie une notification sur les téléphones de chaque compte, dans sa langue
+ * ([construire] reçoit la langue). Retire les jetons expirés.
+ */
+async function envoyerAuxComptes(uids, construire) {
+  if (process.env.FUNCTIONS_EMULATOR === 'true') {
+    logger.info('Émulateur : notifications non envoyées', { uids });
+    return;
+  }
+  const db = getFirestore();
+  for (const uid of uids) {
+    const refProfil = db.doc(`users/${uid}`);
+    const profil = (await refProfil.get()).data();
+    const jetons = profil?.jetonsNotif ?? [];
+    if (jetons.length === 0) continue;
+    const { notification, data } = construire(profil.langue);
+    const res = await getMessaging().sendEachForMulticast({ tokens: jetons, notification, data });
+    const invalides = jetons.filter((_, i) => {
+      const code = res.responses[i].error?.code;
+      return code === 'messaging/registration-token-not-registered'
+        || code === 'messaging/invalid-registration-token';
+    });
+    if (invalides.length > 0) {
+      await refProfil.update({ jetonsNotif: FieldValue.arrayRemove(...invalides) });
+    }
+  }
+}
+
+/** Nouveau rendez-vous dans le calendrier d'un groupe : les membres sont prévenus. */
+export const nouvelleRencontre = onDocumentCreated(
+  'groupes/{gid}/rencontres/{rid}',
+  async (event) => {
+    const r = event.data?.data();
+    if (!r?.debut) return;
+    const groupe = (await getFirestore().doc(`groupes/${event.params.gid}`).get()).data();
+    if (!groupe) return;
+    await envoyerAuxComptes(groupe.membres ?? [], (langue) => notificationRencontre(
+      groupe, event.params.gid, event.params.rid, r, langue,
+      quand(r.debut.toDate(), langue === 'nl' ? 'nl' : 'fr'),
+    ));
+  },
+);
+
+/** Un modérateur demande un remplaçant : les autres membres du groupe sont prévenus. */
+export const demandeRemplacement = onDocumentUpdated(
+  'groupes/{gid}/rencontres/{rid}',
+  async (event) => {
+    const avant = event.data?.before.data();
+    const apres = event.data?.after.data();
+    if (!remplacementVientDEtreDemande(avant, apres)) return;
+    const db = getFirestore();
+    const groupe = (await db.doc(`groupes/${event.params.gid}`).get()).data();
+    if (!groupe) return;
+    const nom = (await db.doc(`annuaire/${apres.moderateur}`).get()).data()?.nom ?? '';
+    await envoyerAuxComptes(
+      destinataires(groupe.membres, apres.moderateur),
+      (langue) => notificationRemplacement(
+        event.params.gid, event.params.rid, apres, nom, langue,
+        quand(apres.debut.toDate(), langue === 'nl' ? 'nl' : 'fr'),
+      ),
+    );
+  },
+);
+
+/** Toutes les heures : rappel la veille des rendez-vous des groupes. */
+export const rappelsRencontres = onSchedule(
+  { schedule: 'every 60 minutes', timeZone: 'Europe/Brussels' },
+  async () => {
+    const db = getFirestore();
+    const maintenant = new Date();
+    const snap = await db.collectionGroup('rencontres')
+      .where('debut', '>', Timestamp.fromDate(maintenant))
+      .where('debut', '<=', Timestamp.fromDate(new Date(maintenant.getTime() + 24 * 3600 * 1000)))
+      .get();
+    const liste = snap.docs.map((d) => ({ ...d.data(), ref: d.ref, id: d.id, debut: d.data().debut.toDate() }));
+    for (const r of rappelsDus(liste, maintenant)) {
+      // Marqué d'abord : pas de double rappel si la fonction est relancée.
+      await r.ref.update({ rappelEnvoye: true });
+      const refGroupe = r.ref.parent.parent;
+      const groupe = (await refGroupe.get()).data();
+      if (!groupe) continue;
+      await envoyerAuxComptes(destinatairesRappel(groupe, r), (langue) => notificationRappel(
+        groupe, refGroupe.id, r.id, r, langue,
+        new Intl.DateTimeFormat(langue === 'nl' ? 'nl-BE' : 'fr-BE', {
+          hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Brussels',
+        }).format(r.debut),
+      ));
     }
   },
 );

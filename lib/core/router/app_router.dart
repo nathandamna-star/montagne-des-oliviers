@@ -14,7 +14,10 @@ import '../../features/auth/auth_providers.dart';
 import '../../features/auth/presentation/connexion_email_screen.dart';
 import '../../features/auth/presentation/connexion_screen.dart';
 import '../../features/auth/presentation/consentement_screen.dart';
+import '../../features/groupes/presentation/calendrier_groupe_screen.dart';
 import '../../features/groupes/presentation/discussion_screen.dart';
+import '../../features/groupes/presentation/editeur_rencontre_screen.dart';
+import '../../features/groupes/presentation/rencontre_screen.dart';
 import '../../features/groupes/presentation/editeur_groupe_screen.dart';
 import '../../features/groupes/presentation/gestion_groupes_screen.dart';
 import '../../features/groupes/presentation/groupe_screen.dart';
@@ -137,6 +140,30 @@ final _sousRoutes = <String, List<RouteBase>>{
           path: 'modifier',
           builder: (context, state) =>
               EditeurGroupeScreen(id: state.pathParameters['id']!),
+        ),
+        GoRoute(
+          path: 'calendrier',
+          builder: (context, state) =>
+              CalendrierGroupeScreen(id: state.pathParameters['id']!),
+          routes: [
+            // « nouvelle/modifier » : création.
+            GoRoute(
+              path: ':rid',
+              builder: (context, state) => RencontreScreen(
+                groupeId: state.pathParameters['id']!,
+                id: state.pathParameters['rid']!,
+              ),
+              routes: [
+                GoRoute(
+                  path: 'modifier',
+                  builder: (context, state) => EditeurRencontreScreen(
+                    groupeId: state.pathParameters['id']!,
+                    id: state.pathParameters['rid']!,
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ],
     ),

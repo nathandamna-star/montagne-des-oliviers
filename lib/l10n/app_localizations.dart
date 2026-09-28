@@ -1627,6 +1627,234 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Autre'**
   String get groupeAutre;
+
+  /// No description provided for @ajouterChant.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un chant'**
+  String get ajouterChant;
+
+  /// No description provided for @ajouterRendezVous.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un rendez-vous'**
+  String get ajouterRendezVous;
+
+  /// No description provided for @appelAvecLien.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le bouton « Rejoindre l\'appel » ouvrira le lien du groupe. L\'appel directement dans l\'app arrivera bientôt.'**
+  String get appelAvecLien;
+
+  /// No description provided for @appelSansLien.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajoutez un lien d\'appel au groupe (✏️ sur la page du groupe) pour que les membres puissent le rejoindre.'**
+  String get appelSansLien;
+
+  /// No description provided for @aucunModerateur.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pas encore de modérateur'**
+  String get aucunModerateur;
+
+  /// No description provided for @aucunRendezVous.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun rendez-vous prévu.'**
+  String get aucunRendezVous;
+
+  /// No description provided for @calendrier.
+  ///
+  /// In fr, this message translates to:
+  /// **'Calendrier'**
+  String get calendrier;
+
+  /// No description provided for @calendrierDe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Calendrier · {nom}'**
+  String calendrierDe(String nom);
+
+  /// No description provided for @chantNumero.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chant {n}'**
+  String chantNumero(int n);
+
+  /// No description provided for @chantsAPreparer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chants à préparer'**
+  String get chantsAPreparer;
+
+  /// No description provided for @demanderRemplacant.
+  ///
+  /// In fr, this message translates to:
+  /// **'Je ne suis pas disponible : demander un remplaçant'**
+  String get demanderRemplacant;
+
+  /// No description provided for @deroule.
+  ///
+  /// In fr, this message translates to:
+  /// **'Déroulé du culte'**
+  String get deroule;
+
+  /// No description provided for @derouleAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Une étape par ligne.'**
+  String get derouleAide;
+
+  /// No description provided for @finalementDisponible.
+  ///
+  /// In fr, this message translates to:
+  /// **'Finalement, je suis disponible'**
+  String get finalementDisponible;
+
+  /// No description provided for @instrumentAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Instrument ou voix (vide s\'il ne joue pas)'**
+  String get instrumentAide;
+
+  /// No description provided for @jeRemplace.
+  ///
+  /// In fr, this message translates to:
+  /// **'Je remplace'**
+  String get jeRemplace;
+
+  /// No description provided for @lienChant.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lien audio, partition ou paroles (facultatif)'**
+  String get lienChant;
+
+  /// No description provided for @maReponse.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ma réponse'**
+  String get maReponse;
+
+  /// No description provided for @moderateur.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modérateur'**
+  String get moderateur;
+
+  /// No description provided for @moderePar.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modéré par {nom}'**
+  String moderePar(String nom);
+
+  /// No description provided for @modifier.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier'**
+  String get modifier;
+
+  /// No description provided for @modifierRendezVous.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier le rendez-vous'**
+  String get modifierRendezVous;
+
+  /// No description provided for @ouvrirLien.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ouvrir le lien'**
+  String get ouvrirLien;
+
+  /// No description provided for @presences.
+  ///
+  /// In fr, this message translates to:
+  /// **'Présences'**
+  String get presences;
+
+  /// No description provided for @quiJoueQuoi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Qui joue quoi'**
+  String get quiJoueQuoi;
+
+  /// No description provided for @remplacantRecherche.
+  ///
+  /// In fr, this message translates to:
+  /// **'{nom} cherche un remplaçant'**
+  String remplacantRecherche(String nom);
+
+  /// No description provided for @remplacementDemande.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un remplaçant est recherché.'**
+  String get remplacementDemande;
+
+  /// No description provided for @rendezVousIndisponible.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce rendez-vous n\'est plus disponible.'**
+  String get rendezVousIndisponible;
+
+  /// No description provided for @retirer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer'**
+  String get retirer;
+
+  /// No description provided for @supprimerRendezVous.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer ce rendez-vous ?'**
+  String get supprimerRendezVous;
+
+  /// No description provided for @titreCulteDimanche.
+  ///
+  /// In fr, this message translates to:
+  /// **'Culte du dimanche'**
+  String get titreCulteDimanche;
+
+  /// No description provided for @rencontreReunion.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réunion'**
+  String get rencontreReunion;
+
+  /// No description provided for @rencontreRepetition.
+  ///
+  /// In fr, this message translates to:
+  /// **'Répétition'**
+  String get rencontreRepetition;
+
+  /// No description provided for @rencontreModeration.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modération'**
+  String get rencontreModeration;
+
+  /// No description provided for @rencontreAppel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Appel de groupe'**
+  String get rencontreAppel;
+
+  /// No description provided for @reponseOui.
+  ///
+  /// In fr, this message translates to:
+  /// **'Je viens'**
+  String get reponseOui;
+
+  /// No description provided for @reponseNon.
+  ///
+  /// In fr, this message translates to:
+  /// **'Je ne viens pas'**
+  String get reponseNon;
+
+  /// No description provided for @reponsePeutEtre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Peut-être'**
+  String get reponsePeutEtre;
 }
 
 class _AppLocalizationsDelegate

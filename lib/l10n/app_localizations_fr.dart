@@ -887,4 +887,129 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get groupeAutre => 'Autre';
+
+  @override
+  String get ajouterChant => 'Ajouter un chant';
+
+  @override
+  String get ajouterRendezVous => 'Ajouter un rendez-vous';
+
+  @override
+  String get appelAvecLien =>
+      'Le bouton « Rejoindre l\'appel » ouvrira le lien du groupe. L\'appel directement dans l\'app arrivera bientôt.';
+
+  @override
+  String get appelSansLien =>
+      'Ajoutez un lien d\'appel au groupe (✏️ sur la page du groupe) pour que les membres puissent le rejoindre.';
+
+  @override
+  String get aucunModerateur => 'Pas encore de modérateur';
+
+  @override
+  String get aucunRendezVous => 'Aucun rendez-vous prévu.';
+
+  @override
+  String get calendrier => 'Calendrier';
+
+  @override
+  String calendrierDe(String nom) {
+    return 'Calendrier · $nom';
+  }
+
+  @override
+  String chantNumero(int n) {
+    return 'Chant $n';
+  }
+
+  @override
+  String get chantsAPreparer => 'Chants à préparer';
+
+  @override
+  String get demanderRemplacant =>
+      'Je ne suis pas disponible : demander un remplaçant';
+
+  @override
+  String get deroule => 'Déroulé du culte';
+
+  @override
+  String get derouleAide => 'Une étape par ligne.';
+
+  @override
+  String get finalementDisponible => 'Finalement, je suis disponible';
+
+  @override
+  String get instrumentAide => 'Instrument ou voix (vide s\'il ne joue pas)';
+
+  @override
+  String get jeRemplace => 'Je remplace';
+
+  @override
+  String get lienChant => 'Lien audio, partition ou paroles (facultatif)';
+
+  @override
+  String get maReponse => 'Ma réponse';
+
+  @override
+  String get moderateur => 'Modérateur';
+
+  @override
+  String moderePar(String nom) {
+    return 'Modéré par $nom';
+  }
+
+  @override
+  String get modifier => 'Modifier';
+
+  @override
+  String get modifierRendezVous => 'Modifier le rendez-vous';
+
+  @override
+  String get ouvrirLien => 'Ouvrir le lien';
+
+  @override
+  String get presences => 'Présences';
+
+  @override
+  String get quiJoueQuoi => 'Qui joue quoi';
+
+  @override
+  String remplacantRecherche(String nom) {
+    return '$nom cherche un remplaçant';
+  }
+
+  @override
+  String get remplacementDemande => 'Un remplaçant est recherché.';
+
+  @override
+  String get rendezVousIndisponible => 'Ce rendez-vous n\'est plus disponible.';
+
+  @override
+  String get retirer => 'Retirer';
+
+  @override
+  String get supprimerRendezVous => 'Supprimer ce rendez-vous ?';
+
+  @override
+  String get titreCulteDimanche => 'Culte du dimanche';
+
+  @override
+  String get rencontreReunion => 'Réunion';
+
+  @override
+  String get rencontreRepetition => 'Répétition';
+
+  @override
+  String get rencontreModeration => 'Modération';
+
+  @override
+  String get rencontreAppel => 'Appel de groupe';
+
+  @override
+  String get reponseOui => 'Je viens';
+
+  @override
+  String get reponseNon => 'Je ne viens pas';
+
+  @override
+  String get reponsePeutEtre => 'Peut-être';
 }

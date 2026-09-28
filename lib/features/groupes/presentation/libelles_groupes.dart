@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../domain/groupe.dart';
+import '../domain/rencontre.dart';
 
 extension LibellesGroupes on AppLocalizations {
   String libelleTypeGroupe(TypeGroupe t) => switch (t) {
@@ -29,4 +30,26 @@ IconData iconeGroupe(TypeGroupe t) => switch (t) {
   TypeGroupe.media => Icons.videocam_outlined,
   TypeGroupe.entraide => Icons.handshake_outlined,
   TypeGroupe.autre => Icons.groups_outlined,
+};
+
+extension LibellesRencontres on AppLocalizations {
+  String libelleRencontre(TypeRencontre t) => switch (t) {
+    TypeRencontre.reunion => rencontreReunion,
+    TypeRencontre.repetition => rencontreRepetition,
+    TypeRencontre.moderation => rencontreModeration,
+    TypeRencontre.appel => rencontreAppel,
+  };
+
+  String libelleReponse(Reponse r) => switch (r) {
+    Reponse.oui => reponseOui,
+    Reponse.non => reponseNon,
+    Reponse.peutetre => reponsePeutEtre,
+  };
+}
+
+IconData iconeRencontre(TypeRencontre t) => switch (t) {
+  TypeRencontre.reunion => Icons.groups_outlined,
+  TypeRencontre.repetition => Icons.music_note_outlined,
+  TypeRencontre.moderation => Icons.record_voice_over_outlined,
+  TypeRencontre.appel => Icons.call_outlined,
 };

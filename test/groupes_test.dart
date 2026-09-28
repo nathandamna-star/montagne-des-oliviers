@@ -179,10 +179,10 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('Valider'));
       await tester.pumpAndSettle();
-      expect(
-        (await b.firestore.doc('groupes/inter').get())['membres'],
-        ['u1', 'u3'],
-      );
+      expect((await b.firestore.doc('groupes/inter').get())['membres'], [
+        'u1',
+        'u3',
+      ]);
     },
   );
 

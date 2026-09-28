@@ -362,5 +362,71 @@
   "groupeModeration": "Modération",
   "groupeMedia": "Équipe média",
   "groupeEntraide": "Entraide",
-  "groupeAutre": "Autre"
+  "groupeAutre": "Autre",
+  "ajouterChant": "Ajouter un chant",
+  "ajouterRendezVous": "Ajouter un rendez-vous",
+  "appelAvecLien": "Le bouton « Rejoindre l'appel » ouvrira le lien du groupe. L'appel directement dans l'app arrivera bientôt.",
+  "appelSansLien": "Ajoutez un lien d'appel au groupe (✏️ sur la page du groupe) pour que les membres puissent le rejoindre.",
+  "aucunModerateur": "Pas encore de modérateur",
+  "aucunRendezVous": "Aucun rendez-vous prévu.",
+  "calendrier": "Calendrier",
+  "calendrierDe": "Calendrier · {nom}",
+  "@calendrierDe": {
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "chantNumero": "Chant {n}",
+  "@chantNumero": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "chantsAPreparer": "Chants à préparer",
+  "demanderRemplacant": "Je ne suis pas disponible : demander un remplaçant",
+  "deroule": "Déroulé du culte",
+  "derouleAide": "Une étape par ligne.",
+  "finalementDisponible": "Finalement, je suis disponible",
+  "instrumentAide": "Instrument ou voix (vide s'il ne joue pas)",
+  "jeRemplace": "Je remplace",
+  "lienChant": "Lien audio, partition ou paroles (facultatif)",
+  "maReponse": "Ma réponse",
+  "moderateur": "Modérateur",
+  "moderePar": "Modéré par {nom}",
+  "@moderePar": {
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "modifier": "Modifier",
+  "modifierRendezVous": "Modifier le rendez-vous",
+  "ouvrirLien": "Ouvrir le lien",
+  "presences": "Présences",
+  "quiJoueQuoi": "Qui joue quoi",
+  "remplacantRecherche": "{nom} cherche un remplaçant",
+  "@remplacantRecherche": {
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "remplacementDemande": "Un remplaçant est recherché.",
+  "rendezVousIndisponible": "Ce rendez-vous n'est plus disponible.",
+  "retirer": "Retirer",
+  "supprimerRendezVous": "Supprimer ce rendez-vous ?",
+  "titreCulteDimanche": "Culte du dimanche",
+  "rencontreReunion": "Réunion",
+  "rencontreRepetition": "Répétition",
+  "rencontreModeration": "Modération",
+  "rencontreAppel": "Appel de groupe",
+  "reponseOui": "Je viens",
+  "reponseNon": "Je ne viens pas",
+  "reponsePeutEtre": "Peut-être"
 }

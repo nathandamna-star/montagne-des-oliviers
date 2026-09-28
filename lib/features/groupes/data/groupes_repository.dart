@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../domain/groupe.dart';
+import '../domain/rencontre.dart';
 
 class GroupesRepository {
   GroupesRepository(this.firestore);
@@ -126,6 +127,90 @@ class GroupesRepository {
 
   Future<void> effacerMessage(String id, String messageId) =>
       _messages(id).doc(messageId).delete();
+
+  // ----- Calendrier du groupe -----
+
+  CollectionReference<Map<String, dynamic>> _rencontres(String id) =>
+      _col.doc(id).collection('rencontres');
+
+  /// Rendez-vous à venir (depuis [depuis]).
+  Stream<List<Rencontre>> rencontres(String id, {required DateTime depuis}) =>
+      _rencontres(id)
+          .where('debut', isGreaterThanOrEqualTo: Timestamp.fromDate(depuis))
+          .orderBy('debut')
+          .limit(100)
+          .snapshots()
+          .map(
+            (s) => [for (final d in s.docs) Rencontre.depuisFirestore(id, d)],
+          );
+
+  Stream<Rencontre?> rencontre(String id, String rid) =>
+      _rencontres(id)
+          .doc(rid)
+          .snapshots()
+          .map((d) => d.exists ? Rencontre.depuisFirestore(id, d) : null);
+
+  Future<Rencontre?> lireRencontre(String id, String rid) async {
+    final d = await _rencontres(id).doc(rid).get();
+    return d.exists ? Rencontre.depuisFirestore(id, d) : null;
+  }
+
+  String nouvelleRencontreId(String id) => _rencontres(id).doc().id;
+
+  /// Enregistre (fusion : le rappel déjà envoyé par le serveur est conservé,
+  /// sauf si la date change).
+  Future<void> enregistrerRencontre(Rencontre r, {required bool dateChangee}) =>
+      _rencontres(r.groupeId).doc(r.id).set({
+        ...r.versFirestore(),
+        if (dateChangee) 'rappelEnvoye': false,
+      }, SetOptions(merge: true));
+
+  Future<void> supprimerRencontre(String id, String rid) =>
+      _rencontres(id).doc(rid).delete();
+
+  /// Modérateur prévu : demander (ou annuler) un remplacement.
+  Future<void> demanderRemplacement(
+    String id,
+    String rid,
+    String uid, {
+    required bool demande,
+  }) => _rencontres(id).doc(rid).update({
+    'moderateur': uid,
+    'remplacement': demande ? 'demande' : 'aucun',
+  });
+
+  /// Un autre membre reprend la modération.
+  Future<void> remplacer(String id, String rid, String uid) =>
+      _rencontres(id)
+          .doc(rid)
+          .update({'moderateur': uid, 'remplacement': 'aucun'});
+
+  Stream<Map<String, Reponse>> presences(String id, String rid) =>
+      _rencontres(id)
+          .doc(rid)
+          .collection('presences')
+          .snapshots()
+          .map(
+            (s) => {
+              for (final d in s.docs)
+                d.id: Reponse.values.firstWhere(
+                  (r) => r.name == d.data()['reponse'],
+                  orElse: () => Reponse.peutetre,
+                ),
+            },
+          );
+
+  Future<void> repondre(
+    String id,
+    String rid, {
+    required String uid,
+    required String nom,
+    required Reponse reponse,
+  }) => _rencontres(id).doc(rid).collection('presences').doc(uid).set({
+    'reponse': reponse.name,
+    'nom': nom,
+    'updatedAt': FieldValue.serverTimestamp(),
+  });
 
   // ----- Annuaire (nom des comptes, lisible par les membres de l'église) -----
 

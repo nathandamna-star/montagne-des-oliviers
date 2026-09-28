@@ -39,6 +39,9 @@ class _MontagneDesOliviersAppState
           router.push(Routes.evenement(id));
         case 'groupe':
           router.push(Routes.discussion(id));
+        case 'rencontre':
+          final rid = d['rid'];
+          if (rid is String) router.push(Routes.rencontre(id, rid));
       }
     });
     // Annonces pour tous ; annonces des membres et jeton après connexion.

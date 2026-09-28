@@ -20,6 +20,11 @@ abstract final class Routes {
   static String groupe(String id) => '/groupes/$id';
   static String discussion(String id) => '/groupes/$id/discussion';
   static String modifierGroupe(String id) => '/groupes/$id/modifier';
+  static String calendrier(String id) => '/groupes/$id/calendrier';
+  static String rencontre(String id, String rid) =>
+      '/groupes/$id/calendrier/$rid';
+  static String editerRencontre(String id, String rid) =>
+      '/groupes/$id/calendrier/$rid/modifier';
 
   static String ficheMembre(String id) => '/responsables/membres/$id';
   static String famille(String id) => '/responsables/familles/$id';
