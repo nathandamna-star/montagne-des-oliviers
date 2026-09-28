@@ -99,6 +99,15 @@ Un compte peut avoir plusieurs rôles. Le premier administrateur est désigné c
      nom de l'ASBL). Jetons d'accès générés par une Cloud Function (membres du groupe seulement,
      certificat de l'app en secret Firebase, jamais dans l'app). Audio par défaut, vidéo en option.
      Derrière une interface `AppelsGroupe` pour pouvoir changer de fournisseur.
+     **Et en plus (choix validé) : lien d'appel externe** facultatif par groupe (Google Meet, Zoom, appel
+     WhatsApp…), saisi par l'administrateur du groupe (adresse https vérifiée) ; bouton « Rejoindre sur
+     Meet / Zoom / WhatsApp » qui ouvre le lien. L'administrateur choisit, pour chaque appel programmé,
+     « appel dans l'app » ou « lien externe » ; les deux restent possibles (secours si le quota gratuit
+     est dépassé ou si des invités n'ont pas l'app).
+   - **Groupe de louange : calendrier des répétitions** (lieu, heure, chants à préparer avec liens
+     audio / partitions / paroles, qui joue quoi), présence « Je viens / Je ne viens pas / Peut-être »,
+     rappel la veille ; lié au planning des services (le culte du dimanche et sa répétition). Le même
+     calendrier de groupe sert aux autres groupes (réunions de cellule, intercession programmée).
 10. **Médias** : prédications et exhortations en audio (podcast, lecture en arrière-plan), vidéos,
     **direct YouTube** du culte, **verset du jour**.
     **Partage WhatsApp (choix validé : gratuit, sans API payante)** : après chaque publication d'une
