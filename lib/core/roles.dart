@@ -19,3 +19,14 @@ final estSecretariatProvider = Provider<bool>((ref) {
   final roles = ref.watch(rolesProvider);
   return roles.contains(Role.secretariat) || roles.contains(Role.admin);
 });
+
+/// Trésorier ou administrateur : dons, relevés, coordonnées bancaires.
+final estTresorierProvider = Provider<bool>((ref) {
+  final roles = ref.watch(rolesProvider);
+  return roles.contains(Role.tresorier) || roles.contains(Role.admin);
+});
+
+/// Boutique de livres : trésorier, secrétariat ou administrateur.
+final gereBoutiqueProvider = Provider<bool>(
+  (ref) => ref.watch(estTresorierProvider) || ref.watch(estSecretariatProvider),
+);

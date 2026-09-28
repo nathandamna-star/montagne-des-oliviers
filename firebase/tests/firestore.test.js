@@ -481,7 +481,7 @@ describe('salles et réservations', () => {
 });
 
 describe('dîmes et offrandes', () => {
-  // 000000012345 → 123 % 97 = 26 ; 100000000034 : 1000000000 % 97 = 9.
+  // 100000000034 : 1000000000 % 97 = 34.
   const COMM = '100000000034';
   const don = (extra = {}) => ({
     uid: 'marie', nom: 'Marie', montant: 50, devise: 'EUR', affectation: 'dime',
@@ -508,6 +508,61 @@ describe('dîmes et offrandes', () => {
     await assertFails(updateDoc(doc(marie(), `dons/${COMM}`), { statut: 'annule' }));
     await assertSucceeds(updateDoc(doc(marie(), 'dons/200000000068'), { statut: 'annule' }));
     await assertFails(deleteDoc(doc(tresorier(), 'dons/200000000068')));
+  });
+});
+
+describe('dons mensuels et boutique', () => {
+  const livre = (extra = {}) => ({
+    titre: 'La prière', auteur: 'Pasteur Jean', description: { fr: 'Un guide' }, prix: 12.5,
+    disponible: true, photoUrl: 'https://exemple.be/c.jpg', ...extra,
+  });
+  const commande = (extra = {}) => ({
+    uid: 'marie', nom: 'Marie', lignes: [{ livreId: 'l1', titre: 'La prière', prix: 12.5, quantite: 1 }],
+    total: 12.5, devise: 'EUR', mode: 'virement', statut: 'en_attente', createdAt: t(1), ...extra,
+  });
+
+  it('dons mensuels : lus par le donateur et le trésorier, jamais écrits par l\'app', async () => {
+    await semer({ 'donsMensuels/sub_1': { uid: 'marie', montant: 20, affectation: 'dime', actif: true } });
+    await assertSucceeds(getDoc(doc(marie(), 'donsMensuels/sub_1')));
+    await assertSucceeds(getDoc(doc(tresorier(), 'donsMensuels/sub_1')));
+    await assertFails(getDoc(doc(paul(), 'donsMensuels/sub_1')));
+    await assertSucceeds(getDocs(query(collection(marie(), 'donsMensuels'), where('uid', '==', 'marie'))));
+    await assertFails(updateDoc(doc(marie(), 'donsMensuels/sub_1'), { actif: false }));
+    await assertFails(setDoc(doc(marie(), 'donsMensuels/sub_2'), { uid: 'marie', actif: true }));
+    await assertFails(setDoc(doc(marie(), 'dons/cs_1'), { uid: 'marie', statut: 'recu' }));
+  });
+
+  it('catalogue : public, tenu par le trésorier ou le secrétariat', async () => {
+    await assertSucceeds(setDoc(doc(tresorier(), 'livres/l1'), livre()));
+    await assertSucceeds(setDoc(doc(secretariat(), 'livres/l2'), livre({ auteur: null, description: null })));
+    await assertFails(setDoc(doc(marie(), 'livres/l3'), livre()));
+    await assertFails(setDoc(doc(tresorier(), 'livres/l3'), livre({ prix: 0 })));
+    await assertFails(setDoc(doc(tresorier(), 'livres/l3'), livre({ stock: 3 })));
+    await assertSucceeds(getDoc(doc(visiteur(), 'livres/l1')));
+    await assertSucceeds(deleteDoc(doc(secretariat(), 'livres/l2')));
+  });
+
+  it('commandes : créées par le serveur ; l\'acheteur annule un virement en attente', async () => {
+    await semer({ 'commandes/100000000034': commande(), 'commandes/c2': commande({ mode: 'en_ligne' }) });
+    await assertFails(setDoc(doc(marie(), 'commandes/c3'), commande()));
+    await assertSucceeds(getDocs(query(collection(marie(), 'commandes'), where('uid', '==', 'marie'))));
+    await assertFails(getDoc(doc(paul(), 'commandes/c2')));
+    await assertFails(updateDoc(doc(marie(), 'commandes/100000000034'), { statut: 'payee' }));
+    await assertFails(updateDoc(doc(marie(), 'commandes/c2'), { statut: 'annulee' }));
+    await assertSucceeds(updateDoc(doc(marie(), 'commandes/100000000034'), { statut: 'annulee' }));
+  });
+
+  it('commandes : le trésorier ou le secrétariat suit le paiement et la remise', async () => {
+    await semer({ 'commandes/100000000034': commande() });
+    await assertSucceeds(getDocs(query(collection(secretariat(), 'commandes'))));
+    await assertSucceeds(updateDoc(doc(tresorier(), 'commandes/100000000034'),
+      { statut: 'payee', majLe: serverTimestamp(), majPar: 'tres' }));
+    await assertFails(updateDoc(doc(tresorier(), 'commandes/100000000034'),
+      { statut: 'remise', majPar: 'secr' }));
+    await assertFails(updateDoc(doc(tresorier(), 'commandes/100000000034'),
+      { total: 1, majPar: 'tres' }));
+    await assertSucceeds(updateDoc(doc(secretariat(), 'commandes/100000000034'),
+      { statut: 'remise', majLe: serverTimestamp(), majPar: 'secr' }));
   });
 });
 

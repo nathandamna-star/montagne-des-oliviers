@@ -580,6 +580,42 @@ service cloud.firestore {
           && seulement(['statut']) && nouveau().statut == 'annule');
     }
 
-    // `systeme/*` et `stripe/*` : réservés aux Cloud Functions (aucun accès depuis l'app).
+    // Dons mensuels (abonnements Stripe) : écrits par le serveur seulement.
+    match /donsMensuels/{id} {
+      allow read: if estTresorier() || (connecte() && resource.data.uid == moi());
+    }
+
+    // ----- Boutique de livres -----
+    function gereBoutique() {
+      return estTresorier() || estSecretariat();
+    }
+
+    match /livres/{id} {
+      allow read: if true;
+      allow create, update: if gereBoutique()
+        && nouveau().keys().hasOnly(['titre', 'auteur', 'description', 'prix', 'photoUrl',
+                                     'disponible', 'updatedAt'])
+        && texte(nouveau().titre, 200)
+        && texteFacultatif(nouveau().get('auteur', null), 100)
+        && (nouveau().get('description', null) == null || traduit(nouveau().description, 3000))
+        && nouveau().prix is number && nouveau().prix >= 1 && nouveau().prix <= 1000
+        && nouveau().disponible is bool
+        && lien(nouveau().get('photoUrl', null));
+      allow delete: if gereBoutique();
+    }
+
+    // Commandes : créées par le serveur (prix relus dans le catalogue).
+    match /commandes/{id} {
+      allow read: if gereBoutique() || (connecte() && resource.data.uid == moi());
+      allow update: if (gereBoutique()
+          && seulement(['statut', 'majLe', 'majPar'])
+          && nouveau().statut in ['en_attente', 'payee', 'remise', 'annulee']
+          && nouveau().majPar == moi())
+        || (connecte() && resource.data.uid == moi()
+          && resource.data.mode == 'virement' && resource.data.statut == 'en_attente'
+          && seulement(['statut']) && nouveau().statut == 'annulee');
+    }
+
+    // `systeme/*` : réservé aux Cloud Functions (aucun accès depuis l'app).
   }
 }

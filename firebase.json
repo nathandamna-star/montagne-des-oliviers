@@ -50,6 +50,13 @@
     ],
     "rewrites": [
       {
+        "source": "/paiement/**",
+        "function": {
+          "functionId": "retourPaiement",
+          "region": "europe-west1"
+        }
+      },
+      {
         "source": "/m/**",
         "function": {
           "functionId": "pageMedia",

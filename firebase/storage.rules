@@ -16,6 +16,10 @@ service firebase.storage {
       return connecte() && (request.auth.token.get('secretariat', false) == true || estAdmin());
     }
 
+    function estTresorier() {
+      return connecte() && (request.auth.token.get('tresorier', false) == true || estAdmin());
+    }
+
     function groupe(gid) {
       return firestore.get(/databases/(default)/documents/groupes/$(gid)).data;
     }
@@ -76,6 +80,13 @@ service firebase.storage {
              .data.get('publique', false) == true;
       allow write: if estAdmin() && (audio() || video() || image(10) || pdf());
       allow delete: if estAdmin();
+    }
+
+    // Couvertures des livres de la boutique : publiques.
+    match /livres/{id}/{fichier} {
+      allow read: if true;
+      allow write: if (estSecretariat() || estTresorier()) && image(10);
+      allow delete: if estSecretariat() || estTresorier();
     }
 
     // Fichiers d'un groupe (photos, documents, partitions) : ses membres.

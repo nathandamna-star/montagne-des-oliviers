@@ -19,6 +19,7 @@ import 'package:montagne_des_oliviers/shared/data/envoi_fichiers.dart';
 import 'package:montagne_des_oliviers/shared/data/envoi_photos.dart';
 import 'package:montagne_des_oliviers/shared/lecteurs/lecteurs.dart';
 import 'package:montagne_des_oliviers/shared/services/lanceur.dart';
+import 'package:montagne_des_oliviers/shared/services/paiements_en_ligne.dart';
 import 'package:montagne_des_oliviers/shared/services/partage.dart';
 import 'package:montagne_des_oliviers/features/auth/auth_providers.dart';
 import 'package:montagne_des_oliviers/features/auth/data/connexion_google.dart';
@@ -138,12 +139,71 @@ class FauxEnvoiFichiers implements EnvoiFichiers {
   }
 }
 
+/// Paiements simulés : la commande est écrite comme le ferait le serveur.
+class FauxPaiements implements PaiementsEnLigne {
+  FauxPaiements(this.firestore);
+
+  final FakeFirebaseFirestore firestore;
+  final appels = <String>[];
+
+  @override
+  Future<Uri> payerDon({
+    required double montant,
+    required String affectation,
+    required bool mensuel,
+  }) async {
+    appels.add('don $montant $affectation${mensuel ? ' mensuel' : ''}');
+    return Uri.parse('https://stripe.test/don');
+  }
+
+  @override
+  Future<CommandePassee> passerCommande({
+    required Map<String, int> lignes,
+    required String mode,
+  }) async {
+    appels.add('commande $mode');
+    final id = mode == 'virement' ? '100000000034' : 'c-en-ligne';
+    final details = <Map<String, dynamic>>[];
+    var total = 0.0;
+    for (final e in lignes.entries) {
+      final l = (await firestore.doc('livres/${e.key}').get()).data()!;
+      details.add({
+        'livreId': e.key,
+        'titre': l['titre'],
+        'prix': l['prix'],
+        'quantite': e.value,
+      });
+      total += (l['prix'] as num) * e.value;
+    }
+    await firestore.doc('commandes/$id').set({
+      'uid': 'u1',
+      'nom': 'Marie',
+      'lignes': details,
+      'total': total,
+      'devise': 'EUR',
+      'mode': mode,
+      'statut': 'en_attente',
+      'createdAt': maintenant,
+    });
+    return (
+      id: id,
+      url: mode == 'virement' ? null : Uri.parse('https://stripe.test/$id'),
+    );
+  }
+
+  @override
+  Future<void> arreterDonMensuel(String id) async {
+    appels.add('arreter $id');
+    await firestore.doc('donsMensuels/$id').update({'actif': false});
+  }
+}
+
 /// Heure fixe des tests : lundi 5 octobre 2026, 9 h.
 final maintenant = DateTime(2026, 10, 5, 9);
 
 /// Environnement de test : faux Firebase et fausses fonctions.
 class Banc {
-  Banc({bool connecte = false, this.roles = const {}})
+  Banc({bool connecte = false, this.roles = const {}, this.iPhone = false})
     : auth = MockFirebaseAuth(
         signedIn: connecte,
         mockUser: MockUser(
@@ -155,6 +215,9 @@ class Banc {
 
   final MockFirebaseAuth auth;
   final Set<Role> roles;
+
+  /// Dons sur le site de l'église (règle d'Apple sur iPhone).
+  final bool iPhone;
   final firestore = FakeFirebaseFirestore();
   final fonctions = FaussesFonctionsRoles();
   final notifications = FaussesNotifications();
@@ -162,6 +225,7 @@ class Banc {
   final partage = FauxPartage();
   final lanceur = FauxLanceur();
   final fichiers = FauxEnvoiFichiers();
+  late final paiements = FauxPaiements(firestore);
 
   /// Crée le profil (consentement déjà donné).
   Future<void> avecProfil([String nom = 'Marie']) =>
@@ -183,6 +247,8 @@ class Banc {
     lanceurProvider.overrideWithValue(lanceur),
     fabriqueLecteursProvider.overrideWithValue(FauxLecteurs()),
     envoiFichiersProvider.overrideWithValue(fichiers),
+    paiementsEnLigneProvider.overrideWithValue(paiements),
+    donsDansLeNavigateurProvider.overrideWithValue(iPhone),
     horlogeProvider.overrideWithValue(() => maintenant),
     rolesFutureProvider.overrideWith((ref) async {
       final user = ref.watch(utilisateurFirebaseProvider).value;
@@ -225,3 +291,6 @@ Future<Banc> responsable([Set<Role> roles = const {Role.admin}]) async {
   await b.avecProfil();
   return b;
 }
+
+/// Montant tel que l'app l'affiche (espace insécable avant « € »).
+String eur(String montant) => montant.replaceAll(' €', ' €');

@@ -127,6 +127,29 @@ class AccueilScreen extends ConsumerWidget {
               ),
             ),
           ],
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              Expanded(
+                child: Card(
+                  child: ListTile(
+                    leading: const Icon(Icons.savings_outlined),
+                    title: Text(l10n.donner),
+                    onTap: () => context.push(Routes.dons),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Card(
+                  child: ListTile(
+                    leading: const Icon(Icons.storefront_outlined),
+                    title: Text(l10n.boutique),
+                    onTap: () => context.push(Routes.boutique),
+                  ),
+                ),
+              ),
+            ],
+          ),
           ..._reseaux(context, ref),
           const SizedBox(height: 24),
           _Section(

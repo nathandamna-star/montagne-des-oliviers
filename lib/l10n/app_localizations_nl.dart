@@ -1916,4 +1916,410 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get fichierOuLienRequis => 'Stuur een bestand of geef een link op.';
+
+  @override
+  String get dimesEtOffrandes => 'Tienden en giften';
+
+  @override
+  String get donner => 'Geven';
+
+  @override
+  String get donsVerset =>
+      '“Laat ieder geven zoals hij zich in zijn hart heeft voorgenomen, niet met tegenzin of uit dwang, want God heeft de blijmoedige gever lief.” 2 Korintiërs 9:7';
+
+  @override
+  String get donsConnexionTexte =>
+      'Meld je aan om te geven en je giften op te volgen.';
+
+  @override
+  String get donsSurLeSiteTexte =>
+      'Op iPhone geef je via de website van de kerk. Meld je aan met hetzelfde account: je giften verschijnen hier.';
+
+  @override
+  String get donnerSurLeSite => 'Geven op de website van de kerk';
+
+  @override
+  String get montant => 'Bedrag';
+
+  @override
+  String get autreMontant => 'Ander bedrag';
+
+  @override
+  String get montantEnEuros => 'Bedrag in euro';
+
+  @override
+  String get montantInvalide => 'Geef een bedrag tussen 1 en 10.000 €.';
+
+  @override
+  String get affectationDon => 'Voor';
+
+  @override
+  String get affectationDime => 'Tiende';
+
+  @override
+  String get affectationOffrande => 'Offergave';
+
+  @override
+  String get affectationMission => 'Zending';
+
+  @override
+  String get affectationConstruction => 'Bouwproject';
+
+  @override
+  String get affectationEntraide => 'Onderlinge hulp';
+
+  @override
+  String get uneFois => 'Eenmalig';
+
+  @override
+  String get chaqueMois => 'Elke maand';
+
+  @override
+  String get donMensuelAide =>
+      'De maandelijkse gift gebeurt met een kaart. Je kunt hem hier op elk moment stopzetten.';
+
+  @override
+  String get donnerParVirement => 'Overschrijving (QR-code)';
+
+  @override
+  String get donnerEnLigne => 'Bancontact of kaart';
+
+  @override
+  String get donnerChaqueMois => 'Elke maand geven met kaart';
+
+  @override
+  String get paiementImpossible =>
+      'De betaling kon niet starten. Probeer later opnieuw.';
+
+  @override
+  String get mesDons => 'Mijn giften';
+
+  @override
+  String get aucunDon => 'Nog geen giften.';
+
+  @override
+  String get mesDonsMensuels => 'Mijn maandelijkse giften';
+
+  @override
+  String get arreter => 'Stoppen';
+
+  @override
+  String get arreterDonMensuelTitre => 'Deze maandelijkse gift stoppen?';
+
+  @override
+  String get arreterDonMensuelTexte =>
+      'Er wordt niets meer afgehouden. Bedankt voor je trouw!';
+
+  @override
+  String get donMensuelArrete => 'Maandelijkse gift gestopt.';
+
+  @override
+  String get donEnAttente => 'in afwachting';
+
+  @override
+  String get donRecu => 'ontvangen';
+
+  @override
+  String get donAnnule => 'geannuleerd';
+
+  @override
+  String get modeVirement => 'overschrijving';
+
+  @override
+  String get modeEnLigne => 'online';
+
+  @override
+  String get modeMensuel => 'maandelijks';
+
+  @override
+  String get virementTitre => 'Overschrijving';
+
+  @override
+  String get virementAide =>
+      'Scan deze QR-code met je bankapp, of neem de gegevens hieronder over. De gestructureerde mededeling is noodzakelijk.';
+
+  @override
+  String get virementAttenteAide =>
+      'De penningmeester bevestigt de ontvangst zodra de overschrijving op de rekening staat.';
+
+  @override
+  String get qrVirement => 'QR-code van de overschrijving';
+
+  @override
+  String get beneficiaire => 'Begunstigde';
+
+  @override
+  String get iban => 'IBAN';
+
+  @override
+  String get bic => 'BIC';
+
+  @override
+  String get communicationStructuree => 'Gestructureerde mededeling';
+
+  @override
+  String get copier => 'Kopiëren';
+
+  @override
+  String get copie => 'Gekopieerd.';
+
+  @override
+  String get coordonneesIndisponibles =>
+      'Overschrijven is nog niet mogelijk: de penningmeester moet eerst de rekening van de kerk invullen.';
+
+  @override
+  String get donIntrouvable => 'Deze gift werd niet gevonden.';
+
+  @override
+  String get renoncerDon => 'Ik zie af van deze gift';
+
+  @override
+  String get merciDon => 'Bedankt voor je vrijgevigheid!';
+
+  @override
+  String get releveAnnuel => 'Jaaroverzicht';
+
+  @override
+  String get anneePrecedente => 'Vorig jaar';
+
+  @override
+  String get anneeSuivante => 'Volgend jaar';
+
+  @override
+  String get totalRecu => 'Totaal ontvangen';
+
+  @override
+  String get aucunDonCetteAnnee => 'Dit jaar geen giften ontvangen.';
+
+  @override
+  String get releveAvertissement =>
+      'Dit overzicht vat je giften samen die de kerk ontving. Het is geen fiscaal attest.';
+
+  @override
+  String get partager => 'Delen';
+
+  @override
+  String get tresorerie => 'Penningmeester';
+
+  @override
+  String get tresorerieSousTitre =>
+      'Te bevestigen overschrijvingen, giften van het jaar, export';
+
+  @override
+  String get aConfirmer => 'Te bevestigen';
+
+  @override
+  String get donsDeLAnnee => 'Giften van het jaar';
+
+  @override
+  String get coordonneesBancaires => 'Bankrekening van de kerk';
+
+  @override
+  String get coordonneesAManquer =>
+      'Vul de bankrekening van de kerk in om overschrijvingen mogelijk te maken.';
+
+  @override
+  String get completer => 'Aanvullen';
+
+  @override
+  String get rechercherCommunication => 'Mededeling of naam';
+
+  @override
+  String get aConfirmerAide =>
+      'Neem de mededeling van een rekeninguittreksel over om de overschrijving te vinden en markeer ze als ontvangen.';
+
+  @override
+  String get rienAConfirmer => 'Geen overschrijvingen te bevestigen.';
+
+  @override
+  String get marquerRecu => 'Ontvangen';
+
+  @override
+  String get parDonateur => 'Per gever';
+
+  @override
+  String get tousLesDons => 'Alle giften';
+
+  @override
+  String get entetesCsvDons =>
+      'Datum,Naam,Bestemming,Wijze,Bedrag (€),Mededeling';
+
+  @override
+  String get coordonneesAide =>
+      'Deze gegevens staan op de overschrijvingsinstructies (giften en boeken). Iedereen kan ze zien.';
+
+  @override
+  String get titulaireCompte => 'Rekeninghouder';
+
+  @override
+  String get ibanInvalide => 'Ongeldig IBAN.';
+
+  @override
+  String get bicFacultatif => 'BIC (optioneel)';
+
+  @override
+  String get boutique => 'Winkel';
+
+  @override
+  String get boutiqueAide =>
+      'Boeken af te halen in de kerk. Betalen met Bancontact, kaart of overschrijving.';
+
+  @override
+  String get boutiqueVide => 'Nog geen boeken.';
+
+  @override
+  String get livreIndisponible => 'Dit boek is niet beschikbaar.';
+
+  @override
+  String get livreEpuise => 'Uitverkocht';
+
+  @override
+  String get ajouterAuPanier => 'In winkelmandje';
+
+  @override
+  String get retraitEglise => 'Af te halen in de kerk na betaling.';
+
+  @override
+  String get panier => 'Winkelmandje';
+
+  @override
+  String get panierVide => 'Je winkelmandje is leeg.';
+
+  @override
+  String get panierInvalide =>
+      'Een boek is niet meer beschikbaar. Controleer je winkelmandje.';
+
+  @override
+  String get enleverUn => 'Eén minder';
+
+  @override
+  String get ajouterUn => 'Eén meer';
+
+  @override
+  String get seConnecterPourCommander => 'Aanmelden om te bestellen';
+
+  @override
+  String get payerEnLigne => 'Betalen met Bancontact of kaart';
+
+  @override
+  String get payerParVirement => 'Betalen via overschrijving (QR-code)';
+
+  @override
+  String get mesCommandes => 'Mijn bestellingen';
+
+  @override
+  String get aucuneCommande => 'Geen bestellingen.';
+
+  @override
+  String get commande => 'Bestelling';
+
+  @override
+  String get commandes => 'Bestellingen';
+
+  @override
+  String get livres => 'Boeken';
+
+  @override
+  String get commandeIntrouvable => 'Deze bestelling werd niet gevonden.';
+
+  @override
+  String get commandeEnAttente => 'Wacht op betaling';
+
+  @override
+  String get commandePayee => 'Betaald, af te halen';
+
+  @override
+  String get commandeRemise => 'Afgehaald';
+
+  @override
+  String get commandeAnnulee => 'Geannuleerd';
+
+  @override
+  String get annulerCommande => 'Bestelling annuleren';
+
+  @override
+  String get paiementEnLigneAttente =>
+      'Betaling bezig. Als je de betaalpagina hebt gesloten, bestel dan opnieuw via de winkel.';
+
+  @override
+  String get suiviCommande => 'Opvolging van de bestelling';
+
+  @override
+  String get gestionBoutiqueSousTitre => 'Bestellingen en boekencatalogus';
+
+  @override
+  String get nouveauLivre => 'Nieuw boek';
+
+  @override
+  String get supprimerLivre => 'Dit boek verwijderen?';
+
+  @override
+  String get couverture => 'Omslag';
+
+  @override
+  String get auteur => 'Auteur';
+
+  @override
+  String get prix => 'Prijs';
+
+  @override
+  String get prixInvalide => 'Geef een prijs tussen 1 en 1.000 €.';
+
+  @override
+  String get description => 'Beschrijving';
+
+  @override
+  String get livreDisponible => 'Te koop';
+
+  @override
+  String voirPanier(int n) {
+    return 'Winkelmandje ($n)';
+  }
+
+  @override
+  String nombreLivres(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n boeken',
+      one: '1 boek',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String nombreDons(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n giften',
+      one: '1 gift',
+      zero: 'Geen giften',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String donsMensuelsActifs(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n lopende maandelijkse giften',
+      one: '1 lopende maandelijkse gift',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String parMois(String montant) {
+    return '$montant per maand';
+  }
+
+  @override
+  String releveTitre(String annee) {
+    return 'Overzicht van mijn giften $annee';
+  }
+
+  @override
+  String get total => 'Totaal';
 }

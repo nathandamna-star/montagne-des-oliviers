@@ -3523,6 +3523,720 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Envoyez un fichier ou indiquez un lien.'**
   String get fichierOuLienRequis;
+
+  /// No description provided for @dimesEtOffrandes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dîmes et offrandes'**
+  String get dimesEtOffrandes;
+
+  /// No description provided for @donner.
+  ///
+  /// In fr, this message translates to:
+  /// **'Donner'**
+  String get donner;
+
+  /// No description provided for @donsVerset.
+  ///
+  /// In fr, this message translates to:
+  /// **'« Que chacun donne comme il l\'a résolu en son cœur, sans tristesse ni contrainte ; car Dieu aime celui qui donne avec joie. » 2 Corinthiens 9:7'**
+  String get donsVerset;
+
+  /// No description provided for @donsConnexionTexte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Connectez-vous pour faire un don et suivre vos dons.'**
+  String get donsConnexionTexte;
+
+  /// No description provided for @donsSurLeSiteTexte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sur iPhone, les dons se font sur le site de l\'église. Connectez-vous avec le même compte : vos dons apparaîtront ici.'**
+  String get donsSurLeSiteTexte;
+
+  /// No description provided for @donnerSurLeSite.
+  ///
+  /// In fr, this message translates to:
+  /// **'Donner sur le site de l\'église'**
+  String get donnerSurLeSite;
+
+  /// No description provided for @montant.
+  ///
+  /// In fr, this message translates to:
+  /// **'Montant'**
+  String get montant;
+
+  /// No description provided for @autreMontant.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autre montant'**
+  String get autreMontant;
+
+  /// No description provided for @montantEnEuros.
+  ///
+  /// In fr, this message translates to:
+  /// **'Montant en euros'**
+  String get montantEnEuros;
+
+  /// No description provided for @montantInvalide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Indiquez un montant entre 1 et 10 000 €.'**
+  String get montantInvalide;
+
+  /// No description provided for @affectationDon.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pour'**
+  String get affectationDon;
+
+  /// No description provided for @affectationDime.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dîme'**
+  String get affectationDime;
+
+  /// No description provided for @affectationOffrande.
+  ///
+  /// In fr, this message translates to:
+  /// **'Offrande'**
+  String get affectationOffrande;
+
+  /// No description provided for @affectationMission.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mission'**
+  String get affectationMission;
+
+  /// No description provided for @affectationConstruction.
+  ///
+  /// In fr, this message translates to:
+  /// **'Construction'**
+  String get affectationConstruction;
+
+  /// No description provided for @affectationEntraide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Entraide'**
+  String get affectationEntraide;
+
+  /// No description provided for @uneFois.
+  ///
+  /// In fr, this message translates to:
+  /// **'Une fois'**
+  String get uneFois;
+
+  /// No description provided for @chaqueMois.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chaque mois'**
+  String get chaqueMois;
+
+  /// No description provided for @donMensuelAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le don mensuel se fait par carte. Vous pouvez l\'arrêter à tout moment ici.'**
+  String get donMensuelAide;
+
+  /// No description provided for @donnerParVirement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Virement (QR code)'**
+  String get donnerParVirement;
+
+  /// No description provided for @donnerEnLigne.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bancontact ou carte'**
+  String get donnerEnLigne;
+
+  /// No description provided for @donnerChaqueMois.
+  ///
+  /// In fr, this message translates to:
+  /// **'Donner chaque mois par carte'**
+  String get donnerChaqueMois;
+
+  /// No description provided for @paiementImpossible.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le paiement n\'a pas pu démarrer. Réessayez plus tard.'**
+  String get paiementImpossible;
+
+  /// No description provided for @mesDons.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mes dons'**
+  String get mesDons;
+
+  /// No description provided for @aucunDon.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun don pour le moment.'**
+  String get aucunDon;
+
+  /// No description provided for @mesDonsMensuels.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mes dons mensuels'**
+  String get mesDonsMensuels;
+
+  /// No description provided for @arreter.
+  ///
+  /// In fr, this message translates to:
+  /// **'Arrêter'**
+  String get arreter;
+
+  /// No description provided for @arreterDonMensuelTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Arrêter ce don mensuel ?'**
+  String get arreterDonMensuelTitre;
+
+  /// No description provided for @arreterDonMensuelTexte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Plus aucun montant ne sera prélevé. Merci pour votre fidélité !'**
+  String get arreterDonMensuelTexte;
+
+  /// No description provided for @donMensuelArrete.
+  ///
+  /// In fr, this message translates to:
+  /// **'Don mensuel arrêté.'**
+  String get donMensuelArrete;
+
+  /// No description provided for @donEnAttente.
+  ///
+  /// In fr, this message translates to:
+  /// **'en attente'**
+  String get donEnAttente;
+
+  /// No description provided for @donRecu.
+  ///
+  /// In fr, this message translates to:
+  /// **'reçu'**
+  String get donRecu;
+
+  /// No description provided for @donAnnule.
+  ///
+  /// In fr, this message translates to:
+  /// **'annulé'**
+  String get donAnnule;
+
+  /// No description provided for @modeVirement.
+  ///
+  /// In fr, this message translates to:
+  /// **'virement'**
+  String get modeVirement;
+
+  /// No description provided for @modeEnLigne.
+  ///
+  /// In fr, this message translates to:
+  /// **'en ligne'**
+  String get modeEnLigne;
+
+  /// No description provided for @modeMensuel.
+  ///
+  /// In fr, this message translates to:
+  /// **'mensuel'**
+  String get modeMensuel;
+
+  /// No description provided for @virementTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Virement'**
+  String get virementTitre;
+
+  /// No description provided for @virementAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Scannez ce QR code avec l\'application de votre banque, ou recopiez les informations ci-dessous. La communication structurée est indispensable.'**
+  String get virementAide;
+
+  /// No description provided for @virementAttenteAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le trésorier confirmera la réception dès que le virement arrivera sur le compte.'**
+  String get virementAttenteAide;
+
+  /// No description provided for @qrVirement.
+  ///
+  /// In fr, this message translates to:
+  /// **'QR code du virement'**
+  String get qrVirement;
+
+  /// No description provided for @beneficiaire.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bénéficiaire'**
+  String get beneficiaire;
+
+  /// No description provided for @iban.
+  ///
+  /// In fr, this message translates to:
+  /// **'IBAN'**
+  String get iban;
+
+  /// No description provided for @bic.
+  ///
+  /// In fr, this message translates to:
+  /// **'BIC'**
+  String get bic;
+
+  /// No description provided for @communicationStructuree.
+  ///
+  /// In fr, this message translates to:
+  /// **'Communication structurée'**
+  String get communicationStructuree;
+
+  /// No description provided for @copier.
+  ///
+  /// In fr, this message translates to:
+  /// **'Copier'**
+  String get copier;
+
+  /// No description provided for @copie.
+  ///
+  /// In fr, this message translates to:
+  /// **'Copié.'**
+  String get copie;
+
+  /// No description provided for @coordonneesIndisponibles.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le virement n\'est pas encore possible : le trésorier doit d\'abord indiquer le compte de l\'église.'**
+  String get coordonneesIndisponibles;
+
+  /// No description provided for @donIntrouvable.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce don est introuvable.'**
+  String get donIntrouvable;
+
+  /// No description provided for @renoncerDon.
+  ///
+  /// In fr, this message translates to:
+  /// **'Je renonce à ce don'**
+  String get renoncerDon;
+
+  /// No description provided for @merciDon.
+  ///
+  /// In fr, this message translates to:
+  /// **'Merci pour votre générosité !'**
+  String get merciDon;
+
+  /// No description provided for @releveAnnuel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Relevé annuel'**
+  String get releveAnnuel;
+
+  /// No description provided for @anneePrecedente.
+  ///
+  /// In fr, this message translates to:
+  /// **'Année précédente'**
+  String get anneePrecedente;
+
+  /// No description provided for @anneeSuivante.
+  ///
+  /// In fr, this message translates to:
+  /// **'Année suivante'**
+  String get anneeSuivante;
+
+  /// No description provided for @totalRecu.
+  ///
+  /// In fr, this message translates to:
+  /// **'Total reçu'**
+  String get totalRecu;
+
+  /// No description provided for @aucunDonCetteAnnee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun don reçu cette année.'**
+  String get aucunDonCetteAnnee;
+
+  /// No description provided for @releveAvertissement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce relevé récapitule vos dons reçus par l\'église. Ce n\'est pas une attestation fiscale.'**
+  String get releveAvertissement;
+
+  /// No description provided for @partager.
+  ///
+  /// In fr, this message translates to:
+  /// **'Partager'**
+  String get partager;
+
+  /// No description provided for @tresorerie.
+  ///
+  /// In fr, this message translates to:
+  /// **'Trésorerie'**
+  String get tresorerie;
+
+  /// No description provided for @tresorerieSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Virements à confirmer, dons de l\'année, export'**
+  String get tresorerieSousTitre;
+
+  /// No description provided for @aConfirmer.
+  ///
+  /// In fr, this message translates to:
+  /// **'À confirmer'**
+  String get aConfirmer;
+
+  /// No description provided for @donsDeLAnnee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dons de l\'année'**
+  String get donsDeLAnnee;
+
+  /// No description provided for @coordonneesBancaires.
+  ///
+  /// In fr, this message translates to:
+  /// **'Compte bancaire de l\'église'**
+  String get coordonneesBancaires;
+
+  /// No description provided for @coordonneesAManquer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Indiquez le compte bancaire de l\'église pour permettre les virements.'**
+  String get coordonneesAManquer;
+
+  /// No description provided for @completer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Compléter'**
+  String get completer;
+
+  /// No description provided for @rechercherCommunication.
+  ///
+  /// In fr, this message translates to:
+  /// **'Communication ou nom'**
+  String get rechercherCommunication;
+
+  /// No description provided for @aConfirmerAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Recopiez la communication d\'un extrait de compte pour retrouver le virement, puis marquez-le reçu.'**
+  String get aConfirmerAide;
+
+  /// No description provided for @rienAConfirmer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun virement à confirmer.'**
+  String get rienAConfirmer;
+
+  /// No description provided for @marquerRecu.
+  ///
+  /// In fr, this message translates to:
+  /// **'Reçu'**
+  String get marquerRecu;
+
+  /// No description provided for @parDonateur.
+  ///
+  /// In fr, this message translates to:
+  /// **'Par donateur'**
+  String get parDonateur;
+
+  /// No description provided for @tousLesDons.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tous les dons'**
+  String get tousLesDons;
+
+  /// No description provided for @entetesCsvDons.
+  ///
+  /// In fr, this message translates to:
+  /// **'Date,Nom,Affectation,Mode,Montant (€),Communication'**
+  String get entetesCsvDons;
+
+  /// No description provided for @coordonneesAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ces informations apparaissent sur les instructions de virement (dons et livres). Elles sont visibles par tous.'**
+  String get coordonneesAide;
+
+  /// No description provided for @titulaireCompte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Titulaire du compte'**
+  String get titulaireCompte;
+
+  /// No description provided for @ibanInvalide.
+  ///
+  /// In fr, this message translates to:
+  /// **'IBAN invalide.'**
+  String get ibanInvalide;
+
+  /// No description provided for @bicFacultatif.
+  ///
+  /// In fr, this message translates to:
+  /// **'BIC (facultatif)'**
+  String get bicFacultatif;
+
+  /// No description provided for @boutique.
+  ///
+  /// In fr, this message translates to:
+  /// **'Boutique'**
+  String get boutique;
+
+  /// No description provided for @boutiqueAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Livres à retirer à l\'église. Paiement par Bancontact, carte ou virement.'**
+  String get boutiqueAide;
+
+  /// No description provided for @boutiqueVide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun livre pour le moment.'**
+  String get boutiqueVide;
+
+  /// No description provided for @livreIndisponible.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce livre n\'est pas disponible.'**
+  String get livreIndisponible;
+
+  /// No description provided for @livreEpuise.
+  ///
+  /// In fr, this message translates to:
+  /// **'Épuisé'**
+  String get livreEpuise;
+
+  /// No description provided for @ajouterAuPanier.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter au panier'**
+  String get ajouterAuPanier;
+
+  /// No description provided for @retraitEglise.
+  ///
+  /// In fr, this message translates to:
+  /// **'À retirer à l\'église après le paiement.'**
+  String get retraitEglise;
+
+  /// No description provided for @panier.
+  ///
+  /// In fr, this message translates to:
+  /// **'Panier'**
+  String get panier;
+
+  /// No description provided for @panierVide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre panier est vide.'**
+  String get panierVide;
+
+  /// No description provided for @panierInvalide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un livre n\'est plus disponible. Vérifiez votre panier.'**
+  String get panierInvalide;
+
+  /// No description provided for @enleverUn.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un de moins'**
+  String get enleverUn;
+
+  /// No description provided for @ajouterUn.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un de plus'**
+  String get ajouterUn;
+
+  /// No description provided for @seConnecterPourCommander.
+  ///
+  /// In fr, this message translates to:
+  /// **'Se connecter pour commander'**
+  String get seConnecterPourCommander;
+
+  /// No description provided for @payerEnLigne.
+  ///
+  /// In fr, this message translates to:
+  /// **'Payer par Bancontact ou carte'**
+  String get payerEnLigne;
+
+  /// No description provided for @payerParVirement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Payer par virement (QR code)'**
+  String get payerParVirement;
+
+  /// No description provided for @mesCommandes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mes commandes'**
+  String get mesCommandes;
+
+  /// No description provided for @aucuneCommande.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune commande.'**
+  String get aucuneCommande;
+
+  /// No description provided for @commande.
+  ///
+  /// In fr, this message translates to:
+  /// **'Commande'**
+  String get commande;
+
+  /// No description provided for @commandes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Commandes'**
+  String get commandes;
+
+  /// No description provided for @livres.
+  ///
+  /// In fr, this message translates to:
+  /// **'Livres'**
+  String get livres;
+
+  /// No description provided for @commandeIntrouvable.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette commande est introuvable.'**
+  String get commandeIntrouvable;
+
+  /// No description provided for @commandeEnAttente.
+  ///
+  /// In fr, this message translates to:
+  /// **'En attente du paiement'**
+  String get commandeEnAttente;
+
+  /// No description provided for @commandePayee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Payée, à retirer'**
+  String get commandePayee;
+
+  /// No description provided for @commandeRemise.
+  ///
+  /// In fr, this message translates to:
+  /// **'Remise'**
+  String get commandeRemise;
+
+  /// No description provided for @commandeAnnulee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annulée'**
+  String get commandeAnnulee;
+
+  /// No description provided for @annulerCommande.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annuler la commande'**
+  String get annulerCommande;
+
+  /// No description provided for @paiementEnLigneAttente.
+  ///
+  /// In fr, this message translates to:
+  /// **'Paiement en cours. Si vous avez fermé la page de paiement, repassez la commande depuis la boutique.'**
+  String get paiementEnLigneAttente;
+
+  /// No description provided for @suiviCommande.
+  ///
+  /// In fr, this message translates to:
+  /// **'Suivi de la commande'**
+  String get suiviCommande;
+
+  /// No description provided for @gestionBoutiqueSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Commandes et catalogue des livres'**
+  String get gestionBoutiqueSousTitre;
+
+  /// No description provided for @nouveauLivre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouveau livre'**
+  String get nouveauLivre;
+
+  /// No description provided for @supprimerLivre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer ce livre ?'**
+  String get supprimerLivre;
+
+  /// No description provided for @couverture.
+  ///
+  /// In fr, this message translates to:
+  /// **'Couverture'**
+  String get couverture;
+
+  /// No description provided for @auteur.
+  ///
+  /// In fr, this message translates to:
+  /// **'Auteur'**
+  String get auteur;
+
+  /// No description provided for @prix.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prix'**
+  String get prix;
+
+  /// No description provided for @prixInvalide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Indiquez un prix entre 1 et 1 000 €.'**
+  String get prixInvalide;
+
+  /// No description provided for @description.
+  ///
+  /// In fr, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @livreDisponible.
+  ///
+  /// In fr, this message translates to:
+  /// **'En vente'**
+  String get livreDisponible;
+
+  /// No description provided for @voirPanier.
+  ///
+  /// In fr, this message translates to:
+  /// **'Panier ({n})'**
+  String voirPanier(int n);
+
+  /// No description provided for @nombreLivres.
+  ///
+  /// In fr, this message translates to:
+  /// **'{n, plural, =1{1 livre} other{{n} livres}}'**
+  String nombreLivres(int n);
+
+  /// No description provided for @nombreDons.
+  ///
+  /// In fr, this message translates to:
+  /// **'{n, plural, =0{Aucun don} =1{1 don} other{{n} dons}}'**
+  String nombreDons(int n);
+
+  /// No description provided for @donsMensuelsActifs.
+  ///
+  /// In fr, this message translates to:
+  /// **'{n, plural, =1{1 don mensuel en cours} other{{n} dons mensuels en cours}}'**
+  String donsMensuelsActifs(int n);
+
+  /// No description provided for @parMois.
+  ///
+  /// In fr, this message translates to:
+  /// **'{montant} par mois'**
+  String parMois(String montant);
+
+  /// No description provided for @releveTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Relevé de mes dons {annee}'**
+  String releveTitre(String annee);
+
+  /// No description provided for @total.
+  ///
+  /// In fr, this message translates to:
+  /// **'Total'**
+  String get total;
 }
 
 class _AppLocalizationsDelegate

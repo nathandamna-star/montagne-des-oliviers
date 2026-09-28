@@ -34,7 +34,10 @@ du secrétariat et du trésorier. Les administrateurs de groupe sont enregistré
 | `reservations/{id}` | uid, nom, salleId, debut, fin, motif, statut demandee/validee/refusee/annulee | auteur, secrétariat ; validées : membres | auteur (demande, annulation), secrétariat |
 | `medias/{id}` | type audio/video/direct, titre, description, predicateur, date, url, youtubeId, dureeSec, visibilite, publie | selon visibilité | secrétariat |
 | `versets/{id}` | reference, texte, ordre | tous | secrétariat |
-| `dons/{communication}` | uid, nom, montant, devise EUR, affectation dime/offrande/mission/construction/entraide, mode virement (carte/Bancontact : serveur), frequence, statut en_attente/recu/annule | donateur, trésorier | donateur (annonce, renoncement) ; trésorier (confirmation) |
+| `dons/{id}` | uid, nom, montant, devise EUR, affectation dime/offrande/mission/construction/entraide, mode virement/en_ligne/mensuel, statut en_attente/recu/annule, reference (Stripe). Virement : id = communication structurée ; en ligne : id Stripe (cs_…, in_…) | donateur, trésorier | donateur (annonce d'un virement, renoncement) ; trésorier (confirmation) ; serveur (paiements Stripe) |
+| `donsMensuels/{abonnement}` | uid, nom, montant, affectation, actif, finLe | donateur, trésorier | serveur seulement (webhook Stripe, `arreterDonMensuel`) |
+| `livres/{id}` | titre, auteur, description {fr, nl}, prix, photoUrl, disponible | tous | trésorier, secrétariat |
+| `commandes/{id}` | uid, nom, lignes [{livreId, titre, prix, quantite}], total, mode virement/en_ligne, statut en_attente/payee/remise/annulee. Virement : id = communication structurée. Retrait à l'église | acheteur, trésorier, secrétariat | serveur (`passerCommande`, prix relus dans le catalogue ; webhook Stripe) ; trésorier / secrétariat (statut) ; acheteur (annuler un virement en attente) |
 | `fetes/{id}` | titre, type anniversaire/naissance/mariage/fete/autre, date, lieu, description, uid, nom | membres de l'église | le membre qui annonce, secrétariat |
 | `fetes/{id}/apports/{uid}` | nom, apporte [nourriture, gateau, boisson, autre], precision | soi, responsables cuisine (`parametres/eglise.groupeCuisineId`), secrétariat | soi |
 | `systeme/*`, `stripe/*` | réservé aux Cloud Functions | — | — |

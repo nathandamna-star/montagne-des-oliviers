@@ -19,6 +19,26 @@ class ResponsablesScreen extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
+          if (ref.watch(estTresorierProvider))
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.account_balance_wallet_outlined),
+                title: Text(l10n.tresorerie),
+                subtitle: Text(l10n.tresorerieSousTitre),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => context.push(Routes.tresorerie),
+              ),
+            ),
+          if (ref.watch(gereBoutiqueProvider))
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.storefront_outlined),
+                title: Text(l10n.boutique),
+                subtitle: Text(l10n.gestionBoutiqueSousTitre),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => context.push(Routes.gestionBoutique),
+              ),
+            ),
           if (ref.watch(estSecretariatProvider)) ...[
             Card(
               child: ListTile(

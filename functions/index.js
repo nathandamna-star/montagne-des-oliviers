@@ -5,7 +5,8 @@ import { initializeApp } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
 import { FieldValue, Timestamp, getFirestore } from 'firebase-admin/firestore';
 import { setGlobalOptions } from 'firebase-functions/v2';
-import { defineString } from 'firebase-functions/params';
+import { defineSecret, defineString } from 'firebase-functions/params';
+import Stripe from 'stripe';
 import { HttpsError, onCall, onRequest } from 'firebase-functions/v2/https';
 import { onDocumentCreated, onDocumentUpdated, onDocumentWritten } from 'firebase-functions/v2/firestore';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
@@ -34,11 +35,28 @@ import {
   notificationDemandeReservation,
 } from './salles.js';
 import { messagesMedia, pageIntrouvable, pageMediaHtml, pagePublique } from './medias.js';
+import {
+  actionsWebhook, checkoutCommande, checkoutDon, donVientDEtreRecu, genererCommunication, lignesCommande,
+  notificationCommande, notificationDonRecu, pageRetourHtml, suiteCommande, verifierDon,
+} from './dons.js';
 
 initializeApp();
 
 // Données en Europe (RGPD) et plafond de coût.
 setGlobalOptions({ region: 'europe-west1', maxInstances: 10 });
+
+// Clés Stripe du compte de l'église : secrets Firebase, jamais dans le dépôt.
+//   npx firebase-tools functions:secrets:set STRIPE_SECRET_KEY
+const STRIPE_SECRET_KEY = defineSecret('STRIPE_SECRET_KEY');
+const STRIPE_WEBHOOK_SECRET = defineSecret('STRIPE_WEBHOOK_SECRET');
+
+let clientStripe;
+function stripe() {
+  clientStripe ??= new Stripe(STRIPE_SECRET_KEY.value());
+  return clientStripe;
+}
+
+const emulateur = () => process.env.FUNCTIONS_EMULATOR === 'true';
 
 const EMAIL_ADMIN = defineString('EMAIL_ADMIN', {
   description: 'Adresse e-mail du premier administrateur (pasteur) dans l\'app',
@@ -572,4 +590,145 @@ export const notifierMedia = onDocumentWritten('medias/{id}', async (event) => {
   const apres = event.data?.after;
   if (!apres?.exists || !doitNotifier(apres.data())) return;
   await envoyer(apres.ref, messagesMedia(event.params.id, apres.data()));
+});
+
+// ----- Dîmes, offrandes et boutique de livres -----
+
+/** Adresse du site (version web de l'app), où Stripe renvoie après le paiement. */
+const site = () => `https://${process.env.GCLOUD_PROJECT}.web.app`;
+
+/** Membre connecté (profil créé) : renvoie son profil. */
+async function membre(requete) {
+  if (!requete.auth) throw new HttpsError('unauthenticated', 'Connexion requise.');
+  const profil = (await getFirestore().doc(`users/${requete.auth.uid}`).get()).data();
+  if (!profil) throw new HttpsError('permission-denied', 'Profil requis.');
+  return profil;
+}
+
+/** Page de paiement Stripe (Checkout) ; adresse factice dans l'émulateur. */
+async function pageDePaiement(parametres, cle) {
+  if (emulateur()) return `https://stripe.test/${cle}`;
+  const session = await stripe().checkout.sessions.create(parametres, { idempotencyKey: cle });
+  return session.url;
+}
+
+/** Don en ligne (carte, Bancontact) ou don mensuel (carte) : adresse de la page Stripe. */
+export const payerDon = onCall({ secrets: [STRIPE_SECRET_KEY] }, async (requete) => {
+  const profil = await membre(requete);
+  const don = verifierDon(requete.data);
+  if (!don) throw new HttpsError('invalid-argument', 'Don invalide.');
+  const url = await pageDePaiement(checkoutDon({
+    uid: requete.auth.uid, nom: profil.nom ?? '', email: requete.auth.token.email,
+    langue: profil.langue, don, site: site(),
+  }), `don-${requete.auth.uid}-${Date.now()}`);
+  return { url };
+});
+
+/**
+ * Commande de livres : prix relus dans le catalogue. Par virement,
+ * l'identifiant est la communication structurée ; en ligne, renvoie aussi
+ * l'adresse de la page Stripe.
+ */
+export const passerCommande = onCall({ secrets: [STRIPE_SECRET_KEY] }, async (requete) => {
+  const profil = await membre(requete);
+  const mode = requete.data?.mode;
+  if (!['virement', 'en_ligne'].includes(mode)) throw new HttpsError('invalid-argument', 'Mode invalide.');
+  const demandees = Array.isArray(requete.data?.lignes) ? requete.data.lignes : [];
+  const db = getFirestore();
+  const livres = {};
+  for (const d of demandees.slice(0, 20)) {
+    if (typeof d?.livreId !== 'string' || !/^[A-Za-z0-9_-]{1,100}$/.test(d.livreId)) continue;
+    const doc = await db.doc(`livres/${d.livreId}`).get();
+    if (doc.exists) livres[doc.id] = doc.data();
+  }
+  const calcul = lignesCommande(demandees, livres);
+  if (!calcul) throw new HttpsError('invalid-argument', 'Commande invalide.');
+  const ref = mode === 'virement'
+    ? db.doc(`commandes/${genererCommunication()}`)
+    : db.collection('commandes').doc();
+  await ref.create({
+    uid: requete.auth.uid, nom: profil.nom ?? '', ...calcul, devise: 'EUR', mode,
+    statut: 'en_attente', createdAt: FieldValue.serverTimestamp(),
+  });
+  if (mode === 'virement') return { id: ref.id };
+  const url = await pageDePaiement(checkoutCommande({
+    commandeId: ref.id, uid: requete.auth.uid, email: requete.auth.token.email,
+    langue: profil.langue, lignes: calcul.lignes, site: site(),
+  }), `commande-${ref.id}`);
+  return { id: ref.id, url };
+});
+
+/** Arrêter un don mensuel (le donateur, ou le trésorier). */
+export const arreterDonMensuel = onCall({ secrets: [STRIPE_SECRET_KEY] }, async (requete) => {
+  if (!requete.auth) throw new HttpsError('unauthenticated', 'Connexion requise.');
+  const id = String(requete.data?.id ?? '');
+  if (!/^sub_[A-Za-z0-9]+$/.test(id)) throw new HttpsError('invalid-argument', 'Identifiant invalide.');
+  const ref = getFirestore().doc(`donsMensuels/${id}`);
+  const d = (await ref.get()).data();
+  const tresorier = requete.auth.token.tresorier === true || requete.auth.token.admin === true;
+  if (!d || (d.uid !== requete.auth.uid && !tresorier)) {
+    throw new HttpsError('permission-denied', 'Ce don mensuel n\'est pas le vôtre.');
+  }
+  if (!d.actif) return;
+  if (!emulateur()) await stripe().subscriptions.cancel(id);
+  await ref.update({ actif: false, finLe: FieldValue.serverTimestamp() });
+});
+
+/** Événements envoyés par Stripe : dons reçus, commandes payées, dons mensuels. */
+export const stripeWebhook = onRequest(
+  { secrets: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET] },
+  async (requete, reponse) => {
+    let evenement;
+    try {
+      evenement = stripe().webhooks.constructEvent(
+        requete.rawBody, requete.get('stripe-signature'), STRIPE_WEBHOOK_SECRET.value());
+    } catch {
+      logger.warn('Webhook Stripe refusé (signature invalide)');
+      reponse.status(400).send('Signature invalide');
+      return;
+    }
+    const db = getFirestore();
+    for (const action of actionsWebhook(evenement)) {
+      const ref = db.doc(action.chemin);
+      const donnees = { ...action.donnees };
+      for (const champ of action.horodater ?? []) donnees[champ] = FieldValue.serverTimestamp();
+      if (action.creer) {
+        // Identifiant Stripe : un événement renvoyé ne crée pas de doublon.
+        await ref.set(donnees, { merge: true });
+        continue;
+      }
+      await db.runTransaction(async (t) => {
+        const doc = await t.get(ref);
+        if (!doc.exists) return;
+        if (action.siStatut && doc.data().statut !== action.siStatut) return;
+        t.update(ref, donnees);
+      });
+    }
+    reponse.json({ recu: true });
+  },
+);
+
+/** Page affichée après le paiement : /paiement/merci ou /paiement/annule. */
+export const retourPaiement = onRequest((requete, reponse) => {
+  const etat = requete.path.split('/').filter(Boolean).pop();
+  reponse.set('Content-Type', 'text/html; charset=utf-8');
+  reponse.send(pageRetourHtml(etat, requete.query.retour, requete.query.id));
+});
+
+/** Virement confirmé par le trésorier : le donateur est remercié. */
+export const suiviDon = onDocumentUpdated('dons/{id}', async (event) => {
+  const avant = event.data?.before.data();
+  const apres = event.data?.after.data();
+  if (!donVientDEtreRecu(avant, apres)) return;
+  await envoyerAuxComptes([apres.uid], (langue) => notificationDonRecu(event.params.id, apres, langue));
+});
+
+/** Commande : le trésorier et le secrétariat sont prévenus, puis l'acheteur à chaque étape. */
+export const suiviCommande = onDocumentWritten('commandes/{id}', async (event) => {
+  const avant = event.data?.before.exists ? event.data.before.data() : null;
+  const apres = event.data?.after.exists ? event.data.after.data() : null;
+  const pour = suiteCommande(avant, apres);
+  if (!pour) return;
+  const uids = pour === 'gestion' ? await comptesAvecRoles(['tresorier', 'secretariat', 'admin']) : [apres.uid];
+  await envoyerAuxComptes(uids, (langue) => notificationCommande(event.params.id, apres, langue, pour));
 });

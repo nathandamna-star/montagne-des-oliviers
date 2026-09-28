@@ -1915,4 +1915,410 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get fichierOuLienRequis => 'Envoyez un fichier ou indiquez un lien.';
+
+  @override
+  String get dimesEtOffrandes => 'Dîmes et offrandes';
+
+  @override
+  String get donner => 'Donner';
+
+  @override
+  String get donsVerset =>
+      '« Que chacun donne comme il l\'a résolu en son cœur, sans tristesse ni contrainte ; car Dieu aime celui qui donne avec joie. » 2 Corinthiens 9:7';
+
+  @override
+  String get donsConnexionTexte =>
+      'Connectez-vous pour faire un don et suivre vos dons.';
+
+  @override
+  String get donsSurLeSiteTexte =>
+      'Sur iPhone, les dons se font sur le site de l\'église. Connectez-vous avec le même compte : vos dons apparaîtront ici.';
+
+  @override
+  String get donnerSurLeSite => 'Donner sur le site de l\'église';
+
+  @override
+  String get montant => 'Montant';
+
+  @override
+  String get autreMontant => 'Autre montant';
+
+  @override
+  String get montantEnEuros => 'Montant en euros';
+
+  @override
+  String get montantInvalide => 'Indiquez un montant entre 1 et 10 000 €.';
+
+  @override
+  String get affectationDon => 'Pour';
+
+  @override
+  String get affectationDime => 'Dîme';
+
+  @override
+  String get affectationOffrande => 'Offrande';
+
+  @override
+  String get affectationMission => 'Mission';
+
+  @override
+  String get affectationConstruction => 'Construction';
+
+  @override
+  String get affectationEntraide => 'Entraide';
+
+  @override
+  String get uneFois => 'Une fois';
+
+  @override
+  String get chaqueMois => 'Chaque mois';
+
+  @override
+  String get donMensuelAide =>
+      'Le don mensuel se fait par carte. Vous pouvez l\'arrêter à tout moment ici.';
+
+  @override
+  String get donnerParVirement => 'Virement (QR code)';
+
+  @override
+  String get donnerEnLigne => 'Bancontact ou carte';
+
+  @override
+  String get donnerChaqueMois => 'Donner chaque mois par carte';
+
+  @override
+  String get paiementImpossible =>
+      'Le paiement n\'a pas pu démarrer. Réessayez plus tard.';
+
+  @override
+  String get mesDons => 'Mes dons';
+
+  @override
+  String get aucunDon => 'Aucun don pour le moment.';
+
+  @override
+  String get mesDonsMensuels => 'Mes dons mensuels';
+
+  @override
+  String get arreter => 'Arrêter';
+
+  @override
+  String get arreterDonMensuelTitre => 'Arrêter ce don mensuel ?';
+
+  @override
+  String get arreterDonMensuelTexte =>
+      'Plus aucun montant ne sera prélevé. Merci pour votre fidélité !';
+
+  @override
+  String get donMensuelArrete => 'Don mensuel arrêté.';
+
+  @override
+  String get donEnAttente => 'en attente';
+
+  @override
+  String get donRecu => 'reçu';
+
+  @override
+  String get donAnnule => 'annulé';
+
+  @override
+  String get modeVirement => 'virement';
+
+  @override
+  String get modeEnLigne => 'en ligne';
+
+  @override
+  String get modeMensuel => 'mensuel';
+
+  @override
+  String get virementTitre => 'Virement';
+
+  @override
+  String get virementAide =>
+      'Scannez ce QR code avec l\'application de votre banque, ou recopiez les informations ci-dessous. La communication structurée est indispensable.';
+
+  @override
+  String get virementAttenteAide =>
+      'Le trésorier confirmera la réception dès que le virement arrivera sur le compte.';
+
+  @override
+  String get qrVirement => 'QR code du virement';
+
+  @override
+  String get beneficiaire => 'Bénéficiaire';
+
+  @override
+  String get iban => 'IBAN';
+
+  @override
+  String get bic => 'BIC';
+
+  @override
+  String get communicationStructuree => 'Communication structurée';
+
+  @override
+  String get copier => 'Copier';
+
+  @override
+  String get copie => 'Copié.';
+
+  @override
+  String get coordonneesIndisponibles =>
+      'Le virement n\'est pas encore possible : le trésorier doit d\'abord indiquer le compte de l\'église.';
+
+  @override
+  String get donIntrouvable => 'Ce don est introuvable.';
+
+  @override
+  String get renoncerDon => 'Je renonce à ce don';
+
+  @override
+  String get merciDon => 'Merci pour votre générosité !';
+
+  @override
+  String get releveAnnuel => 'Relevé annuel';
+
+  @override
+  String get anneePrecedente => 'Année précédente';
+
+  @override
+  String get anneeSuivante => 'Année suivante';
+
+  @override
+  String get totalRecu => 'Total reçu';
+
+  @override
+  String get aucunDonCetteAnnee => 'Aucun don reçu cette année.';
+
+  @override
+  String get releveAvertissement =>
+      'Ce relevé récapitule vos dons reçus par l\'église. Ce n\'est pas une attestation fiscale.';
+
+  @override
+  String get partager => 'Partager';
+
+  @override
+  String get tresorerie => 'Trésorerie';
+
+  @override
+  String get tresorerieSousTitre =>
+      'Virements à confirmer, dons de l\'année, export';
+
+  @override
+  String get aConfirmer => 'À confirmer';
+
+  @override
+  String get donsDeLAnnee => 'Dons de l\'année';
+
+  @override
+  String get coordonneesBancaires => 'Compte bancaire de l\'église';
+
+  @override
+  String get coordonneesAManquer =>
+      'Indiquez le compte bancaire de l\'église pour permettre les virements.';
+
+  @override
+  String get completer => 'Compléter';
+
+  @override
+  String get rechercherCommunication => 'Communication ou nom';
+
+  @override
+  String get aConfirmerAide =>
+      'Recopiez la communication d\'un extrait de compte pour retrouver le virement, puis marquez-le reçu.';
+
+  @override
+  String get rienAConfirmer => 'Aucun virement à confirmer.';
+
+  @override
+  String get marquerRecu => 'Reçu';
+
+  @override
+  String get parDonateur => 'Par donateur';
+
+  @override
+  String get tousLesDons => 'Tous les dons';
+
+  @override
+  String get entetesCsvDons =>
+      'Date,Nom,Affectation,Mode,Montant (€),Communication';
+
+  @override
+  String get coordonneesAide =>
+      'Ces informations apparaissent sur les instructions de virement (dons et livres). Elles sont visibles par tous.';
+
+  @override
+  String get titulaireCompte => 'Titulaire du compte';
+
+  @override
+  String get ibanInvalide => 'IBAN invalide.';
+
+  @override
+  String get bicFacultatif => 'BIC (facultatif)';
+
+  @override
+  String get boutique => 'Boutique';
+
+  @override
+  String get boutiqueAide =>
+      'Livres à retirer à l\'église. Paiement par Bancontact, carte ou virement.';
+
+  @override
+  String get boutiqueVide => 'Aucun livre pour le moment.';
+
+  @override
+  String get livreIndisponible => 'Ce livre n\'est pas disponible.';
+
+  @override
+  String get livreEpuise => 'Épuisé';
+
+  @override
+  String get ajouterAuPanier => 'Ajouter au panier';
+
+  @override
+  String get retraitEglise => 'À retirer à l\'église après le paiement.';
+
+  @override
+  String get panier => 'Panier';
+
+  @override
+  String get panierVide => 'Votre panier est vide.';
+
+  @override
+  String get panierInvalide =>
+      'Un livre n\'est plus disponible. Vérifiez votre panier.';
+
+  @override
+  String get enleverUn => 'Un de moins';
+
+  @override
+  String get ajouterUn => 'Un de plus';
+
+  @override
+  String get seConnecterPourCommander => 'Se connecter pour commander';
+
+  @override
+  String get payerEnLigne => 'Payer par Bancontact ou carte';
+
+  @override
+  String get payerParVirement => 'Payer par virement (QR code)';
+
+  @override
+  String get mesCommandes => 'Mes commandes';
+
+  @override
+  String get aucuneCommande => 'Aucune commande.';
+
+  @override
+  String get commande => 'Commande';
+
+  @override
+  String get commandes => 'Commandes';
+
+  @override
+  String get livres => 'Livres';
+
+  @override
+  String get commandeIntrouvable => 'Cette commande est introuvable.';
+
+  @override
+  String get commandeEnAttente => 'En attente du paiement';
+
+  @override
+  String get commandePayee => 'Payée, à retirer';
+
+  @override
+  String get commandeRemise => 'Remise';
+
+  @override
+  String get commandeAnnulee => 'Annulée';
+
+  @override
+  String get annulerCommande => 'Annuler la commande';
+
+  @override
+  String get paiementEnLigneAttente =>
+      'Paiement en cours. Si vous avez fermé la page de paiement, repassez la commande depuis la boutique.';
+
+  @override
+  String get suiviCommande => 'Suivi de la commande';
+
+  @override
+  String get gestionBoutiqueSousTitre => 'Commandes et catalogue des livres';
+
+  @override
+  String get nouveauLivre => 'Nouveau livre';
+
+  @override
+  String get supprimerLivre => 'Supprimer ce livre ?';
+
+  @override
+  String get couverture => 'Couverture';
+
+  @override
+  String get auteur => 'Auteur';
+
+  @override
+  String get prix => 'Prix';
+
+  @override
+  String get prixInvalide => 'Indiquez un prix entre 1 et 1 000 €.';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get livreDisponible => 'En vente';
+
+  @override
+  String voirPanier(int n) {
+    return 'Panier ($n)';
+  }
+
+  @override
+  String nombreLivres(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n livres',
+      one: '1 livre',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String nombreDons(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n dons',
+      one: '1 don',
+      zero: 'Aucun don',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String donsMensuelsActifs(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n dons mensuels en cours',
+      one: '1 don mensuel en cours',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String parMois(String montant) {
+    return '$montant par mois';
+  }
+
+  @override
+  String releveTitre(String annee) {
+    return 'Relevé de mes dons $annee';
+  }
+
+  @override
+  String get total => 'Total';
 }

@@ -62,6 +62,10 @@ class _MontagneDesOliviersAppState
           );
         case 'media':
           router.push(Routes.media(id));
+        case 'don':
+          router.push(Routes.dons);
+        case 'commande':
+          router.push(Routes.commande(id));
         case 'fete':
           router.push(Routes.fete(id));
         case 'rencontre':

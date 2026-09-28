@@ -67,6 +67,15 @@ describe('fichiers', () => {
     await assertSucceeds(getBytes(ref(paul(), 'preparations/bap/l2/intro.m4a')));
   });
 
+  it('boutique : couvertures envoyées par le trésorier ou le secrétariat, publiques', async () => {
+    const tresorier = () => env.authenticatedContext('tres', { tresorier: true }).storage();
+    await assertSucceeds(envoyer(tresorier(), 'livres/l1/couverture.jpg', 'image/jpeg'));
+    await assertSucceeds(envoyer(secretariat(), 'livres/l1/couverture.jpg', 'image/jpeg'));
+    await assertFails(envoyer(marie(), 'livres/l1/couverture.jpg', 'image/jpeg'));
+    await assertFails(envoyer(tresorier(), 'livres/l1/livre.pdf', 'application/pdf'));
+    await assertSucceeds(getBytes(ref(visiteur(), 'livres/l1/couverture.jpg')));
+  });
+
   it('groupes : les membres partagent photos, documents, audios', async () => {
     await assertSucceeds(envoyer(paul(), 'groupes/g1/partition.pdf', 'application/pdf'));
     await assertFails(envoyer(ctx('luc'), 'groupes/g1/x.pdf', 'application/pdf'));

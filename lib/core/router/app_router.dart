@@ -19,7 +19,17 @@ import '../../features/demandes/presentation/demande_screen.dart';
 import '../../features/demandes/presentation/gestion_demandes_screen.dart';
 import '../../features/demandes/presentation/mes_demandes_screen.dart';
 import '../../features/demandes/presentation/nouvelle_demande_screen.dart';
+import '../../features/boutique/presentation/boutique_screen.dart';
+import '../../features/boutique/presentation/commandes_screens.dart';
+import '../../features/boutique/presentation/editeur_livre_screen.dart';
+import '../../features/boutique/presentation/gestion_boutique_screen.dart';
+import '../../features/boutique/presentation/livre_screen.dart';
+import '../../features/boutique/presentation/panier_screen.dart';
 import '../../features/divers/presentation/editeur_fete_screen.dart';
+import '../../features/dons/presentation/dons_screen.dart';
+import '../../features/dons/presentation/releve_dons_screen.dart';
+import '../../features/dons/presentation/tresorerie_screen.dart';
+import '../../features/dons/presentation/virement_don_screen.dart';
 import '../../features/divers/presentation/fete_screen.dart';
 import '../../features/entretien/entretien_screen.dart';
 import '../../features/medias/presentation/editeur_media_screen.dart';
@@ -142,6 +152,36 @@ final routerProvider = Provider<GoRouter>((ref) {
 
 final _sousRoutes = <String, List<RouteBase>>{
   Routes.accueil: [
+    GoRoute(
+      path: 'dons',
+      builder: (context, state) => const DonsScreen(),
+      routes: [
+        GoRoute(
+          path: 'releve',
+          builder: (context, state) => const ReleveDonsScreen(),
+        ),
+        GoRoute(
+          path: 'virement/:id',
+          builder: (context, state) =>
+              VirementDonScreen(id: state.pathParameters['id']!),
+        ),
+      ],
+    ),
+    GoRoute(
+      path: 'boutique',
+      builder: (context, state) => const BoutiqueScreen(),
+      routes: [
+        GoRoute(
+          path: 'panier',
+          builder: (context, state) => const PanierScreen(),
+        ),
+        GoRoute(
+          path: ':id',
+          builder: (context, state) =>
+              LivreScreen(id: state.pathParameters['id']!),
+        ),
+      ],
+    ),
     GoRoute(
       path: 'salles',
       builder: (context, state) => const SallesScreen(),
@@ -300,6 +340,17 @@ final _sousRoutes = <String, List<RouteBase>>{
   ],
   Routes.profil: [
     GoRoute(
+      path: 'commandes',
+      builder: (context, state) => const MesCommandesScreen(),
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (context, state) =>
+              CommandeScreen(id: state.pathParameters['id']!),
+        ),
+      ],
+    ),
+    GoRoute(
       path: 'demandes',
       builder: (context, state) => const MesDemandesScreen(),
       routes: [
@@ -360,6 +411,27 @@ final _sousRoutes = <String, List<RouteBase>>{
     ),
   ],
   Routes.responsables: [
+    GoRoute(
+      path: 'tresorerie',
+      builder: (context, state) => const TresorerieScreen(),
+      routes: [
+        GoRoute(
+          path: 'coordonnees',
+          builder: (context, state) => const CoordonneesBancairesScreen(),
+        ),
+      ],
+    ),
+    GoRoute(
+      path: 'boutique',
+      builder: (context, state) => const GestionBoutiqueScreen(),
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (context, state) =>
+              EditeurLivreScreen(id: state.pathParameters['id']!),
+        ),
+      ],
+    ),
     GoRoute(path: 'roles', builder: (context, state) => const RolesScreen()),
     GoRoute(
       path: 'medias',
