@@ -34,7 +34,7 @@ void main() {
   setUpAll(() => GoogleFonts.config.allowRuntimeFetching = false);
 
   test('chevauchement des créneaux', () {
-    final d = (int h) => DateTime(2026, 10, 6, h);
+    DateTime d(int h) => DateTime(2026, 10, 6, h);
     expect(chevauchement(d(10), d(12), d(11), d(13)), isTrue);
     expect(chevauchement(d(10), d(12), d(12), d(14)), isFalse);
   });
