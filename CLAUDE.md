@@ -85,8 +85,17 @@ Un compte peut avoir plusieurs rôles. Le premier administrateur est désigné c
 7. **Demandes** : baptême, présentation d'enfant, mariage, rendez-vous pastoral, visite ; suivi de la demande.
 8. **Sujets de prière** : confidentiel (pasteurs seulement) ou partagé avec l'équipe d'intercession ;
    « J'ai prié » ; témoignages de prières exaucées.
-9. **Groupes** : cellules de maison, jeunes, femmes, hommes, louange, entraide… ; messagerie de groupe
-   privée, documents, événements du groupe.
+9. **Groupes** : cellules de maison, **groupes d'intercession**, jeunes, femmes, hommes, louange,
+   entraide… ; messagerie de groupe privée, documents, événements du groupe.
+   - Chaque groupe a un ou plusieurs **administrateurs de groupe** (nommés par le pasteur ou le
+     secrétariat) qui **ajoutent et retirent les membres** (parmi les comptes de l'église), nomment
+     d'autres administrateurs du groupe, modifient le groupe et ses horaires. Groupe privé : seuls ses
+     membres le voient et y écrivent.
+   - **Appel de groupe dans l'app** (audio, vidéo possible) : bouton « Démarrer l'appel » pour un
+     administrateur, « Rejoindre l'appel » pour les membres, notification « L'appel a commencé »,
+     programmation d'appels réguliers (ex. intercession chaque mardi à 20 h, rappel). Technologie à
+     choisir avec le porteur du projet (voir la décision en attente ci-dessous) ; derrière une interface
+     `AppelsGroupe` pour pouvoir changer de fournisseur.
 10. **Médias** : prédications et exhortations en audio (podcast, lecture en arrière-plan), vidéos,
     **direct YouTube** du culte, **verset du jour**.
     **Partage WhatsApp (choix validé : gratuit, sans API payante)** : après chaque publication d'une
