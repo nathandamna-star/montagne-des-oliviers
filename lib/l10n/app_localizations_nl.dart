@@ -1014,4 +1014,337 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get reponsePeutEtre => 'Misschien';
+
+  @override
+  String get aTraiter => 'Te behandelen';
+
+  @override
+  String annonceePar(String nom) {
+    return 'Aangekondigd door $nom';
+  }
+
+  @override
+  String get annoncer => 'Aankondigen';
+
+  @override
+  String get annoncerExaucement => 'Mijn gebed is verhoord!';
+
+  @override
+  String get annoncerFete => 'Aankondigen';
+
+  @override
+  String get anonyme => 'Anoniem';
+
+  @override
+  String get aucunSujetPartage => 'Nog geen gedeelde gebedsintenties.';
+
+  @override
+  String get aucunSujetPriere => 'Geen gebedsintenties.';
+
+  @override
+  String get aucuneDemande =>
+      'Geen aanvragen. Tik op « Nieuwe aanvraag » om er een te doen.';
+
+  @override
+  String get aucuneDemandeATraiter => 'Geen aanvragen te behandelen.';
+
+  @override
+  String get aucuneFete =>
+      'Nog niets aangekondigd. Tik op « Aankondigen » voor een verjaardag of een feest.';
+
+  @override
+  String get chaineYoutube => 'YouTube-kanaal';
+
+  @override
+  String get choisirTypeDemande => 'Kies het soort aanvraag.';
+
+  @override
+  String get confierPriere => 'Gebedsintentie';
+
+  @override
+  String get confierSujet => 'Deze intentie toevertrouwen';
+
+  @override
+  String get cuisineInformee =>
+      'Genoteerd, de keuken is op de hoogte. Dank je!';
+
+  @override
+  String get cultesEtEvenements => 'Diensten en activiteiten';
+
+  @override
+  String get dateEtHeure => 'Datum en uur';
+
+  @override
+  String get demande => 'Aanvraag';
+
+  @override
+  String get demandeEnvoyee =>
+      'Aanvraag verzonden. Je krijgt een melding bij het antwoord.';
+
+  @override
+  String get demandeIndisponible => 'Deze aanvraag is niet meer beschikbaar.';
+
+  @override
+  String get demandesRecues => 'Aanvragen';
+
+  @override
+  String get demandesRecuesSousTitre =>
+      'Dopen, huwelijken, afspraken, bezoeken';
+
+  @override
+  String get divers => 'Allerlei';
+
+  @override
+  String get diversConnexion =>
+      'Meld je aan om de verjaardagen en feesten van de kerk te zien.';
+
+  @override
+  String get enregistrerEtPrevenir => 'Opslaan en de persoon verwittigen';
+
+  @override
+  String get envoyerDemande => 'Aanvraag versturen';
+
+  @override
+  String get exaucee => 'Verhoord';
+
+  @override
+  String get faireDemande => 'Aanvraag doen';
+
+  @override
+  String get feteIndisponible => 'Deze aankondiging is niet meer beschikbaar.';
+
+  @override
+  String get gloireADieu => 'God zij geprezen!';
+
+  @override
+  String get groupeCuisineAide =>
+      'De leden zien wat iedereen meebrengt naar de feesten (rubriek Allerlei) en krijgen een melding. Maak eerst een groep van het type « Keuken ».';
+
+  @override
+  String get groupeCuisineChamp => 'Groep van de keukenverantwoordelijken';
+
+  @override
+  String get groupeIntercessionAide =>
+      'Ontvangt de gebedsintenties die leden willen delen. Maak eerst een groep van het type « Voorbede ».';
+
+  @override
+  String get groupeIntercessionChamp => 'Voorbedegroep van de kerk';
+
+  @override
+  String get informerCuisine => 'De keuken verwittigen';
+
+  @override
+  String get jaiPrie => 'Ik heb gebeden';
+
+  @override
+  String get japporte => 'Ik breng mee…';
+
+  @override
+  String get japporteAide => 'Om de keukenverantwoordelijken te informeren.';
+
+  @override
+  String get mesDemandes => 'Mijn aanvragen';
+
+  @override
+  String get mesDemandesSousTitre =>
+      'Doop, huwelijk, afspraak met een pastoor…';
+
+  @override
+  String get mesSujetsPriere => 'Mijn gebedsintenties';
+
+  @override
+  String get messageDemandeAide =>
+      'Bijvoorbeeld: je beschikbaarheid, je telefoonnummer, de gewenste datum.';
+
+  @override
+  String get messageFacultatif => 'Bericht (optioneel)';
+
+  @override
+  String get modifierTemoignage => 'Mijn getuigenis bewerken';
+
+  @override
+  String nombrePrieres(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n personen hebben gebeden',
+      one: '1 persoon heeft gebeden',
+      zero: 'Nog niemand heeft gebeden',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get nouveauSujet => 'Nieuwe gebedsintentie';
+
+  @override
+  String get nouvelleDemande => 'Nieuwe aanvraag';
+
+  @override
+  String get pageFacebook => 'Facebookpagina';
+
+  @override
+  String get parametresEglise => 'Instellingen van de kerk';
+
+  @override
+  String get parametresEgliseSousTitre => 'Voorbede, keuken, Facebook, YouTube';
+
+  @override
+  String get partageIntercession => 'Ook het voorbedeteam';
+
+  @override
+  String get partageIntercessionAide =>
+      'De leden van de voorbedegroep bidden met je mee.';
+
+  @override
+  String get partagePasteurs => 'Alleen de pastoors';
+
+  @override
+  String get partagePasteursAide => 'Vertrouwelijk.';
+
+  @override
+  String get pasDeGroupeIntercession =>
+      'De kerk heeft nog geen voorbedegroep aangeduid.';
+
+  @override
+  String get personneNApporte => 'Nog niemand heeft iets aangegeven.';
+
+  @override
+  String get pourLaCuisine => 'Voor de keuken';
+
+  @override
+  String get precisionApport =>
+      'Detail (optioneel): « een chocoladetaart », « 2 flessen sap »…';
+
+  @override
+  String get priereExaucee => 'Gebed verhoord';
+
+  @override
+  String get quiPeutLeLire => 'Wie mag het lezen?';
+
+  @override
+  String get reponseALaPersonne => 'Antwoord aan de persoon';
+
+  @override
+  String get reponseAide =>
+      'Zichtbaar voor de persoon in de app; ze krijgt een melding.';
+
+  @override
+  String get reponseEglise => 'Antwoord van de kerk';
+
+  @override
+  String get resterAnonyme => 'Anoniem blijven';
+
+  @override
+  String get resterAnonymeAide =>
+      'Het voorbedeteam ziet je naam niet (de pastoors wel).';
+
+  @override
+  String get retirerDemande => 'Mijn aanvraag intrekken';
+
+  @override
+  String get suivreFacebook => 'Facebook';
+
+  @override
+  String get suivreYoutube => 'YouTube';
+
+  @override
+  String get sujetConfie =>
+      'Je gebedsintentie is toevertrouwd. We bidden met je mee.';
+
+  @override
+  String get sujetIndisponible => 'Deze gebedsintentie is niet toegankelijk.';
+
+  @override
+  String get sujetPriere => 'Gebedsintentie';
+
+  @override
+  String get sujetPriereChamp => 'Waarvoor wil je dat we bidden?';
+
+  @override
+  String get sujetsPriere => 'Gebedsintenties';
+
+  @override
+  String get sujetsPriereSousTitre => 'Alle toevertrouwde intenties (pastoors)';
+
+  @override
+  String get supprimerFete => 'Deze aankondiging verwijderen?';
+
+  @override
+  String get supprimerSujet => 'Deze gebedsintentie verwijderen?';
+
+  @override
+  String get temoignageFacultatif => 'Je getuigenis (optioneel)';
+
+  @override
+  String get titreFeteAide => 'Bv.: Verjaardag van Mama Esther';
+
+  @override
+  String get toutes => 'Alle';
+
+  @override
+  String get typeDemandeQuestion => 'Wat wil je aanvragen?';
+
+  @override
+  String get vousAvezPrie => 'Je hebt gebeden. Dank je!';
+
+  @override
+  String get demandeBapteme => 'Doop';
+
+  @override
+  String get demandePresentation => 'Opdracht van een kind';
+
+  @override
+  String get demandeMariage => 'Huwelijk';
+
+  @override
+  String get demandeRendezVous => 'Afspraak met een pastoor';
+
+  @override
+  String get demandeVisite => 'Huisbezoek';
+
+  @override
+  String get statutNouvelle => 'Verzonden';
+
+  @override
+  String get statutEnCours => 'In behandeling';
+
+  @override
+  String get statutAcceptee => 'Aanvaard';
+
+  @override
+  String get statutRefusee => 'Geweigerd';
+
+  @override
+  String get statutTerminee => 'Afgerond';
+
+  @override
+  String get feteAnniversaire => 'Verjaardag';
+
+  @override
+  String get feteNaissance => 'Geboorte';
+
+  @override
+  String get feteMariage => 'Huwelijk';
+
+  @override
+  String get feteFete => 'Feest';
+
+  @override
+  String get feteAutre => 'Andere';
+
+  @override
+  String get apportNourriture => 'Eten';
+
+  @override
+  String get apportGateau => 'Taart';
+
+  @override
+  String get apportBoisson => 'Drank';
+
+  @override
+  String get apportAutre => 'Andere';
+
+  @override
+  String get groupeCuisine => 'Keuken';
 }

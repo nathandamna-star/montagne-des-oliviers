@@ -265,3 +265,20 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
 - À FAIRE PLUS TARD (demandé par le porteur) : liens **Facebook** et **YouTube** de l'église (comptes pas encore
   créés) : champs `facebookUrl`, `youtubeUrl` dans `parametres/eglise`, saisis par l'admin, boutons sur l'Accueil
   et dans Médias (étape 10) ; le direct YouTube utilisera la même chaîne.
+- Demandes (étape 7, `lib/features/demandes/`) : `demandes/{id}` (type bapteme|presentation|mariage|rendezvous|visite,
+  message, statut nouvelle|en_cours|acceptee|refusee|terminee — `StatutDemande.enCours.code` = « en_cours » —,
+  reponse, traiteePar). Membre : Accueil « Faire une demande », Profil → Mes demandes (retrait tant que « nouvelle »).
+  Responsables → Demandes (secrétariat/pasteurs : à traiter / toutes, statut + réponse). Fonctions `nouvelleDemande`
+  (prévient `users.roles` admin/secretariat) et `suiviDemande` (prévient la personne).
+- Sujets de prière (`lib/features/prieres/`) : `prieres/{id}` (partage pasteurs | intercession avec
+  `parametres/eglise.groupeIntercessionId`, anonyme pour l'équipe, statut ouverte|exaucee, temoignage, nbPrieres par
+  `compterPriants`). Accueil « Sujet de prière », Profil → Mes sujets, groupe d'intercession → Sujets de prière,
+  Responsables → Sujets de prière (pasteurs). « J'ai prié » (`priants/{uid}`). Fonction `nouvellePriere`.
+- Paramètres de l'église (pasteurs) : groupe d'intercession, groupe cuisine, liens Facebook / YouTube (boutons sur
+  l'Accueil quand ils sont renseignés).
+- Divers (demande du porteur) : onglet « Divers » dans l'Agenda. `fetes/{id}` (anniversaire|naissance|mariage|fete|autre,
+  titre, date, lieu, annoncée par un membre, modifiable par lui ou le secrétariat). Pas de « je viens » : chacun indique
+  ce qu'il apporte (`fetes/{id}/apports/{uid}` : nourriture|gateau|boisson|autre + précision) pour informer les
+  **responsables cuisine** = groupe de type `cuisine` désigné dans les paramètres (`groupeCuisineId`), qui voient la
+  liste et les totaux et sont notifiés (`nouvelApport`). Nouvelle fête → sujets `membres_fr|nl` (`nouvelleFete`).
+- Étape 7 bis à faire : Préparations au mariage et au baptême (règles déjà écrites).

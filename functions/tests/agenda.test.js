@@ -71,3 +71,13 @@ describe('groupes (déclencheurs)', () => {
     assert.equal(g.data().dernierMessage.nom, 'Anne');
   });
 });
+
+describe('prières (déclencheurs)', () => {
+  it("compte les « J'ai prié »", async () => {
+    const ref = db.doc('prieres/p-test');
+    await ref.set({ uid: 'x', nom: 'X', texte: 'Pour la paix', partage: 'pasteurs', statut: 'ouverte' });
+    await ref.collection('priants').doc('a').set({ le: Timestamp.now() });
+    await ref.collection('priants').doc('b').set({ le: Timestamp.now() });
+    await attendre(() => ref.get(), (d) => d.data().nbPrieres === 2);
+  });
+});

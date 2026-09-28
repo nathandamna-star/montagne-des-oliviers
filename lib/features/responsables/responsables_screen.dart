@@ -22,6 +22,15 @@ class ResponsablesScreen extends ConsumerWidget {
           if (ref.watch(estSecretariatProvider)) ...[
             Card(
               child: ListTile(
+                leading: const Icon(Icons.inbox_outlined),
+                title: Text(l10n.demandesRecues),
+                subtitle: Text(l10n.demandesRecuesSousTitre),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => context.push(Routes.gestionDemandes),
+              ),
+            ),
+            Card(
+              child: ListTile(
                 leading: const Icon(Icons.badge_outlined),
                 title: Text(l10n.fichierMembres),
                 subtitle: Text(l10n.fichierMembresSousTitre),
@@ -54,6 +63,26 @@ class ResponsablesScreen extends ConsumerWidget {
                 subtitle: Text(l10n.gestionAgendaSousTitre),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () => context.push(Routes.gestionAgenda),
+              ),
+            ),
+          ],
+          if (ref.watch(estAdminProvider)) ...[
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.volunteer_activism_outlined),
+                title: Text(l10n.sujetsPriere),
+                subtitle: Text(l10n.sujetsPriereSousTitre),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => context.push(Routes.gestionPrieres),
+              ),
+            ),
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.settings_outlined),
+                title: Text(l10n.parametresEglise),
+                subtitle: Text(l10n.parametresEgliseSousTitre),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => context.push(Routes.parametres),
               ),
             ),
           ],

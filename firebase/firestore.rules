@@ -204,7 +204,7 @@ service cloud.firestore {
       return texte(d.nom, 100)
         && texteFacultatif(d.get('description', null), 2000)
         && d.type in ['cellule', 'intercession', 'jeunes', 'femmes', 'hommes', 'louange',
-                      'moderation', 'media', 'entraide', 'autre']
+                      'moderation', 'media', 'cuisine', 'entraide', 'autre']
         && d.prive is bool
         && d.membres is list && d.membres.size() <= 500
         && d.admins is list && d.admins.size() >= 1
@@ -321,6 +321,49 @@ service cloud.firestore {
           && lisible(get(/databases/$(database)/documents/prieres/$(pid)).data)
           && request.resource.data.keys().hasOnly(['le'])
           && request.resource.data.le == request.time;
+        allow delete: if connecte() && uid == moi();
+      }
+    }
+
+    // ----- Divers : anniversaires, naissances, fêtes (annoncés par les membres) -----
+    function responsableCuisine() {
+      let p = get(/databases/$(database)/documents/parametres/eglise).data;
+      return connecte() && p.get('groupeCuisineId', null) != null
+        && moi() in get(/databases/$(database)/documents/groupes/$(p.groupeCuisineId)).data.membres;
+    }
+
+    function feteValide(d) {
+      return texte(d.titre, 200)
+        && d.type in ['anniversaire', 'naissance', 'mariage', 'fete', 'autre']
+        && d.date is timestamp
+        && texteFacultatif(d.get('lieu', null), 200)
+        && texteFacultatif(d.get('description', null), 2000);
+    }
+
+    match /fetes/{fid} {
+      allow read: if estMembre();
+      allow create: if estMembre()
+        && nouveau().keys().hasOnly(['titre', 'type', 'date', 'lieu', 'description', 'uid', 'nom',
+                                     'createdAt'])
+        && nouveau().uid == moi()
+        && texte(nouveau().nom, 100)
+        && feteValide(nouveau())
+        && nouveau().createdAt == request.time;
+      allow update: if (estSecretariat() || (connecte() && ancien().uid == moi()))
+        && seulement(['titre', 'type', 'date', 'lieu', 'description'])
+        && feteValide(nouveau());
+      allow delete: if estSecretariat() || (connecte() && ancien().uid == moi());
+
+      // Ce que chacun apporte : pour informer les responsables cuisine.
+      match /apports/{uid} {
+        allow read: if (connecte() && uid == moi()) || estSecretariat() || responsableCuisine();
+        allow write: if estMembre() && uid == moi()
+          && request.resource.data.keys().hasOnly(['nom', 'apporte', 'precision', 'updatedAt'])
+          && texte(request.resource.data.nom, 100)
+          && request.resource.data.apporte is list
+          && request.resource.data.apporte.size() >= 1
+          && request.resource.data.apporte.hasOnly(['nourriture', 'gateau', 'boisson', 'autre'])
+          && texteFacultatif(request.resource.data.get('precision', null), 300);
         allow delete: if connecte() && uid == moi();
       }
     }

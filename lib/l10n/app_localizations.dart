@@ -1855,6 +1855,618 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Peut-être'**
   String get reponsePeutEtre;
+
+  /// No description provided for @aTraiter.
+  ///
+  /// In fr, this message translates to:
+  /// **'À traiter'**
+  String get aTraiter;
+
+  /// No description provided for @annonceePar.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annoncé par {nom}'**
+  String annonceePar(String nom);
+
+  /// No description provided for @annoncer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annoncer'**
+  String get annoncer;
+
+  /// No description provided for @annoncerExaucement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ma prière est exaucée !'**
+  String get annoncerExaucement;
+
+  /// No description provided for @annoncerFete.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annoncer'**
+  String get annoncerFete;
+
+  /// No description provided for @anonyme.
+  ///
+  /// In fr, this message translates to:
+  /// **'Anonyme'**
+  String get anonyme;
+
+  /// No description provided for @aucunSujetPartage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun sujet de prière partagé pour le moment.'**
+  String get aucunSujetPartage;
+
+  /// No description provided for @aucunSujetPriere.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun sujet de prière.'**
+  String get aucunSujetPriere;
+
+  /// No description provided for @aucuneDemande.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune demande. Touchez « Nouvelle demande » pour en faire une.'**
+  String get aucuneDemande;
+
+  /// No description provided for @aucuneDemandeATraiter.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune demande à traiter.'**
+  String get aucuneDemandeATraiter;
+
+  /// No description provided for @aucuneFete.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rien d\'annoncé pour le moment. Touchez « Annoncer » pour un anniversaire ou une fête.'**
+  String get aucuneFete;
+
+  /// No description provided for @chaineYoutube.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chaîne YouTube'**
+  String get chaineYoutube;
+
+  /// No description provided for @choisirTypeDemande.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisissez le type de demande.'**
+  String get choisirTypeDemande;
+
+  /// No description provided for @confierPriere.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sujet de prière'**
+  String get confierPriere;
+
+  /// No description provided for @confierSujet.
+  ///
+  /// In fr, this message translates to:
+  /// **'Confier ce sujet'**
+  String get confierSujet;
+
+  /// No description provided for @cuisineInformee.
+  ///
+  /// In fr, this message translates to:
+  /// **'C\'est noté, la cuisine est informée. Merci !'**
+  String get cuisineInformee;
+
+  /// No description provided for @cultesEtEvenements.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cultes et événements'**
+  String get cultesEtEvenements;
+
+  /// No description provided for @dateEtHeure.
+  ///
+  /// In fr, this message translates to:
+  /// **'Date et heure'**
+  String get dateEtHeure;
+
+  /// No description provided for @demande.
+  ///
+  /// In fr, this message translates to:
+  /// **'Demande'**
+  String get demande;
+
+  /// No description provided for @demandeEnvoyee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Demande envoyée. Vous serez prévenu de la réponse.'**
+  String get demandeEnvoyee;
+
+  /// No description provided for @demandeIndisponible.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette demande n\'est plus disponible.'**
+  String get demandeIndisponible;
+
+  /// No description provided for @demandesRecues.
+  ///
+  /// In fr, this message translates to:
+  /// **'Demandes'**
+  String get demandesRecues;
+
+  /// No description provided for @demandesRecuesSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Baptêmes, mariages, rendez-vous, visites'**
+  String get demandesRecuesSousTitre;
+
+  /// No description provided for @divers.
+  ///
+  /// In fr, this message translates to:
+  /// **'Divers'**
+  String get divers;
+
+  /// No description provided for @diversConnexion.
+  ///
+  /// In fr, this message translates to:
+  /// **'Connectez-vous pour voir les anniversaires et les fêtes de l\'église.'**
+  String get diversConnexion;
+
+  /// No description provided for @enregistrerEtPrevenir.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enregistrer et prévenir la personne'**
+  String get enregistrerEtPrevenir;
+
+  /// No description provided for @envoyerDemande.
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyer la demande'**
+  String get envoyerDemande;
+
+  /// No description provided for @exaucee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Exaucée'**
+  String get exaucee;
+
+  /// No description provided for @faireDemande.
+  ///
+  /// In fr, this message translates to:
+  /// **'Faire une demande'**
+  String get faireDemande;
+
+  /// No description provided for @feteIndisponible.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette annonce n\'est plus disponible.'**
+  String get feteIndisponible;
+
+  /// No description provided for @gloireADieu.
+  ///
+  /// In fr, this message translates to:
+  /// **'Gloire à Dieu !'**
+  String get gloireADieu;
+
+  /// No description provided for @groupeCuisineAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ses membres voient ce que chacun apporte aux fêtes (rubrique Divers) et en sont prévenus. Créez d\'abord un groupe de type « Cuisine ».'**
+  String get groupeCuisineAide;
+
+  /// No description provided for @groupeCuisineChamp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Groupe des responsables cuisine'**
+  String get groupeCuisineChamp;
+
+  /// No description provided for @groupeIntercessionAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Il reçoit les sujets de prière que les membres choisissent de partager. Créez d\'abord un groupe de type « Intercession ».'**
+  String get groupeIntercessionAide;
+
+  /// No description provided for @groupeIntercessionChamp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Groupe d\'intercession de l\'église'**
+  String get groupeIntercessionChamp;
+
+  /// No description provided for @informerCuisine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Informer la cuisine'**
+  String get informerCuisine;
+
+  /// No description provided for @jaiPrie.
+  ///
+  /// In fr, this message translates to:
+  /// **'J\'ai prié'**
+  String get jaiPrie;
+
+  /// No description provided for @japporte.
+  ///
+  /// In fr, this message translates to:
+  /// **'J\'apporte…'**
+  String get japporte;
+
+  /// No description provided for @japporteAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pour informer les responsables cuisine.'**
+  String get japporteAide;
+
+  /// No description provided for @mesDemandes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mes demandes'**
+  String get mesDemandes;
+
+  /// No description provided for @mesDemandesSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Baptême, mariage, rendez-vous avec un pasteur…'**
+  String get mesDemandesSousTitre;
+
+  /// No description provided for @mesSujetsPriere.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mes sujets de prière'**
+  String get mesSujetsPriere;
+
+  /// No description provided for @messageDemandeAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Par exemple : vos disponibilités, votre numéro de téléphone, la date envisagée.'**
+  String get messageDemandeAide;
+
+  /// No description provided for @messageFacultatif.
+  ///
+  /// In fr, this message translates to:
+  /// **'Message (facultatif)'**
+  String get messageFacultatif;
+
+  /// No description provided for @modifierTemoignage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier mon témoignage'**
+  String get modifierTemoignage;
+
+  /// No description provided for @nombrePrieres.
+  ///
+  /// In fr, this message translates to:
+  /// **'{n, plural, =0{Personne n\'a encore prié} =1{1 personne a prié} other{{n} personnes ont prié}}'**
+  String nombrePrieres(int n);
+
+  /// No description provided for @nouveauSujet.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouveau sujet de prière'**
+  String get nouveauSujet;
+
+  /// No description provided for @nouvelleDemande.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle demande'**
+  String get nouvelleDemande;
+
+  /// No description provided for @pageFacebook.
+  ///
+  /// In fr, this message translates to:
+  /// **'Page Facebook'**
+  String get pageFacebook;
+
+  /// No description provided for @parametresEglise.
+  ///
+  /// In fr, this message translates to:
+  /// **'Paramètres de l\'église'**
+  String get parametresEglise;
+
+  /// No description provided for @parametresEgliseSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Intercession, cuisine, Facebook, YouTube'**
+  String get parametresEgliseSousTitre;
+
+  /// No description provided for @partageIntercession.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aussi l\'équipe d\'intercession'**
+  String get partageIntercession;
+
+  /// No description provided for @partageIntercessionAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les membres du groupe d\'intercession prient avec vous.'**
+  String get partageIntercessionAide;
+
+  /// No description provided for @partagePasteurs.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les pasteurs seulement'**
+  String get partagePasteurs;
+
+  /// No description provided for @partagePasteursAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Confidentiel.'**
+  String get partagePasteursAide;
+
+  /// No description provided for @pasDeGroupeIntercession.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pas encore de groupe d\'intercession désigné par l\'église.'**
+  String get pasDeGroupeIntercession;
+
+  /// No description provided for @personneNApporte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Personne n\'a encore rien indiqué.'**
+  String get personneNApporte;
+
+  /// No description provided for @pourLaCuisine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pour la cuisine'**
+  String get pourLaCuisine;
+
+  /// No description provided for @precisionApport.
+  ///
+  /// In fr, this message translates to:
+  /// **'Précision (facultatif) : « un gâteau au chocolat », « 2 bouteilles de jus »…'**
+  String get precisionApport;
+
+  /// No description provided for @priereExaucee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prière exaucée'**
+  String get priereExaucee;
+
+  /// No description provided for @quiPeutLeLire.
+  ///
+  /// In fr, this message translates to:
+  /// **'Qui peut le lire ?'**
+  String get quiPeutLeLire;
+
+  /// No description provided for @reponseALaPersonne.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réponse à la personne'**
+  String get reponseALaPersonne;
+
+  /// No description provided for @reponseAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Visible par la personne dans l\'app ; elle est prévenue par notification.'**
+  String get reponseAide;
+
+  /// No description provided for @reponseEglise.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réponse de l\'église'**
+  String get reponseEglise;
+
+  /// No description provided for @resterAnonyme.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rester anonyme'**
+  String get resterAnonyme;
+
+  /// No description provided for @resterAnonymeAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'L\'équipe d\'intercession ne verra pas votre nom (les pasteurs, oui).'**
+  String get resterAnonymeAide;
+
+  /// No description provided for @retirerDemande.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer ma demande'**
+  String get retirerDemande;
+
+  /// No description provided for @suivreFacebook.
+  ///
+  /// In fr, this message translates to:
+  /// **'Facebook'**
+  String get suivreFacebook;
+
+  /// No description provided for @suivreYoutube.
+  ///
+  /// In fr, this message translates to:
+  /// **'YouTube'**
+  String get suivreYoutube;
+
+  /// No description provided for @sujetConfie.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre sujet de prière est confié. Nous prions avec vous.'**
+  String get sujetConfie;
+
+  /// No description provided for @sujetIndisponible.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce sujet de prière n\'est pas accessible.'**
+  String get sujetIndisponible;
+
+  /// No description provided for @sujetPriere.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sujet de prière'**
+  String get sujetPriere;
+
+  /// No description provided for @sujetPriereChamp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pour quoi voulez-vous que l\'on prie ?'**
+  String get sujetPriereChamp;
+
+  /// No description provided for @sujetsPriere.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sujets de prière'**
+  String get sujetsPriere;
+
+  /// No description provided for @sujetsPriereSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tous les sujets confiés (pasteurs)'**
+  String get sujetsPriereSousTitre;
+
+  /// No description provided for @supprimerFete.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer cette annonce ?'**
+  String get supprimerFete;
+
+  /// No description provided for @supprimerSujet.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer ce sujet de prière ?'**
+  String get supprimerSujet;
+
+  /// No description provided for @temoignageFacultatif.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre témoignage (facultatif)'**
+  String get temoignageFacultatif;
+
+  /// No description provided for @titreFeteAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ex. : Anniversaire de Maman Esther'**
+  String get titreFeteAide;
+
+  /// No description provided for @toutes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Toutes'**
+  String get toutes;
+
+  /// No description provided for @typeDemandeQuestion.
+  ///
+  /// In fr, this message translates to:
+  /// **'Que souhaitez-vous demander ?'**
+  String get typeDemandeQuestion;
+
+  /// No description provided for @vousAvezPrie.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous avez prié. Merci !'**
+  String get vousAvezPrie;
+
+  /// No description provided for @demandeBapteme.
+  ///
+  /// In fr, this message translates to:
+  /// **'Baptême'**
+  String get demandeBapteme;
+
+  /// No description provided for @demandePresentation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Présentation d\'enfant'**
+  String get demandePresentation;
+
+  /// No description provided for @demandeMariage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mariage'**
+  String get demandeMariage;
+
+  /// No description provided for @demandeRendezVous.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rendez-vous avec un pasteur'**
+  String get demandeRendezVous;
+
+  /// No description provided for @demandeVisite.
+  ///
+  /// In fr, this message translates to:
+  /// **'Visite à domicile'**
+  String get demandeVisite;
+
+  /// No description provided for @statutNouvelle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyée'**
+  String get statutNouvelle;
+
+  /// No description provided for @statutEnCours.
+  ///
+  /// In fr, this message translates to:
+  /// **'En cours'**
+  String get statutEnCours;
+
+  /// No description provided for @statutAcceptee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Acceptée'**
+  String get statutAcceptee;
+
+  /// No description provided for @statutRefusee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Refusée'**
+  String get statutRefusee;
+
+  /// No description provided for @statutTerminee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Terminée'**
+  String get statutTerminee;
+
+  /// No description provided for @feteAnniversaire.
+  ///
+  /// In fr, this message translates to:
+  /// **'Anniversaire'**
+  String get feteAnniversaire;
+
+  /// No description provided for @feteNaissance.
+  ///
+  /// In fr, this message translates to:
+  /// **'Naissance'**
+  String get feteNaissance;
+
+  /// No description provided for @feteMariage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mariage'**
+  String get feteMariage;
+
+  /// No description provided for @feteFete.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fête'**
+  String get feteFete;
+
+  /// No description provided for @feteAutre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autre'**
+  String get feteAutre;
+
+  /// No description provided for @apportNourriture.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nourriture'**
+  String get apportNourriture;
+
+  /// No description provided for @apportGateau.
+  ///
+  /// In fr, this message translates to:
+  /// **'Gâteau'**
+  String get apportGateau;
+
+  /// No description provided for @apportBoisson.
+  ///
+  /// In fr, this message translates to:
+  /// **'Boissons'**
+  String get apportBoisson;
+
+  /// No description provided for @apportAutre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autre'**
+  String get apportAutre;
+
+  /// No description provided for @groupeCuisine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cuisine'**
+  String get groupeCuisine;
 }
 
 class _AppLocalizationsDelegate

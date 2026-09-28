@@ -521,3 +521,44 @@ describe('annuaire et listes de groupes', () => {
     await assertSucceeds(getDocs(collection(secretariat(), 'groupes')));
   });
 });
+
+describe('divers : fêtes et ce que chacun apporte', () => {
+  const fete = (extra = {}) => ({
+    titre: 'Anniversaire de Maman Esther', type: 'anniversaire', date: t(10), lieu: 'Tienen',
+    description: '', uid: 'marie', nom: 'Marie', createdAt: serverTimestamp(), ...extra,
+  });
+
+  beforeEach(async () => {
+    await semer({
+      ...MEMBRES, 'users/luc': { nom: 'Luc' },
+      'parametres/eglise': { groupeCuisineId: 'cuisine' },
+      'groupes/cuisine': { nom: 'Cuisine', type: 'cuisine', prive: true, membres: ['luc'], admins: ['luc'] },
+    });
+  });
+
+  it('un membre annonce une fête ; les membres la voient', async () => {
+    await assertSucceeds(setDoc(doc(marie(), 'fetes/f1'), fete()));
+    await assertFails(setDoc(doc(marie(), 'fetes/f2'), fete({ uid: 'paul' })));
+    await assertFails(setDoc(doc(marie(), 'fetes/f3'), fete({ type: 'concert' })));
+    await assertFails(setDoc(doc(sansProfil(), 'fetes/f4'), fete({ uid: 'jean' })));
+    await assertSucceeds(getDoc(doc(paul(), 'fetes/f1')));
+    await assertFails(getDoc(doc(visiteur(), 'fetes/f1')));
+    await assertFails(updateDoc(doc(paul(), 'fetes/f1'), { titre: 'Autre' }));
+    await assertSucceeds(updateDoc(doc(marie(), 'fetes/f1'), { lieu: 'Hoegaarden' }));
+    await assertSucceeds(updateDoc(doc(secretariat(), 'fetes/f1'), { titre: 'Anniversaire d\'Esther' }));
+  });
+
+  it('ce que chacun apporte : soi, la cuisine et le secrétariat', async () => {
+    await semer({ 'fetes/f1': fete({ createdAt: t(1) }) });
+    const luc = env.authenticatedContext('luc').firestore();
+    const apport = { nom: 'Paul', apporte: ['gateau', 'boisson'], precision: 'Gâteau au chocolat' };
+    await assertSucceeds(setDoc(doc(paul(), 'fetes/f1/apports/paul'), apport));
+    await assertFails(setDoc(doc(paul(), 'fetes/f1/apports/marie'), apport));
+    await assertFails(setDoc(doc(paul(), 'fetes/f1/apports/paul'), { ...apport, apporte: ['argent'] }));
+    await assertFails(setDoc(doc(paul(), 'fetes/f1/apports/paul'), { ...apport, apporte: [] }));
+    await assertSucceeds(getDoc(doc(paul(), 'fetes/f1/apports/paul')));
+    await assertSucceeds(getDocs(collection(luc, 'fetes/f1/apports')));
+    await assertSucceeds(getDocs(collection(secretariat(), 'fetes/f1/apports')));
+    await assertFails(getDoc(doc(marie(), 'fetes/f1/apports/paul')));
+  });
+});

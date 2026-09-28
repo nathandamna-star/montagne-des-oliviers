@@ -1012,4 +1012,338 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get reponsePeutEtre => 'Peut-être';
+
+  @override
+  String get aTraiter => 'À traiter';
+
+  @override
+  String annonceePar(String nom) {
+    return 'Annoncé par $nom';
+  }
+
+  @override
+  String get annoncer => 'Annoncer';
+
+  @override
+  String get annoncerExaucement => 'Ma prière est exaucée !';
+
+  @override
+  String get annoncerFete => 'Annoncer';
+
+  @override
+  String get anonyme => 'Anonyme';
+
+  @override
+  String get aucunSujetPartage =>
+      'Aucun sujet de prière partagé pour le moment.';
+
+  @override
+  String get aucunSujetPriere => 'Aucun sujet de prière.';
+
+  @override
+  String get aucuneDemande =>
+      'Aucune demande. Touchez « Nouvelle demande » pour en faire une.';
+
+  @override
+  String get aucuneDemandeATraiter => 'Aucune demande à traiter.';
+
+  @override
+  String get aucuneFete =>
+      'Rien d\'annoncé pour le moment. Touchez « Annoncer » pour un anniversaire ou une fête.';
+
+  @override
+  String get chaineYoutube => 'Chaîne YouTube';
+
+  @override
+  String get choisirTypeDemande => 'Choisissez le type de demande.';
+
+  @override
+  String get confierPriere => 'Sujet de prière';
+
+  @override
+  String get confierSujet => 'Confier ce sujet';
+
+  @override
+  String get cuisineInformee => 'C\'est noté, la cuisine est informée. Merci !';
+
+  @override
+  String get cultesEtEvenements => 'Cultes et événements';
+
+  @override
+  String get dateEtHeure => 'Date et heure';
+
+  @override
+  String get demande => 'Demande';
+
+  @override
+  String get demandeEnvoyee =>
+      'Demande envoyée. Vous serez prévenu de la réponse.';
+
+  @override
+  String get demandeIndisponible => 'Cette demande n\'est plus disponible.';
+
+  @override
+  String get demandesRecues => 'Demandes';
+
+  @override
+  String get demandesRecuesSousTitre =>
+      'Baptêmes, mariages, rendez-vous, visites';
+
+  @override
+  String get divers => 'Divers';
+
+  @override
+  String get diversConnexion =>
+      'Connectez-vous pour voir les anniversaires et les fêtes de l\'église.';
+
+  @override
+  String get enregistrerEtPrevenir => 'Enregistrer et prévenir la personne';
+
+  @override
+  String get envoyerDemande => 'Envoyer la demande';
+
+  @override
+  String get exaucee => 'Exaucée';
+
+  @override
+  String get faireDemande => 'Faire une demande';
+
+  @override
+  String get feteIndisponible => 'Cette annonce n\'est plus disponible.';
+
+  @override
+  String get gloireADieu => 'Gloire à Dieu !';
+
+  @override
+  String get groupeCuisineAide =>
+      'Ses membres voient ce que chacun apporte aux fêtes (rubrique Divers) et en sont prévenus. Créez d\'abord un groupe de type « Cuisine ».';
+
+  @override
+  String get groupeCuisineChamp => 'Groupe des responsables cuisine';
+
+  @override
+  String get groupeIntercessionAide =>
+      'Il reçoit les sujets de prière que les membres choisissent de partager. Créez d\'abord un groupe de type « Intercession ».';
+
+  @override
+  String get groupeIntercessionChamp => 'Groupe d\'intercession de l\'église';
+
+  @override
+  String get informerCuisine => 'Informer la cuisine';
+
+  @override
+  String get jaiPrie => 'J\'ai prié';
+
+  @override
+  String get japporte => 'J\'apporte…';
+
+  @override
+  String get japporteAide => 'Pour informer les responsables cuisine.';
+
+  @override
+  String get mesDemandes => 'Mes demandes';
+
+  @override
+  String get mesDemandesSousTitre =>
+      'Baptême, mariage, rendez-vous avec un pasteur…';
+
+  @override
+  String get mesSujetsPriere => 'Mes sujets de prière';
+
+  @override
+  String get messageDemandeAide =>
+      'Par exemple : vos disponibilités, votre numéro de téléphone, la date envisagée.';
+
+  @override
+  String get messageFacultatif => 'Message (facultatif)';
+
+  @override
+  String get modifierTemoignage => 'Modifier mon témoignage';
+
+  @override
+  String nombrePrieres(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n personnes ont prié',
+      one: '1 personne a prié',
+      zero: 'Personne n\'a encore prié',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get nouveauSujet => 'Nouveau sujet de prière';
+
+  @override
+  String get nouvelleDemande => 'Nouvelle demande';
+
+  @override
+  String get pageFacebook => 'Page Facebook';
+
+  @override
+  String get parametresEglise => 'Paramètres de l\'église';
+
+  @override
+  String get parametresEgliseSousTitre =>
+      'Intercession, cuisine, Facebook, YouTube';
+
+  @override
+  String get partageIntercession => 'Aussi l\'équipe d\'intercession';
+
+  @override
+  String get partageIntercessionAide =>
+      'Les membres du groupe d\'intercession prient avec vous.';
+
+  @override
+  String get partagePasteurs => 'Les pasteurs seulement';
+
+  @override
+  String get partagePasteursAide => 'Confidentiel.';
+
+  @override
+  String get pasDeGroupeIntercession =>
+      'Pas encore de groupe d\'intercession désigné par l\'église.';
+
+  @override
+  String get personneNApporte => 'Personne n\'a encore rien indiqué.';
+
+  @override
+  String get pourLaCuisine => 'Pour la cuisine';
+
+  @override
+  String get precisionApport =>
+      'Précision (facultatif) : « un gâteau au chocolat », « 2 bouteilles de jus »…';
+
+  @override
+  String get priereExaucee => 'Prière exaucée';
+
+  @override
+  String get quiPeutLeLire => 'Qui peut le lire ?';
+
+  @override
+  String get reponseALaPersonne => 'Réponse à la personne';
+
+  @override
+  String get reponseAide =>
+      'Visible par la personne dans l\'app ; elle est prévenue par notification.';
+
+  @override
+  String get reponseEglise => 'Réponse de l\'église';
+
+  @override
+  String get resterAnonyme => 'Rester anonyme';
+
+  @override
+  String get resterAnonymeAide =>
+      'L\'équipe d\'intercession ne verra pas votre nom (les pasteurs, oui).';
+
+  @override
+  String get retirerDemande => 'Retirer ma demande';
+
+  @override
+  String get suivreFacebook => 'Facebook';
+
+  @override
+  String get suivreYoutube => 'YouTube';
+
+  @override
+  String get sujetConfie =>
+      'Votre sujet de prière est confié. Nous prions avec vous.';
+
+  @override
+  String get sujetIndisponible => 'Ce sujet de prière n\'est pas accessible.';
+
+  @override
+  String get sujetPriere => 'Sujet de prière';
+
+  @override
+  String get sujetPriereChamp => 'Pour quoi voulez-vous que l\'on prie ?';
+
+  @override
+  String get sujetsPriere => 'Sujets de prière';
+
+  @override
+  String get sujetsPriereSousTitre => 'Tous les sujets confiés (pasteurs)';
+
+  @override
+  String get supprimerFete => 'Supprimer cette annonce ?';
+
+  @override
+  String get supprimerSujet => 'Supprimer ce sujet de prière ?';
+
+  @override
+  String get temoignageFacultatif => 'Votre témoignage (facultatif)';
+
+  @override
+  String get titreFeteAide => 'Ex. : Anniversaire de Maman Esther';
+
+  @override
+  String get toutes => 'Toutes';
+
+  @override
+  String get typeDemandeQuestion => 'Que souhaitez-vous demander ?';
+
+  @override
+  String get vousAvezPrie => 'Vous avez prié. Merci !';
+
+  @override
+  String get demandeBapteme => 'Baptême';
+
+  @override
+  String get demandePresentation => 'Présentation d\'enfant';
+
+  @override
+  String get demandeMariage => 'Mariage';
+
+  @override
+  String get demandeRendezVous => 'Rendez-vous avec un pasteur';
+
+  @override
+  String get demandeVisite => 'Visite à domicile';
+
+  @override
+  String get statutNouvelle => 'Envoyée';
+
+  @override
+  String get statutEnCours => 'En cours';
+
+  @override
+  String get statutAcceptee => 'Acceptée';
+
+  @override
+  String get statutRefusee => 'Refusée';
+
+  @override
+  String get statutTerminee => 'Terminée';
+
+  @override
+  String get feteAnniversaire => 'Anniversaire';
+
+  @override
+  String get feteNaissance => 'Naissance';
+
+  @override
+  String get feteMariage => 'Mariage';
+
+  @override
+  String get feteFete => 'Fête';
+
+  @override
+  String get feteAutre => 'Autre';
+
+  @override
+  String get apportNourriture => 'Nourriture';
+
+  @override
+  String get apportGateau => 'Gâteau';
+
+  @override
+  String get apportBoisson => 'Boissons';
+
+  @override
+  String get apportAutre => 'Autre';
+
+  @override
+  String get groupeCuisine => 'Cuisine';
 }

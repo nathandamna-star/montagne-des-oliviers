@@ -21,6 +21,20 @@ abstract final class Routes {
   static String discussion(String id) => '/groupes/$id/discussion';
   static String modifierGroupe(String id) => '/groupes/$id/modifier';
   static String calendrier(String id) => '/groupes/$id/calendrier';
+  static String prieresGroupe(String id) => '/groupes/$id/prieres';
+  static String priereGroupe(String id, String pid) =>
+      '/groupes/$id/prieres/$pid';
+  static const mesDemandes = '/profil/demandes';
+  static const nouvelleDemande = '/profil/demandes/nouvelle';
+  static String maDemande(String id) => '/profil/demandes/$id';
+  static const mesPrieres = '/profil/prieres';
+  static const nouvellePriere = '/profil/prieres/nouvelle';
+  static String maPriere(String id) => '/profil/prieres/$id';
+  static const gestionDemandes = '/responsables/demandes';
+  static String gererDemande(String id) => '/responsables/demandes/$id';
+  static const gestionPrieres = '/responsables/prieres';
+  static String gererPriere(String id) => '/responsables/prieres/$id';
+  static const parametres = '/responsables/parametres';
   static String rencontre(String id, String rid) =>
       '/groupes/$id/calendrier/$rid';
   static String editerRencontre(String id, String rid) =>
@@ -31,6 +45,8 @@ abstract final class Routes {
 
   static String actualite(String id) => '/accueil/actualites/$id';
   static String evenement(String id) => '/agenda/$id';
+  static String fete(String id) => '/agenda/divers/$id';
+  static String editerFete(String id) => '/agenda/divers/$id/modifier';
   static String editerActualite(String id) => '/responsables/actualites/$id';
   static String editerEvenement(String id) => '/responsables/agenda/$id';
 }

@@ -9,6 +9,7 @@ enum TypeGroupe {
   louange,
   moderation,
   media,
+  cuisine,
   entraide,
   autre,
 }

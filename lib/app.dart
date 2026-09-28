@@ -39,6 +39,16 @@ class _MontagneDesOliviersAppState
           router.push(Routes.evenement(id));
         case 'groupe':
           router.push(Routes.discussion(id));
+        case 'demande':
+          router.push(
+            d['vue'] == 'gestion'
+                ? Routes.gererDemande(id)
+                : Routes.maDemande(id),
+          );
+        case 'priere':
+          router.push(Routes.maPriere(id));
+        case 'fete':
+          router.push(Routes.fete(id));
         case 'rencontre':
           final rid = d['rid'];
           if (rid is String) router.push(Routes.rencontre(id, rid));

@@ -147,6 +147,14 @@ class _Groupe extends ConsumerWidget {
                   ),
                   label: Text(l10n.discussion),
                 ),
+                if (g.type == TypeGroupe.intercession) ...[
+                  const SizedBox(height: 8),
+                  OutlinedButton.icon(
+                    onPressed: () => context.push(Routes.prieresGroupe(g.id)),
+                    icon: const Icon(Icons.volunteer_activism_outlined),
+                    label: Text(l10n.sujetsPriere),
+                  ),
+                ],
                 if (g.lienAppel.isNotEmpty) ...[
                   const SizedBox(height: 8),
                   OutlinedButton.icon(

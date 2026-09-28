@@ -20,6 +20,10 @@ import {
   apercu, destinataires, destinatairesRappel, notificationMessage, notificationRappel,
   notificationRemplacement, notificationRencontre, rappelsDus, remplacementVientDEtreDemande,
 } from './groupes.js';
+import {
+  demandeAvancee, messagesFete, notificationApport, notificationNouvelleDemande, notificationPriere,
+  notificationSuiviDemande,
+} from './vie.js';
 
 initializeApp();
 
@@ -267,3 +271,74 @@ export const rappelsRencontres = onSchedule(
     }
   },
 );
+
+/** Comptes ayant un des rôles (copie des rôles dans `users.roles`). */
+async function comptesAvecRoles(roles) {
+  const snap = await getFirestore().collection('users').where('roles', 'array-contains-any', roles).get();
+  return snap.docs.map((d) => d.id);
+}
+
+/** Nouvelle demande : le secrétariat et les pasteurs sont prévenus. */
+export const nouvelleDemande = onDocumentCreated('demandes/{id}', async (event) => {
+  const d = event.data?.data();
+  if (!d) return;
+  await envoyerAuxComptes(
+    await comptesAvecRoles(['admin', 'secretariat']),
+    (langue) => notificationNouvelleDemande(event.params.id, d, langue),
+  );
+});
+
+/** Réponse ou nouveau statut : la personne est prévenue. */
+export const suiviDemande = onDocumentUpdated('demandes/{id}', async (event) => {
+  const avant = event.data?.before.data();
+  const apres = event.data?.after.data();
+  if (!demandeAvancee(avant, apres)) return;
+  await envoyerAuxComptes([apres.uid], (langue) => notificationSuiviDemande(event.params.id, apres, langue));
+});
+
+/** Nouveau sujet de prière : les pasteurs, et l'équipe d'intercession s'il est partagé. */
+export const nouvellePriere = onDocumentCreated('prieres/{id}', async (event) => {
+  const p = event.data?.data();
+  if (!p) return;
+  const pasteurs = (await comptesAvecRoles(['admin'])).filter((u) => u !== p.uid);
+  await envoyerAuxComptes(pasteurs, (langue) =>
+    notificationPriere(event.params.id, p, langue, { pourPasteur: true }));
+  if (p.partage !== 'intercession' || !p.groupeId) return;
+  const groupe = (await getFirestore().doc(`groupes/${p.groupeId}`).get()).data();
+  if (!groupe) return;
+  const equipe = destinataires(groupe.membres, p.uid).filter((u) => !pasteurs.includes(u));
+  await envoyerAuxComptes(equipe, (langue) =>
+    notificationPriere(event.params.id, p, langue, { pourPasteur: false }));
+});
+
+/** « J'ai prié » : nombre de personnes qui ont prié pour ce sujet. */
+export const compterPriants = onDocumentWritten('prieres/{id}/priants/{uid}', async (event) => {
+  const ref = getFirestore().doc(`prieres/${event.params.id}`);
+  const n = (await ref.collection('priants').count().get()).data().count;
+  if ((await ref.get()).exists) await ref.update({ nbPrieres: n });
+});
+
+/** Fête annoncée : notification aux membres connectés. */
+export const nouvelleFete = onDocumentCreated('fetes/{id}', async (event) => {
+  const f = event.data?.data();
+  if (!f?.date) return;
+  if (process.env.FUNCTIONS_EMULATOR === 'true') return;
+  await getMessaging().sendEach(messagesFete(event.params.id, f, (l) => quand(f.date.toDate(), l)));
+});
+
+/** Quelqu'un indique ce qu'il apporte : les responsables cuisine sont prévenus. */
+export const nouvelApport = onDocumentWritten('fetes/{id}/apports/{uid}', async (event) => {
+  const a = event.data?.after?.data();
+  if (!a) return;
+  const db = getFirestore();
+  const cuisineId = (await db.doc('parametres/eglise').get()).data()?.groupeCuisineId;
+  if (!cuisineId) return;
+  const [cuisine, fete] = await Promise.all([
+    db.doc(`groupes/${cuisineId}`).get(), db.doc(`fetes/${event.params.id}`).get(),
+  ]);
+  if (!cuisine.exists || !fete.exists) return;
+  await envoyerAuxComptes(
+    destinataires(cuisine.data().membres, event.params.uid),
+    (langue) => notificationApport(event.params.id, fete.data(), a, langue),
+  );
+});

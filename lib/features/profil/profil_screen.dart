@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../core/router/routes.dart';
 import '../../l10n/app_localizations.dart';
 import '../../shared/widgets/connexion_requise.dart';
 import '../auth/auth_providers.dart';
@@ -113,10 +115,24 @@ class _ProfilScreenState extends ConsumerState<ProfilScreen> {
             ),
           ),
           const SizedBox(height: 12),
-          Text(
-            l10n.profilAVenir,
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
+          Card(
+            child: Column(
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.outbox_outlined),
+                  title: Text(l10n.mesDemandes),
+                  subtitle: Text(l10n.mesDemandesSousTitre),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => context.push(Routes.mesDemandes),
+                ),
+                const Divider(height: 1),
+                ListTile(
+                  leading: const Icon(Icons.volunteer_activism_outlined),
+                  title: Text(l10n.mesSujetsPriere),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => context.push(Routes.mesPrieres),
+                ),
+              ],
             ),
           ),
           const SizedBox(height: 24),

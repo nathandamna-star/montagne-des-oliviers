@@ -14,6 +14,17 @@ import '../../features/auth/auth_providers.dart';
 import '../../features/auth/presentation/connexion_email_screen.dart';
 import '../../features/auth/presentation/connexion_screen.dart';
 import '../../features/auth/presentation/consentement_screen.dart';
+import '../../features/demandes/domain/demande.dart';
+import '../../features/demandes/presentation/demande_screen.dart';
+import '../../features/demandes/presentation/gestion_demandes_screen.dart';
+import '../../features/demandes/presentation/mes_demandes_screen.dart';
+import '../../features/demandes/presentation/nouvelle_demande_screen.dart';
+import '../../features/divers/presentation/editeur_fete_screen.dart';
+import '../../features/divers/presentation/fete_screen.dart';
+import '../../features/parametres/parametres_eglise_screen.dart';
+import '../../features/prieres/presentation/listes_prieres.dart';
+import '../../features/prieres/presentation/nouvelle_priere_screen.dart';
+import '../../features/prieres/presentation/priere_screen.dart';
 import '../../features/groupes/presentation/calendrier_groupe_screen.dart';
 import '../../features/groupes/presentation/discussion_screen.dart';
 import '../../features/groupes/presentation/editeur_rencontre_screen.dart';
@@ -142,6 +153,18 @@ final _sousRoutes = <String, List<RouteBase>>{
               EditeurGroupeScreen(id: state.pathParameters['id']!),
         ),
         GoRoute(
+          path: 'prieres',
+          builder: (context, state) =>
+              PrieresGroupeScreen(groupeId: state.pathParameters['id']!),
+          routes: [
+            GoRoute(
+              path: ':pid',
+              builder: (context, state) =>
+                  PriereScreen(id: state.pathParameters['pid']!),
+            ),
+          ],
+        ),
+        GoRoute(
           path: 'calendrier',
           builder: (context, state) =>
               CalendrierGroupeScreen(id: state.pathParameters['id']!),
@@ -168,7 +191,55 @@ final _sousRoutes = <String, List<RouteBase>>{
       ],
     ),
   ],
+  Routes.profil: [
+    GoRoute(
+      path: 'demandes',
+      builder: (context, state) => const MesDemandesScreen(),
+      routes: [
+        GoRoute(
+          path: 'nouvelle',
+          builder: (context, state) => NouvelleDemandeScreen(
+            type: TypeDemande.values
+                .where((t) => t.name == state.uri.queryParameters['type'])
+                .firstOrNull,
+          ),
+        ),
+        GoRoute(
+          path: ':id',
+          builder: (context, state) =>
+              DemandeScreen(id: state.pathParameters['id']!),
+        ),
+      ],
+    ),
+    GoRoute(
+      path: 'prieres',
+      builder: (context, state) => const MesPrieresScreen(),
+      routes: [
+        GoRoute(
+          path: 'nouvelle',
+          builder: (context, state) => const NouvellePriereScreen(),
+        ),
+        GoRoute(
+          path: ':id',
+          builder: (context, state) =>
+              PriereScreen(id: state.pathParameters['id']!),
+        ),
+      ],
+    ),
+  ],
   Routes.agenda: [
+    // Déclaré avant « :id » (événement).
+    GoRoute(
+      path: 'divers/:id',
+      builder: (context, state) => FeteScreen(id: state.pathParameters['id']!),
+      routes: [
+        GoRoute(
+          path: 'modifier',
+          builder: (context, state) =>
+              EditeurFeteScreen(id: state.pathParameters['id']!),
+        ),
+      ],
+    ),
     GoRoute(
       path: ':id',
       builder: (context, state) =>
@@ -177,6 +248,32 @@ final _sousRoutes = <String, List<RouteBase>>{
   ],
   Routes.responsables: [
     GoRoute(path: 'roles', builder: (context, state) => const RolesScreen()),
+    GoRoute(
+      path: 'parametres',
+      builder: (context, state) => const ParametresEgliseScreen(),
+    ),
+    GoRoute(
+      path: 'demandes',
+      builder: (context, state) => const GestionDemandesScreen(),
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (context, state) =>
+              DemandeScreen(id: state.pathParameters['id']!, gestion: true),
+        ),
+      ],
+    ),
+    GoRoute(
+      path: 'prieres',
+      builder: (context, state) => const GestionPrieresScreen(),
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (context, state) =>
+              PriereScreen(id: state.pathParameters['id']!),
+        ),
+      ],
+    ),
     GoRoute(
       path: 'groupes',
       builder: (context, state) => const GestionGroupesScreen(),

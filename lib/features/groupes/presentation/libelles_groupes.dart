@@ -14,6 +14,7 @@ extension LibellesGroupes on AppLocalizations {
     TypeGroupe.louange => groupeLouange,
     TypeGroupe.moderation => groupeModeration,
     TypeGroupe.media => groupeMedia,
+    TypeGroupe.cuisine => groupeCuisine,
     TypeGroupe.entraide => groupeEntraide,
     TypeGroupe.autre => groupeAutre,
   };
@@ -28,6 +29,7 @@ IconData iconeGroupe(TypeGroupe t) => switch (t) {
   TypeGroupe.louange => Icons.music_note_outlined,
   TypeGroupe.moderation => Icons.record_voice_over_outlined,
   TypeGroupe.media => Icons.videocam_outlined,
+  TypeGroupe.cuisine => Icons.soup_kitchen_outlined,
   TypeGroupe.entraide => Icons.handshake_outlined,
   TypeGroupe.autre => Icons.groups_outlined,
 };

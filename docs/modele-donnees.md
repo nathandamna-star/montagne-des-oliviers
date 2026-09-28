@@ -35,6 +35,8 @@ du secrétariat et du trésorier. Les administrateurs de groupe sont enregistré
 | `medias/{id}` | type audio/video/direct, titre, description, predicateur, date, url, youtubeId, dureeSec, visibilite, publie | selon visibilité | secrétariat |
 | `versets/{id}` | reference, texte, ordre | tous | secrétariat |
 | `dons/{communication}` | uid, nom, montant, devise EUR, affectation dime/offrande/mission/construction/entraide, mode virement (carte/Bancontact : serveur), frequence, statut en_attente/recu/annule | donateur, trésorier | donateur (annonce, renoncement) ; trésorier (confirmation) |
+| `fetes/{id}` | titre, type anniversaire/naissance/mariage/fete/autre, date, lieu, description, uid, nom | membres de l'église | le membre qui annonce, secrétariat |
+| `fetes/{id}/apports/{uid}` | nom, apporte [nourriture, gateau, boisson, autre], precision | soi, responsables cuisine (`parametres/eglise.groupeCuisineId`), secrétariat | soi |
 | `systeme/*`, `stripe/*` | réservé aux Cloud Functions | — | — |
 
 ## Fichiers (Storage)

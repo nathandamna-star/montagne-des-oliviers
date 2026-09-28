@@ -5,12 +5,14 @@ import 'package:go_router/go_router.dart';
 import '../../core/router/routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../l10n/app_localizations.dart';
+import '../../shared/services/lanceur.dart';
 import '../../shared/widgets/logo_eglise.dart';
 import '../actualites/actualites_providers.dart';
 import '../actualites/presentation/carte_actualite.dart';
 import '../agenda/agenda_providers.dart';
 import '../agenda/presentation/carte_evenement.dart';
 import '../auth/auth_providers.dart';
+import '../parametres/parametres_eglise.dart';
 
 /// Accueil : bannière (visiteurs) ou carte de l'église (membres), dernières
 /// annonces et prochains événements. et, plus tard, verset du jour, annonces,
@@ -61,6 +63,29 @@ class AccueilScreen extends ConsumerWidget {
               ),
             ),
           ],
+          if (ref.watch(profilProvider).value != null) ...[
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () => context.push(Routes.nouvelleDemande),
+                    icon: const Icon(Icons.outbox_outlined),
+                    label: Text(l10n.faireDemande),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () => context.push(Routes.nouvellePriere),
+                    icon: const Icon(Icons.volunteer_activism_outlined),
+                    label: Text(l10n.confierPriere),
+                  ),
+                ),
+              ],
+            ),
+          ],
+          ..._reseaux(context, ref),
           const SizedBox(height: 24),
           _Section(
             titre: l10n.annonces,
@@ -79,6 +104,37 @@ class AccueilScreen extends ConsumerWidget {
       ),
     );
   }
+}
+
+/// Boutons Facebook et YouTube, quand l'église les a renseignés.
+List<Widget> _reseaux(BuildContext context, WidgetRef ref) {
+  final l10n = AppLocalizations.of(context);
+  final p = ref.watch(parametresEgliseProvider).value;
+  if (p == null || (p.facebookUrl.isEmpty && p.youtubeUrl.isEmpty)) {
+    return const [];
+  }
+  final lanceur = ref.read(lanceurProvider);
+  return [
+    const SizedBox(height: 16),
+    Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        if (p.youtubeUrl.isNotEmpty)
+          ActionChip(
+            avatar: const Icon(Icons.smart_display_outlined),
+            label: Text(l10n.suivreYoutube),
+            onPressed: () => lanceur.ouvrir(Uri.parse(p.youtubeUrl)),
+          ),
+        if (p.facebookUrl.isNotEmpty)
+          ActionChip(
+            avatar: const Icon(Icons.facebook_outlined),
+            label: Text(l10n.suivreFacebook),
+            onPressed: () => lanceur.ouvrir(Uri.parse(p.facebookUrl)),
+          ),
+      ],
+    ),
+  ];
 }
 
 List<Widget> _annonces(BuildContext context, WidgetRef ref) {
