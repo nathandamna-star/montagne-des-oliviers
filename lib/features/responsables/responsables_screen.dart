@@ -22,6 +22,15 @@ class ResponsablesScreen extends ConsumerWidget {
           if (ref.watch(estSecretariatProvider)) ...[
             Card(
               child: ListTile(
+                leading: const Icon(Icons.badge_outlined),
+                title: Text(l10n.fichierMembres),
+                subtitle: Text(l10n.fichierMembresSousTitre),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => context.push(Routes.membres),
+              ),
+            ),
+            Card(
+              child: ListTile(
                 leading: const Icon(Icons.campaign_outlined),
                 title: Text(l10n.annonces),
                 subtitle: Text(l10n.annoncesSousTitre),

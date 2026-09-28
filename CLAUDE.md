@@ -227,3 +227,12 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   personnelles à venir). Fonctions `notifierActualite` / `notifierEvenement` : une seule fois (`notifieLe`) quand
   publié avec `notifier` ; textes FR/NL et heure de Bruxelles (`functions/notifications.js`). Toucher la notification
   ouvre l'annonce ou l'événement. iPhone : `Runner.entitlements` (aps-environment) + clé APNs dans Firebase.
+- Membres et familles (étape 5, `lib/features/membres/`) : `membres/{id}` (voir `Membre` : nom, prénom, coordonnées,
+  dates de naissance / arrivée / baptême / présentation / mariage, statut visiteur|membre|actif, familleId, uid du compte
+  lié, services, notes) et `familles/{id}` (nom). Responsables → Fichier des membres (secrétariat/admin) : recherche
+  sans accents (`sansAccents`), filtre par statut, tableau sur grand écran (≥ 900 px), export CSV (`exporterCsv` :
+  point-virgule + BOM pour Excel, liste filtrée) partagé par `Partage` (share_plus, téléchargement sur le web),
+  « comptes de l'app sans fiche » → fiche pré-remplie (`?uid=`). Familles : liste, ajout/retrait de personnes.
+  Rôles : liste des responsables actuels (`users.roles`, écrit par `definirRoles`).
+- Site web (back-office sur ordinateur) : Firebase Hosting (`build/web`, réécriture vers index.html) :
+  `flutter build web && npx firebase-tools deploy --only hosting` → https://montagne-des-oliviers.web.app

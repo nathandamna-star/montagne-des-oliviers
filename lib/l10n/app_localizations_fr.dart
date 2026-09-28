@@ -487,4 +487,205 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get typeConference => 'Conférence';
+
+  @override
+  String get ajouter => 'Ajouter';
+
+  @override
+  String get ajouterALaFamille => 'Ajouter une personne';
+
+  @override
+  String get aucun => 'Aucun';
+
+  @override
+  String get aucune => 'Aucune';
+
+  @override
+  String get aucuneFamille => 'Aucune famille pour le moment.';
+
+  @override
+  String get aucuneFiche => 'Aucune fiche.';
+
+  @override
+  String get autreService => 'Autre service';
+
+  @override
+  String get champArrivee => 'Arrivée à l\'église';
+
+  @override
+  String get champBapteme => 'Baptême';
+
+  @override
+  String get champCodePostal => 'Code postal';
+
+  @override
+  String get champDateNaissance => 'Date de naissance';
+
+  @override
+  String get champFamille => 'Famille';
+
+  @override
+  String get champMariage => 'Mariage';
+
+  @override
+  String get champNomFamille => 'Nom';
+
+  @override
+  String get champNotes => 'Notes';
+
+  @override
+  String get champPrenom => 'Prénom';
+
+  @override
+  String get champPresentation => 'Présentation d\'enfant';
+
+  @override
+  String get champRue => 'Rue et numéro';
+
+  @override
+  String get champServices => 'Services';
+
+  @override
+  String get champStatut => 'Statut';
+
+  @override
+  String get champTelephone => 'Téléphone';
+
+  @override
+  String get champVille => 'Localité';
+
+  @override
+  String get compteApp => 'Compte de l\'application';
+
+  @override
+  String get compteLie => 'Compte lié';
+
+  @override
+  String get compteLieAide => 'La personne pourra voir sa fiche dans l\'app.';
+
+  @override
+  String comptesSansFiche(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n comptes de l\'app sans fiche',
+      one: '1 compte de l\'app sans fiche',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get comptesSansFicheAide =>
+      'Créer leur fiche en reprenant nom et e-mail';
+
+  @override
+  String get coordonnees => 'Coordonnées';
+
+  @override
+  String get creer => 'Créer';
+
+  @override
+  String get creerFicheDepuisCompte => 'Créer la fiche de…';
+
+  @override
+  String get effacerDate => 'Effacer la date';
+
+  @override
+  String get exporterCsv => 'Exporter (tableur CSV)';
+
+  @override
+  String familleDe(String nom) {
+    return 'Famille $nom';
+  }
+
+  @override
+  String get familleVide => 'Personne dans cette famille pour le moment.';
+
+  @override
+  String get familles => 'Familles';
+
+  @override
+  String get ficheMembre => 'Fiche';
+
+  @override
+  String get fichierMembres => 'Fichier des membres';
+
+  @override
+  String get fichierMembresSousTitre =>
+      'Membres, familles, coordonnées, services';
+
+  @override
+  String get nomFamilleChamp => 'Nom de la famille';
+
+  @override
+  String nombreFiches(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n fiches',
+      one: '1 fiche',
+      zero: 'Aucune fiche',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String nombrePersonnesFamille(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n personnes',
+      one: '1 personne',
+      zero: 'Aucune personne',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get notesAide =>
+      'Notes (visibles seulement par le secrétariat et les pasteurs)';
+
+  @override
+  String get nouvelleFamille => 'Nouvelle famille';
+
+  @override
+  String get nouvelleFiche => 'Nouvelle fiche';
+
+  @override
+  String get rechercherMembre => 'Rechercher (nom, téléphone, localité…)';
+
+  @override
+  String get renommer => 'Renommer';
+
+  @override
+  String get responsablesActuels => 'Responsables actuels';
+
+  @override
+  String get retirerDeLaFamille => 'Retirer de la famille';
+
+  @override
+  String get supprimerFamille => 'Supprimer cette famille ?';
+
+  @override
+  String get supprimerFamilleAide =>
+      'Les fiches des personnes sont conservées.';
+
+  @override
+  String get supprimerFiche => 'Supprimer cette fiche ?';
+
+  @override
+  String get supprimerFicheAide =>
+      'Le compte de l\'app de la personne n\'est pas supprimé.';
+
+  @override
+  String get vieDEglise => 'Vie d\'église';
+
+  @override
+  String get statutVisiteur => 'Visiteur';
+
+  @override
+  String get statutMembre => 'Membre';
+
+  @override
+  String get statutActif => 'Membre actif';
 }

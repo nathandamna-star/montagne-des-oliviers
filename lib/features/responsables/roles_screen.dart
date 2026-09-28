@@ -5,6 +5,7 @@ import '../../l10n/app_localizations.dart';
 import '../auth/auth_providers.dart';
 import '../auth/data/fonctions_roles.dart';
 import '../auth/domain/role.dart';
+import '../membres/membres_providers.dart';
 import '../profil/libelles_roles.dart';
 
 /// Administrateur : attribuer ou retirer les rôles d'un compte (par e-mail).
@@ -101,6 +102,35 @@ class _RolesScreenState extends ConsumerState<RolesScreen> {
                   onPressed: _occupe ? null : _enregistrer,
                   child: Text(l10n.enregistrer),
                 ),
+                const SizedBox(height: 32),
+                Text(
+                  l10n.responsablesActuels,
+                  style: theme.textTheme.titleMedium,
+                ),
+                for (final c in ref.watch(comptesProvider).value ?? const [])
+                  if (c.roles.isNotEmpty)
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(Icons.verified_user_outlined),
+                      title: Text(c.nom),
+                      subtitle: Text(
+                        [
+                          for (final r in Role.values)
+                            if (c.roles.contains(r.name)) l10n.libelleRole(r),
+                        ].join(', '),
+                      ),
+                      trailing: const Icon(Icons.edit_outlined),
+                      // Reprendre ce compte dans le formulaire ci-dessus.
+                      onTap: () => setState(() {
+                        _email.text = c.email;
+                        _roles
+                          ..clear()
+                          ..addAll([
+                            for (final r in Role.values)
+                              if (c.roles.contains(r.name)) r,
+                          ]);
+                      }),
+                    ),
               ],
             ),
           ),

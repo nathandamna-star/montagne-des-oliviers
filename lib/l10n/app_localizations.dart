@@ -949,6 +949,342 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Conférence'**
   String get typeConference;
+
+  /// No description provided for @ajouter.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter'**
+  String get ajouter;
+
+  /// No description provided for @ajouterALaFamille.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter une personne'**
+  String get ajouterALaFamille;
+
+  /// No description provided for @aucun.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun'**
+  String get aucun;
+
+  /// No description provided for @aucune.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune'**
+  String get aucune;
+
+  /// No description provided for @aucuneFamille.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune famille pour le moment.'**
+  String get aucuneFamille;
+
+  /// No description provided for @aucuneFiche.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune fiche.'**
+  String get aucuneFiche;
+
+  /// No description provided for @autreService.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autre service'**
+  String get autreService;
+
+  /// No description provided for @champArrivee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Arrivée à l\'église'**
+  String get champArrivee;
+
+  /// No description provided for @champBapteme.
+  ///
+  /// In fr, this message translates to:
+  /// **'Baptême'**
+  String get champBapteme;
+
+  /// No description provided for @champCodePostal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Code postal'**
+  String get champCodePostal;
+
+  /// No description provided for @champDateNaissance.
+  ///
+  /// In fr, this message translates to:
+  /// **'Date de naissance'**
+  String get champDateNaissance;
+
+  /// No description provided for @champFamille.
+  ///
+  /// In fr, this message translates to:
+  /// **'Famille'**
+  String get champFamille;
+
+  /// No description provided for @champMariage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mariage'**
+  String get champMariage;
+
+  /// No description provided for @champNomFamille.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom'**
+  String get champNomFamille;
+
+  /// No description provided for @champNotes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Notes'**
+  String get champNotes;
+
+  /// No description provided for @champPrenom.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prénom'**
+  String get champPrenom;
+
+  /// No description provided for @champPresentation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Présentation d\'enfant'**
+  String get champPresentation;
+
+  /// No description provided for @champRue.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rue et numéro'**
+  String get champRue;
+
+  /// No description provided for @champServices.
+  ///
+  /// In fr, this message translates to:
+  /// **'Services'**
+  String get champServices;
+
+  /// No description provided for @champStatut.
+  ///
+  /// In fr, this message translates to:
+  /// **'Statut'**
+  String get champStatut;
+
+  /// No description provided for @champTelephone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Téléphone'**
+  String get champTelephone;
+
+  /// No description provided for @champVille.
+  ///
+  /// In fr, this message translates to:
+  /// **'Localité'**
+  String get champVille;
+
+  /// No description provided for @compteApp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Compte de l\'application'**
+  String get compteApp;
+
+  /// No description provided for @compteLie.
+  ///
+  /// In fr, this message translates to:
+  /// **'Compte lié'**
+  String get compteLie;
+
+  /// No description provided for @compteLieAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'La personne pourra voir sa fiche dans l\'app.'**
+  String get compteLieAide;
+
+  /// No description provided for @comptesSansFiche.
+  ///
+  /// In fr, this message translates to:
+  /// **'{n, plural, =1{1 compte de l\'app sans fiche} other{{n} comptes de l\'app sans fiche}}'**
+  String comptesSansFiche(int n);
+
+  /// No description provided for @comptesSansFicheAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créer leur fiche en reprenant nom et e-mail'**
+  String get comptesSansFicheAide;
+
+  /// No description provided for @coordonnees.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coordonnées'**
+  String get coordonnees;
+
+  /// No description provided for @creer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créer'**
+  String get creer;
+
+  /// No description provided for @creerFicheDepuisCompte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créer la fiche de…'**
+  String get creerFicheDepuisCompte;
+
+  /// No description provided for @effacerDate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Effacer la date'**
+  String get effacerDate;
+
+  /// No description provided for @exporterCsv.
+  ///
+  /// In fr, this message translates to:
+  /// **'Exporter (tableur CSV)'**
+  String get exporterCsv;
+
+  /// No description provided for @familleDe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Famille {nom}'**
+  String familleDe(String nom);
+
+  /// No description provided for @familleVide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Personne dans cette famille pour le moment.'**
+  String get familleVide;
+
+  /// No description provided for @familles.
+  ///
+  /// In fr, this message translates to:
+  /// **'Familles'**
+  String get familles;
+
+  /// No description provided for @ficheMembre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fiche'**
+  String get ficheMembre;
+
+  /// No description provided for @fichierMembres.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fichier des membres'**
+  String get fichierMembres;
+
+  /// No description provided for @fichierMembresSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Membres, familles, coordonnées, services'**
+  String get fichierMembresSousTitre;
+
+  /// No description provided for @nomFamilleChamp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom de la famille'**
+  String get nomFamilleChamp;
+
+  /// No description provided for @nombreFiches.
+  ///
+  /// In fr, this message translates to:
+  /// **'{n, plural, =0{Aucune fiche} =1{1 fiche} other{{n} fiches}}'**
+  String nombreFiches(int n);
+
+  /// No description provided for @nombrePersonnesFamille.
+  ///
+  /// In fr, this message translates to:
+  /// **'{n, plural, =0{Aucune personne} =1{1 personne} other{{n} personnes}}'**
+  String nombrePersonnesFamille(int n);
+
+  /// No description provided for @notesAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Notes (visibles seulement par le secrétariat et les pasteurs)'**
+  String get notesAide;
+
+  /// No description provided for @nouvelleFamille.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle famille'**
+  String get nouvelleFamille;
+
+  /// No description provided for @nouvelleFiche.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle fiche'**
+  String get nouvelleFiche;
+
+  /// No description provided for @rechercherMembre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rechercher (nom, téléphone, localité…)'**
+  String get rechercherMembre;
+
+  /// No description provided for @renommer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Renommer'**
+  String get renommer;
+
+  /// No description provided for @responsablesActuels.
+  ///
+  /// In fr, this message translates to:
+  /// **'Responsables actuels'**
+  String get responsablesActuels;
+
+  /// No description provided for @retirerDeLaFamille.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer de la famille'**
+  String get retirerDeLaFamille;
+
+  /// No description provided for @supprimerFamille.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer cette famille ?'**
+  String get supprimerFamille;
+
+  /// No description provided for @supprimerFamilleAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les fiches des personnes sont conservées.'**
+  String get supprimerFamilleAide;
+
+  /// No description provided for @supprimerFiche.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer cette fiche ?'**
+  String get supprimerFiche;
+
+  /// No description provided for @supprimerFicheAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le compte de l\'app de la personne n\'est pas supprimé.'**
+  String get supprimerFicheAide;
+
+  /// No description provided for @vieDEglise.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vie d\'église'**
+  String get vieDEglise;
+
+  /// No description provided for @statutVisiteur.
+  ///
+  /// In fr, this message translates to:
+  /// **'Visiteur'**
+  String get statutVisiteur;
+
+  /// No description provided for @statutMembre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Membre'**
+  String get statutMembre;
+
+  /// No description provided for @statutActif.
+  ///
+  /// In fr, this message translates to:
+  /// **'Membre actif'**
+  String get statutActif;
 }
 
 class _AppLocalizationsDelegate

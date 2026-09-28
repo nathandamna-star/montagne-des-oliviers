@@ -489,4 +489,205 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get typeConference => 'Conferentie';
+
+  @override
+  String get ajouter => 'Toevoegen';
+
+  @override
+  String get ajouterALaFamille => 'Persoon toevoegen';
+
+  @override
+  String get aucun => 'Geen';
+
+  @override
+  String get aucune => 'Geen';
+
+  @override
+  String get aucuneFamille => 'Nog geen gezinnen.';
+
+  @override
+  String get aucuneFiche => 'Geen fiches.';
+
+  @override
+  String get autreService => 'Andere dienst';
+
+  @override
+  String get champArrivee => 'Aankomst in de kerk';
+
+  @override
+  String get champBapteme => 'Doop';
+
+  @override
+  String get champCodePostal => 'Postcode';
+
+  @override
+  String get champDateNaissance => 'Geboortedatum';
+
+  @override
+  String get champFamille => 'Gezin';
+
+  @override
+  String get champMariage => 'Huwelijk';
+
+  @override
+  String get champNomFamille => 'Naam';
+
+  @override
+  String get champNotes => 'Notities';
+
+  @override
+  String get champPrenom => 'Voornaam';
+
+  @override
+  String get champPresentation => 'Opdracht van een kind';
+
+  @override
+  String get champRue => 'Straat en nummer';
+
+  @override
+  String get champServices => 'Diensten';
+
+  @override
+  String get champStatut => 'Status';
+
+  @override
+  String get champTelephone => 'Telefoon';
+
+  @override
+  String get champVille => 'Gemeente';
+
+  @override
+  String get compteApp => 'Account in de app';
+
+  @override
+  String get compteLie => 'Gekoppeld account';
+
+  @override
+  String get compteLieAide =>
+      'De persoon kan zijn of haar fiche in de app zien.';
+
+  @override
+  String comptesSansFiche(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n accounts zonder fiche',
+      one: '1 account zonder fiche',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get comptesSansFicheAide => 'Hun fiche aanmaken met naam en e-mail';
+
+  @override
+  String get coordonnees => 'Contactgegevens';
+
+  @override
+  String get creer => 'Aanmaken';
+
+  @override
+  String get creerFicheDepuisCompte => 'Fiche aanmaken voor…';
+
+  @override
+  String get effacerDate => 'Datum wissen';
+
+  @override
+  String get exporterCsv => 'Exporteren (CSV-bestand)';
+
+  @override
+  String familleDe(String nom) {
+    return 'Gezin $nom';
+  }
+
+  @override
+  String get familleVide => 'Nog niemand in dit gezin.';
+
+  @override
+  String get familles => 'Gezinnen';
+
+  @override
+  String get ficheMembre => 'Fiche';
+
+  @override
+  String get fichierMembres => 'Ledenbestand';
+
+  @override
+  String get fichierMembresSousTitre =>
+      'Leden, gezinnen, contactgegevens, diensten';
+
+  @override
+  String get nomFamilleChamp => 'Naam van het gezin';
+
+  @override
+  String nombreFiches(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n fiches',
+      one: '1 fiche',
+      zero: 'Geen fiches',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String nombrePersonnesFamille(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n personen',
+      one: '1 persoon',
+      zero: 'Niemand',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get notesAide =>
+      'Notities (alleen zichtbaar voor secretariaat en pastoors)';
+
+  @override
+  String get nouvelleFamille => 'Nieuw gezin';
+
+  @override
+  String get nouvelleFiche => 'Nieuwe fiche';
+
+  @override
+  String get rechercherMembre => 'Zoeken (naam, telefoon, gemeente…)';
+
+  @override
+  String get renommer => 'Naam wijzigen';
+
+  @override
+  String get responsablesActuels => 'Huidige verantwoordelijken';
+
+  @override
+  String get retirerDeLaFamille => 'Uit het gezin halen';
+
+  @override
+  String get supprimerFamille => 'Dit gezin verwijderen?';
+
+  @override
+  String get supprimerFamilleAide =>
+      'De fiches van de personen blijven bewaard.';
+
+  @override
+  String get supprimerFiche => 'Deze fiche verwijderen?';
+
+  @override
+  String get supprimerFicheAide =>
+      'Het app-account van de persoon wordt niet verwijderd.';
+
+  @override
+  String get vieDEglise => 'Kerkelijk leven';
+
+  @override
+  String get statutVisiteur => 'Bezoeker';
+
+  @override
+  String get statutMembre => 'Lid';
+
+  @override
+  String get statutActif => 'Actief lid';
 }

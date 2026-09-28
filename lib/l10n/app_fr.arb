@@ -193,5 +193,89 @@
   "typeJeune": "Jeûne",
   "typeCellule": "Cellule",
   "typeEvenement": "Événement",
-  "typeConference": "Conférence"
+  "typeConference": "Conférence",
+  "ajouter": "Ajouter",
+  "ajouterALaFamille": "Ajouter une personne",
+  "aucun": "Aucun",
+  "aucune": "Aucune",
+  "aucuneFamille": "Aucune famille pour le moment.",
+  "aucuneFiche": "Aucune fiche.",
+  "autreService": "Autre service",
+  "champArrivee": "Arrivée à l'église",
+  "champBapteme": "Baptême",
+  "champCodePostal": "Code postal",
+  "champDateNaissance": "Date de naissance",
+  "champFamille": "Famille",
+  "champMariage": "Mariage",
+  "champNomFamille": "Nom",
+  "champNotes": "Notes",
+  "champPrenom": "Prénom",
+  "champPresentation": "Présentation d'enfant",
+  "champRue": "Rue et numéro",
+  "champServices": "Services",
+  "champStatut": "Statut",
+  "champTelephone": "Téléphone",
+  "champVille": "Localité",
+  "compteApp": "Compte de l'application",
+  "compteLie": "Compte lié",
+  "compteLieAide": "La personne pourra voir sa fiche dans l'app.",
+  "comptesSansFiche": "{n, plural, =1{1 compte de l'app sans fiche} other{{n} comptes de l'app sans fiche}}",
+  "@comptesSansFiche": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "comptesSansFicheAide": "Créer leur fiche en reprenant nom et e-mail",
+  "coordonnees": "Coordonnées",
+  "creer": "Créer",
+  "creerFicheDepuisCompte": "Créer la fiche de…",
+  "effacerDate": "Effacer la date",
+  "exporterCsv": "Exporter (tableur CSV)",
+  "familleDe": "Famille {nom}",
+  "@familleDe": {
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "familleVide": "Personne dans cette famille pour le moment.",
+  "familles": "Familles",
+  "ficheMembre": "Fiche",
+  "fichierMembres": "Fichier des membres",
+  "fichierMembresSousTitre": "Membres, familles, coordonnées, services",
+  "nomFamilleChamp": "Nom de la famille",
+  "nombreFiches": "{n, plural, =0{Aucune fiche} =1{1 fiche} other{{n} fiches}}",
+  "@nombreFiches": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "nombrePersonnesFamille": "{n, plural, =0{Aucune personne} =1{1 personne} other{{n} personnes}}",
+  "@nombrePersonnesFamille": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "notesAide": "Notes (visibles seulement par le secrétariat et les pasteurs)",
+  "nouvelleFamille": "Nouvelle famille",
+  "nouvelleFiche": "Nouvelle fiche",
+  "rechercherMembre": "Rechercher (nom, téléphone, localité…)",
+  "renommer": "Renommer",
+  "responsablesActuels": "Responsables actuels",
+  "retirerDeLaFamille": "Retirer de la famille",
+  "supprimerFamille": "Supprimer cette famille ?",
+  "supprimerFamilleAide": "Les fiches des personnes sont conservées.",
+  "supprimerFiche": "Supprimer cette fiche ?",
+  "supprimerFicheAide": "Le compte de l'app de la personne n'est pas supprimé.",
+  "vieDEglise": "Vie d'église",
+  "statutVisiteur": "Visiteur",
+  "statutMembre": "Membre",
+  "statutActif": "Membre actif"
 }

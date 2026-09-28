@@ -14,6 +14,9 @@ import '../../features/auth/auth_providers.dart';
 import '../../features/auth/presentation/connexion_email_screen.dart';
 import '../../features/auth/presentation/connexion_screen.dart';
 import '../../features/auth/presentation/consentement_screen.dart';
+import '../../features/membres/presentation/familles_screen.dart';
+import '../../features/membres/presentation/fiche_membre_screen.dart';
+import '../../features/membres/presentation/membres_screen.dart';
 import '../../features/responsables/roles_screen.dart';
 import '../../shared/widgets/logo_eglise.dart';
 import '../../features/agenda/agenda_screen.dart';
@@ -124,6 +127,30 @@ final _sousRoutes = <String, List<RouteBase>>{
   ],
   Routes.responsables: [
     GoRoute(path: 'roles', builder: (context, state) => const RolesScreen()),
+    GoRoute(
+      path: 'membres',
+      builder: (context, state) => const MembresScreen(),
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (context, state) => FicheMembreScreen(
+            id: state.pathParameters['id']!,
+            uidCompte: state.uri.queryParameters['uid'],
+          ),
+        ),
+      ],
+    ),
+    GoRoute(
+      path: 'familles',
+      builder: (context, state) => const FamillesScreen(),
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (context, state) =>
+              FamilleScreen(id: state.pathParameters['id']!),
+        ),
+      ],
+    ),
     GoRoute(
       path: 'actualites',
       builder: (context, state) => const GestionActualitesScreen(),

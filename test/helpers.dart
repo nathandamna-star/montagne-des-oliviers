@@ -13,6 +13,7 @@ import 'package:montagne_des_oliviers/features/actualites/actualites_providers.d
 import 'package:montagne_des_oliviers/features/notifications/notifications_providers.dart';
 import 'package:montagne_des_oliviers/features/notifications/notifications_service.dart';
 import 'package:montagne_des_oliviers/shared/data/envoi_photos.dart';
+import 'package:montagne_des_oliviers/shared/services/partage.dart';
 import 'package:montagne_des_oliviers/features/auth/auth_providers.dart';
 import 'package:montagne_des_oliviers/features/auth/data/connexion_google.dart';
 import 'package:montagne_des_oliviers/features/auth/data/fonctions_roles.dart';
@@ -77,6 +78,18 @@ class FauxEnvoiPhotos implements EnvoiPhotos {
   }
 }
 
+/// Partage simulé : garde les fichiers « partagés ».
+class FauxPartage implements Partage {
+  final fichiers = <(String, String)>[];
+
+  @override
+  Future<void> partagerFichier({
+    required String nom,
+    required String contenu,
+    required String typeMime,
+  }) async => fichiers.add((nom, contenu));
+}
+
 /// Heure fixe des tests : lundi 5 octobre 2026, 9 h.
 final maintenant = DateTime(2026, 10, 5, 9);
 
@@ -98,6 +111,7 @@ class Banc {
   final fonctions = FaussesFonctionsRoles();
   final notifications = FaussesNotifications();
   final photos = FauxEnvoiPhotos();
+  final partage = FauxPartage();
 
   /// Crée le profil (consentement déjà donné).
   Future<void> avecProfil([String nom = 'Marie']) =>
@@ -115,6 +129,7 @@ class Banc {
     fonctionsRolesProvider.overrideWithValue(fonctions),
     notificationsServiceProvider.overrideWithValue(notifications),
     envoiPhotosProvider.overrideWithValue(photos),
+    partageProvider.overrideWithValue(partage),
     horlogeProvider.overrideWithValue(() => maintenant),
     rolesFutureProvider.overrideWith((ref) async {
       final user = ref.watch(utilisateurFirebaseProvider).value;
