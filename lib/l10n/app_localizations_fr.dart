@@ -1727,4 +1727,113 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get personnesSouhaitees => 'Nombre de personnes souhaitées';
+
+  @override
+  String get reserverSalle => 'Réserver une salle';
+
+  @override
+  String get reserverSalleSousTitre => 'Voir les créneaux libres et demander';
+
+  @override
+  String get sallesEtReservations => 'Salles et réservations';
+
+  @override
+  String get sallesEtReservationsSousTitre =>
+      'Valider les demandes, gérer les salles';
+
+  @override
+  String get nouvelleSalle => 'Nouvelle salle';
+
+  @override
+  String get salles => 'Salles';
+
+  @override
+  String get aucuneSalle => 'Aucune salle enregistrée.';
+
+  @override
+  String get nomSalle => 'Nom de la salle';
+
+  @override
+  String get capacite => 'Capacité (personnes)';
+
+  @override
+  String capacitePersonnes(int n) {
+    return '$n personnes';
+  }
+
+  @override
+  String get mesReservations => 'Mes réservations';
+
+  @override
+  String get aucuneReservation => 'Aucune réservation à venir.';
+
+  @override
+  String get annulerReservation => 'Annuler la réservation';
+
+  @override
+  String get reservationsAValider => 'Réservations à valider';
+
+  @override
+  String get aucuneReservationAValider => 'Aucune demande de réservation.';
+
+  @override
+  String get reservationDemandee => 'En attente de validation';
+
+  @override
+  String get reservationValidee => 'Validée';
+
+  @override
+  String get reservationRefusee => 'Refusée';
+
+  @override
+  String get reservationAnnulee => 'Annulée';
+
+  @override
+  String get salleIndisponible => 'Cette salle n\'existe plus.';
+
+  @override
+  String get creneauxReserves => 'Déjà réservé';
+
+  @override
+  String get aucunCreneauReserve =>
+      'Aucune réservation à venir : la salle est libre.';
+
+  @override
+  String get demanderReservation => 'Demander une réservation';
+
+  @override
+  String get motifReservation => 'Pour quoi ?';
+
+  @override
+  String get motifReservationAide => 'Ex. : Répétition de la chorale';
+
+  @override
+  String get motifObligatoire => 'Indiquez pour quoi vous réservez.';
+
+  @override
+  String get creneauDejaPris => 'Ce créneau est déjà réservé.';
+
+  @override
+  String creneauDejaPrisPar(String motifs) {
+    return 'Déjà réservé : $motifs';
+  }
+
+  @override
+  String get envoyerDemandeReservation => 'Envoyer la demande';
+
+  @override
+  String get reservationEnvoyee => 'Demande envoyée au secrétariat.';
+
+  @override
+  String demandeePar(String nom) {
+    return 'Demandée par $nom';
+  }
+
+  @override
+  String conflitAvec(String autres) {
+    return 'Conflit avec : $autres';
+  }
+
+  @override
+  String get refuser => 'Refuser';
 }

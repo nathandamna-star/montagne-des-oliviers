@@ -503,7 +503,11 @@ service cloud.firestore {
     // ----- Salles et réservations -----
     match /salles/{sid} {
       allow read: if estMembre();
-      allow write: if estSecretariat();
+      allow create, update: if estSecretariat()
+        && texte(nouveau().nom, 100)
+        && (nouveau().get('capacite', null) == null || nouveau().capacite is int)
+        && texteFacultatif(nouveau().get('description', null), 1000);
+      allow delete: if estSecretariat();
     }
 
     match /reservations/{id} {
@@ -512,7 +516,7 @@ service cloud.firestore {
         || (connecte() && resource.data.uid == moi())
         || (estMembre() && resource.data.statut == 'validee');
       allow create: if estMembre()
-        && nouveau().keys().hasOnly(['uid', 'nom', 'salleId', 'debut', 'fin', 'motif',
+        && nouveau().keys().hasOnly(['uid', 'nom', 'salleId', 'salleNom', 'debut', 'fin', 'motif',
                                      'statut', 'createdAt'])
         && nouveau().uid == moi()
         && texte(nouveau().nom, 100)

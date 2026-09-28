@@ -81,3 +81,13 @@ describe('prières (déclencheurs)', () => {
     await attendre(() => ref.get(), (d) => d.data().nbPrieres === 2);
   });
 });
+
+describe('réservations (déclencheurs)', () => {
+  it('double validation : la seconde repasse en attente', async () => {
+    const d = (h) => Timestamp.fromDate(new Date(2026, 10, 7, h));
+    await db.doc('reservations/r1').set({ uid: 'a', nom: 'A', salleId: 's1', salleNom: 'S', debut: d(10), fin: d(12), motif: 'x', statut: 'validee' });
+    await db.doc('reservations/r2').set({ uid: 'b', nom: 'B', salleId: 's1', salleNom: 'S', debut: d(11), fin: d(13), motif: 'y', statut: 'demandee' });
+    await db.doc('reservations/r2').update({ statut: 'validee' });
+    await attendre(() => db.doc('reservations/r2').get(), (x) => x.data().statut === 'demandee');
+  });
+});

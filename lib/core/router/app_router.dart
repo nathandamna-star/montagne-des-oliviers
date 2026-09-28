@@ -22,6 +22,9 @@ import '../../features/demandes/presentation/nouvelle_demande_screen.dart';
 import '../../features/divers/presentation/editeur_fete_screen.dart';
 import '../../features/divers/presentation/fete_screen.dart';
 import '../../features/entretien/entretien_screen.dart';
+import '../../features/salles/reservations_a_valider_screen.dart';
+import '../../features/salles/salle_screen.dart';
+import '../../features/salles/salles_screen.dart';
 import '../../features/parametres/parametres_eglise_screen.dart';
 import '../../features/planning/presentation/editeur_affectation_screen.dart';
 import '../../features/planning/presentation/editeur_equipe_screen.dart';
@@ -136,6 +139,22 @@ final routerProvider = Provider<GoRouter>((ref) {
 
 final _sousRoutes = <String, List<RouteBase>>{
   Routes.accueil: [
+    GoRoute(
+      path: 'salles',
+      builder: (context, state) => const SallesScreen(),
+      routes: [
+        // Déclaré avant « :id ».
+        GoRoute(
+          path: 'a-valider',
+          builder: (context, state) => const ReservationsAValiderScreen(),
+        ),
+        GoRoute(
+          path: ':id',
+          builder: (context, state) =>
+              SalleScreen(id: state.pathParameters['id']!),
+        ),
+      ],
+    ),
     GoRoute(
       path: 'entretien',
       builder: (context, state) => const EntretienScreen(),

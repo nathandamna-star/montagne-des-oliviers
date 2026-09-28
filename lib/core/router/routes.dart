@@ -13,6 +13,9 @@ abstract final class Routes {
   static const preparations = '/accueil/preparations';
   static const planning = '/accueil/planning';
   static const entretien = '/accueil/entretien';
+  static const salles = '/accueil/salles';
+  static const reservationsAValider = '/accueil/salles/a-valider';
+  static String salle(String id) => '/accueil/salles/$id';
   static String equipe(String id) => '/accueil/planning/equipes/$id';
   static String editerEquipe(String id) =>
       '/accueil/planning/equipes/$id/modifier';

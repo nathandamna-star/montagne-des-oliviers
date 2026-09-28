@@ -702,5 +702,66 @@
   "jeViensNettoyer": "Je viens aider",
   "inscritAnnuler": "Inscrit — annuler",
   "titreNettoyageDefaut": "Nettoyage de la salle",
-  "personnesSouhaitees": "Nombre de personnes souhaitées"
+  "personnesSouhaitees": "Nombre de personnes souhaitées",
+  "reserverSalle": "Réserver une salle",
+  "reserverSalleSousTitre": "Voir les créneaux libres et demander",
+  "sallesEtReservations": "Salles et réservations",
+  "sallesEtReservationsSousTitre": "Valider les demandes, gérer les salles",
+  "nouvelleSalle": "Nouvelle salle",
+  "salles": "Salles",
+  "aucuneSalle": "Aucune salle enregistrée.",
+  "nomSalle": "Nom de la salle",
+  "capacite": "Capacité (personnes)",
+  "capacitePersonnes": "{n} personnes",
+  "@capacitePersonnes": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "mesReservations": "Mes réservations",
+  "aucuneReservation": "Aucune réservation à venir.",
+  "annulerReservation": "Annuler la réservation",
+  "reservationsAValider": "Réservations à valider",
+  "aucuneReservationAValider": "Aucune demande de réservation.",
+  "reservationDemandee": "En attente de validation",
+  "reservationValidee": "Validée",
+  "reservationRefusee": "Refusée",
+  "reservationAnnulee": "Annulée",
+  "salleIndisponible": "Cette salle n'existe plus.",
+  "creneauxReserves": "Déjà réservé",
+  "aucunCreneauReserve": "Aucune réservation à venir : la salle est libre.",
+  "demanderReservation": "Demander une réservation",
+  "motifReservation": "Pour quoi ?",
+  "motifReservationAide": "Ex. : Répétition de la chorale",
+  "motifObligatoire": "Indiquez pour quoi vous réservez.",
+  "creneauDejaPris": "Ce créneau est déjà réservé.",
+  "creneauDejaPrisPar": "Déjà réservé : {motifs}",
+  "@creneauDejaPrisPar": {
+    "placeholders": {
+      "motifs": {
+        "type": "String"
+      }
+    }
+  },
+  "envoyerDemandeReservation": "Envoyer la demande",
+  "reservationEnvoyee": "Demande envoyée au secrétariat.",
+  "demandeePar": "Demandée par {nom}",
+  "@demandeePar": {
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "conflitAvec": "Conflit avec : {autres}",
+  "@conflitAvec": {
+    "placeholders": {
+      "autres": {
+        "type": "String"
+      }
+    }
+  },
+  "refuser": "Refuser"
 }

@@ -35,7 +35,7 @@ void main() {
     expect(find.byType(NavigationDestination), findsNWidgets(6));
     await tester.tap(find.text('Responsables'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('fichier des membres'), findsOneWidget);
+    expect(find.text('Fichier des membres'), findsOneWidget);
   });
 
   testWidgets('ordinateur : menu latéral', (tester) async {

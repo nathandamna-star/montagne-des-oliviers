@@ -315,3 +315,10 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
 - À FAIRE (demande du porteur) : **Boutique** (livres) payable par virement (QR EPC, communication structurée) ou
   Bancontact / carte (Stripe) — à faire avec l'étape 11 (même compte Stripe que les dons). Livre papier = bien
   physique : paiement hors Apple autorisé.
+- Réservation des salles (étape 9, `lib/features/salles/`) : `salles/{id}` (nom, capacite, description ; secrétariat) et
+  `reservations/{id}` (uid, nom, salleId, salleNom, debut, fin, motif, statut demandee|validee|refusee|annulee,
+  reponse). `/accueil/salles` (Accueil « Réserver une salle », Responsables « Salles et réservations ») : salles, mes
+  réservations (annuler) ; fiche salle : créneaux validés à venir + demande (demain 14 h–16 h par défaut), bloquée si
+  `conflits()` (bords qui se touchent autorisés). Secrétariat : `/accueil/salles/a-valider` (conflits signalés,
+  « Valider » désactivé en cas de conflit, refuser avec message). Fonctions `nouvelleReservation` (secrétariat) et
+  `decisionReservation` (prévient la personne ; filet : une validation en conflit repasse « demandee »).

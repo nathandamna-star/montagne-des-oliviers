@@ -3169,6 +3169,204 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Nombre de personnes souhaitées'**
   String get personnesSouhaitees;
+
+  /// No description provided for @reserverSalle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réserver une salle'**
+  String get reserverSalle;
+
+  /// No description provided for @reserverSalleSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Voir les créneaux libres et demander'**
+  String get reserverSalleSousTitre;
+
+  /// No description provided for @sallesEtReservations.
+  ///
+  /// In fr, this message translates to:
+  /// **'Salles et réservations'**
+  String get sallesEtReservations;
+
+  /// No description provided for @sallesEtReservationsSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Valider les demandes, gérer les salles'**
+  String get sallesEtReservationsSousTitre;
+
+  /// No description provided for @nouvelleSalle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle salle'**
+  String get nouvelleSalle;
+
+  /// No description provided for @salles.
+  ///
+  /// In fr, this message translates to:
+  /// **'Salles'**
+  String get salles;
+
+  /// No description provided for @aucuneSalle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune salle enregistrée.'**
+  String get aucuneSalle;
+
+  /// No description provided for @nomSalle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom de la salle'**
+  String get nomSalle;
+
+  /// No description provided for @capacite.
+  ///
+  /// In fr, this message translates to:
+  /// **'Capacité (personnes)'**
+  String get capacite;
+
+  /// No description provided for @capacitePersonnes.
+  ///
+  /// In fr, this message translates to:
+  /// **'{n} personnes'**
+  String capacitePersonnes(int n);
+
+  /// No description provided for @mesReservations.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mes réservations'**
+  String get mesReservations;
+
+  /// No description provided for @aucuneReservation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune réservation à venir.'**
+  String get aucuneReservation;
+
+  /// No description provided for @annulerReservation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annuler la réservation'**
+  String get annulerReservation;
+
+  /// No description provided for @reservationsAValider.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réservations à valider'**
+  String get reservationsAValider;
+
+  /// No description provided for @aucuneReservationAValider.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune demande de réservation.'**
+  String get aucuneReservationAValider;
+
+  /// No description provided for @reservationDemandee.
+  ///
+  /// In fr, this message translates to:
+  /// **'En attente de validation'**
+  String get reservationDemandee;
+
+  /// No description provided for @reservationValidee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Validée'**
+  String get reservationValidee;
+
+  /// No description provided for @reservationRefusee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Refusée'**
+  String get reservationRefusee;
+
+  /// No description provided for @reservationAnnulee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annulée'**
+  String get reservationAnnulee;
+
+  /// No description provided for @salleIndisponible.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette salle n\'existe plus.'**
+  String get salleIndisponible;
+
+  /// No description provided for @creneauxReserves.
+  ///
+  /// In fr, this message translates to:
+  /// **'Déjà réservé'**
+  String get creneauxReserves;
+
+  /// No description provided for @aucunCreneauReserve.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune réservation à venir : la salle est libre.'**
+  String get aucunCreneauReserve;
+
+  /// No description provided for @demanderReservation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Demander une réservation'**
+  String get demanderReservation;
+
+  /// No description provided for @motifReservation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pour quoi ?'**
+  String get motifReservation;
+
+  /// No description provided for @motifReservationAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ex. : Répétition de la chorale'**
+  String get motifReservationAide;
+
+  /// No description provided for @motifObligatoire.
+  ///
+  /// In fr, this message translates to:
+  /// **'Indiquez pour quoi vous réservez.'**
+  String get motifObligatoire;
+
+  /// No description provided for @creneauDejaPris.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce créneau est déjà réservé.'**
+  String get creneauDejaPris;
+
+  /// No description provided for @creneauDejaPrisPar.
+  ///
+  /// In fr, this message translates to:
+  /// **'Déjà réservé : {motifs}'**
+  String creneauDejaPrisPar(String motifs);
+
+  /// No description provided for @envoyerDemandeReservation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyer la demande'**
+  String get envoyerDemandeReservation;
+
+  /// No description provided for @reservationEnvoyee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Demande envoyée au secrétariat.'**
+  String get reservationEnvoyee;
+
+  /// No description provided for @demandeePar.
+  ///
+  /// In fr, this message translates to:
+  /// **'Demandée par {nom}'**
+  String demandeePar(String nom);
+
+  /// No description provided for @conflitAvec.
+  ///
+  /// In fr, this message translates to:
+  /// **'Conflit avec : {autres}'**
+  String conflitAvec(String autres);
+
+  /// No description provided for @refuser.
+  ///
+  /// In fr, this message translates to:
+  /// **'Refuser'**
+  String get refuser;
 }
 
 class _AppLocalizationsDelegate

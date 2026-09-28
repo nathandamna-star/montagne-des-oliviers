@@ -29,6 +29,10 @@ import {
   changementService, notificationAffectation, notificationChangement, notificationRappelService,
   rappelsServicesDus, messagesNettoyage, notificationRappelNettoyage,
 } from './planning.js';
+import {
+  conflitsReservation, decisionPrise, notificationDecisionReservation,
+  notificationDemandeReservation,
+} from './salles.js';
 
 initializeApp();
 
@@ -514,3 +518,36 @@ export const rappelsNettoyage = onSchedule(
     }
   },
 );
+
+/** Demande de réservation : le secrétariat est prévenu. */
+export const nouvelleReservation = onDocumentCreated('reservations/{id}', async (event) => {
+  const r = event.data?.data();
+  if (!r?.debut) return;
+  await envoyerAuxComptes(await comptesAvecRoles(['admin', 'secretariat']), (langue) =>
+    notificationDemandeReservation(event.params.id, r, langue, quandL(r.debut.toDate(), langue)));
+});
+
+/**
+ * Décision du secrétariat. Filet de sécurité : si une autre réservation validée
+ * occupe déjà le créneau (deux validations en même temps), la demande repasse
+ * « en attente ». Sinon la personne est prévenue.
+ */
+export const decisionReservation = onDocumentUpdated('reservations/{id}', async (event) => {
+  const avant = event.data?.before.data();
+  const apres = event.data?.after.data();
+  if (!decisionPrise(avant, apres)) return;
+  if (apres.statut === 'validee') {
+    const snap = await getFirestore().collection('reservations')
+      .where('salleId', '==', apres.salleId).where('statut', '==', 'validee').get();
+    const validees = snap.docs.map((d) => ({
+      id: d.id, salleId: d.data().salleId, debut: d.data().debut.toDate(), fin: d.data().fin.toDate(),
+    }));
+    const r = { id: event.params.id, salleId: apres.salleId, debut: apres.debut.toDate(), fin: apres.fin.toDate() };
+    if (conflitsReservation(r, validees).length > 0) {
+      await event.data.after.ref.update({ statut: 'demandee', reponse: 'Conflit : créneau déjà réservé.' });
+      return;
+    }
+  }
+  await envoyerAuxComptes([apres.uid], (langue) =>
+    notificationDecisionReservation(event.params.id, apres, langue, quandL(apres.debut.toDate(), langue)));
+});

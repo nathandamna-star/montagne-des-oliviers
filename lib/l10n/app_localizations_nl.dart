@@ -1727,4 +1727,113 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get personnesSouhaitees => 'Gewenst aantal personen';
+
+  @override
+  String get reserverSalle => 'Zaal reserveren';
+
+  @override
+  String get reserverSalleSousTitre => 'Vrije momenten bekijken en aanvragen';
+
+  @override
+  String get sallesEtReservations => 'Zalen en reservaties';
+
+  @override
+  String get sallesEtReservationsSousTitre =>
+      'Aanvragen goedkeuren, zalen beheren';
+
+  @override
+  String get nouvelleSalle => 'Nieuwe zaal';
+
+  @override
+  String get salles => 'Zalen';
+
+  @override
+  String get aucuneSalle => 'Geen zalen geregistreerd.';
+
+  @override
+  String get nomSalle => 'Naam van de zaal';
+
+  @override
+  String get capacite => 'Capaciteit (personen)';
+
+  @override
+  String capacitePersonnes(int n) {
+    return '$n personen';
+  }
+
+  @override
+  String get mesReservations => 'Mijn reservaties';
+
+  @override
+  String get aucuneReservation => 'Geen komende reservaties.';
+
+  @override
+  String get annulerReservation => 'Reservatie annuleren';
+
+  @override
+  String get reservationsAValider => 'Goed te keuren reservaties';
+
+  @override
+  String get aucuneReservationAValider => 'Geen reservatieaanvragen.';
+
+  @override
+  String get reservationDemandee => 'Wacht op goedkeuring';
+
+  @override
+  String get reservationValidee => 'Goedgekeurd';
+
+  @override
+  String get reservationRefusee => 'Geweigerd';
+
+  @override
+  String get reservationAnnulee => 'Geannuleerd';
+
+  @override
+  String get salleIndisponible => 'Deze zaal bestaat niet meer.';
+
+  @override
+  String get creneauxReserves => 'Al gereserveerd';
+
+  @override
+  String get aucunCreneauReserve =>
+      'Geen komende reservaties: de zaal is vrij.';
+
+  @override
+  String get demanderReservation => 'Reservatie aanvragen';
+
+  @override
+  String get motifReservation => 'Waarvoor?';
+
+  @override
+  String get motifReservationAide => 'Bv.: Repetitie van het koor';
+
+  @override
+  String get motifObligatoire => 'Geef aan waarvoor je reserveert.';
+
+  @override
+  String get creneauDejaPris => 'Dit moment is al gereserveerd.';
+
+  @override
+  String creneauDejaPrisPar(String motifs) {
+    return 'Al gereserveerd: $motifs';
+  }
+
+  @override
+  String get envoyerDemandeReservation => 'Aanvraag versturen';
+
+  @override
+  String get reservationEnvoyee => 'Aanvraag verzonden naar het secretariaat.';
+
+  @override
+  String demandeePar(String nom) {
+    return 'Aangevraagd door $nom';
+  }
+
+  @override
+  String conflitAvec(String autres) {
+    return 'Conflict met: $autres';
+  }
+
+  @override
+  String get refuser => 'Weigeren';
 }
