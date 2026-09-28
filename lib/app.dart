@@ -54,6 +54,8 @@ class _MontagneDesOliviersAppState
           if (uid is String) router.push(Routes.candidat(id, uid));
         case 'service':
           router.push(Routes.equipe(id));
+        case 'nettoyage':
+          router.push(Routes.entretien);
         case 'fete':
           router.push(Routes.fete(id));
         case 'rencontre':

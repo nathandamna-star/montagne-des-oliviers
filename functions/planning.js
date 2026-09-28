@@ -64,3 +64,23 @@ export function rappelsServicesDus(affectations, maintenant) {
     && (a.statut === 'prevu' || a.statut === 'confirme')
     && a.date.getTime() > maintenant.getTime() && a.date.getTime() <= limite);
 }
+
+const N = {
+  fr: { aide: 'On cherche des bras pour le nettoyage 🧹', demain: 'Demain : nettoyage de la salle' },
+  nl: { aide: 'Helpers gezocht voor de schoonmaak 🧹', demain: 'Morgen: schoonmaak van de zaal' },
+};
+
+/** Nouvelle séance de nettoyage : annonce aux membres (sujets FCM). */
+export function messagesNettoyage(id, n, quand) {
+  return ['fr', 'nl'].map((l) => ({
+    topic: `membres_${l}`,
+    notification: { title: N[l].aide, body: `${n.titre} · ${quand(l)}` },
+    data: { type: 'nettoyage', id },
+  }));
+}
+
+/** Rappel la veille aux inscrits. */
+export function notificationRappelNettoyage(id, n, langue, heure) {
+  const l = l2(langue);
+  return { notification: { title: N[l].demain, body: `${n.titre} · ${heure}` }, data: { type: 'nettoyage', id } };
+}

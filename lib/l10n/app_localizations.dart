@@ -3103,6 +3103,72 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Pas encore d\'exhortation.'**
   String get aucuneExhortation;
+
+  /// No description provided for @entretienSalle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Entretien de la salle'**
+  String get entretienSalle;
+
+  /// No description provided for @entretienSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Inscrivez-vous pour le nettoyage'**
+  String get entretienSousTitre;
+
+  /// No description provided for @entretienIntro.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aidez à garder notre salle propre : inscrivez-vous à une séance de nettoyage.'**
+  String get entretienIntro;
+
+  /// No description provided for @nouvelleSeanceNettoyage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle séance'**
+  String get nouvelleSeanceNettoyage;
+
+  /// No description provided for @aucuneSeanceNettoyage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune séance de nettoyage prévue.'**
+  String get aucuneSeanceNettoyage;
+
+  /// No description provided for @inscritsNettoyage.
+  ///
+  /// In fr, this message translates to:
+  /// **'{n, plural, =0{Personne d\'inscrit} =1{1 personne inscrite} other{{n} personnes inscrites}}'**
+  String inscritsNettoyage(int n);
+
+  /// No description provided for @inscritsNettoyageSur.
+  ///
+  /// In fr, this message translates to:
+  /// **'{n} inscrit(s) sur {max} souhaité(s)'**
+  String inscritsNettoyageSur(int n, int max);
+
+  /// No description provided for @jeViensNettoyer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Je viens aider'**
+  String get jeViensNettoyer;
+
+  /// No description provided for @inscritAnnuler.
+  ///
+  /// In fr, this message translates to:
+  /// **'Inscrit — annuler'**
+  String get inscritAnnuler;
+
+  /// No description provided for @titreNettoyageDefaut.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nettoyage de la salle'**
+  String get titreNettoyageDefaut;
+
+  /// No description provided for @personnesSouhaitees.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nombre de personnes souhaitées'**
+  String get personnesSouhaitees;
 }
 
 class _AppLocalizationsDelegate

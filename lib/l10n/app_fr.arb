@@ -674,5 +674,33 @@
   "exhortations": "Exhortations",
   "exhortation": "Exhortation",
   "ajouterExhortation": "Ajouter une exhortation",
-  "aucuneExhortation": "Pas encore d'exhortation."
+  "aucuneExhortation": "Pas encore d'exhortation.",
+  "entretienSalle": "Entretien de la salle",
+  "entretienSousTitre": "Inscrivez-vous pour le nettoyage",
+  "entretienIntro": "Aidez à garder notre salle propre : inscrivez-vous à une séance de nettoyage.",
+  "nouvelleSeanceNettoyage": "Nouvelle séance",
+  "aucuneSeanceNettoyage": "Aucune séance de nettoyage prévue.",
+  "inscritsNettoyage": "{n, plural, =0{Personne d'inscrit} =1{1 personne inscrite} other{{n} personnes inscrites}}",
+  "@inscritsNettoyage": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "inscritsNettoyageSur": "{n} inscrit(s) sur {max} souhaité(s)",
+  "@inscritsNettoyageSur": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "jeViensNettoyer": "Je viens aider",
+  "inscritAnnuler": "Inscrit — annuler",
+  "titreNettoyageDefaut": "Nettoyage de la salle",
+  "personnesSouhaitees": "Nombre de personnes souhaitées"
 }

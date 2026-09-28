@@ -306,3 +306,12 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   responsables : ajouter au planning (culte choisi dans l'agenda ou date libre), membres. Fonctions
   `nouvelleAffectation`, `changementAffectation`, `rappelsServices` (veille, toutes les heures). `ChoixPersonnes`
   (feuille de choix dans l'annuaire) partagé avec les groupes.
+- Préparations : rubrique **Exhortations** (demande du porteur) : même document que les leçons avec `genre:
+  'exhortation'` (audio / vidéo / texte), liste séparée, pas comptée dans la progression ni « terminée ».
+- Entretien de la salle (demande du porteur, `lib/features/entretien/`) : `nettoyages/{id}` (titre, date, description,
+  places, nbInscrits par `compterNettoyage`, rappelEnvoye) créées par le secrétariat ; chacun s'inscrit
+  (`…/inscrits/{uid}` : nom) ou se désinscrit ; « Complet » quand le nombre souhaité est atteint. Accès : Accueil et
+  Mon planning (`/accueil/entretien`). Fonctions `nouveauNettoyage` (sujets membres) et `rappelsNettoyage` (veille).
+- À FAIRE (demande du porteur) : **Boutique** (livres) payable par virement (QR EPC, communication structurée) ou
+  Bancontact / carte (Stripe) — à faire avec l'étape 11 (même compte Stripe que les dons). Livre papier = bien
+  physique : paiement hors Apple autorisé.

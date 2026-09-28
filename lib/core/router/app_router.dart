@@ -21,6 +21,7 @@ import '../../features/demandes/presentation/mes_demandes_screen.dart';
 import '../../features/demandes/presentation/nouvelle_demande_screen.dart';
 import '../../features/divers/presentation/editeur_fete_screen.dart';
 import '../../features/divers/presentation/fete_screen.dart';
+import '../../features/entretien/entretien_screen.dart';
 import '../../features/parametres/parametres_eglise_screen.dart';
 import '../../features/planning/presentation/editeur_affectation_screen.dart';
 import '../../features/planning/presentation/editeur_equipe_screen.dart';
@@ -135,6 +136,10 @@ final routerProvider = Provider<GoRouter>((ref) {
 
 final _sousRoutes = <String, List<RouteBase>>{
   Routes.accueil: [
+    GoRoute(
+      path: 'entretien',
+      builder: (context, state) => const EntretienScreen(),
+    ),
     GoRoute(
       path: 'planning',
       builder: (context, state) => const MonPlanningScreen(),

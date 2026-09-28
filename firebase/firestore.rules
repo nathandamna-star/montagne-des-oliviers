@@ -478,6 +478,28 @@ service cloud.firestore {
       allow read: if connecte() && resource.data.uid == moi();
     }
 
+    // ----- Entretien de la salle : séances de nettoyage, inscription libre -----
+    match /nettoyages/{nid} {
+      allow read: if estMembre();
+      allow create, update: if estSecretariat()
+        && texte(nouveau().titre, 200)
+        && nouveau().date is timestamp
+        && texteFacultatif(nouveau().get('description', null), 1000)
+        && (nouveau().get('places', null) == null
+          || (nouveau().places is int && nouveau().places >= 1 && nouveau().places <= 100));
+      allow delete: if estSecretariat();
+
+      // Chacun s'inscrit (ou se désinscrit) lui-même ; le nombre est tenu par le serveur.
+      match /inscrits/{uid} {
+        allow read: if estMembre();
+        allow create: if estMembre() && uid == moi()
+          && request.resource.data.keys().hasOnly(['nom', 'createdAt'])
+          && texte(request.resource.data.nom, 100)
+          && request.resource.data.createdAt == request.time;
+        allow delete: if (connecte() && uid == moi()) || estSecretariat();
+      }
+    }
+
     // ----- Salles et réservations -----
     match /salles/{sid} {
       allow read: if estMembre();

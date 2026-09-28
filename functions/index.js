@@ -27,7 +27,7 @@ import {
 } from './vie.js';
 import {
   changementService, notificationAffectation, notificationChangement, notificationRappelService,
-  rappelsServicesDus,
+  rappelsServicesDus, messagesNettoyage, notificationRappelNettoyage,
 } from './planning.js';
 
 initializeApp();
@@ -470,6 +470,46 @@ export const rappelsServices = onSchedule(
         new Intl.DateTimeFormat(langue === 'nl' ? 'nl-BE' : 'fr-BE', {
           hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Brussels',
         }).format(a.date),
+      ));
+    }
+  },
+);
+
+/** Nouvelle séance de nettoyage : annonce aux membres. */
+export const nouveauNettoyage = onDocumentCreated('nettoyages/{id}', async (event) => {
+  const n = event.data?.data();
+  if (!n?.date) return;
+  if (process.env.FUNCTIONS_EMULATOR === 'true') return;
+  await getMessaging().sendEach(messagesNettoyage(event.params.id, n, (l) => quand(n.date.toDate(), l)));
+});
+
+/** Nombre d'inscrits à une séance de nettoyage. */
+export const compterNettoyage = onDocumentWritten('nettoyages/{id}/inscrits/{uid}', async (event) => {
+  const ref = getFirestore().doc(`nettoyages/${event.params.id}`);
+  const n = (await ref.collection('inscrits').count().get()).data().count;
+  if ((await ref.get()).exists) await ref.update({ nbInscrits: n });
+});
+
+/** Toutes les heures : rappel la veille aux inscrits du nettoyage. */
+export const rappelsNettoyage = onSchedule(
+  { schedule: 'every 60 minutes', timeZone: 'Europe/Brussels' },
+  async () => {
+    const db = getFirestore();
+    const maintenant = new Date();
+    const snap = await db.collection('nettoyages')
+      .where('date', '>', Timestamp.fromDate(maintenant))
+      .where('date', '<=', Timestamp.fromDate(new Date(maintenant.getTime() + 24 * 3600 * 1000)))
+      .get();
+    for (const d of snap.docs) {
+      const n = d.data();
+      if (n.rappelEnvoye === true) continue;
+      await d.ref.update({ rappelEnvoye: true });
+      const inscrits = await d.ref.collection('inscrits').get();
+      await envoyerAuxComptes(inscrits.docs.map((x) => x.id), (langue) => notificationRappelNettoyage(
+        d.id, n, langue,
+        new Intl.DateTimeFormat(langue === 'nl' ? 'nl-BE' : 'fr-BE', {
+          hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Brussels',
+        }).format(n.date.toDate()),
       ));
     }
   },

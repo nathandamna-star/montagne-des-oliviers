@@ -41,3 +41,14 @@ describe('planning des services', () => {
     assert.deepEqual(dus.map((x) => x.id), ['a']);
   });
 });
+
+import { messagesNettoyage, notificationRappelNettoyage } from '../../planning.js';
+
+describe('entretien de la salle', () => {
+  it('annonce et rappel', () => {
+    const m = messagesNettoyage('n1', { titre: 'Nettoyage de la salle' }, (l) => (l === 'fr' ? 'samedi à 10:00' : 'zaterdag om 10:00'));
+    assert.deepEqual(m.map((x) => x.topic), ['membres_fr', 'membres_nl']);
+    assert.equal(m[0].notification.body, 'Nettoyage de la salle · samedi à 10:00');
+    assert.equal(notificationRappelNettoyage('n1', { titre: 'Nettoyage' }, 'nl', '10:00').notification.title, 'Morgen: schoonmaak van de zaal');
+  });
+});

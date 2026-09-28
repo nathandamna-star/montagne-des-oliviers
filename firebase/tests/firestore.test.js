@@ -603,3 +603,25 @@ describe('divers : fêtes et ce que chacun apporte', () => {
     await assertFails(getDoc(doc(marie(), 'fetes/f1/apports/paul')));
   });
 });
+
+describe('entretien de la salle', () => {
+  const seance = (extra = {}) => ({
+    titre: 'Nettoyage de la grande salle', date: t(10), description: 'Balais fournis', places: 6, ...extra,
+  });
+
+  it('le secrétariat crée les séances ; les membres s\'inscrivent eux-mêmes', async () => {
+    await semer(MEMBRES);
+    await assertSucceeds(setDoc(doc(secretariat(), 'nettoyages/n1'), seance()));
+    await assertFails(setDoc(doc(marie(), 'nettoyages/n2'), seance()));
+    await assertFails(setDoc(doc(secretariat(), 'nettoyages/n3'), seance({ places: 0 })));
+    await assertSucceeds(getDoc(doc(paul(), 'nettoyages/n1')));
+    await assertFails(getDoc(doc(visiteur(), 'nettoyages/n1')));
+    const insc = { nom: 'Marie', createdAt: serverTimestamp() };
+    await assertSucceeds(setDoc(doc(marie(), 'nettoyages/n1/inscrits/marie'), insc));
+    await assertFails(setDoc(doc(marie(), 'nettoyages/n1/inscrits/paul'), insc));
+    await assertFails(setDoc(doc(sansProfil(), 'nettoyages/n1/inscrits/jean'), insc));
+    await assertSucceeds(getDocs(collection(paul(), 'nettoyages/n1/inscrits')));
+    await assertFails(deleteDoc(doc(paul(), 'nettoyages/n1/inscrits/marie')));
+    await assertSucceeds(deleteDoc(doc(marie(), 'nettoyages/n1/inscrits/marie')));
+  });
+});

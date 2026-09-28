@@ -69,6 +69,16 @@ class MonPlanningScreen extends ConsumerWidget {
           if (services.isEmpty) Text(l10n.aucunService),
           for (final a in services)
             CarteService(affectation: a, equipeNom: noms[a.equipeId] ?? ''),
+          const SizedBox(height: 16),
+          Card(
+            child: ListTile(
+              leading: const Icon(Icons.cleaning_services_outlined),
+              title: Text(l10n.entretienSalle),
+              subtitle: Text(l10n.entretienSousTitre),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => context.push(Routes.entretien),
+            ),
+          ),
           const SizedBox(height: 24),
           Text(l10n.mesEquipes, style: theme.textTheme.titleLarge),
           const SizedBox(height: 8),

@@ -1682,4 +1682,49 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get aucuneExhortation => 'Nog geen bemoedigingen.';
+
+  @override
+  String get entretienSalle => 'Onderhoud van de zaal';
+
+  @override
+  String get entretienSousTitre => 'Schrijf je in voor de schoonmaak';
+
+  @override
+  String get entretienIntro =>
+      'Help onze zaal proper te houden: schrijf je in voor een schoonmaakbeurt.';
+
+  @override
+  String get nouvelleSeanceNettoyage => 'Nieuwe beurt';
+
+  @override
+  String get aucuneSeanceNettoyage => 'Geen schoonmaakbeurten gepland.';
+
+  @override
+  String inscritsNettoyage(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n personen ingeschreven',
+      one: '1 persoon ingeschreven',
+      zero: 'Nog niemand ingeschreven',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String inscritsNettoyageSur(int n, int max) {
+    return '$n ingeschreven op $max gewenst';
+  }
+
+  @override
+  String get jeViensNettoyer => 'Ik kom helpen';
+
+  @override
+  String get inscritAnnuler => 'Ingeschreven — annuleren';
+
+  @override
+  String get titreNettoyageDefaut => 'Schoonmaak van de zaal';
+
+  @override
+  String get personnesSouhaitees => 'Gewenst aantal personen';
 }

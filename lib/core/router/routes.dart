@@ -12,6 +12,7 @@ abstract final class Routes {
   static const actualites = '/accueil/actualites';
   static const preparations = '/accueil/preparations';
   static const planning = '/accueil/planning';
+  static const entretien = '/accueil/entretien';
   static String equipe(String id) => '/accueil/planning/equipes/$id';
   static String editerEquipe(String id) =>
       '/accueil/planning/equipes/$id/modifier';

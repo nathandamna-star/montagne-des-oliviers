@@ -98,6 +98,15 @@ class AccueilScreen extends ConsumerWidget {
             ),
             Card(
               child: ListTile(
+                leading: const Icon(Icons.cleaning_services_outlined),
+                title: Text(l10n.entretienSalle),
+                subtitle: Text(l10n.entretienSousTitre),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => context.push(Routes.entretien),
+              ),
+            ),
+            Card(
+              child: ListTile(
                 leading: const Icon(Icons.menu_book_outlined),
                 title: Text(l10n.preparations),
                 subtitle: Text(l10n.preparationsSousTitre),

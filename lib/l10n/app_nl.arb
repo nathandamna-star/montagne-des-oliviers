@@ -500,5 +500,16 @@
   "exhortations": "Bemoedigingen",
   "exhortation": "Bemoediging",
   "ajouterExhortation": "Bemoediging toevoegen",
-  "aucuneExhortation": "Nog geen bemoedigingen."
+  "aucuneExhortation": "Nog geen bemoedigingen.",
+  "entretienSalle": "Onderhoud van de zaal",
+  "entretienSousTitre": "Schrijf je in voor de schoonmaak",
+  "entretienIntro": "Help onze zaal proper te houden: schrijf je in voor een schoonmaakbeurt.",
+  "nouvelleSeanceNettoyage": "Nieuwe beurt",
+  "aucuneSeanceNettoyage": "Geen schoonmaakbeurten gepland.",
+  "inscritsNettoyage": "{n, plural, =0{Nog niemand ingeschreven} =1{1 persoon ingeschreven} other{{n} personen ingeschreven}}",
+  "inscritsNettoyageSur": "{n} ingeschreven op {max} gewenst",
+  "jeViensNettoyer": "Ik kom helpen",
+  "inscritAnnuler": "Ingeschreven — annuleren",
+  "titreNettoyageDefaut": "Schoonmaak van de zaal",
+  "personnesSouhaitees": "Gewenst aantal personen"
 }
