@@ -1670,4 +1670,16 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get serviceRemplacement => 'Vervanger gezocht';
+
+  @override
+  String get exhortations => 'Bemoedigingen';
+
+  @override
+  String get exhortation => 'Bemoediging';
+
+  @override
+  String get ajouterExhortation => 'Bemoediging toevoegen';
+
+  @override
+  String get aucuneExhortation => 'Nog geen bemoedigingen.';
 }

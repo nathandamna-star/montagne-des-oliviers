@@ -26,6 +26,7 @@ import '../../features/planning/presentation/editeur_affectation_screen.dart';
 import '../../features/planning/presentation/editeur_equipe_screen.dart';
 import '../../features/planning/presentation/equipe_screen.dart';
 import '../../features/planning/presentation/mon_planning_screen.dart';
+import '../../features/preparations/domain/preparation.dart';
 import '../../features/preparations/presentation/candidat_screen.dart';
 import '../../features/preparations/presentation/editeur_lecon_screen.dart';
 import '../../features/preparations/presentation/editeur_preparation_screen.dart';
@@ -185,6 +186,9 @@ final _sousRoutes = <String, List<RouteBase>>{
                   builder: (context, state) => EditeurLeconScreen(
                     preparationId: state.pathParameters['id']!,
                     id: state.pathParameters['lid']!,
+                    genre: state.uri.queryParameters['genre'] == 'exhortation'
+                        ? GenreLecon.exhortation
+                        : GenreLecon.lecon,
                   ),
                 ),
               ],

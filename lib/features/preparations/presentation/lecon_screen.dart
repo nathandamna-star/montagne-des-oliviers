@@ -60,7 +60,9 @@ class LeconScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.lecon),
+        title: Text(
+          lecon.value?.estExhortation == true ? l10n.exhortation : l10n.lecon,
+        ),
         actions: [
           if (pasteur)
             IconButton(
@@ -116,31 +118,32 @@ class LeconScreen extends ConsumerWidget {
                       ],
                       if (inscrit != null && uid != null) ...[
                         const SizedBox(height: 24),
-                        inscrit.faites.contains(id)
-                            ? OutlinedButton.icon(
-                                onPressed: () => ref
-                                    .read(preparationsRepositoryProvider)
-                                    .marquerFaite(
-                                      preparationId,
-                                      uid,
-                                      id,
-                                      faite: false,
-                                    ),
-                                icon: const Icon(Icons.check_circle),
-                                label: Text(l10n.leconTerminee),
-                              )
-                            : FilledButton.icon(
-                                onPressed: () => ref
-                                    .read(preparationsRepositoryProvider)
-                                    .marquerFaite(
-                                      preparationId,
-                                      uid,
-                                      id,
-                                      faite: true,
-                                    ),
-                                icon: const Icon(Icons.check),
-                                label: Text(l10n.marquerTerminee),
-                              ),
+                        if (!l.estExhortation)
+                          inscrit.faites.contains(id)
+                              ? OutlinedButton.icon(
+                                  onPressed: () => ref
+                                      .read(preparationsRepositoryProvider)
+                                      .marquerFaite(
+                                        preparationId,
+                                        uid,
+                                        id,
+                                        faite: false,
+                                      ),
+                                  icon: const Icon(Icons.check_circle),
+                                  label: Text(l10n.leconTerminee),
+                                )
+                              : FilledButton.icon(
+                                  onPressed: () => ref
+                                      .read(preparationsRepositoryProvider)
+                                      .marquerFaite(
+                                        preparationId,
+                                        uid,
+                                        id,
+                                        faite: true,
+                                      ),
+                                  icon: const Icon(Icons.check),
+                                  label: Text(l10n.marquerTerminee),
+                                ),
                         const SizedBox(height: 24),
                         Text(
                           l10n.mesQuestions,

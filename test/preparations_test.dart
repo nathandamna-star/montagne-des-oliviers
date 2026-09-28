@@ -165,4 +165,41 @@ void main() {
     expect(i['demandeId'], 'd1');
     expect(find.text('Paul est inscrit à la préparation.'), findsOneWidget);
   });
+
+  testWidgets('exhortations : ajoutées par le pasteur, hors progression', (
+    tester,
+  ) async {
+    final b = await banc(inscrit: true, roles: {Role.admin});
+    await lancer(tester, banc: b, taille: grand);
+    await ouvrir(tester);
+    expect(find.text('Pas encore d\'exhortation.'), findsOneWidget);
+    await tester.tap(find.text('Ajouter une exhortation'));
+    await tester.pumpAndSettle();
+    expect(find.text('Ajouter une exhortation'), findsOneWidget);
+    await tester.enterText(
+      find.widgetWithText(TextFormField, 'Titre (FR)'),
+      'Le mariage selon Dieu',
+    );
+    await tester.tap(find.text('Choisir un fichier').first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Enregistrer'));
+    await tester.pumpAndSettle();
+    final x =
+        (await b.firestore
+                .collection('preparations/bap/lecons')
+                .where('genre', isEqualTo: 'exhortation')
+                .get())
+            .docs
+            .single
+            .data();
+    expect(x['titre'], {'fr': 'Le mariage selon Dieu'});
+    expect(x['audioUrl'], startsWith('https://exemple.be/preparations/bap/'));
+    expect(find.text('Le mariage selon Dieu'), findsOneWidget);
+    // La progression ne compte que les leçons.
+    expect(find.text('0 leçon(s) terminée(s) sur 2'), findsWidgets);
+    await tester.tap(find.text('Le mariage selon Dieu'));
+    await tester.pumpAndSettle();
+    expect(find.text('Exhortation'), findsOneWidget);
+    expect(find.text('J\'ai terminé cette leçon'), findsNothing);
+  });
 }

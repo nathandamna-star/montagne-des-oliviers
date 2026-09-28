@@ -16,10 +16,14 @@ class EditeurLeconScreen extends ConsumerStatefulWidget {
     super.key,
     required this.preparationId,
     required this.id,
+    this.genre = GenreLecon.lecon,
   });
 
   final String preparationId;
   final String id;
+
+  /// Pour une création : leçon ou exhortation.
+  final GenreLecon genre;
 
   @override
   ConsumerState<EditeurLeconScreen> createState() => _EditeurLeconScreenState();
@@ -36,6 +40,7 @@ class _EditeurLeconScreenState extends ConsumerState<EditeurLeconScreen> {
   bool _charge = false;
   bool _occupe = false;
   bool _publique = false;
+  late GenreLecon _genre = widget.genre;
   int _ordre = 0;
   final _urls = <GenreFichier, String?>{};
   GenreFichier? _envoiEnCours;
@@ -67,6 +72,7 @@ class _EditeurLeconScreenState extends ConsumerState<EditeurLeconScreen> {
           _texteFr.text = l.texte['fr'] ?? '';
           _texteNl.text = l.texte['nl'] ?? '';
           _publique = l.publique;
+          _genre = l.genre;
           _ordre = l.ordre;
           _urls[GenreFichier.audio] = l.audioUrl;
           _urls[GenreFichier.video] = l.videoUrl;
@@ -126,6 +132,7 @@ class _EditeurLeconScreenState extends ConsumerState<EditeurLeconScreen> {
               texte: Traduction.ecrire(_texteFr.text, _texteNl.text)
                 ..removeWhere((_, v) => v.isEmpty),
               ordre: _ordre,
+              genre: _genre,
               publique: _publique,
               audioUrl: _urls[GenreFichier.audio],
               videoUrl: _urls[GenreFichier.video],
@@ -209,7 +216,13 @@ class _EditeurLeconScreenState extends ConsumerState<EditeurLeconScreen> {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(_nouvelle ? l10n.ajouterLecon : l10n.modifier),
+        title: Text(
+          !_nouvelle
+              ? l10n.modifier
+              : _genre == GenreLecon.exhortation
+              ? l10n.ajouterExhortation
+              : l10n.ajouterLecon,
+        ),
         actions: [
           if (!_nouvelle)
             IconButton(

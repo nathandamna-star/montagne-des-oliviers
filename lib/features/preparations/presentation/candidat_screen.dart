@@ -42,8 +42,11 @@ class CandidatScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final inscrit = ref.watch(inscritProvider((preparationId, uid)));
-    final lecons =
-        ref.watch(leconsProvider(preparationId)).value ?? const <Lecon>[];
+    final lecons = [
+      for (final l
+          in ref.watch(leconsProvider(preparationId)).value ?? const <Lecon>[])
+        if (!l.estExhortation) l,
+    ];
     final questions =
         ref.watch(questionsProvider((preparationId, uid))).value ?? const [];
     final repo = ref.read(preparationsRepositoryProvider);

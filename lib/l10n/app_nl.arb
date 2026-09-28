@@ -496,5 +496,9 @@
   "servicePrevu": "Gepland (te bevestigen)",
   "serviceConfirme": "Bevestigd",
   "serviceIndisponible": "Niet beschikbaar",
-  "serviceRemplacement": "Vervanger gezocht"
+  "serviceRemplacement": "Vervanger gezocht",
+  "exhortations": "Bemoedigingen",
+  "exhortation": "Bemoediging",
+  "ajouterExhortation": "Bemoediging toevoegen",
+  "aucuneExhortation": "Nog geen bemoedigingen."
 }

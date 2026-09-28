@@ -46,12 +46,16 @@ class Preparation {
   };
 }
 
+/// Leçon (comptée dans la progression) ou exhortation (audio / vidéo en plus).
+enum GenreLecon { lecon, exhortation }
+
 /// Leçon d'une préparation : texte, audio, vidéo, document.
 class Lecon {
   const Lecon({
     required this.id,
     required this.titre,
     required this.ordre,
+    this.genre = GenreLecon.lecon,
     this.texte = const {},
     this.publique = false,
     this.audioUrl,
@@ -63,6 +67,9 @@ class Lecon {
   final Map<String, String> titre;
   final Map<String, String> texte;
   final int ordre;
+  final GenreLecon genre;
+
+  bool get estExhortation => genre == GenreLecon.exhortation;
 
   /// Visible par tous (sinon : inscrits et pasteurs seulement).
   final bool publique;
@@ -79,6 +86,9 @@ class Lecon {
       titre: Traduction.lire(m['titre']),
       texte: Traduction.lire(m['texte']),
       ordre: (m['ordre'] as num?)?.toInt() ?? 0,
+      genre: m['genre'] == 'exhortation'
+          ? GenreLecon.exhortation
+          : GenreLecon.lecon,
       publique: m['publique'] == true,
       audioUrl: _url(m['audioUrl']),
       videoUrl: _url(m['videoUrl']),
@@ -90,6 +100,7 @@ class Lecon {
     'titre': titre,
     'texte': texte,
     'ordre': ordre,
+    'genre': genre.name,
     'publique': publique,
     'audioUrl': audioUrl,
     'videoUrl': videoUrl,

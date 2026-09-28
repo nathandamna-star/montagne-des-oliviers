@@ -3079,6 +3079,30 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Remplaçant recherché'**
   String get serviceRemplacement;
+
+  /// No description provided for @exhortations.
+  ///
+  /// In fr, this message translates to:
+  /// **'Exhortations'**
+  String get exhortations;
+
+  /// No description provided for @exhortation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Exhortation'**
+  String get exhortation;
+
+  /// No description provided for @ajouterExhortation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter une exhortation'**
+  String get ajouterExhortation;
+
+  /// No description provided for @aucuneExhortation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pas encore d\'exhortation.'**
+  String get aucuneExhortation;
 }
 
 class _AppLocalizationsDelegate

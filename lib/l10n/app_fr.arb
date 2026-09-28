@@ -670,5 +670,9 @@
   "servicePrevu": "Prévu (à confirmer)",
   "serviceConfirme": "Confirmé",
   "serviceIndisponible": "Indisponible",
-  "serviceRemplacement": "Remplaçant recherché"
+  "serviceRemplacement": "Remplaçant recherché",
+  "exhortations": "Exhortations",
+  "exhortation": "Exhortation",
+  "ajouterExhortation": "Ajouter une exhortation",
+  "aucuneExhortation": "Pas encore d'exhortation."
 }

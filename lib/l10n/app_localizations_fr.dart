@@ -1670,4 +1670,16 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get serviceRemplacement => 'Remplaçant recherché';
+
+  @override
+  String get exhortations => 'Exhortations';
+
+  @override
+  String get exhortation => 'Exhortation';
+
+  @override
+  String get ajouterExhortation => 'Ajouter une exhortation';
+
+  @override
+  String get aucuneExhortation => 'Pas encore d\'exhortation.';
 }

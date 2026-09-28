@@ -29,7 +29,15 @@ class PreparationScreen extends ConsumerWidget {
     final pasteur = ref.watch(estAdminProvider);
     final preparation = ref.watch(preparationProvider(id));
     final inscrit = ref.watch(monInscritProvider(id)).value;
-    final lecons = ref.watch(leconsProvider(id)).value ?? const <Lecon>[];
+    final tout = ref.watch(leconsProvider(id)).value ?? const <Lecon>[];
+    final lecons = [
+      for (final l in tout)
+        if (!l.estExhortation) l,
+    ];
+    final exhortations = [
+      for (final l in tout)
+        if (l.estExhortation) l,
+    ];
     final repo = ref.read(preparationsRepositoryProvider);
 
     return Scaffold(
@@ -224,6 +232,49 @@ class PreparationScreen extends ConsumerWidget {
                                   )
                                 : const Icon(Icons.chevron_right),
                             onTap: () => context.push(Routes.lecon(id, l.id)),
+                          ),
+                        ),
+                      const SizedBox(height: 24),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              l10n.exhortations,
+                              style: theme.textTheme.titleMedium,
+                            ),
+                          ),
+                          if (pasteur)
+                            TextButton.icon(
+                              onPressed: () => context.push(
+                                '${Routes.editerLecon(id, 'nouvelle')}?genre=exhortation',
+                              ),
+                              icon: const Icon(Icons.add),
+                              label: Text(l10n.ajouterExhortation),
+                            ),
+                        ],
+                      ),
+                      if (exhortations.isEmpty)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Text(l10n.aucuneExhortation),
+                        ),
+                      for (final x in exhortations)
+                        Card(
+                          child: ListTile(
+                            leading: Icon(
+                              x.videoUrl != null
+                                  ? Icons.smart_display_outlined
+                                  : Icons.headphones,
+                              color: theme.colorScheme.secondary,
+                            ),
+                            title: Text(
+                              Traduction.dans(x.titre, context.langue),
+                            ),
+                            subtitle: pasteur && x.publique
+                                ? Text(l10n.publique)
+                                : null,
+                            trailing: const Icon(Icons.chevron_right),
+                            onTap: () => context.push(Routes.lecon(id, x.id)),
                           ),
                         ),
                       if (pasteur) ...[
