@@ -1551,4 +1551,123 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get ajouterAdmin => 'Beheerder toevoegen';
+
+  @override
+  String get ajouterAuPlanning => 'Aan de planning toevoegen';
+
+  @override
+  String get aucunService => 'Geen diensten gepland voor jou.';
+
+  @override
+  String get aucuneEquipe => 'Je maakt geen deel uit van een dienstteam.';
+
+  @override
+  String get autresEquipes => 'Andere teams';
+
+  @override
+  String get choisirCulte => 'Kies een dienst of activiteit uit de agenda';
+
+  @override
+  String get choisirPersonne => 'Kies de persoon.';
+
+  @override
+  String get cultOuEvenement => 'Dienst of activiteit';
+
+  @override
+  String get demanderRemplacantService => 'Vervanger vragen';
+
+  @override
+  String get demanderRemplacantServiceAide =>
+      'De andere teamleden worden verwittigd.';
+
+  @override
+  String get equipeIndisponible => 'Dit team bestaat niet meer.';
+
+  @override
+  String get jeConfirme => 'Ik bevestig, ik ben er';
+
+  @override
+  String get jeNeSuisPasDisponible => 'Ik ben niet beschikbaar';
+
+  @override
+  String get jeNeSuisPasDisponibleAide =>
+      'De verantwoordelijke van het team wordt verwittigd.';
+
+  @override
+  String get membresEtResponsables => 'Leden en verantwoordelijken';
+
+  @override
+  String get membresEtResponsablesAide =>
+      'Vink de leden aan; « Verantwoordelijke »: maakt de planning van het team.';
+
+  @override
+  String get mesEquipes => 'Mijn teams';
+
+  @override
+  String get mesServices => 'Mijn komende diensten';
+
+  @override
+  String get nomEquipe => 'Naam van het team';
+
+  @override
+  String get nomEquipeAide => 'Bv.: Geluid en video, Onthaal, Zondagsschool';
+
+  @override
+  String get nouvelleEquipe => 'Nieuw team';
+
+  @override
+  String get planning => 'Dienstenplanning';
+
+  @override
+  String get planningServices => 'Dienstenplanning';
+
+  @override
+  String get planningServicesSousTitre => 'Teams, wie dient bij welke dienst';
+
+  @override
+  String get planningSousTitre => 'Mijn diensten en mijn teams';
+
+  @override
+  String get planningVide => 'Momenteel niets gepland.';
+
+  @override
+  String get poste => 'Taak (optioneel)';
+
+  @override
+  String get posteAide => 'Bv.: Mengtafel, Onthaal aan de deur';
+
+  @override
+  String get quiSert => 'Wie dient?';
+
+  @override
+  String remplaceNom(String nom) {
+    return 'Vervangt $nom';
+  }
+
+  @override
+  String get repondreService => 'Bevestigen of afzeggen';
+
+  @override
+  String get responsable => 'Verantwoordelijke';
+
+  @override
+  String get responsableEquipe => 'Verantwoordelijke van het team';
+
+  @override
+  String get retirerDeLEquipe => 'Uit het team verwijderen';
+
+  @override
+  String get supprimerEquipe => 'Dit team en zijn planning verwijderen?';
+
+  @override
+  String get servicePrevu => 'Gepland (te bevestigen)';
+
+  @override
+  String get serviceConfirme => 'Bevestigd';
+
+  @override
+  String get serviceIndisponible => 'Niet beschikbaar';
+
+  @override
+  String get serviceRemplacement => 'Vervanger gezocht';
 }

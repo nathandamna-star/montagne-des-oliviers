@@ -127,6 +127,13 @@ class _ProfilScreenState extends ConsumerState<ProfilScreen> {
                 ),
                 const Divider(height: 1),
                 ListTile(
+                  leading: const Icon(Icons.event_note_outlined),
+                  title: Text(l10n.planning),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => context.push(Routes.planning),
+                ),
+                const Divider(height: 1),
+                ListTile(
                   leading: const Icon(Icons.menu_book_outlined),
                   title: Text(l10n.preparations),
                   trailing: const Icon(Icons.chevron_right),

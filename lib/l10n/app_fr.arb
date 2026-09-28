@@ -625,5 +625,50 @@
   "votreQuestion": "Votre question",
   "votreReponse": "Votre réponse",
   "vousEtesInscrit": "Vous êtes inscrit",
-  "ajouterAdmin": "Ajouter un administrateur"
+  "ajouterAdmin": "Ajouter un administrateur",
+  "ajouterAuPlanning": "Ajouter au planning",
+  "aucunService": "Aucun service prévu pour vous.",
+  "aucuneEquipe": "Vous ne faites partie d'aucune équipe de service.",
+  "autresEquipes": "Autres équipes",
+  "choisirCulte": "Choisir un culte ou un événement de l'agenda",
+  "choisirPersonne": "Choisissez la personne.",
+  "cultOuEvenement": "Culte ou événement",
+  "demanderRemplacantService": "Demander un remplaçant",
+  "demanderRemplacantServiceAide": "Les autres membres de l'équipe sont prévenus.",
+  "equipeIndisponible": "Cette équipe n'existe plus.",
+  "jeConfirme": "Je confirme, je serai là",
+  "jeNeSuisPasDisponible": "Je ne suis pas disponible",
+  "jeNeSuisPasDisponibleAide": "Le responsable de l'équipe est prévenu.",
+  "membresEtResponsables": "Membres et responsables",
+  "membresEtResponsablesAide": "Cochez les membres ; « Responsable » : fait le planning de l'équipe.",
+  "mesEquipes": "Mes équipes",
+  "mesServices": "Mes services à venir",
+  "nomEquipe": "Nom de l'équipe",
+  "nomEquipeAide": "Ex. : Sono et vidéo, Accueil, École du dimanche",
+  "nouvelleEquipe": "Nouvelle équipe",
+  "planning": "Planning des services",
+  "planningServices": "Planning des services",
+  "planningServicesSousTitre": "Équipes, qui sert à quel culte",
+  "planningSousTitre": "Mes services et mes équipes",
+  "planningVide": "Rien de prévu pour le moment.",
+  "poste": "Poste (facultatif)",
+  "posteAide": "Ex. : Table de mixage, Accueil à la porte",
+  "quiSert": "Qui sert ?",
+  "remplaceNom": "Remplace {nom}",
+  "@remplaceNom": {
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "repondreService": "Confirmer ou se désister",
+  "responsable": "Responsable",
+  "responsableEquipe": "Responsable de l'équipe",
+  "retirerDeLEquipe": "Retirer de l'équipe",
+  "supprimerEquipe": "Supprimer cette équipe et son planning ?",
+  "servicePrevu": "Prévu (à confirmer)",
+  "serviceConfirme": "Confirmé",
+  "serviceIndisponible": "Indisponible",
+  "serviceRemplacement": "Remplaçant recherché"
 }

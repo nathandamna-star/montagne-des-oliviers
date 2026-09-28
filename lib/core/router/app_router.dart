@@ -22,6 +22,10 @@ import '../../features/demandes/presentation/nouvelle_demande_screen.dart';
 import '../../features/divers/presentation/editeur_fete_screen.dart';
 import '../../features/divers/presentation/fete_screen.dart';
 import '../../features/parametres/parametres_eglise_screen.dart';
+import '../../features/planning/presentation/editeur_affectation_screen.dart';
+import '../../features/planning/presentation/editeur_equipe_screen.dart';
+import '../../features/planning/presentation/equipe_screen.dart';
+import '../../features/planning/presentation/mon_planning_screen.dart';
 import '../../features/preparations/presentation/candidat_screen.dart';
 import '../../features/preparations/presentation/editeur_lecon_screen.dart';
 import '../../features/preparations/presentation/editeur_preparation_screen.dart';
@@ -130,6 +134,31 @@ final routerProvider = Provider<GoRouter>((ref) {
 
 final _sousRoutes = <String, List<RouteBase>>{
   Routes.accueil: [
+    GoRoute(
+      path: 'planning',
+      builder: (context, state) => const MonPlanningScreen(),
+      routes: [
+        GoRoute(
+          path: 'equipes/:id',
+          builder: (context, state) =>
+              EquipeScreen(id: state.pathParameters['id']!),
+          routes: [
+            GoRoute(
+              path: 'modifier',
+              builder: (context, state) =>
+                  EditeurEquipeScreen(id: state.pathParameters['id']!),
+            ),
+            GoRoute(
+              path: 'services/:aid',
+              builder: (context, state) => EditeurAffectationScreen(
+                equipeId: state.pathParameters['id']!,
+                id: state.pathParameters['aid']!,
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
     GoRoute(
       path: 'preparations',
       builder: (context, state) => const PreparationsScreen(),

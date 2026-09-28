@@ -1550,4 +1550,124 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ajouterAdmin => 'Ajouter un administrateur';
+
+  @override
+  String get ajouterAuPlanning => 'Ajouter au planning';
+
+  @override
+  String get aucunService => 'Aucun service prévu pour vous.';
+
+  @override
+  String get aucuneEquipe =>
+      'Vous ne faites partie d\'aucune équipe de service.';
+
+  @override
+  String get autresEquipes => 'Autres équipes';
+
+  @override
+  String get choisirCulte => 'Choisir un culte ou un événement de l\'agenda';
+
+  @override
+  String get choisirPersonne => 'Choisissez la personne.';
+
+  @override
+  String get cultOuEvenement => 'Culte ou événement';
+
+  @override
+  String get demanderRemplacantService => 'Demander un remplaçant';
+
+  @override
+  String get demanderRemplacantServiceAide =>
+      'Les autres membres de l\'équipe sont prévenus.';
+
+  @override
+  String get equipeIndisponible => 'Cette équipe n\'existe plus.';
+
+  @override
+  String get jeConfirme => 'Je confirme, je serai là';
+
+  @override
+  String get jeNeSuisPasDisponible => 'Je ne suis pas disponible';
+
+  @override
+  String get jeNeSuisPasDisponibleAide =>
+      'Le responsable de l\'équipe est prévenu.';
+
+  @override
+  String get membresEtResponsables => 'Membres et responsables';
+
+  @override
+  String get membresEtResponsablesAide =>
+      'Cochez les membres ; « Responsable » : fait le planning de l\'équipe.';
+
+  @override
+  String get mesEquipes => 'Mes équipes';
+
+  @override
+  String get mesServices => 'Mes services à venir';
+
+  @override
+  String get nomEquipe => 'Nom de l\'équipe';
+
+  @override
+  String get nomEquipeAide => 'Ex. : Sono et vidéo, Accueil, École du dimanche';
+
+  @override
+  String get nouvelleEquipe => 'Nouvelle équipe';
+
+  @override
+  String get planning => 'Planning des services';
+
+  @override
+  String get planningServices => 'Planning des services';
+
+  @override
+  String get planningServicesSousTitre => 'Équipes, qui sert à quel culte';
+
+  @override
+  String get planningSousTitre => 'Mes services et mes équipes';
+
+  @override
+  String get planningVide => 'Rien de prévu pour le moment.';
+
+  @override
+  String get poste => 'Poste (facultatif)';
+
+  @override
+  String get posteAide => 'Ex. : Table de mixage, Accueil à la porte';
+
+  @override
+  String get quiSert => 'Qui sert ?';
+
+  @override
+  String remplaceNom(String nom) {
+    return 'Remplace $nom';
+  }
+
+  @override
+  String get repondreService => 'Confirmer ou se désister';
+
+  @override
+  String get responsable => 'Responsable';
+
+  @override
+  String get responsableEquipe => 'Responsable de l\'équipe';
+
+  @override
+  String get retirerDeLEquipe => 'Retirer de l\'équipe';
+
+  @override
+  String get supprimerEquipe => 'Supprimer cette équipe et son planning ?';
+
+  @override
+  String get servicePrevu => 'Prévu (à confirmer)';
+
+  @override
+  String get serviceConfirme => 'Confirmé';
+
+  @override
+  String get serviceIndisponible => 'Indisponible';
+
+  @override
+  String get serviceRemplacement => 'Remplaçant recherché';
 }

@@ -2851,6 +2851,234 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Ajouter un administrateur'**
   String get ajouterAdmin;
+
+  /// No description provided for @ajouterAuPlanning.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter au planning'**
+  String get ajouterAuPlanning;
+
+  /// No description provided for @aucunService.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun service prévu pour vous.'**
+  String get aucunService;
+
+  /// No description provided for @aucuneEquipe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous ne faites partie d\'aucune équipe de service.'**
+  String get aucuneEquipe;
+
+  /// No description provided for @autresEquipes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autres équipes'**
+  String get autresEquipes;
+
+  /// No description provided for @choisirCulte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisir un culte ou un événement de l\'agenda'**
+  String get choisirCulte;
+
+  /// No description provided for @choisirPersonne.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisissez la personne.'**
+  String get choisirPersonne;
+
+  /// No description provided for @cultOuEvenement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Culte ou événement'**
+  String get cultOuEvenement;
+
+  /// No description provided for @demanderRemplacantService.
+  ///
+  /// In fr, this message translates to:
+  /// **'Demander un remplaçant'**
+  String get demanderRemplacantService;
+
+  /// No description provided for @demanderRemplacantServiceAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les autres membres de l\'équipe sont prévenus.'**
+  String get demanderRemplacantServiceAide;
+
+  /// No description provided for @equipeIndisponible.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette équipe n\'existe plus.'**
+  String get equipeIndisponible;
+
+  /// No description provided for @jeConfirme.
+  ///
+  /// In fr, this message translates to:
+  /// **'Je confirme, je serai là'**
+  String get jeConfirme;
+
+  /// No description provided for @jeNeSuisPasDisponible.
+  ///
+  /// In fr, this message translates to:
+  /// **'Je ne suis pas disponible'**
+  String get jeNeSuisPasDisponible;
+
+  /// No description provided for @jeNeSuisPasDisponibleAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le responsable de l\'équipe est prévenu.'**
+  String get jeNeSuisPasDisponibleAide;
+
+  /// No description provided for @membresEtResponsables.
+  ///
+  /// In fr, this message translates to:
+  /// **'Membres et responsables'**
+  String get membresEtResponsables;
+
+  /// No description provided for @membresEtResponsablesAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cochez les membres ; « Responsable » : fait le planning de l\'équipe.'**
+  String get membresEtResponsablesAide;
+
+  /// No description provided for @mesEquipes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mes équipes'**
+  String get mesEquipes;
+
+  /// No description provided for @mesServices.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mes services à venir'**
+  String get mesServices;
+
+  /// No description provided for @nomEquipe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom de l\'équipe'**
+  String get nomEquipe;
+
+  /// No description provided for @nomEquipeAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ex. : Sono et vidéo, Accueil, École du dimanche'**
+  String get nomEquipeAide;
+
+  /// No description provided for @nouvelleEquipe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle équipe'**
+  String get nouvelleEquipe;
+
+  /// No description provided for @planning.
+  ///
+  /// In fr, this message translates to:
+  /// **'Planning des services'**
+  String get planning;
+
+  /// No description provided for @planningServices.
+  ///
+  /// In fr, this message translates to:
+  /// **'Planning des services'**
+  String get planningServices;
+
+  /// No description provided for @planningServicesSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Équipes, qui sert à quel culte'**
+  String get planningServicesSousTitre;
+
+  /// No description provided for @planningSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mes services et mes équipes'**
+  String get planningSousTitre;
+
+  /// No description provided for @planningVide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rien de prévu pour le moment.'**
+  String get planningVide;
+
+  /// No description provided for @poste.
+  ///
+  /// In fr, this message translates to:
+  /// **'Poste (facultatif)'**
+  String get poste;
+
+  /// No description provided for @posteAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ex. : Table de mixage, Accueil à la porte'**
+  String get posteAide;
+
+  /// No description provided for @quiSert.
+  ///
+  /// In fr, this message translates to:
+  /// **'Qui sert ?'**
+  String get quiSert;
+
+  /// No description provided for @remplaceNom.
+  ///
+  /// In fr, this message translates to:
+  /// **'Remplace {nom}'**
+  String remplaceNom(String nom);
+
+  /// No description provided for @repondreService.
+  ///
+  /// In fr, this message translates to:
+  /// **'Confirmer ou se désister'**
+  String get repondreService;
+
+  /// No description provided for @responsable.
+  ///
+  /// In fr, this message translates to:
+  /// **'Responsable'**
+  String get responsable;
+
+  /// No description provided for @responsableEquipe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Responsable de l\'équipe'**
+  String get responsableEquipe;
+
+  /// No description provided for @retirerDeLEquipe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer de l\'équipe'**
+  String get retirerDeLEquipe;
+
+  /// No description provided for @supprimerEquipe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer cette équipe et son planning ?'**
+  String get supprimerEquipe;
+
+  /// No description provided for @servicePrevu.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prévu (à confirmer)'**
+  String get servicePrevu;
+
+  /// No description provided for @serviceConfirme.
+  ///
+  /// In fr, this message translates to:
+  /// **'Confirmé'**
+  String get serviceConfirme;
+
+  /// No description provided for @serviceIndisponible.
+  ///
+  /// In fr, this message translates to:
+  /// **'Indisponible'**
+  String get serviceIndisponible;
+
+  /// No description provided for @serviceRemplacement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Remplaçant recherché'**
+  String get serviceRemplacement;
 }
 
 class _AppLocalizationsDelegate

@@ -52,6 +52,8 @@ class _MontagneDesOliviersAppState
         case 'candidat':
           final uid = d['uid'];
           if (uid is String) router.push(Routes.candidat(id, uid));
+        case 'service':
+          router.push(Routes.equipe(id));
         case 'fete':
           router.push(Routes.fete(id));
         case 'rencontre':

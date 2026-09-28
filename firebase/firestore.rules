@@ -419,25 +419,63 @@ service cloud.firestore {
       }
     }
 
-    // ----- Planning des services (équipes : louange, sono, accueil, école du dimanche…) -----
+    // ----- Planning des services (équipes : sono, accueil, école du dimanche…) -----
+    function equipeValide(d) {
+      return texte(d.nom, 100)
+        && texteFacultatif(d.get('description', null), 500)
+        && d.membres is list && d.membres.size() <= 300
+        && d.responsables is list
+        && d.membres.hasAll(d.responsables);
+    }
+
     match /equipes/{eid} {
       function equipe() {
         return get(/databases/$(database)/documents/equipes/$(eid)).data;
       }
 
-      allow read: if estMembre();
-      allow write: if estSecretariat();
-
-      // Affectations : qui sert à quel culte ; la personne confirme ou demande un remplacement.
-      match /affectations/{aid} {
-        allow read: if estSecretariat() || (connecte() && moi() in equipe().membres);
-        allow create, delete: if estSecretariat() || (connecte() && moi() in equipe().responsables);
-        allow update: if ((estSecretariat() || (connecte() && moi() in equipe().responsables))
-            && request.resource.data.statut in ['prevu', 'confirme', 'indisponible', 'remplacement'])
-          || (connecte() && resource.data.uid == moi()
-              && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['statut'])
-              && request.resource.data.statut in ['confirme', 'indisponible', 'remplacement']);
+      function responsableEquipe() {
+        return connecte() && moi() in equipe().responsables;
       }
+
+      allow read: if estMembre();
+      allow create: if estSecretariat() && equipeValide(nouveau());
+      // Les responsables de l'équipe gèrent ses membres (pas les responsables).
+      allow update: if equipeValide(nouveau())
+        && (estSecretariat() || (responsableEquipe() && seulement(['membres', 'updatedAt'])));
+      allow delete: if estSecretariat();
+
+      // Affectations : qui sert à quel culte ; la personne confirme ou demande un
+      // remplacement ; un autre membre de l'équipe peut alors reprendre.
+      match /affectations/{aid} {
+        function affectationValide(d) {
+          return d.uid is string && texte(d.nom, 100)
+            && d.date is timestamp
+            && texte(d.titre, 200)
+            && texteFacultatif(d.get('role', null), 100)
+            && d.statut in ['prevu', 'confirme', 'indisponible', 'remplacement'];
+        }
+
+        allow read: if estSecretariat() || (connecte() && moi() in equipe().membres);
+        allow create: if (estSecretariat() || responsableEquipe())
+          && affectationValide(nouveau())
+          && nouveau().uid in equipe().membres;
+        allow delete: if estSecretariat() || responsableEquipe();
+        allow update: if ((estSecretariat() || responsableEquipe()) && affectationValide(nouveau()))
+          || (connecte() && ancien().uid == moi()
+              && seulement(['statut'])
+              && nouveau().statut in ['confirme', 'indisponible', 'remplacement'])
+          || (connecte() && moi() in equipe().membres && ancien().uid != moi()
+              && ancien().statut in ['indisponible', 'remplacement']
+              && seulement(['uid', 'nom', 'statut', 'remplace'])
+              && nouveau().uid == moi()
+              && texte(nouveau().nom, 100)
+              && nouveau().statut == 'confirme');
+      }
+    }
+
+    // Mon planning : mes affectations dans toutes les équipes.
+    match /{chemin=**}/affectations/{aid} {
+      allow read: if connecte() && resource.data.uid == moi();
     }
 
     // ----- Salles et réservations -----

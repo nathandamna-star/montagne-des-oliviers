@@ -25,6 +25,10 @@ import {
   notificationInscription, notificationQuestion, notificationReponse, notificationSuiviDemande,
   reponseDonnee,
 } from './vie.js';
+import {
+  changementService, notificationAffectation, notificationChangement, notificationRappelService,
+  rappelsServicesDus,
+} from './planning.js';
 
 initializeApp();
 
@@ -411,3 +415,62 @@ export const reconstruireAnnuaire = onCall(async (requete) => {
   if (n > 0) await lot.commit();
   return { misAJour: n };
 });
+
+const quandL = (date, langue) => quand(date, langue === 'nl' ? 'nl' : 'fr');
+
+/** Quelqu'un est mis au planning : il est prévenu. */
+export const nouvelleAffectation = onDocumentCreated(
+  'equipes/{eid}/affectations/{aid}',
+  async (event) => {
+    const a = event.data?.data();
+    if (!a?.date) return;
+    const equipe = (await getFirestore().doc(`equipes/${event.params.eid}`).get()).data();
+    if (!equipe) return;
+    await envoyerAuxComptes([a.uid], (langue) =>
+      notificationAffectation(event.params.eid, equipe, a, langue, quandL(a.date.toDate(), langue)));
+  },
+);
+
+/** Indisponible, remplaçant recherché ou remplacé : les bonnes personnes sont prévenues. */
+export const changementAffectation = onDocumentUpdated(
+  'equipes/{eid}/affectations/{aid}',
+  async (event) => {
+    const avant = event.data?.before.data();
+    const apres = event.data?.after.data();
+    const c = changementService(avant, apres);
+    if (!c) return;
+    const equipe = (await getFirestore().doc(`equipes/${event.params.eid}`).get()).data();
+    if (!equipe) return;
+    const cibles = c.cible === 'responsables'
+      ? destinataires(equipe.responsables, apres.uid)
+      : destinataires(equipe.membres, apres.uid);
+    await envoyerAuxComptes(cibles, (langue) => notificationChangement(
+      event.params.eid, c.genre, avant, apres, langue, quandL(apres.date.toDate(), langue)));
+  },
+);
+
+/** Toutes les heures : rappel la veille de chaque service. */
+export const rappelsServices = onSchedule(
+  { schedule: 'every 60 minutes', timeZone: 'Europe/Brussels' },
+  async () => {
+    const db = getFirestore();
+    const maintenant = new Date();
+    const snap = await db.collectionGroup('affectations')
+      .where('date', '>', Timestamp.fromDate(maintenant))
+      .where('date', '<=', Timestamp.fromDate(new Date(maintenant.getTime() + 24 * 3600 * 1000)))
+      .get();
+    const liste = snap.docs.map((d) => ({ ...d.data(), ref: d.ref, date: d.data().date.toDate() }));
+    for (const a of rappelsServicesDus(liste, maintenant)) {
+      await a.ref.update({ rappelEnvoye: true });
+      const refEquipe = a.ref.parent.parent;
+      const equipe = (await refEquipe.get()).data();
+      if (!equipe) continue;
+      await envoyerAuxComptes([a.uid], (langue) => notificationRappelService(
+        refEquipe.id, equipe, a, langue,
+        new Intl.DateTimeFormat(langue === 'nl' ? 'nl-BE' : 'fr-BE', {
+          hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Brussels',
+        }).format(a.date),
+      ));
+    }
+  },
+);

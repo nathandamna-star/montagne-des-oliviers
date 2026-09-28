@@ -4,7 +4,7 @@ import {
   assertFails, assertSucceeds, initializeTestEnvironment,
 } from '@firebase/rules-unit-testing';
 import {
-  Timestamp, collection, deleteDoc, doc, getDoc, getDocs, query, serverTimestamp, setDoc,
+  Timestamp, collection, collectionGroup, deleteDoc, doc, getDoc, getDocs, query, serverTimestamp, setDoc,
   updateDoc, where,
 } from 'firebase/firestore';
 
@@ -402,18 +402,59 @@ describe('préparations au mariage et au baptême', () => {
 });
 
 describe('planning des services', () => {
-  it('équipes, affectations et confirmation par la personne', async () => {
-    await semer({ ...MEMBRES });
-    await assertSucceeds(setDoc(doc(secretariat(), 'equipes/sono'), { nom: 'Sono', membres: ['marie', 'paul'], responsables: ['paul'] }));
-    await assertFails(setDoc(doc(marie(), 'equipes/x'), { nom: 'X', membres: [], responsables: [] }));
+  const aff = (extra = {}) => ({
+    uid: 'marie', nom: 'Marie', date: t(12), titre: 'Culte du dimanche', role: 'Table de mixage',
+    statut: 'prevu', ...extra,
+  });
+
+  beforeEach(async () => {
+    await semer({ ...MEMBRES, 'users/luc': { nom: 'Luc' } });
+  });
+
+  it('équipes : le secrétariat les crée ; les responsables gèrent les membres', async () => {
+    const sono = { nom: 'Sono', membres: ['marie', 'paul'], responsables: ['paul'] };
+    await assertSucceeds(setDoc(doc(secretariat(), 'equipes/sono'), sono));
+    await assertFails(setDoc(doc(secretariat(), 'equipes/x'), { ...sono, responsables: ['luc'] }));
+    await assertFails(setDoc(doc(marie(), 'equipes/x'), sono));
     await assertSucceeds(getDoc(doc(marie(), 'equipes/sono')));
-    const aff = { uid: 'marie', date: t(12), role: 'Table de mixage', statut: 'prevu' };
-    await assertSucceeds(setDoc(doc(paul(), 'equipes/sono/affectations/a1'), aff));
-    await assertFails(setDoc(doc(marie(), 'equipes/sono/affectations/a2'), aff));
-    await assertSucceeds(updateDoc(doc(marie(), 'equipes/sono/affectations/a1'), { statut: 'remplacement' }));
-    await assertFails(updateDoc(doc(marie(), 'equipes/sono/affectations/a1'), { uid: 'paul' }));
+    await assertSucceeds(updateDoc(doc(paul(), 'equipes/sono'), { membres: ['marie', 'paul', 'luc'] }));
+    await assertFails(updateDoc(doc(paul(), 'equipes/sono'), { responsables: ['paul', 'marie'] }));
+    await assertFails(updateDoc(doc(marie(), 'equipes/sono'), { membres: ['marie'] }));
+  });
+
+  it('affectations : créées par un responsable, pour un membre de l\'équipe', async () => {
+    await semer({ 'equipes/sono': { nom: 'Sono', membres: ['marie', 'paul'], responsables: ['paul'] } });
+    await assertSucceeds(setDoc(doc(paul(), 'equipes/sono/affectations/a1'), aff()));
+    await assertFails(setDoc(doc(paul(), 'equipes/sono/affectations/a2'), aff({ uid: 'luc', nom: 'Luc' })));
+    await assertFails(setDoc(doc(paul(), 'equipes/sono/affectations/a3'), aff({ titre: '' })));
+    await assertFails(setDoc(doc(marie(), 'equipes/sono/affectations/a4'), aff()));
     const luc = env.authenticatedContext('luc').firestore();
     await assertFails(getDoc(doc(luc, 'equipes/sono/affectations/a1')));
+  });
+
+  it('la personne confirme ou demande un remplacement ; un autre reprend', async () => {
+    await semer({
+      'equipes/sono': { nom: 'Sono', membres: ['marie', 'paul', 'luc'], responsables: ['luc'] },
+      'equipes/sono/affectations/a1': aff(),
+    });
+    await assertSucceeds(updateDoc(doc(marie(), 'equipes/sono/affectations/a1'), { statut: 'confirme' }));
+    await assertFails(updateDoc(doc(marie(), 'equipes/sono/affectations/a1'), { role: 'Autre' }));
+    await assertFails(updateDoc(doc(paul(), 'equipes/sono/affectations/a1'), { uid: 'paul', nom: 'Paul', statut: 'confirme' }));
+    await assertSucceeds(updateDoc(doc(marie(), 'equipes/sono/affectations/a1'), { statut: 'remplacement' }));
+    await assertFails(updateDoc(doc(paul(), 'equipes/sono/affectations/a1'), { uid: 'paul', nom: 'Paul', statut: 'prevu' }));
+    await assertSucceeds(updateDoc(doc(paul(), 'equipes/sono/affectations/a1'), {
+      uid: 'paul', nom: 'Paul', statut: 'confirme', remplace: 'Marie',
+    }));
+  });
+
+  it('mon planning : mes affectations dans toutes les équipes', async () => {
+    await semer({
+      'equipes/sono': { nom: 'Sono', membres: ['marie', 'paul'], responsables: ['paul'] },
+      'equipes/sono/affectations/a1': aff(),
+      'equipes/sono/affectations/a2': aff({ uid: 'paul', nom: 'Paul' }),
+    });
+    await assertSucceeds(getDocs(query(collectionGroup(marie(), 'affectations'), where('uid', '==', 'marie'))));
+    await assertFails(getDocs(query(collectionGroup(marie(), 'affectations'), where('uid', '==', 'paul'))));
   });
 });
 

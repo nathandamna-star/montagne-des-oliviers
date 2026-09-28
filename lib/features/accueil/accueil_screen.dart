@@ -89,6 +89,15 @@ class AccueilScreen extends ConsumerWidget {
             const SizedBox(height: 8),
             Card(
               child: ListTile(
+                leading: const Icon(Icons.event_note_outlined),
+                title: Text(l10n.planning),
+                subtitle: Text(l10n.planningSousTitre),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => context.push(Routes.planning),
+              ),
+            ),
+            Card(
+              child: ListTile(
                 leading: const Icon(Icons.menu_book_outlined),
                 title: Text(l10n.preparations),
                 subtitle: Text(l10n.preparationsSousTitre),

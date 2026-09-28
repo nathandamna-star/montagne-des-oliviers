@@ -297,3 +297,12 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   membre et administrateur, `ajouterAdmins`) ; à la création, recherche par nom et administrateurs choisis affichés en
   haut. Fonction `reconstruireAnnuaire` (secrétariat/admin) appelée à l'ouverture de ces écrans : tous les comptes
   apparaissent dans la liste, même anciens.
+- Planning des services (étape 8, `lib/features/planning/`) : `equipes/{id}` (nom, description, membres, responsables ⊂
+  membres ; créées par le secrétariat, les responsables gèrent les membres) et `equipes/{id}/affectations/{aid}` (uid,
+  nom, date, titre du culte, role, statut prevu|confirme|indisponible|remplacement, remplace, rappelEnvoye). « Mon
+  planning » (`/accueil/planning`, Accueil / Profil / Responsables) : mes services (requête de groupe de collections
+  `affectations` sur uid, règle `/{chemin=**}/affectations`) → confirmer / indisponible / demander un remplaçant ;
+  mes équipes. Page d'équipe : planning par date, « Je remplace » (un autre membre reprend, `remplace` = ancien nom),
+  responsables : ajouter au planning (culte choisi dans l'agenda ou date libre), membres. Fonctions
+  `nouvelleAffectation`, `changementAffectation`, `rappelsServices` (veille, toutes les heures). `ChoixPersonnes`
+  (feuille de choix dans l'annuaire) partagé avec les groupes.
