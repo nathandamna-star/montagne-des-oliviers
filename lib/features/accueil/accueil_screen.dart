@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../core/router/routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../l10n/app_localizations.dart';
+import '../auth/auth_providers.dart';
 
 /// Accueil : nom de l'église et, plus tard, verset du jour, annonces,
 /// prochain culte et direct.
-class AccueilScreen extends StatelessWidget {
+class AccueilScreen extends ConsumerWidget {
   const AccueilScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
     return Scaffold(
@@ -48,6 +52,25 @@ class AccueilScreen extends StatelessWidget {
               ],
             ),
           ),
+          if (!ref.watch(estConnecteProvider)) ...[
+            const SizedBox(height: 16),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(l10n.accueilConnexionTexte),
+                    const SizedBox(height: 12),
+                    FilledButton(
+                      onPressed: () => context.push(Routes.connexion),
+                      child: Text(l10n.seConnecter),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
           const SizedBox(height: 20),
           Text(l10n.accueilBienvenue, style: theme.textTheme.titleMedium),
           const SizedBox(height: 8),

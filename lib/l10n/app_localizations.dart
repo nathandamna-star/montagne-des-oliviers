@@ -199,6 +199,336 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Ici : le fichier des membres, les dons, les plannings des services et la réservation des salles.'**
   String get responsablesAVenir;
+
+  /// No description provided for @seConnecter.
+  ///
+  /// In fr, this message translates to:
+  /// **'Se connecter'**
+  String get seConnecter;
+
+  /// No description provided for @seDeconnecter.
+  ///
+  /// In fr, this message translates to:
+  /// **'Se déconnecter'**
+  String get seDeconnecter;
+
+  /// No description provided for @creerCompte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créer un compte'**
+  String get creerCompte;
+
+  /// No description provided for @connexionIntro.
+  ///
+  /// In fr, this message translates to:
+  /// **'Connectez-vous pour rejoindre vos groupes, vous inscrire aux activités et faire vos demandes.'**
+  String get connexionIntro;
+
+  /// No description provided for @continuerGoogle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Continuer avec Google'**
+  String get continuerGoogle;
+
+  /// No description provided for @continuerApple.
+  ///
+  /// In fr, this message translates to:
+  /// **'Continuer avec Apple'**
+  String get continuerApple;
+
+  /// No description provided for @continuerEmail.
+  ///
+  /// In fr, this message translates to:
+  /// **'Continuer avec un e-mail'**
+  String get continuerEmail;
+
+  /// No description provided for @continuerSansCompte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Continuer sans compte'**
+  String get continuerSansCompte;
+
+  /// No description provided for @bienvenueFamille.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bienvenue dans la famille !'**
+  String get bienvenueFamille;
+
+  /// No description provided for @completerProfilIntro.
+  ///
+  /// In fr, this message translates to:
+  /// **'Encore une étape : indiquez votre nom et acceptez l\'utilisation de vos données.'**
+  String get completerProfilIntro;
+
+  /// No description provided for @annuler.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annuler'**
+  String get annuler;
+
+  /// No description provided for @valider.
+  ///
+  /// In fr, this message translates to:
+  /// **'Valider'**
+  String get valider;
+
+  /// No description provided for @enregistrer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enregistrer'**
+  String get enregistrer;
+
+  /// No description provided for @chargement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chargement…'**
+  String get chargement;
+
+  /// No description provided for @champNom.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prénom et nom'**
+  String get champNom;
+
+  /// No description provided for @champEmail.
+  ///
+  /// In fr, this message translates to:
+  /// **'Adresse e-mail'**
+  String get champEmail;
+
+  /// No description provided for @champMotDePasse.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mot de passe'**
+  String get champMotDePasse;
+
+  /// No description provided for @afficherMotDePasse.
+  ///
+  /// In fr, this message translates to:
+  /// **'Afficher le mot de passe'**
+  String get afficherMotDePasse;
+
+  /// No description provided for @masquerMotDePasse.
+  ///
+  /// In fr, this message translates to:
+  /// **'Masquer le mot de passe'**
+  String get masquerMotDePasse;
+
+  /// No description provided for @motDePasseOublie.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mot de passe oublié ?'**
+  String get motDePasseOublie;
+
+  /// No description provided for @emailReinitialisationEnvoye.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un e-mail pour choisir un nouveau mot de passe a été envoyé à {email}.'**
+  String emailReinitialisationEnvoye(String email);
+
+  /// No description provided for @validationNomRequis.
+  ///
+  /// In fr, this message translates to:
+  /// **'Indiquez votre nom.'**
+  String get validationNomRequis;
+
+  /// No description provided for @validationEmail.
+  ///
+  /// In fr, this message translates to:
+  /// **'Indiquez une adresse e-mail valide.'**
+  String get validationEmail;
+
+  /// No description provided for @validationMotDePasse.
+  ///
+  /// In fr, this message translates to:
+  /// **'Au moins 8 caractères.'**
+  String get validationMotDePasse;
+
+  /// No description provided for @consentementTexte.
+  ///
+  /// In fr, this message translates to:
+  /// **'J\'accepte que l\'église enregistre mes données (nom, e-mail, groupes, demandes et sujets de prière, qui peuvent révéler mes convictions religieuses) pour la vie de la communauté. Je peux supprimer mon compte à tout moment.'**
+  String get consentementTexte;
+
+  /// No description provided for @consentementRequis.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cochez la case pour continuer.'**
+  String get consentementRequis;
+
+  /// No description provided for @connexionRequiseTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Connexion nécessaire'**
+  String get connexionRequiseTitre;
+
+  /// No description provided for @connexionRequiseTexte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette partie est réservée aux membres connectés.'**
+  String get connexionRequiseTexte;
+
+  /// No description provided for @groupesConnexionTexte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Connectez-vous pour retrouver vos groupes et leurs discussions.'**
+  String get groupesConnexionTexte;
+
+  /// No description provided for @profilConnexionTexte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Connectez-vous pour voir votre compte, vos demandes et vos dons.'**
+  String get profilConnexionTexte;
+
+  /// No description provided for @accueilConnexionTexte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous faites partie de l\'église ? Connectez-vous pour tout retrouver.'**
+  String get accueilConnexionTexte;
+
+  /// No description provided for @bonjourNom.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bonjour {nom}'**
+  String bonjourNom(String nom);
+
+  /// No description provided for @activerAdminTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Activer l\'administration ?'**
+  String get activerAdminTitre;
+
+  /// No description provided for @activerAdminTexte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Seul le compte désigné lors de l\'installation peut devenir administrateur.'**
+  String get activerAdminTexte;
+
+  /// No description provided for @adminActive.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous êtes maintenant administrateur.'**
+  String get adminActive;
+
+  /// No description provided for @adminRefuse.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce compte ne peut pas devenir administrateur.'**
+  String get adminRefuse;
+
+  /// No description provided for @roleAdmin.
+  ///
+  /// In fr, this message translates to:
+  /// **'Administrateur'**
+  String get roleAdmin;
+
+  /// No description provided for @roleSecretariat.
+  ///
+  /// In fr, this message translates to:
+  /// **'Secrétariat'**
+  String get roleSecretariat;
+
+  /// No description provided for @roleTresorier.
+  ///
+  /// In fr, this message translates to:
+  /// **'Trésorier'**
+  String get roleTresorier;
+
+  /// No description provided for @roleAdminAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tout gérer, y compris les rôles.'**
+  String get roleAdminAide;
+
+  /// No description provided for @roleSecretariatAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Membres, agenda, annonces, demandes.'**
+  String get roleSecretariatAide;
+
+  /// No description provided for @roleTresorierAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dons et relevés annuels.'**
+  String get roleTresorierAide;
+
+  /// No description provided for @rolesTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rôles des responsables'**
+  String get rolesTitre;
+
+  /// No description provided for @rolesSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Donner ou retirer un accès'**
+  String get rolesSousTitre;
+
+  /// No description provided for @rolesAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'La personne doit d\'abord avoir créé son compte. Décochez tout pour retirer ses accès.'**
+  String get rolesAide;
+
+  /// No description provided for @rolesEnregistres.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rôles enregistrés pour {email}.'**
+  String rolesEnregistres(String email);
+
+  /// No description provided for @rolesCompteIntrouvable.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun compte avec cette adresse. La personne doit d\'abord s\'inscrire.'**
+  String get rolesCompteIntrouvable;
+
+  /// No description provided for @rolesRefuse.
+  ///
+  /// In fr, this message translates to:
+  /// **'Seul un administrateur peut changer les rôles.'**
+  String get rolesRefuse;
+
+  /// No description provided for @erreurEmailInvalide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette adresse e-mail n\'est pas valide.'**
+  String get erreurEmailInvalide;
+
+  /// No description provided for @erreurMotDePasseFaible.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce mot de passe est trop faible. Utilisez au moins 8 caractères.'**
+  String get erreurMotDePasseFaible;
+
+  /// No description provided for @erreurEmailDejaUtilise.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un compte existe déjà avec cette adresse. Connectez-vous plutôt.'**
+  String get erreurEmailDejaUtilise;
+
+  /// No description provided for @erreurIdentifiantsIncorrects.
+  ///
+  /// In fr, this message translates to:
+  /// **'Adresse e-mail ou mot de passe incorrect.'**
+  String get erreurIdentifiantsIncorrects;
+
+  /// No description provided for @erreurTropDeTentatives.
+  ///
+  /// In fr, this message translates to:
+  /// **'Trop de tentatives. Réessayez dans quelques minutes.'**
+  String get erreurTropDeTentatives;
+
+  /// No description provided for @erreurReseau.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pas de connexion internet. Vérifiez votre réseau et réessayez.'**
+  String get erreurReseau;
+
+  /// No description provided for @erreurInconnue.
+  ///
+  /// In fr, this message translates to:
+  /// **'Une erreur est survenue. Réessayez.'**
+  String get erreurInconnue;
 }
 
 class _AppLocalizationsDelegate

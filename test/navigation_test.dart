@@ -19,7 +19,7 @@ void main() {
 
     for (final (onglet, extrait) in [
       ('Agenda', 'cultes'),
-      ('Groupes', 'cellules de maison'),
+      ('Groupes', 'groupes et leurs discussions'),
       ('Médias', 'exhortations'),
       ('Profil', 'dons'),
     ]) {
@@ -30,7 +30,7 @@ void main() {
   });
 
   testWidgets('onglet Responsables pour les responsables', (tester) async {
-    await lancer(tester, responsable: true);
+    await lancer(tester, banc: await responsable());
     expect(find.byType(NavigationDestination), findsNWidgets(6));
     await tester.tap(find.text('Responsables'));
     await tester.pumpAndSettle();
@@ -38,7 +38,11 @@ void main() {
   });
 
   testWidgets('ordinateur : menu latéral', (tester) async {
-    await lancer(tester, taille: const Size(2800, 1800), responsable: true);
+    await lancer(
+      tester,
+      taille: const Size(2800, 1800),
+      banc: await responsable(),
+    );
     expect(find.byType(NavigationRail), findsOneWidget);
     expect(find.byType(NavigationBar), findsNothing);
     await tester.tap(find.text('Responsables'));

@@ -16,5 +16,81 @@
   "groupesAVenir": "Ici : vos cellules de maison, les jeunes, la louange, l'entraide… avec une discussion privée par groupe.",
   "mediasAVenir": "Ici : les prédications et exhortations en audio et en vidéo, le direct du culte et le verset du jour.",
   "profilAVenir": "Ici : votre compte, vos demandes, vos sujets de prière, vos dons et la langue de l'application.",
-  "responsablesAVenir": "Ici : le fichier des membres, les dons, les plannings des services et la réservation des salles."
+  "responsablesAVenir": "Ici : le fichier des membres, les dons, les plannings des services et la réservation des salles.",
+  "seConnecter": "Se connecter",
+  "seDeconnecter": "Se déconnecter",
+  "creerCompte": "Créer un compte",
+  "connexionIntro": "Connectez-vous pour rejoindre vos groupes, vous inscrire aux activités et faire vos demandes.",
+  "continuerGoogle": "Continuer avec Google",
+  "continuerApple": "Continuer avec Apple",
+  "continuerEmail": "Continuer avec un e-mail",
+  "continuerSansCompte": "Continuer sans compte",
+  "bienvenueFamille": "Bienvenue dans la famille !",
+  "completerProfilIntro": "Encore une étape : indiquez votre nom et acceptez l'utilisation de vos données.",
+  "annuler": "Annuler",
+  "valider": "Valider",
+  "enregistrer": "Enregistrer",
+  "chargement": "Chargement…",
+  "champNom": "Prénom et nom",
+  "champEmail": "Adresse e-mail",
+  "champMotDePasse": "Mot de passe",
+  "afficherMotDePasse": "Afficher le mot de passe",
+  "masquerMotDePasse": "Masquer le mot de passe",
+  "motDePasseOublie": "Mot de passe oublié ?",
+  "emailReinitialisationEnvoye": "Un e-mail pour choisir un nouveau mot de passe a été envoyé à {email}.",
+  "@emailReinitialisationEnvoye": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "validationNomRequis": "Indiquez votre nom.",
+  "validationEmail": "Indiquez une adresse e-mail valide.",
+  "validationMotDePasse": "Au moins 8 caractères.",
+  "consentementTexte": "J'accepte que l'église enregistre mes données (nom, e-mail, groupes, demandes et sujets de prière, qui peuvent révéler mes convictions religieuses) pour la vie de la communauté. Je peux supprimer mon compte à tout moment.",
+  "consentementRequis": "Cochez la case pour continuer.",
+  "connexionRequiseTitre": "Connexion nécessaire",
+  "connexionRequiseTexte": "Cette partie est réservée aux membres connectés.",
+  "groupesConnexionTexte": "Connectez-vous pour retrouver vos groupes et leurs discussions.",
+  "profilConnexionTexte": "Connectez-vous pour voir votre compte, vos demandes et vos dons.",
+  "accueilConnexionTexte": "Vous faites partie de l'église ? Connectez-vous pour tout retrouver.",
+  "bonjourNom": "Bonjour {nom}",
+  "@bonjourNom": {
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "activerAdminTitre": "Activer l'administration ?",
+  "activerAdminTexte": "Seul le compte désigné lors de l'installation peut devenir administrateur.",
+  "adminActive": "Vous êtes maintenant administrateur.",
+  "adminRefuse": "Ce compte ne peut pas devenir administrateur.",
+  "roleAdmin": "Administrateur",
+  "roleSecretariat": "Secrétariat",
+  "roleTresorier": "Trésorier",
+  "roleAdminAide": "Tout gérer, y compris les rôles.",
+  "roleSecretariatAide": "Membres, agenda, annonces, demandes.",
+  "roleTresorierAide": "Dons et relevés annuels.",
+  "rolesTitre": "Rôles des responsables",
+  "rolesSousTitre": "Donner ou retirer un accès",
+  "rolesAide": "La personne doit d'abord avoir créé son compte. Décochez tout pour retirer ses accès.",
+  "rolesEnregistres": "Rôles enregistrés pour {email}.",
+  "@rolesEnregistres": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "rolesCompteIntrouvable": "Aucun compte avec cette adresse. La personne doit d'abord s'inscrire.",
+  "rolesRefuse": "Seul un administrateur peut changer les rôles.",
+  "erreurEmailInvalide": "Cette adresse e-mail n'est pas valide.",
+  "erreurMotDePasseFaible": "Ce mot de passe est trop faible. Utilisez au moins 8 caractères.",
+  "erreurEmailDejaUtilise": "Un compte existe déjà avec cette adresse. Connectez-vous plutôt.",
+  "erreurIdentifiantsIncorrects": "Adresse e-mail ou mot de passe incorrect.",
+  "erreurTropDeTentatives": "Trop de tentatives. Réessayez dans quelques minutes.",
+  "erreurReseau": "Pas de connexion internet. Vérifiez votre réseau et réessayez.",
+  "erreurInconnue": "Une erreur est survenue. Réessayez."
 }
