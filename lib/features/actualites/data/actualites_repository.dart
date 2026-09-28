@@ -36,6 +36,11 @@ class ActualitesRepository {
       .snapshots()
       .map((d) => d.exists ? Actualite.depuisFirestore(d) : null);
 
+  Future<Actualite?> lire(String id) async {
+    final d = await _col.doc(id).get();
+    return d.exists ? Actualite.depuisFirestore(d) : null;
+  }
+
   String nouvelId() => _col.doc().id;
 
   /// Enregistre ; la date de publication est fixée à la première publication.

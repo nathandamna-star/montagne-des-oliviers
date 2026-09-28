@@ -14,6 +14,12 @@ abstract final class Routes {
   static const gestionAgenda = '/responsables/agenda';
   static const membres = '/responsables/membres';
   static const familles = '/responsables/familles';
+  static const gestionGroupes = '/responsables/groupes';
+  static const nouveauGroupe = '/responsables/groupes/nouveau';
+
+  static String groupe(String id) => '/groupes/$id';
+  static String discussion(String id) => '/groupes/$id/discussion';
+  static String modifierGroupe(String id) => '/groupes/$id/modifier';
 
   static String ficheMembre(String id) => '/responsables/membres/$id';
   static String famille(String id) => '/responsables/familles/$id';

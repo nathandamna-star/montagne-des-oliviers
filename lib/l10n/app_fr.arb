@@ -277,5 +277,90 @@
   "vieDEglise": "Vie d'église",
   "statutVisiteur": "Visiteur",
   "statutMembre": "Membre",
-  "statutActif": "Membre actif"
+  "statutActif": "Membre actif",
+  "adminGroupe": "Administrateur du groupe",
+  "adminsGroupe": "Administrateurs du groupe",
+  "adminsGroupeAide": "Ils ajoutent et retirent les membres. Choisissez au moins une personne.",
+  "ajouterMembres": "Ajouter",
+  "ajouterNombre": "{n, plural, =0{Ajouter} =1{Ajouter 1 personne} other{Ajouter {n} personnes}}",
+  "@ajouterNombre": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "aucunGroupe": "Vous ne faites encore partie d'aucun groupe.",
+  "aucunGroupeEglise": "Aucun groupe pour le moment.",
+  "aucunMessageGroupe": "Aucun message. Écrivez le premier !",
+  "autresGroupes": "Groupes ouverts",
+  "autresGroupesAide": "Pour en faire partie, demandez à un administrateur du groupe.",
+  "choisirAdminGroupe": "Choisissez au moins un administrateur.",
+  "compteInconnu": "Compte supprimé",
+  "discussion": "Discussion",
+  "ecrireMessage": "Écrire un message…",
+  "effacerMessage": "Effacer ce message ?",
+  "envoiEchoue": "L'envoi a échoué. Vérifiez votre connexion.",
+  "envoyerMessage": "Envoyer",
+  "envoyerPhoto": "Envoyer une photo",
+  "groupeIndisponible": "Ce groupe n'est pas accessible.",
+  "groupeOuvert": "Groupe ouvert",
+  "groupePrive": "Groupe privé",
+  "groupePriveAide": "Seuls ses membres le voient. Sinon, tous les membres de l'église le voient (sans la discussion).",
+  "lienAppel": "Lien d'appel (Meet, Zoom, WhatsApp…)",
+  "lienAppelAide": "Facultatif. Adresse commençant par https:// ; un bouton « Rejoindre l'appel » l'ouvrira.",
+  "lienInvalide": "Le lien doit commencer par https://",
+  "mesGroupes": "Mes groupes",
+  "modifierGroupe": "Modifier le groupe",
+  "nomGroupe": "Nom du groupe",
+  "nombreMembres": "{n, plural, =0{Aucun membre} =1{1 membre} other{{n} membres}}",
+  "@nombreMembres": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "nommerAdmin": "Nommer administrateur",
+  "nouveau": "Nouveau",
+  "nouveauGroupe": "Nouveau groupe",
+  "options": "Options",
+  "personneATrouver": "Personne à ajouter.",
+  "photo": "Photo",
+  "quitterGroupe": "Quitter le groupe",
+  "quitterGroupeQuestion": "Quitter ce groupe ?",
+  "rechercherPersonne": "Rechercher une personne",
+  "rejoindreAppel": "Rejoindre l'appel",
+  "rejoindreGroupeAide": "Pour rejoindre ce groupe, demandez à : {admins}.",
+  "@rejoindreGroupeAide": {
+    "placeholders": {
+      "admins": {
+        "type": "String"
+      }
+    }
+  },
+  "retirerAdmin": "Retirer le rôle d'administrateur",
+  "retirerDuGroupe": "Retirer du groupe",
+  "retirerDuGroupeQuestion": "Retirer {nom} du groupe ?",
+  "@retirerDuGroupeQuestion": {
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "supprimerGroupe": "Supprimer ce groupe ?",
+  "supprimerGroupeAide": "Le groupe disparaît pour tous ses membres.",
+  "tousLesGroupes": "Groupes de l'église",
+  "tousLesGroupesSousTitre": "Créer les groupes et nommer leurs administrateurs",
+  "groupeCellule": "Cellule de maison",
+  "groupeIntercession": "Intercession",
+  "groupeJeunes": "Jeunes",
+  "groupeFemmes": "Femmes",
+  "groupeHommes": "Hommes",
+  "groupeLouange": "Louange",
+  "groupeModeration": "Modération",
+  "groupeMedia": "Équipe média",
+  "groupeEntraide": "Entraide",
+  "groupeAutre": "Autre"
 }

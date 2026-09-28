@@ -46,7 +46,7 @@ class _EditeurActualiteScreenState
     if (_nouvelle) {
       _charge = true;
     } else {
-      repo.une(_id).first.then((a) {
+      repo.lire(_id).then((a) {
         if (!mounted || a == null) return;
         setState(() {
           _titreFr.text = a.titre['fr'] ?? '';

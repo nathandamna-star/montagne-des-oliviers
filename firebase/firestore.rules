@@ -98,6 +98,11 @@ service cloud.firestore {
       allow delete: if connecte() && uid == moi();
     }
 
+    // ----- Annuaire : nom des comptes (pour composer les groupes), tenu par le serveur -----
+    match /annuaire/{uid} {
+      allow read: if estMembre();
+    }
+
     // ----- Fichier des membres (données sensibles : secrétariat et pasteurs) -----
     match /membres/{id} {
       allow read: if estSecretariat()

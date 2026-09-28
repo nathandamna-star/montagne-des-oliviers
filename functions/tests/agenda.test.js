@@ -50,3 +50,24 @@ describe('agenda et annonces (déclencheurs)', () => {
     assert.equal((await ref.get()).data().notifieLe, undefined);
   });
 });
+
+describe('groupes (déclencheurs)', () => {
+  it('annuaire : nom recopié du profil, effacé avec lui', async () => {
+    await db.doc('users/u-annu').set({ nom: 'Hélène', email: 'h@x.be', langue: 'fr' });
+    await attendre(() => db.doc('annuaire/u-annu').get(), (d) => d.exists && d.data().nom === 'Hélène');
+    const d = await db.doc('annuaire/u-annu').get();
+    assert.deepEqual(Object.keys(d.data()), ['nom']);
+    await db.doc('users/u-annu').delete();
+    await attendre(() => db.doc('annuaire/u-annu').get(), (x) => !x.exists);
+  });
+
+  it('nouveau message : aperçu du dernier message dans le groupe', async () => {
+    await db.doc('groupes/g-test').set({ nom: 'Louange', membres: ['a', 'b'], admins: ['a'] });
+    await db.collection('groupes/g-test/messages').add({
+      auteur: 'a', nom: 'Anne', texte: 'Répétition jeudi 19 h', createdAt: Timestamp.now(),
+    });
+    const g = await attendre(() => db.doc('groupes/g-test').get(), (x) => x.data().dernierMessage);
+    assert.equal(g.data().dernierMessage.texte, 'Répétition jeudi 19 h');
+    assert.equal(g.data().dernierMessage.nom, 'Anne');
+  });
+});

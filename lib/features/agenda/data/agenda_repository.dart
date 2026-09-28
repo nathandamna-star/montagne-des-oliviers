@@ -45,6 +45,11 @@ class AgendaRepository {
       .snapshots()
       .map((d) => d.exists ? Evenement.depuisFirestore(d) : null);
 
+  Future<Evenement?> lire(String id) async {
+    final d = await _col.doc(id).get();
+    return d.exists ? Evenement.depuisFirestore(d) : null;
+  }
+
   String nouvelId() => _col.doc().id;
 
   Future<void> enregistrer(Evenement e) => _col.doc(e.id).set({

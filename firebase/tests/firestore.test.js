@@ -498,3 +498,26 @@ describe('requêtes de l\'app (annonces et agenda)', () => {
     await assertSucceeds(getDocs(collection(secretariat(), 'actualites')));
   });
 });
+
+describe('annuaire et listes de groupes', () => {
+  it('annuaire lisible par les membres de l\'église, écrit par le serveur seulement', async () => {
+    await semer({ ...MEMBRES, 'annuaire/paul': { nom: 'Paul' } });
+    await assertSucceeds(getDocs(collection(marie(), 'annuaire')));
+    await assertFails(getDocs(collection(sansProfil(), 'annuaire')));
+    await assertFails(getDocs(collection(visiteur(), 'annuaire')));
+    await assertFails(setDoc(doc(marie(), 'annuaire/marie'), { nom: 'Reine Marie' }));
+  });
+
+  it('requêtes : mes groupes, groupes ouverts, tous (secrétariat)', async () => {
+    await semer({
+      ...MEMBRES,
+      'groupes/g1': { nom: 'A', type: 'cellule', prive: true, membres: ['marie'], admins: ['marie'] },
+      'groupes/g2': { nom: 'B', type: 'jeunes', prive: false, membres: ['paul'], admins: ['paul'] },
+    });
+    await assertSucceeds(getDocs(query(collection(marie(), 'groupes'), where('membres', 'array-contains', 'marie'))));
+    await assertFails(getDocs(query(collection(marie(), 'groupes'), where('membres', 'array-contains', 'paul'))));
+    await assertSucceeds(getDocs(query(collection(marie(), 'groupes'), where('prive', '==', false))));
+    await assertFails(getDocs(collection(marie(), 'groupes')));
+    await assertSucceeds(getDocs(collection(secretariat(), 'groupes')));
+  });
+});

@@ -688,4 +688,203 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get statutActif => 'Membre actif';
+
+  @override
+  String get adminGroupe => 'Administrateur du groupe';
+
+  @override
+  String get adminsGroupe => 'Administrateurs du groupe';
+
+  @override
+  String get adminsGroupeAide =>
+      'Ils ajoutent et retirent les membres. Choisissez au moins une personne.';
+
+  @override
+  String get ajouterMembres => 'Ajouter';
+
+  @override
+  String ajouterNombre(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Ajouter $n personnes',
+      one: 'Ajouter 1 personne',
+      zero: 'Ajouter',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get aucunGroupe => 'Vous ne faites encore partie d\'aucun groupe.';
+
+  @override
+  String get aucunGroupeEglise => 'Aucun groupe pour le moment.';
+
+  @override
+  String get aucunMessageGroupe => 'Aucun message. Écrivez le premier !';
+
+  @override
+  String get autresGroupes => 'Groupes ouverts';
+
+  @override
+  String get autresGroupesAide =>
+      'Pour en faire partie, demandez à un administrateur du groupe.';
+
+  @override
+  String get choisirAdminGroupe => 'Choisissez au moins un administrateur.';
+
+  @override
+  String get compteInconnu => 'Compte supprimé';
+
+  @override
+  String get discussion => 'Discussion';
+
+  @override
+  String get ecrireMessage => 'Écrire un message…';
+
+  @override
+  String get effacerMessage => 'Effacer ce message ?';
+
+  @override
+  String get envoiEchoue => 'L\'envoi a échoué. Vérifiez votre connexion.';
+
+  @override
+  String get envoyerMessage => 'Envoyer';
+
+  @override
+  String get envoyerPhoto => 'Envoyer une photo';
+
+  @override
+  String get groupeIndisponible => 'Ce groupe n\'est pas accessible.';
+
+  @override
+  String get groupeOuvert => 'Groupe ouvert';
+
+  @override
+  String get groupePrive => 'Groupe privé';
+
+  @override
+  String get groupePriveAide =>
+      'Seuls ses membres le voient. Sinon, tous les membres de l\'église le voient (sans la discussion).';
+
+  @override
+  String get lienAppel => 'Lien d\'appel (Meet, Zoom, WhatsApp…)';
+
+  @override
+  String get lienAppelAide =>
+      'Facultatif. Adresse commençant par https:// ; un bouton « Rejoindre l\'appel » l\'ouvrira.';
+
+  @override
+  String get lienInvalide => 'Le lien doit commencer par https://';
+
+  @override
+  String get mesGroupes => 'Mes groupes';
+
+  @override
+  String get modifierGroupe => 'Modifier le groupe';
+
+  @override
+  String get nomGroupe => 'Nom du groupe';
+
+  @override
+  String nombreMembres(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n membres',
+      one: '1 membre',
+      zero: 'Aucun membre',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get nommerAdmin => 'Nommer administrateur';
+
+  @override
+  String get nouveau => 'Nouveau';
+
+  @override
+  String get nouveauGroupe => 'Nouveau groupe';
+
+  @override
+  String get options => 'Options';
+
+  @override
+  String get personneATrouver => 'Personne à ajouter.';
+
+  @override
+  String get photo => 'Photo';
+
+  @override
+  String get quitterGroupe => 'Quitter le groupe';
+
+  @override
+  String get quitterGroupeQuestion => 'Quitter ce groupe ?';
+
+  @override
+  String get rechercherPersonne => 'Rechercher une personne';
+
+  @override
+  String get rejoindreAppel => 'Rejoindre l\'appel';
+
+  @override
+  String rejoindreGroupeAide(String admins) {
+    return 'Pour rejoindre ce groupe, demandez à : $admins.';
+  }
+
+  @override
+  String get retirerAdmin => 'Retirer le rôle d\'administrateur';
+
+  @override
+  String get retirerDuGroupe => 'Retirer du groupe';
+
+  @override
+  String retirerDuGroupeQuestion(String nom) {
+    return 'Retirer $nom du groupe ?';
+  }
+
+  @override
+  String get supprimerGroupe => 'Supprimer ce groupe ?';
+
+  @override
+  String get supprimerGroupeAide =>
+      'Le groupe disparaît pour tous ses membres.';
+
+  @override
+  String get tousLesGroupes => 'Groupes de l\'église';
+
+  @override
+  String get tousLesGroupesSousTitre =>
+      'Créer les groupes et nommer leurs administrateurs';
+
+  @override
+  String get groupeCellule => 'Cellule de maison';
+
+  @override
+  String get groupeIntercession => 'Intercession';
+
+  @override
+  String get groupeJeunes => 'Jeunes';
+
+  @override
+  String get groupeFemmes => 'Femmes';
+
+  @override
+  String get groupeHommes => 'Hommes';
+
+  @override
+  String get groupeLouange => 'Louange';
+
+  @override
+  String get groupeModeration => 'Modération';
+
+  @override
+  String get groupeMedia => 'Équipe média';
+
+  @override
+  String get groupeEntraide => 'Entraide';
+
+  @override
+  String get groupeAutre => 'Autre';
 }

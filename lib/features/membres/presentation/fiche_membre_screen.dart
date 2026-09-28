@@ -81,7 +81,7 @@ class _FicheMembreScreenState extends ConsumerState<FicheMembreScreen> {
       }
       _charge = true;
     } else {
-      repo.membre(_id).first.then((m) {
+      repo.lire(_id).then((m) {
         if (!mounted || m == null) return;
         setState(() {
           _nom.text = m.nom;

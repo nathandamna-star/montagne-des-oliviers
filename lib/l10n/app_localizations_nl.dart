@@ -690,4 +690,202 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get statutActif => 'Actief lid';
+
+  @override
+  String get adminGroupe => 'Beheerder van de groep';
+
+  @override
+  String get adminsGroupe => 'Beheerders van de groep';
+
+  @override
+  String get adminsGroupeAide =>
+      'Zij voegen leden toe en verwijderen ze. Kies minstens één persoon.';
+
+  @override
+  String get ajouterMembres => 'Toevoegen';
+
+  @override
+  String ajouterNombre(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n personen toevoegen',
+      one: '1 persoon toevoegen',
+      zero: 'Toevoegen',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get aucunGroupe => 'Je maakt nog geen deel uit van een groep.';
+
+  @override
+  String get aucunGroupeEglise => 'Nog geen groepen.';
+
+  @override
+  String get aucunMessageGroupe => 'Nog geen berichten. Schrijf het eerste!';
+
+  @override
+  String get autresGroupes => 'Open groepen';
+
+  @override
+  String get autresGroupesAide =>
+      'Vraag een beheerder van de groep om lid te worden.';
+
+  @override
+  String get choisirAdminGroupe => 'Kies minstens één beheerder.';
+
+  @override
+  String get compteInconnu => 'Verwijderd account';
+
+  @override
+  String get discussion => 'Gesprek';
+
+  @override
+  String get ecrireMessage => 'Schrijf een bericht…';
+
+  @override
+  String get effacerMessage => 'Dit bericht verwijderen?';
+
+  @override
+  String get envoiEchoue => 'Verzenden mislukt. Controleer je verbinding.';
+
+  @override
+  String get envoyerMessage => 'Verzenden';
+
+  @override
+  String get envoyerPhoto => 'Foto sturen';
+
+  @override
+  String get groupeIndisponible => 'Deze groep is niet toegankelijk.';
+
+  @override
+  String get groupeOuvert => 'Open groep';
+
+  @override
+  String get groupePrive => 'Besloten groep';
+
+  @override
+  String get groupePriveAide =>
+      'Alleen de leden zien hem. Anders zien alle leden van de kerk hem (zonder het gesprek).';
+
+  @override
+  String get lienAppel => 'Link voor oproep (Meet, Zoom, WhatsApp…)';
+
+  @override
+  String get lienAppelAide =>
+      'Optioneel. Adres dat begint met https://; een knop « Deelnemen aan oproep » opent het.';
+
+  @override
+  String get lienInvalide => 'De link moet beginnen met https://';
+
+  @override
+  String get mesGroupes => 'Mijn groepen';
+
+  @override
+  String get modifierGroupe => 'Groep bewerken';
+
+  @override
+  String get nomGroupe => 'Naam van de groep';
+
+  @override
+  String nombreMembres(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n leden',
+      one: '1 lid',
+      zero: 'Geen leden',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get nommerAdmin => 'Beheerder maken';
+
+  @override
+  String get nouveau => 'Nieuw';
+
+  @override
+  String get nouveauGroupe => 'Nieuwe groep';
+
+  @override
+  String get options => 'Opties';
+
+  @override
+  String get personneATrouver => 'Niemand om toe te voegen.';
+
+  @override
+  String get photo => 'Foto';
+
+  @override
+  String get quitterGroupe => 'Groep verlaten';
+
+  @override
+  String get quitterGroupeQuestion => 'Deze groep verlaten?';
+
+  @override
+  String get rechercherPersonne => 'Iemand zoeken';
+
+  @override
+  String get rejoindreAppel => 'Deelnemen aan oproep';
+
+  @override
+  String rejoindreGroupeAide(String admins) {
+    return 'Vraag om lid te worden aan: $admins.';
+  }
+
+  @override
+  String get retirerAdmin => 'Beheerdersrol intrekken';
+
+  @override
+  String get retirerDuGroupe => 'Uit de groep verwijderen';
+
+  @override
+  String retirerDuGroupeQuestion(String nom) {
+    return '$nom uit de groep verwijderen?';
+  }
+
+  @override
+  String get supprimerGroupe => 'Deze groep verwijderen?';
+
+  @override
+  String get supprimerGroupeAide => 'De groep verdwijnt voor alle leden.';
+
+  @override
+  String get tousLesGroupes => 'Groepen van de kerk';
+
+  @override
+  String get tousLesGroupesSousTitre =>
+      'Groepen aanmaken en beheerders aanduiden';
+
+  @override
+  String get groupeCellule => 'Huiskring';
+
+  @override
+  String get groupeIntercession => 'Voorbede';
+
+  @override
+  String get groupeJeunes => 'Jongeren';
+
+  @override
+  String get groupeFemmes => 'Vrouwen';
+
+  @override
+  String get groupeHommes => 'Mannen';
+
+  @override
+  String get groupeLouange => 'Aanbidding';
+
+  @override
+  String get groupeModeration => 'Leiding van de dienst';
+
+  @override
+  String get groupeMedia => 'Mediateam';
+
+  @override
+  String get groupeEntraide => 'Hulpverlening';
+
+  @override
+  String get groupeAutre => 'Andere';
 }

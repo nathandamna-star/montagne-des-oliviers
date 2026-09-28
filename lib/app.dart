@@ -37,6 +37,8 @@ class _MontagneDesOliviersAppState
           router.push(Routes.actualite(id));
         case 'evenement':
           router.push(Routes.evenement(id));
+        case 'groupe':
+          router.push(Routes.discussion(id));
       }
     });
     // Annonces pour tous ; annonces des membres et jeton après connexion.

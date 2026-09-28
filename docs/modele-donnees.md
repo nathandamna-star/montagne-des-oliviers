@@ -9,6 +9,7 @@ du secrétariat et du trésorier. Les administrateurs de groupe sont enregistré
 | Collection | Contenu | Lecture | Écriture |
 |---|---|---|---|
 | `users/{uid}` | nom, email, langue fr/nl, consentementLe, photoUrl, jetonsNotif, roles (serveur) | soi, secrétariat | soi (champs limités) |
+| `annuaire/{uid}` | nom seulement (recopié du profil par le serveur) | membres de l'église | serveur |
 | `membres/{id}` | fiche : nom, prénom, coordonnées, dateNaissance, familleId, baptemeLe, presentationLe, mariageLe, arriveeLe, statut visiteur/membre/actif, uid (compte lié), groupes, services, notes | secrétariat, la personne liée | secrétariat |
 | `familles/{id}` | nom, membres | secrétariat | secrétariat |
 | `parametres/eglise` | IBAN, BIC, titulaire, adresse, horaires, chaîne YouTube, groupe d'intercession par défaut | tous | trésorier, admin |
@@ -16,7 +17,7 @@ du secrétariat et du trésorier. Les administrateurs de groupe sont enregistré
 | `evenements/{id}` | titre, description, type culte/priere/jeune/cellule/evenement/conference, debut, fin, lieu, visibilite, publie, inscription, placesMax, inscrits (serveur) | selon visibilité | secrétariat |
 | `evenements/{id}/inscriptions/{uid}` | nom, personnes (1–10) | soi, secrétariat | soi |
 | `demandes/{id}` | uid, nom, type bapteme/presentation/mariage/rendezvous/visite, message, statut nouvelle→en_cours→acceptee/refusee→terminee, reponse | auteur, secrétariat | auteur (création, retrait si nouvelle), secrétariat |
-| `groupes/{gid}` | nom, description, type cellule/intercession/jeunes/femmes/hommes/louange/moderation/**media**/entraide/autre, prive, membres [uid], admins [uid], lienAppel https, horaires | membres ; groupe ouvert : membres de l'église | secrétariat ; admins du groupe (membres, admins, textes, lien) ; un membre peut partir |
+| `groupes/{gid}` | nom, description, dernierMessage (serveur), type cellule/intercession/jeunes/femmes/hommes/louange/moderation/**media**/entraide/autre, prive, membres [uid], admins [uid], lienAppel https, horaires | membres ; groupe ouvert : membres de l'église | secrétariat ; admins du groupe (membres, admins, textes, lien) ; un membre peut partir |
 | `groupes/{gid}/messages/{mid}` | auteur, nom, texte, fichierUrl | membres du groupe | membres (à leur nom) ; effacement : auteur ou admin du groupe |
 | `groupes/{gid}/rencontres/{rid}` | type reunion/repetition/moderation/appel, titre, debut, fin, lieu, chants [{titre, lien}], qui joue quoi, moderateur, remplacement aucun/demande, deroule, modeAppel aucun/app/externe | membres | admins du groupe ; modérateur (demande de remplacement) ; un membre reprend une modération à remplacer |
 | `…/rencontres/{rid}/presences/{uid}` | reponse oui/non/peutetre | membres | soi |

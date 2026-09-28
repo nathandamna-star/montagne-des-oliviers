@@ -7,12 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:montagne_des_oliviers/app.dart';
 import 'package:montagne_des_oliviers/core/horloge.dart';
 import 'package:montagne_des_oliviers/features/actualites/actualites_providers.dart';
 import 'package:montagne_des_oliviers/features/notifications/notifications_providers.dart';
 import 'package:montagne_des_oliviers/features/notifications/notifications_service.dart';
 import 'package:montagne_des_oliviers/shared/data/envoi_photos.dart';
+import 'package:montagne_des_oliviers/shared/services/lanceur.dart';
 import 'package:montagne_des_oliviers/shared/services/partage.dart';
 import 'package:montagne_des_oliviers/features/auth/auth_providers.dart';
 import 'package:montagne_des_oliviers/features/auth/data/connexion_google.dart';
@@ -90,6 +92,17 @@ class FauxPartage implements Partage {
   }) async => fichiers.add((nom, contenu));
 }
 
+/// Liens externes simulés.
+class FauxLanceur implements Lanceur {
+  final ouverts = <Uri>[];
+
+  @override
+  Future<bool> ouvrir(Uri url) async {
+    ouverts.add(url);
+    return true;
+  }
+}
+
 /// Heure fixe des tests : lundi 5 octobre 2026, 9 h.
 final maintenant = DateTime(2026, 10, 5, 9);
 
@@ -112,6 +125,7 @@ class Banc {
   final notifications = FaussesNotifications();
   final photos = FauxEnvoiPhotos();
   final partage = FauxPartage();
+  final lanceur = FauxLanceur();
 
   /// Crée le profil (consentement déjà donné).
   Future<void> avecProfil([String nom = 'Marie']) =>
@@ -130,6 +144,7 @@ class Banc {
     notificationsServiceProvider.overrideWithValue(notifications),
     envoiPhotosProvider.overrideWithValue(photos),
     partageProvider.overrideWithValue(partage),
+    lanceurProvider.overrideWithValue(lanceur),
     horlogeProvider.overrideWithValue(() => maintenant),
     rolesFutureProvider.overrideWith((ref) async {
       final user = ref.watch(utilisateurFirebaseProvider).value;
@@ -145,6 +160,7 @@ Future<Banc> lancer(
   Locale locale = const Locale('fr'),
   Size taille = const Size(1080, 2400),
 }) async {
+  SharedPreferences.setMockInitialValues({});
   final b = banc ?? Banc();
   tester.view.physicalSize = taille;
   tester.view.devicePixelRatio = 2.5;

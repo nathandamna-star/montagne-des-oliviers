@@ -7,13 +7,14 @@ import { FieldValue, getFirestore } from 'firebase-admin/firestore';
 import { setGlobalOptions } from 'firebase-functions/v2';
 import { defineString } from 'firebase-functions/params';
 import { HttpsError, onCall } from 'firebase-functions/v2/https';
-import { onDocumentWritten } from 'firebase-functions/v2/firestore';
+import { onDocumentCreated, onDocumentWritten } from 'firebase-functions/v2/firestore';
 import { getMessaging } from 'firebase-admin/messaging';
 import { logger } from 'firebase-functions';
 import { nouveauxClaims, normaliser, rolesDe } from './roles.js';
 import {
   doitNotifier, messagesActualite, messagesEvenement, totalInscrits,
 } from './notifications.js';
+import { apercu, destinataires, notificationMessage } from './groupes.js';
 
 initializeApp();
 
@@ -127,5 +128,62 @@ export const compterInscrits = onDocumentWritten(
     const evenement = await ref.get();
     if (!evenement.exists) return;
     await ref.update({ inscrits: totalInscrits(inscriptions.docs.map((d) => d.data())) });
+  },
+);
+
+/**
+ * Annuaire : seulement le nom de chaque compte, lisible par les membres de
+ * l'église (pour composer les groupes). Suit le profil `users/{uid}`.
+ */
+export const synchroniserAnnuaire = onDocumentWritten('users/{uid}', async (event) => {
+  const ref = getFirestore().doc(`annuaire/${event.params.uid}`);
+  const apres = event.data?.after;
+  if (!apres?.exists) {
+    await ref.delete();
+    return;
+  }
+  const nom = apres.data().nom ?? '';
+  if (event.data?.before?.data()?.nom === nom && (await ref.get()).exists) return;
+  await ref.set({ nom });
+});
+
+/** Nouveau message de groupe : aperçu dans le groupe et notification aux membres. */
+export const nouveauMessageGroupe = onDocumentCreated(
+  'groupes/{gid}/messages/{mid}',
+  async (event) => {
+    const message = event.data?.data();
+    if (!message) return;
+    const db = getFirestore();
+    const refGroupe = db.doc(`groupes/${event.params.gid}`);
+    const groupe = (await refGroupe.get()).data();
+    if (!groupe) return;
+    await refGroupe.update({
+      dernierMessage: {
+        auteur: message.auteur,
+        nom: message.nom,
+        texte: apercu(message),
+        le: message.createdAt ?? FieldValue.serverTimestamp(),
+      },
+    });
+    if (process.env.FUNCTIONS_EMULATOR === 'true') return;
+    for (const uid of destinataires(groupe.membres, message.auteur)) {
+      const refProfil = db.doc(`users/${uid}`);
+      const profil = (await refProfil.get()).data();
+      const jetons = profil?.jetonsNotif ?? [];
+      if (jetons.length === 0) continue;
+      const { notification, data } = notificationMessage(
+        groupe, event.params.gid, message, profil.langue,
+      );
+      const res = await getMessaging().sendEachForMulticast({ tokens: jetons, notification, data });
+      // Jetons expirés : on les retire du profil.
+      const invalides = jetons.filter((_, i) => {
+        const code = res.responses[i].error?.code;
+        return code === 'messaging/registration-token-not-registered'
+          || code === 'messaging/invalid-registration-token';
+      });
+      if (invalides.length > 0) {
+        await refProfil.update({ jetonsNotif: FieldValue.arrayRemove(...invalides) });
+      }
+    }
   },
 );

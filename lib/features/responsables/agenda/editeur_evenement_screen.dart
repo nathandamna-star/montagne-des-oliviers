@@ -59,7 +59,7 @@ class _EditeurEvenementScreenState
     if (_nouveau) {
       _charge = true;
     } else {
-      repo.un(_id).first.then((e) {
+      repo.lire(_id).then((e) {
         if (!mounted || e == null) return;
         setState(() {
           _titreFr.text = e.titre['fr'] ?? '';

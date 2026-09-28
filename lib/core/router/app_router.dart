@@ -14,6 +14,10 @@ import '../../features/auth/auth_providers.dart';
 import '../../features/auth/presentation/connexion_email_screen.dart';
 import '../../features/auth/presentation/connexion_screen.dart';
 import '../../features/auth/presentation/consentement_screen.dart';
+import '../../features/groupes/presentation/discussion_screen.dart';
+import '../../features/groupes/presentation/editeur_groupe_screen.dart';
+import '../../features/groupes/presentation/gestion_groupes_screen.dart';
+import '../../features/groupes/presentation/groupe_screen.dart';
 import '../../features/membres/presentation/familles_screen.dart';
 import '../../features/membres/presentation/fiche_membre_screen.dart';
 import '../../features/membres/presentation/membres_screen.dart';
@@ -118,6 +122,25 @@ final _sousRoutes = <String, List<RouteBase>>{
       ],
     ),
   ],
+  Routes.groupes: [
+    GoRoute(
+      path: ':id',
+      builder: (context, state) =>
+          GroupeScreen(id: state.pathParameters['id']!),
+      routes: [
+        GoRoute(
+          path: 'discussion',
+          builder: (context, state) =>
+              DiscussionScreen(id: state.pathParameters['id']!),
+        ),
+        GoRoute(
+          path: 'modifier',
+          builder: (context, state) =>
+              EditeurGroupeScreen(id: state.pathParameters['id']!),
+        ),
+      ],
+    ),
+  ],
   Routes.agenda: [
     GoRoute(
       path: ':id',
@@ -127,6 +150,16 @@ final _sousRoutes = <String, List<RouteBase>>{
   ],
   Routes.responsables: [
     GoRoute(path: 'roles', builder: (context, state) => const RolesScreen()),
+    GoRoute(
+      path: 'groupes',
+      builder: (context, state) => const GestionGroupesScreen(),
+      routes: [
+        GoRoute(
+          path: 'nouveau',
+          builder: (context, state) => const EditeurGroupeScreen(),
+        ),
+      ],
+    ),
     GoRoute(
       path: 'membres',
       builder: (context, state) => const MembresScreen(),

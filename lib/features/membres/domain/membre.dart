@@ -1,5 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../../shared/domain/sans_accents.dart';
+
+export '../../../shared/domain/sans_accents.dart';
+
 enum StatutMembre { visiteur, membre, actif }
 
 /// Fiche du fichier des membres (`membres/{id}`). Données sensibles :
@@ -114,16 +118,4 @@ class Famille {
 
   final String id;
   final String nom;
-}
-
-/// Minuscules sans accents, pour chercher « Hélène » en tapant « helene ».
-String sansAccents(String s) {
-  const avec = 'àâäáãåçéèêëíìîïñóòôöõúùûüýÿœæ';
-  const sans = 'aaaaaaceeeeiiiinooooouuuuyyoa';
-  final b = StringBuffer();
-  for (final c in s.toLowerCase().split('')) {
-    final i = avec.indexOf(c);
-    b.write(i < 0 ? c : sans[i]);
-  }
-  return b.toString();
 }

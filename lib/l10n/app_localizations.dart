@@ -1285,6 +1285,348 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Membre actif'**
   String get statutActif;
+
+  /// No description provided for @adminGroupe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Administrateur du groupe'**
+  String get adminGroupe;
+
+  /// No description provided for @adminsGroupe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Administrateurs du groupe'**
+  String get adminsGroupe;
+
+  /// No description provided for @adminsGroupeAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ils ajoutent et retirent les membres. Choisissez au moins une personne.'**
+  String get adminsGroupeAide;
+
+  /// No description provided for @ajouterMembres.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter'**
+  String get ajouterMembres;
+
+  /// No description provided for @ajouterNombre.
+  ///
+  /// In fr, this message translates to:
+  /// **'{n, plural, =0{Ajouter} =1{Ajouter 1 personne} other{Ajouter {n} personnes}}'**
+  String ajouterNombre(int n);
+
+  /// No description provided for @aucunGroupe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous ne faites encore partie d\'aucun groupe.'**
+  String get aucunGroupe;
+
+  /// No description provided for @aucunGroupeEglise.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun groupe pour le moment.'**
+  String get aucunGroupeEglise;
+
+  /// No description provided for @aucunMessageGroupe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun message. Écrivez le premier !'**
+  String get aucunMessageGroupe;
+
+  /// No description provided for @autresGroupes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Groupes ouverts'**
+  String get autresGroupes;
+
+  /// No description provided for @autresGroupesAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pour en faire partie, demandez à un administrateur du groupe.'**
+  String get autresGroupesAide;
+
+  /// No description provided for @choisirAdminGroupe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisissez au moins un administrateur.'**
+  String get choisirAdminGroupe;
+
+  /// No description provided for @compteInconnu.
+  ///
+  /// In fr, this message translates to:
+  /// **'Compte supprimé'**
+  String get compteInconnu;
+
+  /// No description provided for @discussion.
+  ///
+  /// In fr, this message translates to:
+  /// **'Discussion'**
+  String get discussion;
+
+  /// No description provided for @ecrireMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Écrire un message…'**
+  String get ecrireMessage;
+
+  /// No description provided for @effacerMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Effacer ce message ?'**
+  String get effacerMessage;
+
+  /// No description provided for @envoiEchoue.
+  ///
+  /// In fr, this message translates to:
+  /// **'L\'envoi a échoué. Vérifiez votre connexion.'**
+  String get envoiEchoue;
+
+  /// No description provided for @envoyerMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyer'**
+  String get envoyerMessage;
+
+  /// No description provided for @envoyerPhoto.
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyer une photo'**
+  String get envoyerPhoto;
+
+  /// No description provided for @groupeIndisponible.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce groupe n\'est pas accessible.'**
+  String get groupeIndisponible;
+
+  /// No description provided for @groupeOuvert.
+  ///
+  /// In fr, this message translates to:
+  /// **'Groupe ouvert'**
+  String get groupeOuvert;
+
+  /// No description provided for @groupePrive.
+  ///
+  /// In fr, this message translates to:
+  /// **'Groupe privé'**
+  String get groupePrive;
+
+  /// No description provided for @groupePriveAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Seuls ses membres le voient. Sinon, tous les membres de l\'église le voient (sans la discussion).'**
+  String get groupePriveAide;
+
+  /// No description provided for @lienAppel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lien d\'appel (Meet, Zoom, WhatsApp…)'**
+  String get lienAppel;
+
+  /// No description provided for @lienAppelAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Facultatif. Adresse commençant par https:// ; un bouton « Rejoindre l\'appel » l\'ouvrira.'**
+  String get lienAppelAide;
+
+  /// No description provided for @lienInvalide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le lien doit commencer par https://'**
+  String get lienInvalide;
+
+  /// No description provided for @mesGroupes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mes groupes'**
+  String get mesGroupes;
+
+  /// No description provided for @modifierGroupe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier le groupe'**
+  String get modifierGroupe;
+
+  /// No description provided for @nomGroupe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom du groupe'**
+  String get nomGroupe;
+
+  /// No description provided for @nombreMembres.
+  ///
+  /// In fr, this message translates to:
+  /// **'{n, plural, =0{Aucun membre} =1{1 membre} other{{n} membres}}'**
+  String nombreMembres(int n);
+
+  /// No description provided for @nommerAdmin.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nommer administrateur'**
+  String get nommerAdmin;
+
+  /// No description provided for @nouveau.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouveau'**
+  String get nouveau;
+
+  /// No description provided for @nouveauGroupe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouveau groupe'**
+  String get nouveauGroupe;
+
+  /// No description provided for @options.
+  ///
+  /// In fr, this message translates to:
+  /// **'Options'**
+  String get options;
+
+  /// No description provided for @personneATrouver.
+  ///
+  /// In fr, this message translates to:
+  /// **'Personne à ajouter.'**
+  String get personneATrouver;
+
+  /// No description provided for @photo.
+  ///
+  /// In fr, this message translates to:
+  /// **'Photo'**
+  String get photo;
+
+  /// No description provided for @quitterGroupe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Quitter le groupe'**
+  String get quitterGroupe;
+
+  /// No description provided for @quitterGroupeQuestion.
+  ///
+  /// In fr, this message translates to:
+  /// **'Quitter ce groupe ?'**
+  String get quitterGroupeQuestion;
+
+  /// No description provided for @rechercherPersonne.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rechercher une personne'**
+  String get rechercherPersonne;
+
+  /// No description provided for @rejoindreAppel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rejoindre l\'appel'**
+  String get rejoindreAppel;
+
+  /// No description provided for @rejoindreGroupeAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pour rejoindre ce groupe, demandez à : {admins}.'**
+  String rejoindreGroupeAide(String admins);
+
+  /// No description provided for @retirerAdmin.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer le rôle d\'administrateur'**
+  String get retirerAdmin;
+
+  /// No description provided for @retirerDuGroupe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer du groupe'**
+  String get retirerDuGroupe;
+
+  /// No description provided for @retirerDuGroupeQuestion.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer {nom} du groupe ?'**
+  String retirerDuGroupeQuestion(String nom);
+
+  /// No description provided for @supprimerGroupe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer ce groupe ?'**
+  String get supprimerGroupe;
+
+  /// No description provided for @supprimerGroupeAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le groupe disparaît pour tous ses membres.'**
+  String get supprimerGroupeAide;
+
+  /// No description provided for @tousLesGroupes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Groupes de l\'église'**
+  String get tousLesGroupes;
+
+  /// No description provided for @tousLesGroupesSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créer les groupes et nommer leurs administrateurs'**
+  String get tousLesGroupesSousTitre;
+
+  /// No description provided for @groupeCellule.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cellule de maison'**
+  String get groupeCellule;
+
+  /// No description provided for @groupeIntercession.
+  ///
+  /// In fr, this message translates to:
+  /// **'Intercession'**
+  String get groupeIntercession;
+
+  /// No description provided for @groupeJeunes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Jeunes'**
+  String get groupeJeunes;
+
+  /// No description provided for @groupeFemmes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Femmes'**
+  String get groupeFemmes;
+
+  /// No description provided for @groupeHommes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Hommes'**
+  String get groupeHommes;
+
+  /// No description provided for @groupeLouange.
+  ///
+  /// In fr, this message translates to:
+  /// **'Louange'**
+  String get groupeLouange;
+
+  /// No description provided for @groupeModeration.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modération'**
+  String get groupeModeration;
+
+  /// No description provided for @groupeMedia.
+  ///
+  /// In fr, this message translates to:
+  /// **'Équipe média'**
+  String get groupeMedia;
+
+  /// No description provided for @groupeEntraide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Entraide'**
+  String get groupeEntraide;
+
+  /// No description provided for @groupeAutre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autre'**
+  String get groupeAutre;
 }
 
 class _AppLocalizationsDelegate

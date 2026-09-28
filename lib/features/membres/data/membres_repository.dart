@@ -39,6 +39,11 @@ class MembresRepository {
       .snapshots()
       .map((d) => d.exists ? Membre.depuisFirestore(d) : null);
 
+  Future<Membre?> lire(String id) async {
+    final d = await _membres.doc(id).get();
+    return d.exists ? Membre.depuisFirestore(d) : null;
+  }
+
   String nouvelId() => _membres.doc().id;
 
   Future<void> enregistrer(Membre m) => _membres.doc(m.id).set({

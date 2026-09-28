@@ -236,3 +236,17 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   Rôles : liste des responsables actuels (`users.roles`, écrit par `definirRoles`).
 - Site web (back-office sur ordinateur) : Firebase Hosting (`build/web`, réécriture vers index.html) :
   `flutter build web && npx firebase-tools deploy --only hosting` → https://montagne-des-oliviers.web.app
+- Groupes (étape 6, `lib/features/groupes/`) : `groupes/{id}` (nom, type dont `media`, description, prive, membres,
+  admins, lienAppel https, dernierMessage écrit par `nouveauMessageGroupe`). Onglet Groupes : « Mes groupes »
+  (array-contains) + « Groupes ouverts » (qui contacter pour entrer). Page du groupe : Discussion (texte + photo
+  Storage `groupes/{id}/…`, appui long pour effacer : auteur ou admin du groupe), « Rejoindre l'appel » (lien externe
+  via `Lanceur`), membres (admins du groupe ou secrétariat : ajouter depuis l'annuaire, nommer / retirer admin,
+  retirer ; il reste toujours un admin), quitter (membre simple). Éditeur : le secrétariat choisit type, privé et
+  les premiers admins ; l'admin du groupe modifie nom, description, lien. Responsables → Groupes de l'église.
+  Non-lus : dernière lecture par groupe sur le téléphone (`LecturesGroupes`, shared_preferences).
+- Annuaire : `annuaire/{uid}` = { nom } seulement, recopié du profil par `synchroniserAnnuaire` (se crée à la
+  prochaine écriture du profil pour les comptes existants), lisible par les membres de l'église.
+- Notifications de groupe : `nouveauMessageGroupe` envoie aux jetons des membres (sauf l'auteur) dans leur langue,
+  retire les jetons expirés ; toucher → discussion. Appel intégré (Agora), calendriers de répétition et de modération :
+  étape suivante des groupes.
+- Éditeurs : lecture ponctuelle (`lire(id)`, `get()`) plutôt que `.first` d'un flux.
