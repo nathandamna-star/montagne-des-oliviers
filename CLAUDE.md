@@ -108,6 +108,11 @@ Un compte peut avoir plusieurs rôles. Le premier administrateur est désigné c
      audio / partitions / paroles, qui joue quoi), présence « Je viens / Je ne viens pas / Peut-être »,
      rappel la veille ; lié au planning des services (le culte du dimanche et sa répétition). Le même
      calendrier de groupe sert aux autres groupes (réunions de cellule, intercession programmée).
+   - **Groupe de modération** (modérateurs / animateurs qui conduisent le culte) : **calendrier des
+     modérations** = qui modère quel culte ou quel événement (tour de rôle), confirmation « Je suis
+     disponible / indisponible », demande de remplacement à un autre modérateur, rappel la veille,
+     déroulé du culte joint (ordre : accueil, louange, annonces, offrande, prédication…) ; lié au planning
+     des services.
 10. **Médias** : prédications et exhortations en audio (podcast, lecture en arrière-plan), vidéos,
     **direct YouTube** du culte, **verset du jour**.
     **Partage WhatsApp (choix validé : gratuit, sans API payante)** : après chaque publication d'une
