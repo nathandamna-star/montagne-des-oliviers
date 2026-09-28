@@ -83,6 +83,13 @@ Un compte peut avoir plusieurs rôles. Le premier administrateur est désigné c
 6. **Calendrier** : cultes, réunions de prière, jeûnes, cellules, événements, conférences ; inscription
    aux événements ; ajout au calendrier du téléphone.
 7. **Demandes** : baptême, présentation d'enfant, mariage, rendez-vous pastoral, visite ; suivi de la demande.
+7 bis. **Préparations au mariage et au baptême** (section « Préparations », accessible depuis l'Accueil,
+   le Profil et la demande correspondante) : parcours en leçons créés par les pasteurs, chaque leçon avec
+   texte, **audio et vidéo chargés depuis l'app** (téléphone ou ordinateur, Firebase Storage), document
+   joint, questions ; les candidats inscrits (après leur demande) voient leur parcours, marquent les
+   leçons comme faites, posent des questions au pasteur ; le pasteur suit la progression de chacun et
+   planifie les rencontres (entretiens, date du baptême / du mariage). Contenus réservés aux candidats
+   inscrits ; certains peuvent être rendus publics.
 8. **Sujets de prière** : confidentiel (pasteurs seulement) ou partagé avec l'équipe d'intercession ;
    « J'ai prié » ; témoignages de prières exaucées.
 9. **Groupes** : cellules de maison, **groupes d'intercession**, jeunes, femmes, hommes, louange,
