@@ -93,9 +93,12 @@ Un compte peut avoir plusieurs rôles. Le premier administrateur est désigné c
      membres le voient et y écrivent.
    - **Appel de groupe dans l'app** (audio, vidéo possible) : bouton « Démarrer l'appel » pour un
      administrateur, « Rejoindre l'appel » pour les membres, notification « L'appel a commencé »,
-     programmation d'appels réguliers (ex. intercession chaque mardi à 20 h, rappel). Technologie à
-     choisir avec le porteur du projet (voir la décision en attente ci-dessous) ; derrière une interface
-     `AppelsGroupe` pour pouvoir changer de fournisseur.
+     programmation d'appels réguliers (ex. intercession chaque mardi à 20 h, rappel).
+     **Choix validé : appel intégré dans l'app** via un fournisseur de temps réel (Agora envisagé :
+     quota gratuit mensuel puis facturation à la minute, tarifs à vérifier à l'ouverture du compte, au
+     nom de l'ASBL). Jetons d'accès générés par une Cloud Function (membres du groupe seulement,
+     certificat de l'app en secret Firebase, jamais dans l'app). Audio par défaut, vidéo en option.
+     Derrière une interface `AppelsGroupe` pour pouvoir changer de fournisseur.
 10. **Médias** : prédications et exhortations en audio (podcast, lecture en arrière-plan), vidéos,
     **direct YouTube** du culte, **verset du jour**.
     **Partage WhatsApp (choix validé : gratuit, sans API payante)** : après chaque publication d'une
