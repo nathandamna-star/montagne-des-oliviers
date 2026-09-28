@@ -7,7 +7,13 @@ import { FieldValue, getFirestore } from 'firebase-admin/firestore';
 import { setGlobalOptions } from 'firebase-functions/v2';
 import { defineString } from 'firebase-functions/params';
 import { HttpsError, onCall } from 'firebase-functions/v2/https';
+import { onDocumentWritten } from 'firebase-functions/v2/firestore';
+import { getMessaging } from 'firebase-admin/messaging';
+import { logger } from 'firebase-functions';
 import { nouveauxClaims, normaliser, rolesDe } from './roles.js';
+import {
+  doitNotifier, messagesActualite, messagesEvenement, totalInscrits,
+} from './notifications.js';
 
 initializeApp();
 
@@ -82,3 +88,44 @@ export const definirRoles = onCall(async (requete) => {
   await appliquerRoles(cible.uid, roles);
   return { roles: rolesDe(nouveauxClaims({}, roles)) };
 });
+
+/** Envoie les messages (sauf dans l'émulateur) puis marque le document comme notifié. */
+async function envoyer(ref, messages) {
+  // Marqué d'abord : une nouvelle exécution ne renverra rien.
+  await ref.update({ notifieLe: FieldValue.serverTimestamp() });
+  if (process.env.FUNCTIONS_EMULATOR === 'true') {
+    logger.info('Émulateur : notifications non envoyées', { messages });
+    return;
+  }
+  const resultat = await getMessaging().sendEach(messages);
+  if (resultat.failureCount > 0) {
+    logger.warn('Notifications en échec', { echecs: resultat.failureCount });
+  }
+}
+
+/** Annonce publiée avec « prévenir » : notification à tous, ou aux membres. */
+export const notifierActualite = onDocumentWritten('actualites/{id}', async (event) => {
+  const apres = event.data?.after;
+  if (!apres?.exists || !doitNotifier(apres.data())) return;
+  await envoyer(apres.ref, messagesActualite(event.params.id, apres.data()));
+});
+
+/** Événement publié avec « prévenir ». */
+export const notifierEvenement = onDocumentWritten('evenements/{id}', async (event) => {
+  const apres = event.data?.after;
+  if (!apres?.exists || !doitNotifier(apres.data())) return;
+  const e = apres.data();
+  await envoyer(apres.ref, messagesEvenement(event.params.id, e, e.debut.toDate()));
+});
+
+/** Tient à jour le nombre de personnes inscrites à un événement. */
+export const compterInscrits = onDocumentWritten(
+  'evenements/{id}/inscriptions/{uid}',
+  async (event) => {
+    const ref = getFirestore().doc(`evenements/${event.params.id}`);
+    const inscriptions = await ref.collection('inscriptions').get();
+    const evenement = await ref.get();
+    if (!evenement.exists) return;
+    await ref.update({ inscrits: totalInscrits(inscriptions.docs.map((d) => d.data())) });
+  },
+);

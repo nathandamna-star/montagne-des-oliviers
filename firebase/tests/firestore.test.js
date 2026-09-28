@@ -482,3 +482,19 @@ describe('équipe média', () => {
     await assertFails(getDoc(doc(luc, 'groupes/media/messages/m1')));
   });
 });
+
+describe('requêtes de l\'app (annonces et agenda)', () => {
+  it('visiteur : public seulement ; membre : public et membres', async () => {
+    await semer(MEMBRES);
+    const q = (db, col, vis) => getDocs(query(collection(db, col),
+      where('publie', '==', true), where('visibilite', 'in', vis)));
+    await assertSucceeds(q(visiteur(), 'actualites', ['public']));
+    await assertFails(q(visiteur(), 'actualites', ['public', 'membres']));
+    await assertSucceeds(q(marie(), 'actualites', ['public', 'membres']));
+    await assertSucceeds(q(visiteur(), 'evenements', ['public']));
+    await assertSucceeds(q(marie(), 'evenements', ['public', 'membres']));
+    await assertFails(q(sansProfil(), 'evenements', ['public', 'membres']));
+    // Secrétariat : tout, brouillons compris.
+    await assertSucceeds(getDocs(collection(secretariat(), 'actualites')));
+  });
+});

@@ -92,5 +92,106 @@
   "erreurTropDeTentatives": "Trop de tentatives. Réessayez dans quelques minutes.",
   "erreurReseau": "Pas de connexion internet. Vérifiez votre réseau et réessayez.",
   "erreurInconnue": "Une erreur est survenue. Réessayez.",
-  "devise": "Repentance · Délivrance · Sanctification"
+  "devise": "Repentance · Délivrance · Sanctification",
+  "annonce": "Annonce",
+  "annonces": "Annonces",
+  "annoncesSousTitre": "Publier les annonces de l'église",
+  "annonceIndisponible": "Cette annonce n'est plus disponible.",
+  "aucuneAnnonce": "Aucune annonce pour le moment.",
+  "aucunEvenement": "Aucun événement prévu pour le moment.",
+  "brouillon": "Brouillon",
+  "champTitre": "Titre",
+  "champTexte": "Texte",
+  "champDescription": "Description",
+  "champObligatoire": "Ce champ est obligatoire.",
+  "traductionFacultative": "Facultatif : sinon le texte français est affiché.",
+  "ajouterPhoto": "Ajouter une photo",
+  "changerPhoto": "Changer la photo",
+  "retirerPhoto": "Retirer la photo",
+  "erreurPhoto": "La photo n'a pas pu être envoyée. Réessayez.",
+  "erreurChargement": "Impossible de charger. Vérifiez votre connexion.",
+  "complet": "Complet",
+  "debut": "Début",
+  "fin": "Fin",
+  "finAvantDebut": "La fin doit être après le début.",
+  "enregistre": "Enregistré.",
+  "envoyerNotification": "Prévenir par notification",
+  "envoyerNotificationAide": "Une notification est envoyée une seule fois, à la publication.",
+  "epinglee": "Épinglée",
+  "epingler": "Épingler en haut",
+  "epinglerAide": "Reste en tête des annonces.",
+  "evenement": "Événement",
+  "evenementIndisponible": "Cet événement n'est plus disponible.",
+  "gestionAgenda": "Agenda de l'église",
+  "gestionAgendaSousTitre": "Cultes, réunions et événements",
+  "inscription": "Inscription",
+  "inscriptionConnexion": "Connectez-vous pour vous inscrire.",
+  "inscriptionOuverte": "Inscriptions ouvertes",
+  "inscritPersonnes": "Inscription confirmée ({n, plural, =1{1 personne} other{{n} personnes}}).",
+  "@inscritPersonnes": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "inscritsNombre": "{n, plural, =0{Aucun inscrit} =1{1 inscrit} other{{n} inscrits}}",
+  "@inscritsNombre": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "inscritsSurPlaces": "{n} inscrits sur {max} places",
+  "@inscritsSurPlaces": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "lieu": "Lieu",
+  "modifierAnnonce": "Modifier l'annonce",
+  "modifierEvenement": "Modifier l'événement",
+  "moins": "Moins",
+  "plus": "Plus",
+  "nombreInvalide": "Indiquez un nombre entier.",
+  "nombrePersonnes": "Nombre de personnes",
+  "nouvelEvenement": "Nouvel événement",
+  "nouvelleAnnonce": "Nouvelle annonce",
+  "placesMax": "Nombre de places",
+  "placesMaxAide": "Laisser vide s'il n'y a pas de limite.",
+  "prochainement": "Prochainement",
+  "publieeLe": "Publiée le {date}",
+  "@publieeLe": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "publier": "Publier",
+  "publierAide": "Sinon, reste en brouillon (visible seulement par les responsables).",
+  "sInscrire": "Je m'inscris",
+  "seDesinscrire": "Annuler mon inscription",
+  "supprimer": "Supprimer",
+  "supprimerAnnonce": "Supprimer cette annonce ?",
+  "supprimerEvenement": "Supprimer cet événement ?",
+  "tous": "Tous",
+  "toutLAgenda": "Tout l'agenda",
+  "voirTout": "Tout voir",
+  "typeEvenementChamp": "Type",
+  "visibilite": "Qui peut le voir ?",
+  "visibilitePublic": "Tout le monde",
+  "visibiliteMembres": "Membres",
+  "typeCulte": "Culte",
+  "typePriere": "Prière",
+  "typeJeune": "Jeûne",
+  "typeCellule": "Cellule",
+  "typeEvenement": "Événement",
+  "typeConference": "Conférence"
 }

@@ -211,3 +211,19 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   Membre de l'église = compte avec profil (consentement). Règles Firestore + Storage testées dans
   `firebase/tests/` (Storage lit Firestore : `firestore.get`). Dans cet environnement cloud, lancer les tests
   des règles sans les variables de proxy (`env -u GLOBAL_AGENT_HTTPS_PROXY -u HTTPS_PROXY -u https_proxy npm test`).
+- Annonces (étape 4, `lib/features/actualites/`) : `actualites/{id}` (titre/texte `{fr, nl?}` via `Traduction`,
+  photoUrl dans Storage `actualites/{id}/…` envoyée par `EnvoiPhotos` (image_picker), epingle, visibilite
+  public|membres, publie, notifier, publieLe fixée à la 1re publication, modifieLe). Accueil : 3 dernières (épinglées
+  d'abord) + « Tout voir » (`/accueil/actualites`, fiche `/accueil/actualites/:id`). Responsables → Annonces
+  (secrétariat/admin, `estSecretariatProvider`) : liste avec brouillons, éditeur FR/NL.
+- Agenda (`lib/features/agenda/`) : `evenements/{id}` (titre, description, type culte|priere|jeune|cellule|evenement|
+  conference, debut, fin, lieu, visibilite, publie, notifier, inscription, placesMax, inscrits tenu par la fonction
+  `compterInscrits`). Onglet Agenda : à venir (fin ≥ aujourd'hui, `horlogeProvider`), un titre par jour, filtres par
+  type ; fiche `/agenda/:id` avec inscription (1 à 10 personnes, « Complet »). Responsables → Agenda de l'église :
+  éditeur (par défaut dimanche suivant 10 h–12 h) et liste des inscrits. Requêtes : index composites dans
+  `firebase/firestore.indexes.json`.
+- Notifications (`lib/features/notifications/`) : sujets FCM `annonces_fr|nl` (tous, même sans compte) et
+  `membres_fr|nl` (connectés) selon la langue du téléphone ; jeton dans `users.jetonsNotif` (pour les notifications
+  personnelles à venir). Fonctions `notifierActualite` / `notifierEvenement` : une seule fois (`notifieLe`) quand
+  publié avec `notifier` ; textes FR/NL et heure de Bruxelles (`functions/notifications.js`). Toucher la notification
+  ouvre l'annonce ou l'événement. iPhone : `Runner.entitlements` (aps-environment) + clé APNs dans Firebase.

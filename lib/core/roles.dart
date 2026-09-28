@@ -13,3 +13,9 @@ final estResponsableProvider = Provider<bool>(
 final estAdminProvider = Provider<bool>(
   (ref) => ref.watch(rolesProvider).contains(Role.admin),
 );
+
+/// Secrétariat ou administrateur : actualités, agenda, membres, salles.
+final estSecretariatProvider = Provider<bool>((ref) {
+  final roles = ref.watch(rolesProvider);
+  return roles.contains(Role.secretariat) || roles.contains(Role.admin);
+});

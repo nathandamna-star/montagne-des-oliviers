@@ -3,6 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/accueil/accueil_screen.dart';
+import '../../features/actualites/presentation/actualite_screen.dart';
+import '../../features/actualites/presentation/actualites_screen.dart';
+import '../../features/agenda/presentation/evenement_screen.dart';
+import '../../features/responsables/actualites/editeur_actualite_screen.dart';
+import '../../features/responsables/actualites/gestion_actualites_screen.dart';
+import '../../features/responsables/agenda/editeur_evenement_screen.dart';
+import '../../features/responsables/agenda/gestion_agenda_screen.dart';
 import '../../features/auth/auth_providers.dart';
 import '../../features/auth/presentation/connexion_email_screen.dart';
 import '../../features/auth/presentation/connexion_screen.dart';
@@ -95,8 +102,50 @@ final routerProvider = Provider<GoRouter>((ref) {
 });
 
 final _sousRoutes = <String, List<RouteBase>>{
+  Routes.accueil: [
+    GoRoute(
+      path: 'actualites',
+      builder: (context, state) => const ActualitesScreen(),
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (context, state) =>
+              ActualiteScreen(id: state.pathParameters['id']!),
+        ),
+      ],
+    ),
+  ],
+  Routes.agenda: [
+    GoRoute(
+      path: ':id',
+      builder: (context, state) =>
+          EvenementScreen(id: state.pathParameters['id']!),
+    ),
+  ],
   Routes.responsables: [
     GoRoute(path: 'roles', builder: (context, state) => const RolesScreen()),
+    GoRoute(
+      path: 'actualites',
+      builder: (context, state) => const GestionActualitesScreen(),
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (context, state) =>
+              EditeurActualiteScreen(id: state.pathParameters['id']!),
+        ),
+      ],
+    ),
+    GoRoute(
+      path: 'agenda',
+      builder: (context, state) => const GestionAgendaScreen(),
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (context, state) =>
+              EditeurEvenementScreen(id: state.pathParameters['id']!),
+        ),
+      ],
+    ),
   ],
 };
 

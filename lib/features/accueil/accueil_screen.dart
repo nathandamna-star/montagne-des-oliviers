@@ -6,9 +6,14 @@ import '../../core/router/routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../l10n/app_localizations.dart';
 import '../../shared/widgets/logo_eglise.dart';
+import '../actualites/actualites_providers.dart';
+import '../actualites/presentation/carte_actualite.dart';
+import '../agenda/agenda_providers.dart';
+import '../agenda/presentation/carte_evenement.dart';
 import '../auth/auth_providers.dart';
 
-/// Accueil : bannière (visiteurs) ou carte de l'église (membres) et, plus tard, verset du jour, annonces,
+/// Accueil : bannière (visiteurs) ou carte de l'église (membres), dernières
+/// annonces et prochains événements. et, plus tard, verset du jour, annonces,
 /// prochain culte et direct.
 class AccueilScreen extends ConsumerWidget {
   const AccueilScreen({super.key});
@@ -16,7 +21,6 @@ class AccueilScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final theme = Theme.of(context);
     final connecte = ref.watch(estConnecteProvider);
     return Scaffold(
       appBar: AppBar(title: Text(l10n.appTitle)),
@@ -57,16 +61,89 @@ class AccueilScreen extends ConsumerWidget {
               ),
             ),
           ],
-          const SizedBox(height: 20),
-          Text(l10n.accueilBienvenue, style: theme.textTheme.titleMedium),
-          const SizedBox(height: 8),
-          Text(
-            l10n.accueilAVenir,
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
+          const SizedBox(height: 24),
+          _Section(
+            titre: l10n.annonces,
+            action: l10n.voirTout,
+            onAction: () => context.push(Routes.actualites),
           ),
+          ..._annonces(context, ref),
+          const SizedBox(height: 24),
+          _Section(
+            titre: l10n.prochainement,
+            action: l10n.toutLAgenda,
+            onAction: () => context.go(Routes.agenda),
+          ),
+          ..._evenements(context, ref),
         ],
+      ),
+    );
+  }
+}
+
+List<Widget> _annonces(BuildContext context, WidgetRef ref) {
+  final l10n = AppLocalizations.of(context);
+  final liste = ref.watch(actualitesProvider).value ?? const [];
+  if (liste.isEmpty) return [_Vide(l10n.aucuneAnnonce)];
+  return [
+    for (final a in liste.take(3))
+      Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: CarteActualite(actualite: a, lien: Routes.actualite(a.id)),
+      ),
+  ];
+}
+
+List<Widget> _evenements(BuildContext context, WidgetRef ref) {
+  final l10n = AppLocalizations.of(context);
+  final liste = ref.watch(evenementsProvider).value ?? const [];
+  if (liste.isEmpty) return [_Vide(l10n.aucunEvenement)];
+  return [
+    for (final e in liste.take(3))
+      Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: CarteEvenement(evenement: e, lien: Routes.evenement(e.id)),
+      ),
+  ];
+}
+
+class _Section extends StatelessWidget {
+  const _Section({
+    required this.titre,
+    required this.action,
+    required this.onAction,
+  });
+
+  final String titre;
+  final String action;
+  final VoidCallback onAction;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(bottom: 8),
+    child: Row(
+      children: [
+        Expanded(
+          child: Text(titre, style: Theme.of(context).textTheme.titleLarge),
+        ),
+        TextButton(onPressed: onAction, child: Text(action)),
+      ],
+    ),
+  );
+}
+
+class _Vide extends StatelessWidget {
+  const _Vide(this.texte);
+
+  final String texte;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Text(
+      texte,
+      style: theme.textTheme.bodyMedium?.copyWith(
+        color: theme.colorScheme.onSurfaceVariant,
       ),
     );
   }

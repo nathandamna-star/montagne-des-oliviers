@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
@@ -6,6 +8,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:montagne_des_oliviers/app.dart';
+import 'package:montagne_des_oliviers/core/horloge.dart';
+import 'package:montagne_des_oliviers/features/actualites/actualites_providers.dart';
+import 'package:montagne_des_oliviers/features/notifications/notifications_providers.dart';
+import 'package:montagne_des_oliviers/features/notifications/notifications_service.dart';
+import 'package:montagne_des_oliviers/shared/data/envoi_photos.dart';
 import 'package:montagne_des_oliviers/features/auth/auth_providers.dart';
 import 'package:montagne_des_oliviers/features/auth/data/connexion_google.dart';
 import 'package:montagne_des_oliviers/features/auth/data/fonctions_roles.dart';
@@ -43,6 +50,36 @@ class FaussesFonctionsRoles implements FonctionsRoles {
   }
 }
 
+/// Notifications simulées : garde la trace des abonnements.
+class FaussesNotifications implements NotificationsService {
+  final appels = <String>[];
+  final touchees = StreamController<Map<String, dynamic>>.broadcast();
+
+  @override
+  Future<void> activer({required String langue, String? uid}) async =>
+      appels.add('activer $langue ${uid ?? '-'}');
+
+  @override
+  Future<void> desactiver(String uid) async => appels.add('desactiver $uid');
+
+  @override
+  Stream<Map<String, dynamic>> get notificationsTouchees => touchees.stream;
+}
+
+/// Photo simulée : renvoie une adresse sans rien envoyer.
+class FauxEnvoiPhotos implements EnvoiPhotos {
+  final chemins = <String>[];
+
+  @override
+  Future<String?> choisirEtEnvoyer(String chemin) async {
+    chemins.add(chemin);
+    return 'https://exemple.be/$chemin';
+  }
+}
+
+/// Heure fixe des tests : lundi 5 octobre 2026, 9 h.
+final maintenant = DateTime(2026, 10, 5, 9);
+
 /// Environnement de test : faux Firebase et fausses fonctions.
 class Banc {
   Banc({bool connecte = false, this.roles = const {}})
@@ -59,6 +96,8 @@ class Banc {
   final Set<Role> roles;
   final firestore = FakeFirebaseFirestore();
   final fonctions = FaussesFonctionsRoles();
+  final notifications = FaussesNotifications();
+  final photos = FauxEnvoiPhotos();
 
   /// Crée le profil (consentement déjà donné).
   Future<void> avecProfil([String nom = 'Marie']) =>
@@ -74,6 +113,9 @@ class Banc {
     firestoreProvider.overrideWithValue(firestore),
     connexionFournisseursProvider.overrideWithValue(FauxFournisseurs()),
     fonctionsRolesProvider.overrideWithValue(fonctions),
+    notificationsServiceProvider.overrideWithValue(notifications),
+    envoiPhotosProvider.overrideWithValue(photos),
+    horlogeProvider.overrideWithValue(() => maintenant),
     rolesFutureProvider.overrideWith((ref) async {
       final user = ref.watch(utilisateurFirebaseProvider).value;
       return user == null ? const <Role>{} : roles;

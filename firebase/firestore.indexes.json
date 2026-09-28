@@ -1,4 +1,23 @@
 {
-  "indexes": [],
+  "indexes": [
+    {
+      "collectionGroup": "actualites",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "publie", "order": "ASCENDING" },
+        { "fieldPath": "visibilite", "order": "ASCENDING" },
+        { "fieldPath": "publieLe", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "evenements",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "publie", "order": "ASCENDING" },
+        { "fieldPath": "visibilite", "order": "ASCENDING" },
+        { "fieldPath": "fin", "order": "ASCENDING" }
+      ]
+    }
+  ],
   "fieldOverrides": []
 }

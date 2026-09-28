@@ -19,6 +19,26 @@ class ResponsablesScreen extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
+          if (ref.watch(estSecretariatProvider)) ...[
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.campaign_outlined),
+                title: Text(l10n.annonces),
+                subtitle: Text(l10n.annoncesSousTitre),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => context.push(Routes.gestionActualites),
+              ),
+            ),
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.event_note_outlined),
+                title: Text(l10n.gestionAgenda),
+                subtitle: Text(l10n.gestionAgendaSousTitre),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => context.push(Routes.gestionAgenda),
+              ),
+            ),
+          ],
           if (ref.watch(estAdminProvider))
             Card(
               child: ListTile(

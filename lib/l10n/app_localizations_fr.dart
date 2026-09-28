@@ -252,4 +252,239 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get devise => 'Repentance · Délivrance · Sanctification';
+
+  @override
+  String get annonce => 'Annonce';
+
+  @override
+  String get annonces => 'Annonces';
+
+  @override
+  String get annoncesSousTitre => 'Publier les annonces de l\'église';
+
+  @override
+  String get annonceIndisponible => 'Cette annonce n\'est plus disponible.';
+
+  @override
+  String get aucuneAnnonce => 'Aucune annonce pour le moment.';
+
+  @override
+  String get aucunEvenement => 'Aucun événement prévu pour le moment.';
+
+  @override
+  String get brouillon => 'Brouillon';
+
+  @override
+  String get champTitre => 'Titre';
+
+  @override
+  String get champTexte => 'Texte';
+
+  @override
+  String get champDescription => 'Description';
+
+  @override
+  String get champObligatoire => 'Ce champ est obligatoire.';
+
+  @override
+  String get traductionFacultative =>
+      'Facultatif : sinon le texte français est affiché.';
+
+  @override
+  String get ajouterPhoto => 'Ajouter une photo';
+
+  @override
+  String get changerPhoto => 'Changer la photo';
+
+  @override
+  String get retirerPhoto => 'Retirer la photo';
+
+  @override
+  String get erreurPhoto => 'La photo n\'a pas pu être envoyée. Réessayez.';
+
+  @override
+  String get erreurChargement =>
+      'Impossible de charger. Vérifiez votre connexion.';
+
+  @override
+  String get complet => 'Complet';
+
+  @override
+  String get debut => 'Début';
+
+  @override
+  String get fin => 'Fin';
+
+  @override
+  String get finAvantDebut => 'La fin doit être après le début.';
+
+  @override
+  String get enregistre => 'Enregistré.';
+
+  @override
+  String get envoyerNotification => 'Prévenir par notification';
+
+  @override
+  String get envoyerNotificationAide =>
+      'Une notification est envoyée une seule fois, à la publication.';
+
+  @override
+  String get epinglee => 'Épinglée';
+
+  @override
+  String get epingler => 'Épingler en haut';
+
+  @override
+  String get epinglerAide => 'Reste en tête des annonces.';
+
+  @override
+  String get evenement => 'Événement';
+
+  @override
+  String get evenementIndisponible => 'Cet événement n\'est plus disponible.';
+
+  @override
+  String get gestionAgenda => 'Agenda de l\'église';
+
+  @override
+  String get gestionAgendaSousTitre => 'Cultes, réunions et événements';
+
+  @override
+  String get inscription => 'Inscription';
+
+  @override
+  String get inscriptionConnexion => 'Connectez-vous pour vous inscrire.';
+
+  @override
+  String get inscriptionOuverte => 'Inscriptions ouvertes';
+
+  @override
+  String inscritPersonnes(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n personnes',
+      one: '1 personne',
+    );
+    return 'Inscription confirmée ($_temp0).';
+  }
+
+  @override
+  String inscritsNombre(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n inscrits',
+      one: '1 inscrit',
+      zero: 'Aucun inscrit',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String inscritsSurPlaces(int n, int max) {
+    return '$n inscrits sur $max places';
+  }
+
+  @override
+  String get lieu => 'Lieu';
+
+  @override
+  String get modifierAnnonce => 'Modifier l\'annonce';
+
+  @override
+  String get modifierEvenement => 'Modifier l\'événement';
+
+  @override
+  String get moins => 'Moins';
+
+  @override
+  String get plus => 'Plus';
+
+  @override
+  String get nombreInvalide => 'Indiquez un nombre entier.';
+
+  @override
+  String get nombrePersonnes => 'Nombre de personnes';
+
+  @override
+  String get nouvelEvenement => 'Nouvel événement';
+
+  @override
+  String get nouvelleAnnonce => 'Nouvelle annonce';
+
+  @override
+  String get placesMax => 'Nombre de places';
+
+  @override
+  String get placesMaxAide => 'Laisser vide s\'il n\'y a pas de limite.';
+
+  @override
+  String get prochainement => 'Prochainement';
+
+  @override
+  String publieeLe(String date) {
+    return 'Publiée le $date';
+  }
+
+  @override
+  String get publier => 'Publier';
+
+  @override
+  String get publierAide =>
+      'Sinon, reste en brouillon (visible seulement par les responsables).';
+
+  @override
+  String get sInscrire => 'Je m\'inscris';
+
+  @override
+  String get seDesinscrire => 'Annuler mon inscription';
+
+  @override
+  String get supprimer => 'Supprimer';
+
+  @override
+  String get supprimerAnnonce => 'Supprimer cette annonce ?';
+
+  @override
+  String get supprimerEvenement => 'Supprimer cet événement ?';
+
+  @override
+  String get tous => 'Tous';
+
+  @override
+  String get toutLAgenda => 'Tout l\'agenda';
+
+  @override
+  String get voirTout => 'Tout voir';
+
+  @override
+  String get typeEvenementChamp => 'Type';
+
+  @override
+  String get visibilite => 'Qui peut le voir ?';
+
+  @override
+  String get visibilitePublic => 'Tout le monde';
+
+  @override
+  String get visibiliteMembres => 'Membres';
+
+  @override
+  String get typeCulte => 'Culte';
+
+  @override
+  String get typePriere => 'Prière';
+
+  @override
+  String get typeJeune => 'Jeûne';
+
+  @override
+  String get typeCellule => 'Cellule';
+
+  @override
+  String get typeEvenement => 'Événement';
+
+  @override
+  String get typeConference => 'Conférence';
 }

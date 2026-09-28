@@ -529,6 +529,426 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Repentance · Délivrance · Sanctification'**
   String get devise;
+
+  /// No description provided for @annonce.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annonce'**
+  String get annonce;
+
+  /// No description provided for @annonces.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annonces'**
+  String get annonces;
+
+  /// No description provided for @annoncesSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Publier les annonces de l\'église'**
+  String get annoncesSousTitre;
+
+  /// No description provided for @annonceIndisponible.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette annonce n\'est plus disponible.'**
+  String get annonceIndisponible;
+
+  /// No description provided for @aucuneAnnonce.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune annonce pour le moment.'**
+  String get aucuneAnnonce;
+
+  /// No description provided for @aucunEvenement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun événement prévu pour le moment.'**
+  String get aucunEvenement;
+
+  /// No description provided for @brouillon.
+  ///
+  /// In fr, this message translates to:
+  /// **'Brouillon'**
+  String get brouillon;
+
+  /// No description provided for @champTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Titre'**
+  String get champTitre;
+
+  /// No description provided for @champTexte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Texte'**
+  String get champTexte;
+
+  /// No description provided for @champDescription.
+  ///
+  /// In fr, this message translates to:
+  /// **'Description'**
+  String get champDescription;
+
+  /// No description provided for @champObligatoire.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce champ est obligatoire.'**
+  String get champObligatoire;
+
+  /// No description provided for @traductionFacultative.
+  ///
+  /// In fr, this message translates to:
+  /// **'Facultatif : sinon le texte français est affiché.'**
+  String get traductionFacultative;
+
+  /// No description provided for @ajouterPhoto.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter une photo'**
+  String get ajouterPhoto;
+
+  /// No description provided for @changerPhoto.
+  ///
+  /// In fr, this message translates to:
+  /// **'Changer la photo'**
+  String get changerPhoto;
+
+  /// No description provided for @retirerPhoto.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer la photo'**
+  String get retirerPhoto;
+
+  /// No description provided for @erreurPhoto.
+  ///
+  /// In fr, this message translates to:
+  /// **'La photo n\'a pas pu être envoyée. Réessayez.'**
+  String get erreurPhoto;
+
+  /// No description provided for @erreurChargement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Impossible de charger. Vérifiez votre connexion.'**
+  String get erreurChargement;
+
+  /// No description provided for @complet.
+  ///
+  /// In fr, this message translates to:
+  /// **'Complet'**
+  String get complet;
+
+  /// No description provided for @debut.
+  ///
+  /// In fr, this message translates to:
+  /// **'Début'**
+  String get debut;
+
+  /// No description provided for @fin.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fin'**
+  String get fin;
+
+  /// No description provided for @finAvantDebut.
+  ///
+  /// In fr, this message translates to:
+  /// **'La fin doit être après le début.'**
+  String get finAvantDebut;
+
+  /// No description provided for @enregistre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enregistré.'**
+  String get enregistre;
+
+  /// No description provided for @envoyerNotification.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prévenir par notification'**
+  String get envoyerNotification;
+
+  /// No description provided for @envoyerNotificationAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Une notification est envoyée une seule fois, à la publication.'**
+  String get envoyerNotificationAide;
+
+  /// No description provided for @epinglee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Épinglée'**
+  String get epinglee;
+
+  /// No description provided for @epingler.
+  ///
+  /// In fr, this message translates to:
+  /// **'Épingler en haut'**
+  String get epingler;
+
+  /// No description provided for @epinglerAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Reste en tête des annonces.'**
+  String get epinglerAide;
+
+  /// No description provided for @evenement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Événement'**
+  String get evenement;
+
+  /// No description provided for @evenementIndisponible.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cet événement n\'est plus disponible.'**
+  String get evenementIndisponible;
+
+  /// No description provided for @gestionAgenda.
+  ///
+  /// In fr, this message translates to:
+  /// **'Agenda de l\'église'**
+  String get gestionAgenda;
+
+  /// No description provided for @gestionAgendaSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cultes, réunions et événements'**
+  String get gestionAgendaSousTitre;
+
+  /// No description provided for @inscription.
+  ///
+  /// In fr, this message translates to:
+  /// **'Inscription'**
+  String get inscription;
+
+  /// No description provided for @inscriptionConnexion.
+  ///
+  /// In fr, this message translates to:
+  /// **'Connectez-vous pour vous inscrire.'**
+  String get inscriptionConnexion;
+
+  /// No description provided for @inscriptionOuverte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Inscriptions ouvertes'**
+  String get inscriptionOuverte;
+
+  /// No description provided for @inscritPersonnes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Inscription confirmée ({n, plural, =1{1 personne} other{{n} personnes}}).'**
+  String inscritPersonnes(int n);
+
+  /// No description provided for @inscritsNombre.
+  ///
+  /// In fr, this message translates to:
+  /// **'{n, plural, =0{Aucun inscrit} =1{1 inscrit} other{{n} inscrits}}'**
+  String inscritsNombre(int n);
+
+  /// No description provided for @inscritsSurPlaces.
+  ///
+  /// In fr, this message translates to:
+  /// **'{n} inscrits sur {max} places'**
+  String inscritsSurPlaces(int n, int max);
+
+  /// No description provided for @lieu.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lieu'**
+  String get lieu;
+
+  /// No description provided for @modifierAnnonce.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier l\'annonce'**
+  String get modifierAnnonce;
+
+  /// No description provided for @modifierEvenement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier l\'événement'**
+  String get modifierEvenement;
+
+  /// No description provided for @moins.
+  ///
+  /// In fr, this message translates to:
+  /// **'Moins'**
+  String get moins;
+
+  /// No description provided for @plus.
+  ///
+  /// In fr, this message translates to:
+  /// **'Plus'**
+  String get plus;
+
+  /// No description provided for @nombreInvalide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Indiquez un nombre entier.'**
+  String get nombreInvalide;
+
+  /// No description provided for @nombrePersonnes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nombre de personnes'**
+  String get nombrePersonnes;
+
+  /// No description provided for @nouvelEvenement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvel événement'**
+  String get nouvelEvenement;
+
+  /// No description provided for @nouvelleAnnonce.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle annonce'**
+  String get nouvelleAnnonce;
+
+  /// No description provided for @placesMax.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nombre de places'**
+  String get placesMax;
+
+  /// No description provided for @placesMaxAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Laisser vide s\'il n\'y a pas de limite.'**
+  String get placesMaxAide;
+
+  /// No description provided for @prochainement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prochainement'**
+  String get prochainement;
+
+  /// No description provided for @publieeLe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Publiée le {date}'**
+  String publieeLe(String date);
+
+  /// No description provided for @publier.
+  ///
+  /// In fr, this message translates to:
+  /// **'Publier'**
+  String get publier;
+
+  /// No description provided for @publierAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sinon, reste en brouillon (visible seulement par les responsables).'**
+  String get publierAide;
+
+  /// No description provided for @sInscrire.
+  ///
+  /// In fr, this message translates to:
+  /// **'Je m\'inscris'**
+  String get sInscrire;
+
+  /// No description provided for @seDesinscrire.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annuler mon inscription'**
+  String get seDesinscrire;
+
+  /// No description provided for @supprimer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer'**
+  String get supprimer;
+
+  /// No description provided for @supprimerAnnonce.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer cette annonce ?'**
+  String get supprimerAnnonce;
+
+  /// No description provided for @supprimerEvenement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer cet événement ?'**
+  String get supprimerEvenement;
+
+  /// No description provided for @tous.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tous'**
+  String get tous;
+
+  /// No description provided for @toutLAgenda.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tout l\'agenda'**
+  String get toutLAgenda;
+
+  /// No description provided for @voirTout.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tout voir'**
+  String get voirTout;
+
+  /// No description provided for @typeEvenementChamp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Type'**
+  String get typeEvenementChamp;
+
+  /// No description provided for @visibilite.
+  ///
+  /// In fr, this message translates to:
+  /// **'Qui peut le voir ?'**
+  String get visibilite;
+
+  /// No description provided for @visibilitePublic.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tout le monde'**
+  String get visibilitePublic;
+
+  /// No description provided for @visibiliteMembres.
+  ///
+  /// In fr, this message translates to:
+  /// **'Membres'**
+  String get visibiliteMembres;
+
+  /// No description provided for @typeCulte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Culte'**
+  String get typeCulte;
+
+  /// No description provided for @typePriere.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prière'**
+  String get typePriere;
+
+  /// No description provided for @typeJeune.
+  ///
+  /// In fr, this message translates to:
+  /// **'Jeûne'**
+  String get typeJeune;
+
+  /// No description provided for @typeCellule.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cellule'**
+  String get typeCellule;
+
+  /// No description provided for @typeEvenement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Événement'**
+  String get typeEvenement;
+
+  /// No description provided for @typeConference.
+  ///
+  /// In fr, this message translates to:
+  /// **'Conférence'**
+  String get typeConference;
 }
 
 class _AppLocalizationsDelegate

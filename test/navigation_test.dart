@@ -19,7 +19,7 @@ void main() {
     );
 
     for (final (onglet, extrait) in [
-      ('Agenda', 'cultes'),
+      ('Agenda', 'Aucun événement prévu'),
       ('Groupes', 'groupes et leurs discussions'),
       ('Médias', 'exhortations'),
       ('Profil', 'dons'),

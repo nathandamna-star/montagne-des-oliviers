@@ -9,4 +9,12 @@ abstract final class Routes {
   static const connexionEmail = '/connexion/email';
   static const consentement = '/connexion/profil';
   static const roles = '/responsables/roles';
+  static const actualites = '/accueil/actualites';
+  static const gestionActualites = '/responsables/actualites';
+  static const gestionAgenda = '/responsables/agenda';
+
+  static String actualite(String id) => '/accueil/actualites/$id';
+  static String evenement(String id) => '/agenda/$id';
+  static String editerActualite(String id) => '/responsables/actualites/$id';
+  static String editerEvenement(String id) => '/responsables/agenda/$id';
 }
