@@ -1,9 +1,11 @@
 rules_version = '2';
 
-// Règles de sécurité (voir CLAUDE.md, sections 4 et 6).
+// Règles de sécurité (modèle : docs/modele-donnees.md ; CLAUDE.md, sections 4 à 7).
 // Tout ce qui n'est pas explicitement autorisé est refusé.
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    // ----- Outils -----
 
     function connecte() {
       return request.auth != null;
@@ -13,51 +15,459 @@ service cloud.firestore {
       return request.auth.uid;
     }
 
+    // Membre de l'église : compte connecté ayant donné son consentement (profil créé).
+    function estMembre() {
+      return connecte() && exists(/databases/$(database)/documents/users/$(moi()));
+    }
+
     // Rôles : custom claims attribués par une Cloud Function, jamais par l'app.
     function estAdmin() {
       return connecte() && request.auth.token.admin == true;
     }
 
     function estSecretariat() {
-      return connecte()
-        && (request.auth.token.secretariat == true || estAdmin());
+      return connecte() && (request.auth.token.secretariat == true || estAdmin());
+    }
+
+    function estTresorier() {
+      return connecte() && (request.auth.token.tresorier == true || estAdmin());
     }
 
     function texte(v, max) {
       return v is string && v.size() > 0 && v.size() <= max;
     }
 
-    // ----- Profils des membres -----
+    function texteFacultatif(v, max) {
+      return v == null || (v is string && v.size() <= max);
+    }
+
+    function lien(v) {
+      return v == null || v == '' || (v is string && v.matches('https://.+') && v.size() <= 1000);
+    }
+
+    // Texte traduit : { fr, nl? } ; le français est obligatoire.
+    function traduit(v, max) {
+      return v is map && v.keys().hasOnly(['fr', 'nl'])
+        && texte(v.fr, max) && texteFacultatif(v.get('nl', null), max);
+    }
+
+    function nouveau() {
+      return request.resource.data;
+    }
+
+    function ancien() {
+      return resource.data;
+    }
+
+    function seulement(champs) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(champs);
+    }
+
+    function visible(d) {
+      return d.publie == true && (d.visibilite == 'public' || estMembre());
+    }
+
+    // Communication structurée belge : 12 chiffres, contrôle modulo 97.
+    function communicationValide(c) {
+      return c.matches('[1-9][0-9]{11}')
+        && (int(c[0:10]) % 97 == 0 ? 97 : int(c[0:10]) % 97) == int(c[10:12]);
+    }
+
+    // ----- Profils des comptes -----
     match /users/{uid} {
-      // Chacun le sien ; le secrétariat et l'administrateur tiennent le
-      // fichier des membres.
+      // Chacun le sien ; le secrétariat et l'administrateur voient les comptes.
       allow read: if (connecte() && uid == moi()) || estSecretariat();
 
       // Création : consentement explicite daté par le serveur.
       allow create: if connecte() && uid == moi()
-        && request.resource.data.keys().hasOnly([
-          'nom', 'email', 'langue', 'consentementLe', 'createdAt'])
-        && texte(request.resource.data.nom, 100)
-        && request.resource.data.email is string
-        && request.resource.data.langue in ['fr', 'nl']
-        && request.resource.data.consentementLe == request.time;
+        && nouveau().keys().hasOnly(['nom', 'email', 'langue', 'consentementLe', 'createdAt'])
+        && texte(nouveau().nom, 100)
+        && nouveau().email is string
+        && nouveau().langue in ['fr', 'nl']
+        && nouveau().consentementLe == request.time;
 
       // Modification par soi-même : jamais les rôles ni le consentement.
       allow update: if connecte() && uid == moi()
-        && request.resource.data.diff(resource.data).affectedKeys()
-             .hasOnly(['nom', 'langue', 'photoUrl', 'jetonsNotif', 'decalageMin'])
-        && texte(request.resource.data.nom, 100)
-        && request.resource.data.langue in ['fr', 'nl']
-        && request.resource.data.get('jetonsNotif', []) is list
-        && request.resource.data.get('jetonsNotif', []).size() <= 20
-        && (request.resource.data.get('photoUrl', null) == null
-          || (request.resource.data.photoUrl is string
-            && request.resource.data.photoUrl.matches('https://.+')
-            && request.resource.data.photoUrl.size() <= 1000));
+        && seulement(['nom', 'langue', 'photoUrl', 'jetonsNotif', 'decalageMin'])
+        && texte(nouveau().nom, 100)
+        && nouveau().langue in ['fr', 'nl']
+        && nouveau().get('jetonsNotif', []) is list
+        && nouveau().get('jetonsNotif', []).size() <= 20
+        && lien(nouveau().get('photoUrl', null));
 
       allow delete: if connecte() && uid == moi();
     }
 
-    // `systeme/*` : réservé aux Cloud Functions (aucun accès depuis l'app).
+    // ----- Fichier des membres (données sensibles : secrétariat et pasteurs) -----
+    match /membres/{id} {
+      allow read: if estSecretariat()
+        || (connecte() && resource.data.get('uid', null) == moi());
+      allow create, update: if estSecretariat()
+        && texte(nouveau().nom, 100)
+        && nouveau().statut in ['visiteur', 'membre', 'actif'];
+      allow delete: if estSecretariat();
+    }
+
+    match /familles/{id} {
+      allow read, delete: if estSecretariat();
+      allow create, update: if estSecretariat() && texte(nouveau().nom, 100);
+    }
+
+    // ----- Paramètres de l'église (IBAN, horaires, chaîne YouTube…) : lisibles par tous -----
+    match /parametres/eglise {
+      allow read: if true;
+      allow write: if estAdmin() || estTresorier();
+    }
+
+    // ----- Actualités -----
+    match /actualites/{id} {
+      allow read: if visible(resource.data) || estSecretariat();
+      allow create, update: if estSecretariat()
+        && traduit(nouveau().titre, 200)
+        && traduit(nouveau().texte, 20000)
+        && nouveau().visibilite in ['public', 'membres']
+        && nouveau().publie is bool
+        && nouveau().epingle is bool
+        && lien(nouveau().get('photoUrl', null));
+      allow delete: if estSecretariat();
+    }
+
+    // ----- Calendrier : cultes et événements -----
+    match /evenements/{id} {
+      allow read: if visible(resource.data) || estSecretariat();
+      allow create, update: if estSecretariat()
+        && traduit(nouveau().titre, 200)
+        && nouveau().type in ['culte', 'priere', 'jeune', 'cellule', 'evenement', 'conference']
+        && nouveau().debut is timestamp
+        && nouveau().fin is timestamp
+        && nouveau().fin >= nouveau().debut
+        && nouveau().visibilite in ['public', 'membres']
+        && nouveau().publie is bool
+        && nouveau().inscription is bool;
+      allow delete: if estSecretariat();
+
+      // Inscriptions : chacun la sienne (le nombre d'inscrits est tenu par le serveur).
+      match /inscriptions/{uid} {
+        function evenement() {
+          return get(/databases/$(database)/documents/evenements/$(id)).data;
+        }
+        allow read: if (connecte() && uid == moi()) || estSecretariat();
+        allow create, update: if estMembre() && uid == moi()
+          && evenement().publie == true && evenement().inscription == true
+          && nouveau().keys().hasOnly(['nom', 'personnes', 'createdAt'])
+          && texte(nouveau().nom, 100)
+          && nouveau().personnes is int
+          && nouveau().personnes >= 1 && nouveau().personnes <= 10;
+        allow delete: if (connecte() && uid == moi()) || estSecretariat();
+      }
+    }
+
+    // ----- Demandes : baptême, présentation d'enfant, mariage, rendez-vous, visite -----
+    match /demandes/{id} {
+      allow read: if estSecretariat() || (connecte() && resource.data.uid == moi());
+      allow create: if estMembre()
+        && nouveau().keys().hasOnly(['uid', 'nom', 'type', 'message', 'statut', 'createdAt'])
+        && nouveau().uid == moi()
+        && texte(nouveau().nom, 100)
+        && nouveau().type in ['bapteme', 'presentation', 'mariage', 'rendezvous', 'visite']
+        && texteFacultatif(nouveau().message, 5000)
+        && nouveau().statut == 'nouvelle'
+        && nouveau().createdAt == request.time;
+      // Le secrétariat et les pasteurs répondent et font avancer la demande.
+      allow update: if estSecretariat()
+        && seulement(['statut', 'reponse', 'traiteePar', 'updatedAt'])
+        && nouveau().statut in ['nouvelle', 'en_cours', 'acceptee', 'refusee', 'terminee'];
+      // La personne peut retirer une demande pas encore traitée.
+      allow delete: if estSecretariat()
+        || (connecte() && resource.data.uid == moi() && resource.data.statut == 'nouvelle');
+    }
+
+    // ----- Groupes (cellules, intercession, louange, modération…) -----
+    function groupe(gid) {
+      return get(/databases/$(database)/documents/groupes/$(gid)).data;
+    }
+
+    function membreGroupe(gid) {
+      return connecte() && moi() in groupe(gid).membres;
+    }
+
+    function adminGroupe(gid) {
+      return connecte() && moi() in groupe(gid).admins;
+    }
+
+    function groupeValide(d) {
+      return texte(d.nom, 100)
+        && texteFacultatif(d.get('description', null), 2000)
+        && d.type in ['cellule', 'intercession', 'jeunes', 'femmes', 'hommes', 'louange',
+                      'moderation', 'media', 'entraide', 'autre']
+        && d.prive is bool
+        && d.membres is list && d.membres.size() <= 500
+        && d.admins is list && d.admins.size() >= 1
+        && d.membres.hasAll(d.admins)
+        && lien(d.get('lienAppel', null));
+    }
+
+    match /groupes/{gid} {
+      // Groupe ouvert : visible des membres de l'église ; groupe privé : de ses membres.
+      allow read: if estSecretariat()
+        || (connecte() && moi() in resource.data.membres)
+        || (resource.data.prive == false && estMembre());
+      // Création et suppression : pasteur ou secrétariat (qui nomment les administrateurs).
+      allow create: if estSecretariat() && groupeValide(nouveau());
+      allow delete: if estSecretariat();
+      allow update: if groupeValide(nouveau()) && (
+        estSecretariat()
+        // L'administrateur du groupe gère membres, administrateurs, texte et lien d'appel.
+        || (connecte() && moi() in ancien().admins
+            && seulement(['nom', 'description', 'membres', 'admins', 'lienAppel', 'photoUrl',
+                          'horaires', 'updatedAt']))
+        // Un membre peut quitter le groupe (sauf s'il en est administrateur).
+        || (connecte() && moi() in ancien().membres && !(moi() in ancien().admins)
+            && seulement(['membres'])
+            && nouveau().membres.toSet() == ancien().membres.toSet().difference([moi()].toSet()))
+      );
+
+      // Messagerie privée du groupe.
+      match /messages/{mid} {
+        allow read: if membreGroupe(gid);
+        allow create: if membreGroupe(gid)
+          && nouveau().keys().hasOnly(['auteur', 'nom', 'texte', 'fichierUrl', 'createdAt'])
+          && nouveau().auteur == moi()
+          && texte(nouveau().nom, 100)
+          && texteFacultatif(nouveau().texte, 5000)
+          && lien(nouveau().get('fichierUrl', null))
+          && nouveau().createdAt == request.time;
+        allow delete: if (membreGroupe(gid) && resource.data.auteur == moi()) || adminGroupe(gid);
+      }
+
+      // Calendrier du groupe : réunions, répétitions (louange), modérations, appels programmés.
+      match /rencontres/{rid} {
+        allow read: if membreGroupe(gid) || estSecretariat();
+        allow create, update: if (adminGroupe(gid) || estSecretariat())
+          && nouveau().type in ['reunion', 'repetition', 'moderation', 'appel']
+          && texte(nouveau().titre, 200)
+          && nouveau().debut is timestamp
+          && nouveau().get('modeAppel', 'aucun') in ['aucun', 'app', 'externe'];
+        // Modération : le modérateur prévu demande un remplacement ; un autre membre du
+        // groupe peut alors prendre sa place.
+        allow update: if membreGroupe(gid) && seulement(['moderateur', 'remplacement'])
+          && ((resource.data.get('moderateur', null) == moi()
+                && nouveau().moderateur == moi()
+                && nouveau().remplacement in ['aucun', 'demande'])
+            || (resource.data.get('remplacement', 'aucun') == 'demande'
+                && nouveau().moderateur == moi()
+                && nouveau().remplacement == 'aucun'));
+        allow delete: if adminGroupe(gid) || estSecretariat();
+
+        // Présence : « Je viens / Je ne viens pas / Peut-être » (ou disponible pour une modération).
+        match /presences/{uid} {
+          allow read: if membreGroupe(gid);
+          allow write: if membreGroupe(gid) && uid == moi()
+            && request.resource.data.keys().hasOnly(['reponse', 'nom', 'updatedAt'])
+            && request.resource.data.reponse in ['oui', 'non', 'peutetre'];
+          allow delete: if membreGroupe(gid) && uid == moi();
+        }
+      }
+
+      // Appel en cours (appel dans l'app ou lien externe).
+      match /appels/{aid} {
+        allow read: if membreGroupe(gid);
+        allow write: if adminGroupe(gid)
+          && request.resource.data.mode in ['app', 'externe']
+          && request.resource.data.enCours is bool;
+        allow delete: if adminGroupe(gid);
+      }
+    }
+
+    // ----- Sujets de prière -----
+    // « pasteurs » : lu par l'auteur et les pasteurs ; « intercession » : aussi par les membres
+    // du groupe d'intercession choisi.
+    match /prieres/{pid} {
+      function lisible(d) {
+        return estAdmin()
+          || (connecte() && d.uid == moi())
+          || (d.partage == 'intercession' && membreGroupe(d.groupeId));
+      }
+
+      allow read: if lisible(resource.data);
+      allow create: if estMembre()
+        && nouveau().keys().hasOnly(['uid', 'nom', 'anonyme', 'texte', 'partage', 'groupeId',
+                                     'statut', 'createdAt'])
+        && nouveau().uid == moi()
+        && texte(nouveau().nom, 100)
+        && nouveau().anonyme is bool
+        && texte(nouveau().texte, 5000)
+        && ((nouveau().partage == 'pasteurs' && nouveau().groupeId == null)
+          || (nouveau().partage == 'intercession'
+              && groupe(nouveau().groupeId).type == 'intercession'))
+        && nouveau().statut == 'ouverte'
+        && nouveau().createdAt == request.time;
+      // L'auteur annonce l'exaucement et écrit son témoignage.
+      allow update: if connecte() && resource.data.uid == moi()
+        && seulement(['statut', 'temoignage', 'updatedAt'])
+        && nouveau().statut in ['ouverte', 'exaucee']
+        && texteFacultatif(nouveau().get('temoignage', null), 5000);
+      allow delete: if estAdmin() || (connecte() && resource.data.uid == moi());
+
+      // « J'ai prié » : une marque par personne (le total est tenu par le serveur).
+      match /priants/{uid} {
+        allow read: if lisible(get(/databases/$(database)/documents/prieres/$(pid)).data);
+        allow create: if connecte() && uid == moi()
+          && lisible(get(/databases/$(database)/documents/prieres/$(pid)).data)
+          && request.resource.data.keys().hasOnly(['le'])
+          && request.resource.data.le == request.time;
+        allow delete: if connecte() && uid == moi();
+      }
+    }
+
+    // ----- Préparations au mariage et au baptême -----
+    match /preparations/{prid} {
+      function inscrit() {
+        return connecte()
+          && exists(/databases/$(database)/documents/preparations/$(prid)/inscrits/$(moi()));
+      }
+
+      allow read: if estAdmin() || inscrit() || resource.data.publie == true;
+      allow create, update: if estAdmin()
+        && nouveau().type in ['mariage', 'bapteme']
+        && traduit(nouveau().titre, 200)
+        && nouveau().publie is bool;
+      allow delete: if estAdmin();
+
+      // Leçons : texte, audio, vidéo, document, questions. Réservées aux inscrits,
+      // sauf celles rendues publiques.
+      match /lecons/{lid} {
+        allow read: if estAdmin() || inscrit() || resource.data.get('publique', false) == true;
+        allow create, update: if estAdmin()
+          && traduit(nouveau().titre, 200)
+          && nouveau().ordre is int
+          && nouveau().publique is bool
+          && lien(nouveau().get('audioUrl', null))
+          && lien(nouveau().get('videoUrl', null))
+          && lien(nouveau().get('documentUrl', null));
+        allow delete: if estAdmin();
+      }
+
+      // Candidats inscrits par le pasteur (après leur demande) ; chacun coche ses leçons.
+      match /inscrits/{uid} {
+        allow read: if estAdmin() || (connecte() && uid == moi());
+        allow create, delete: if estAdmin();
+        allow update: if estAdmin()
+          || (connecte() && uid == moi() && seulement(['faites', 'updatedAt'])
+              && nouveau().faites is list);
+
+        // Questions au pasteur.
+        match /questions/{qid} {
+          allow read: if estAdmin() || (connecte() && uid == moi());
+          allow create: if connecte() && uid == moi()
+            && request.resource.data.keys().hasOnly(['texte', 'leconId', 'createdAt'])
+            && texte(request.resource.data.texte, 5000)
+            && request.resource.data.createdAt == request.time;
+          allow update: if estAdmin()
+            && request.resource.data.diff(resource.data).affectedKeys()
+                 .hasOnly(['reponse', 'reponduLe']);
+          allow delete: if estAdmin();
+        }
+      }
+    }
+
+    // ----- Planning des services (équipes : louange, sono, accueil, école du dimanche…) -----
+    match /equipes/{eid} {
+      function equipe() {
+        return get(/databases/$(database)/documents/equipes/$(eid)).data;
+      }
+
+      allow read: if estMembre();
+      allow write: if estSecretariat();
+
+      // Affectations : qui sert à quel culte ; la personne confirme ou demande un remplacement.
+      match /affectations/{aid} {
+        allow read: if estSecretariat() || (connecte() && moi() in equipe().membres);
+        allow create, delete: if estSecretariat() || (connecte() && moi() in equipe().responsables);
+        allow update: if ((estSecretariat() || (connecte() && moi() in equipe().responsables))
+            && request.resource.data.statut in ['prevu', 'confirme', 'indisponible', 'remplacement'])
+          || (connecte() && resource.data.uid == moi()
+              && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['statut'])
+              && request.resource.data.statut in ['confirme', 'indisponible', 'remplacement']);
+      }
+    }
+
+    // ----- Salles et réservations -----
+    match /salles/{sid} {
+      allow read: if estMembre();
+      allow write: if estSecretariat();
+    }
+
+    match /reservations/{id} {
+      // Les réservations validées sont visibles (pour voir les créneaux occupés).
+      allow read: if estSecretariat()
+        || (connecte() && resource.data.uid == moi())
+        || (estMembre() && resource.data.statut == 'validee');
+      allow create: if estMembre()
+        && nouveau().keys().hasOnly(['uid', 'nom', 'salleId', 'debut', 'fin', 'motif',
+                                     'statut', 'createdAt'])
+        && nouveau().uid == moi()
+        && texte(nouveau().nom, 100)
+        && texte(nouveau().motif, 500)
+        && nouveau().debut is timestamp
+        && nouveau().fin > nouveau().debut
+        && nouveau().statut == 'demandee'
+        && nouveau().createdAt == request.time;
+      allow update: if (estSecretariat()
+          && seulement(['statut', 'reponse', 'updatedAt'])
+          && nouveau().statut in ['demandee', 'validee', 'refusee', 'annulee'])
+        || (connecte() && resource.data.uid == moi()
+          && seulement(['statut', 'updatedAt']) && nouveau().statut == 'annulee');
+      allow delete: if estSecretariat();
+    }
+
+    // ----- Médias : prédications, exhortations, direct ; verset du jour -----
+    match /medias/{id} {
+      allow read: if visible(resource.data) || estSecretariat();
+      allow create, update: if estSecretariat()
+        && nouveau().type in ['audio', 'video', 'direct']
+        && traduit(nouveau().titre, 200)
+        && nouveau().visibilite in ['public', 'membres']
+        && nouveau().publie is bool
+        && lien(nouveau().get('url', null));
+      allow delete: if estSecretariat();
+    }
+
+    match /versets/{id} {
+      allow read: if true;
+      allow create, update: if estSecretariat()
+        && texte(nouveau().reference, 100)
+        && traduit(nouveau().texte, 2000)
+        && nouveau().ordre is int;
+      allow delete: if estSecretariat();
+    }
+
+    // ----- Dîmes et offrandes -----
+    // L'identifiant d'un don par virement est sa communication structurée.
+    // Les dons par carte (Stripe) sont écrits par le serveur seulement.
+    match /dons/{id} {
+      allow read: if estTresorier() || (connecte() && resource.data.uid == moi());
+      allow create: if estMembre()
+        && communicationValide(id)
+        && nouveau().keys().hasOnly(['uid', 'nom', 'montant', 'devise', 'affectation', 'mode',
+                                     'statut', 'createdAt'])
+        && nouveau().uid == moi()
+        && texte(nouveau().nom, 100)
+        && nouveau().montant is number
+        && nouveau().montant > 0 && nouveau().montant <= 100000
+        && nouveau().devise == 'EUR'
+        && nouveau().affectation in ['dime', 'offrande', 'mission', 'construction', 'entraide']
+        && nouveau().mode == 'virement'
+        && nouveau().statut == 'en_attente'
+        && nouveau().createdAt == request.time;
+      // Le trésorier confirme la réception (ou annule) ; le donateur peut renoncer.
+      allow update: if (estTresorier()
+          && seulement(['statut', 'confirmeLe', 'confirmePar'])
+          && nouveau().statut in ['recu', 'annule'])
+        || (connecte() && resource.data.uid == moi() && resource.data.statut == 'en_attente'
+          && seulement(['statut']) && nouveau().statut == 'annule');
+    }
+
+    // `systeme/*` et `stripe/*` : réservés aux Cloud Functions (aucun accès depuis l'app).
   }
 }

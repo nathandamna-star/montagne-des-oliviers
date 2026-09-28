@@ -4,7 +4,7 @@
   "description": "Règles de sécurité Firebase et leurs tests (émulateur)",
   "type": "module",
   "scripts": {
-    "test": "firebase emulators:exec --only firestore --project demo-mdo \"node --test --test-concurrency=1 tests/*.test.js\""
+    "test": "firebase emulators:exec --only firestore,storage --project demo-mdo \"node --test --test-concurrency=1 tests/*.test.js\""
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^5.0.2",

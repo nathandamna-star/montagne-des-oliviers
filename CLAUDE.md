@@ -93,7 +93,7 @@ Un compte peut avoir plusieurs rôles. Le premier administrateur est désigné c
 8. **Sujets de prière** : confidentiel (pasteurs seulement) ou partagé avec l'équipe d'intercession ;
    « J'ai prié » ; témoignages de prières exaucées.
 9. **Groupes** : cellules de maison, **groupes d'intercession**, jeunes, femmes, hommes, louange,
-   entraide… ; messagerie de groupe privée, documents, événements du groupe.
+   **équipe média** (échanger les infos : tournages, matériel, directs, publications), entraide… ; messagerie de groupe privée, documents, événements du groupe.
    - Chaque groupe a un ou plusieurs **administrateurs de groupe** (nommés par le pasteur ou le
      secrétariat) qui **ajoutent et retirent les membres** (parmi les comptes de l'église), nomment
      d'autres administrateurs du groupe, modifient le groupe et ses horaires. Groupe privé : seuls ses
@@ -207,3 +207,7 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   `assets/images/banniere.jpg` (Accueil des visiteurs) ; membres : carte dégradé + logo + devise
   « Repentance · Délivrance · Sanctification » (clé `devise`, traduite en néerlandais). Icônes iOS, Android et web
   générées depuis le logo (maskable : logo à 80 %). La vidéo servira dans Médias / partage (étapes suivantes).
+- Modèle de données (étape 3) : `docs/modele-donnees.md` (toutes les collections, qui lit, qui écrit).
+  Membre de l'église = compte avec profil (consentement). Règles Firestore + Storage testées dans
+  `firebase/tests/` (Storage lit Firestore : `firestore.get`). Dans cet environnement cloud, lancer les tests
+  des règles sans les variables de proxy (`env -u GLOBAL_AGENT_HTTPS_PROXY -u HTTPS_PROXY -u https_proxy npm test`).

@@ -1,0 +1,89 @@
+rules_version = '2';
+
+// Fichiers (photos, audios, vidéos, documents). Tailles limitées par type.
+// Les droits suivent ceux des documents Firestore correspondants.
+service firebase.storage {
+  match /b/{bucket}/o {
+    function connecte() {
+      return request.auth != null;
+    }
+
+    function estAdmin() {
+      return connecte() && request.auth.token.get('admin', false) == true;
+    }
+
+    function estSecretariat() {
+      return connecte() && (request.auth.token.get('secretariat', false) == true || estAdmin());
+    }
+
+    function groupe(gid) {
+      return firestore.get(/databases/(default)/documents/groupes/$(gid)).data;
+    }
+
+    function image(max) {
+      return request.resource.contentType.matches('image/.*')
+        && request.resource.size < max * 1024 * 1024;
+    }
+
+    function audio() {
+      return request.resource.contentType.matches('audio/.*')
+        && request.resource.size < 200 * 1024 * 1024;
+    }
+
+    function video() {
+      return request.resource.contentType.matches('video/.*')
+        && request.resource.size < 1024 * 1024 * 1024;
+    }
+
+    function pdf() {
+      return request.resource.contentType == 'application/pdf'
+        && request.resource.size < 20 * 1024 * 1024;
+    }
+
+    // Photo de profil : chacun la sienne.
+    match /users/{uid}/{fichier} {
+      allow read: if connecte();
+      allow write: if connecte() && request.auth.uid == uid && image(5);
+      allow delete: if connecte() && request.auth.uid == uid;
+    }
+
+    // Photos des actualités et des événements : publiques.
+    match /actualites/{id}/{fichier} {
+      allow read: if true;
+      allow write: if estSecretariat() && image(10);
+      allow delete: if estSecretariat();
+    }
+
+    match /evenements/{id}/{fichier} {
+      allow read: if true;
+      allow write: if estSecretariat() && image(10);
+      allow delete: if estSecretariat();
+    }
+
+    // Prédications et exhortations : publiques (page web partagée sur WhatsApp).
+    match /medias/{id}/{fichier} {
+      allow read: if true;
+      allow write: if estSecretariat() && (audio() || video() || image(10));
+      allow delete: if estSecretariat();
+    }
+
+    // Préparations : pasteurs ; lecture par les inscrits (ou tous si la leçon est publique).
+    match /preparations/{prid}/{lid}/{fichier} {
+      allow read: if estAdmin()
+        || (connecte() && firestore.exists(
+             /databases/(default)/documents/preparations/$(prid)/inscrits/$(request.auth.uid)))
+        || firestore.get(/databases/(default)/documents/preparations/$(prid)/lecons/$(lid))
+             .data.get('publique', false) == true;
+      allow write: if estAdmin() && (audio() || video() || image(10) || pdf());
+      allow delete: if estAdmin();
+    }
+
+    // Fichiers d'un groupe (photos, documents, partitions) : ses membres.
+    match /groupes/{gid}/{fichier} {
+      allow read: if connecte() && request.auth.uid in groupe(gid).membres;
+      allow create: if connecte() && request.auth.uid in groupe(gid).membres
+        && (image(10) || pdf() || audio());
+      allow delete: if connecte() && request.auth.uid in groupe(gid).admins;
+    }
+  }
+}
