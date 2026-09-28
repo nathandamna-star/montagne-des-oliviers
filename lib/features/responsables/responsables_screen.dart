@@ -67,6 +67,15 @@ class ResponsablesScreen extends ConsumerWidget {
             ),
             Card(
               child: ListTile(
+                leading: const Icon(Icons.play_circle_outline),
+                title: Text(l10n.gestionMedias),
+                subtitle: Text(l10n.gestionMediasSousTitre),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => context.push(Routes.gestionMedias),
+              ),
+            ),
+            Card(
+              child: ListTile(
                 leading: const Icon(Icons.campaign_outlined),
                 title: Text(l10n.annonces),
                 subtitle: Text(l10n.annoncesSousTitre),

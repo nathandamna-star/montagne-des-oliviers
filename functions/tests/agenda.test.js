@@ -91,3 +91,22 @@ describe('réservations (déclencheurs)', () => {
     await attendre(() => db.doc('reservations/r2').get(), (x) => x.data().statut === 'demandee');
   });
 });
+
+describe('page web d\'un média', () => {
+  const url = (id) => `http://127.0.0.1:5001/demo-mdo/europe-west1/pageMedia/m/${id}`;
+
+  it('publique : page avec aperçu ; réservée aux membres : introuvable', async () => {
+    await db.doc('medias/pub').set({
+      type: 'audio', titre: { fr: 'La foi' }, publie: true, visibilite: 'public',
+      url: 'https://exemple.be/a.m4a', date: Timestamp.now(),
+    });
+    await db.doc('medias/prive').set({
+      type: 'audio', titre: { fr: 'Secret' }, publie: true, visibilite: 'membres', date: Timestamp.now(),
+    });
+    const ok = await fetch(url('pub'));
+    assert.equal(ok.status, 200);
+    assert.match(await ok.text(), /og:title" content="La foi"/);
+    assert.equal((await fetch(url('prive'))).status, 404);
+    assert.equal((await fetch(url('inconnu'))).status, 404);
+  });
+});

@@ -120,7 +120,11 @@ void main() {
   });
 
   testWidgets('administrateur : attribuer un rôle', (tester) async {
-    final b = await lancer(tester, banc: await responsable());
+    final b = await lancer(
+      tester,
+      banc: await responsable(),
+      taille: const Size(1080, 6000),
+    );
     await tester.tap(find.text('Profil').last);
     await tester.pumpAndSettle();
     expect(find.text('Administrateur'), findsOneWidget);

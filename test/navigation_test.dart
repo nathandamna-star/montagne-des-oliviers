@@ -21,7 +21,7 @@ void main() {
     for (final (onglet, extrait) in [
       ('Agenda', 'Aucun événement prévu'),
       ('Groupes', 'groupes et leurs discussions'),
-      ('Médias', 'exhortations'),
+      ('Médias', 'Aucune prédication'),
       ('Profil', 'dons'),
     ]) {
       await tester.tap(find.text(onglet).last);
@@ -56,7 +56,7 @@ void main() {
     expect(find.text('Groepen'), findsOneWidget);
     await tester.tap(find.text('Media'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('livestream'), findsOneWidget);
+    expect(find.textContaining('Nog geen preken'), findsOneWidget);
   });
 
   testWidgets('autre langue du téléphone : français', (tester) async {

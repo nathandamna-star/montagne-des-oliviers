@@ -22,6 +22,9 @@ import '../../features/demandes/presentation/nouvelle_demande_screen.dart';
 import '../../features/divers/presentation/editeur_fete_screen.dart';
 import '../../features/divers/presentation/fete_screen.dart';
 import '../../features/entretien/entretien_screen.dart';
+import '../../features/medias/presentation/editeur_media_screen.dart';
+import '../../features/medias/presentation/gestion_medias_screen.dart';
+import '../../features/medias/presentation/media_screen.dart';
 import '../../features/salles/reservations_a_valider_screen.dart';
 import '../../features/salles/salle_screen.dart';
 import '../../features/salles/salles_screen.dart';
@@ -331,6 +334,12 @@ final _sousRoutes = <String, List<RouteBase>>{
       ],
     ),
   ],
+  Routes.medias: [
+    GoRoute(
+      path: ':id',
+      builder: (context, state) => MediaScreen(id: state.pathParameters['id']!),
+    ),
+  ],
   Routes.agenda: [
     // Déclaré avant « :id » (événement).
     GoRoute(
@@ -352,6 +361,17 @@ final _sousRoutes = <String, List<RouteBase>>{
   ],
   Routes.responsables: [
     GoRoute(path: 'roles', builder: (context, state) => const RolesScreen()),
+    GoRoute(
+      path: 'medias',
+      builder: (context, state) => const GestionMediasScreen(),
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (context, state) =>
+              EditeurMediaScreen(id: state.pathParameters['id']!),
+        ),
+      ],
+    ),
     GoRoute(
       path: 'parametres',
       builder: (context, state) => const ParametresEgliseScreen(),

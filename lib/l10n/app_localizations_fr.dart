@@ -1836,4 +1836,83 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get refuser => 'Refuser';
+
+  @override
+  String get versetDuJour => 'Verset du jour';
+
+  @override
+  String get direct => 'Direct';
+
+  @override
+  String get enDirectMaintenant => 'En direct maintenant';
+
+  @override
+  String get regarderDirect => 'Regarder le direct';
+
+  @override
+  String get audios => 'Audios';
+
+  @override
+  String get videos => 'Vidéos';
+
+  @override
+  String get aucunMedia => 'Aucune prédication pour le moment.';
+
+  @override
+  String get mediaIndisponible => 'Ce média n\'est pas disponible.';
+
+  @override
+  String get regarderSurYoutube => 'Regarder';
+
+  @override
+  String get envoyerSurWhatsApp => 'Envoyer sur WhatsApp';
+
+  @override
+  String get gestionMedias => 'Médias';
+
+  @override
+  String get gestionMediasSousTitre =>
+      'Prédications, exhortations, directs, versets';
+
+  @override
+  String get predicationsEtDirects => 'Prédications et directs';
+
+  @override
+  String get versetsDuJour => 'Versets du jour';
+
+  @override
+  String get nouveauMedia => 'Nouveau média';
+
+  @override
+  String get versetsAide => 'Un verset par jour, dans cet ordre, en boucle.';
+
+  @override
+  String get aucunVerset => 'Aucun verset. Ajoutez-en quelques-uns.';
+
+  @override
+  String get ajouterVerset => 'Ajouter un verset';
+
+  @override
+  String get referenceBiblique => 'Référence';
+
+  @override
+  String get audio => 'Audio';
+
+  @override
+  String get video => 'Vidéo';
+
+  @override
+  String get predicateur => 'Prédicateur';
+
+  @override
+  String get debutDirect => 'Début du direct';
+
+  @override
+  String get lienDirect => 'Lien du direct (YouTube ou Facebook)';
+
+  @override
+  String get ouLienYoutube => 'Ou lien YouTube / Facebook (facultatif)';
+
+  @override
+  String get fichierOuLienRequis => 'Envoyez un fichier ou indiquez un lien.';
 }

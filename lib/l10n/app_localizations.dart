@@ -3367,6 +3367,162 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Refuser'**
   String get refuser;
+
+  /// No description provided for @versetDuJour.
+  ///
+  /// In fr, this message translates to:
+  /// **'Verset du jour'**
+  String get versetDuJour;
+
+  /// No description provided for @direct.
+  ///
+  /// In fr, this message translates to:
+  /// **'Direct'**
+  String get direct;
+
+  /// No description provided for @enDirectMaintenant.
+  ///
+  /// In fr, this message translates to:
+  /// **'En direct maintenant'**
+  String get enDirectMaintenant;
+
+  /// No description provided for @regarderDirect.
+  ///
+  /// In fr, this message translates to:
+  /// **'Regarder le direct'**
+  String get regarderDirect;
+
+  /// No description provided for @audios.
+  ///
+  /// In fr, this message translates to:
+  /// **'Audios'**
+  String get audios;
+
+  /// No description provided for @videos.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vidéos'**
+  String get videos;
+
+  /// No description provided for @aucunMedia.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune prédication pour le moment.'**
+  String get aucunMedia;
+
+  /// No description provided for @mediaIndisponible.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce média n\'est pas disponible.'**
+  String get mediaIndisponible;
+
+  /// No description provided for @regarderSurYoutube.
+  ///
+  /// In fr, this message translates to:
+  /// **'Regarder'**
+  String get regarderSurYoutube;
+
+  /// No description provided for @envoyerSurWhatsApp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyer sur WhatsApp'**
+  String get envoyerSurWhatsApp;
+
+  /// No description provided for @gestionMedias.
+  ///
+  /// In fr, this message translates to:
+  /// **'Médias'**
+  String get gestionMedias;
+
+  /// No description provided for @gestionMediasSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prédications, exhortations, directs, versets'**
+  String get gestionMediasSousTitre;
+
+  /// No description provided for @predicationsEtDirects.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prédications et directs'**
+  String get predicationsEtDirects;
+
+  /// No description provided for @versetsDuJour.
+  ///
+  /// In fr, this message translates to:
+  /// **'Versets du jour'**
+  String get versetsDuJour;
+
+  /// No description provided for @nouveauMedia.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouveau média'**
+  String get nouveauMedia;
+
+  /// No description provided for @versetsAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un verset par jour, dans cet ordre, en boucle.'**
+  String get versetsAide;
+
+  /// No description provided for @aucunVerset.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun verset. Ajoutez-en quelques-uns.'**
+  String get aucunVerset;
+
+  /// No description provided for @ajouterVerset.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un verset'**
+  String get ajouterVerset;
+
+  /// No description provided for @referenceBiblique.
+  ///
+  /// In fr, this message translates to:
+  /// **'Référence'**
+  String get referenceBiblique;
+
+  /// No description provided for @audio.
+  ///
+  /// In fr, this message translates to:
+  /// **'Audio'**
+  String get audio;
+
+  /// No description provided for @video.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vidéo'**
+  String get video;
+
+  /// No description provided for @predicateur.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prédicateur'**
+  String get predicateur;
+
+  /// No description provided for @debutDirect.
+  ///
+  /// In fr, this message translates to:
+  /// **'Début du direct'**
+  String get debutDirect;
+
+  /// No description provided for @lienDirect.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lien du direct (YouTube ou Facebook)'**
+  String get lienDirect;
+
+  /// No description provided for @ouLienYoutube.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ou lien YouTube / Facebook (facultatif)'**
+  String get ouLienYoutube;
+
+  /// No description provided for @fichierOuLienRequis.
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyez un fichier ou indiquez un lien.'**
+  String get fichierOuLienRequis;
 }
 
 class _AppLocalizationsDelegate

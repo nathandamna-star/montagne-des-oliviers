@@ -6,7 +6,7 @@ import { getAuth } from 'firebase-admin/auth';
 import { FieldValue, Timestamp, getFirestore } from 'firebase-admin/firestore';
 import { setGlobalOptions } from 'firebase-functions/v2';
 import { defineString } from 'firebase-functions/params';
-import { HttpsError, onCall } from 'firebase-functions/v2/https';
+import { HttpsError, onCall, onRequest } from 'firebase-functions/v2/https';
 import { onDocumentCreated, onDocumentUpdated, onDocumentWritten } from 'firebase-functions/v2/firestore';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 import { getMessaging } from 'firebase-admin/messaging';
@@ -33,6 +33,7 @@ import {
   conflitsReservation, decisionPrise, notificationDecisionReservation,
   notificationDemandeReservation,
 } from './salles.js';
+import { messagesMedia, pageIntrouvable, pageMediaHtml, pagePublique } from './medias.js';
 
 initializeApp();
 
@@ -550,4 +551,25 @@ export const decisionReservation = onDocumentUpdated('reservations/{id}', async 
   }
   await envoyerAuxComptes([apres.uid], (langue) =>
     notificationDecisionReservation(event.params.id, apres, langue, quandL(apres.debut.toDate(), langue)));
+});
+
+/** Page web publique d'une prédication (lien partagé sur WhatsApp) : /m/{id}. */
+export const pageMedia = onRequest(async (req, res) => {
+  const id = decodeURIComponent(req.path.split('/').filter(Boolean).pop() ?? '');
+  const doc = id ? await getFirestore().doc(`medias/${id}`).get() : null;
+  const m = doc?.data();
+  res.set('Content-Type', 'text/html; charset=utf-8');
+  if (!m || !pagePublique(m)) {
+    res.status(404).send(pageIntrouvable);
+    return;
+  }
+  res.set('Cache-Control', 'public, max-age=300');
+  res.send(pageMediaHtml(id, m, m.date?.toDate?.() ?? new Date()));
+});
+
+/** Média publié avec « prévenir » : notification (une seule fois). */
+export const notifierMedia = onDocumentWritten('medias/{id}', async (event) => {
+  const apres = event.data?.after;
+  if (!apres?.exists || !doitNotifier(apres.data())) return;
+  await envoyer(apres.ref, messagesMedia(event.params.id, apres.data()));
 });

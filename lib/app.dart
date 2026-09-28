@@ -60,6 +60,8 @@ class _MontagneDesOliviersAppState
           router.push(
             d['vue'] == 'gestion' ? Routes.reservationsAValider : Routes.salles,
           );
+        case 'media':
+          router.push(Routes.media(id));
         case 'fete':
           router.push(Routes.fete(id));
         case 'rencontre':

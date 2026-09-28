@@ -35,6 +35,24 @@
           "order": "ASCENDING"
         }
       ]
+    },
+    {
+      "collectionGroup": "medias",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "publie",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "visibilite",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "date",
+          "order": "DESCENDING"
+        }
+      ]
     }
   ],
   "fieldOverrides": [

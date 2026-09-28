@@ -12,6 +12,7 @@ import '../actualites/presentation/carte_actualite.dart';
 import '../agenda/agenda_providers.dart';
 import '../agenda/presentation/carte_evenement.dart';
 import '../auth/auth_providers.dart';
+import '../medias/presentation/widgets_medias.dart';
 import '../parametres/parametres_eglise.dart';
 
 /// Accueil : bannière (visiteurs) ou carte de l'église (membres), dernières
@@ -44,6 +45,8 @@ class AccueilScreen extends ConsumerWidget {
                 ),
               ),
             ),
+          const SizedBox(height: 12),
+          const CarteVersetDuJour(),
           if (!connecte) ...[
             const SizedBox(height: 16),
             Card(

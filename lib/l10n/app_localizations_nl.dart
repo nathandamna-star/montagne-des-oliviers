@@ -1836,4 +1836,84 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get refuser => 'Weigeren';
+
+  @override
+  String get versetDuJour => 'Vers van de dag';
+
+  @override
+  String get direct => 'Livestream';
+
+  @override
+  String get enDirectMaintenant => 'Nu live';
+
+  @override
+  String get regarderDirect => 'Livestream bekijken';
+
+  @override
+  String get audios => 'Audio';
+
+  @override
+  String get videos => 'Video\'s';
+
+  @override
+  String get aucunMedia => 'Nog geen preken.';
+
+  @override
+  String get mediaIndisponible => 'Dit medium is niet beschikbaar.';
+
+  @override
+  String get regarderSurYoutube => 'Bekijken';
+
+  @override
+  String get envoyerSurWhatsApp => 'Via WhatsApp versturen';
+
+  @override
+  String get gestionMedias => 'Media';
+
+  @override
+  String get gestionMediasSousTitre =>
+      'Preken, bemoedigingen, livestreams, verzen';
+
+  @override
+  String get predicationsEtDirects => 'Preken en livestreams';
+
+  @override
+  String get versetsDuJour => 'Verzen van de dag';
+
+  @override
+  String get nouveauMedia => 'Nieuw medium';
+
+  @override
+  String get versetsAide =>
+      'Eén vers per dag, in deze volgorde, telkens opnieuw.';
+
+  @override
+  String get aucunVerset => 'Geen verzen. Voeg er enkele toe.';
+
+  @override
+  String get ajouterVerset => 'Vers toevoegen';
+
+  @override
+  String get referenceBiblique => 'Referentie';
+
+  @override
+  String get audio => 'Audio';
+
+  @override
+  String get video => 'Video';
+
+  @override
+  String get predicateur => 'Prediker';
+
+  @override
+  String get debutDirect => 'Begin van de livestream';
+
+  @override
+  String get lienDirect => 'Link van de livestream (YouTube of Facebook)';
+
+  @override
+  String get ouLienYoutube => 'Of YouTube- / Facebooklink (optioneel)';
+
+  @override
+  String get fichierOuLienRequis => 'Stuur een bestand of geef een link op.';
 }

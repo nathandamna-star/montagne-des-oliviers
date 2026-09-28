@@ -322,3 +322,11 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   `conflits()` (bords qui se touchent autorisés). Secrétariat : `/accueil/salles/a-valider` (conflits signalés,
   « Valider » désactivé en cas de conflit, refuser avec message). Fonctions `nouvelleReservation` (secrétariat) et
   `decisionReservation` (prévient la personne ; filet : une validation en conflit repasse « demandee »).
+- Médias (étape 10, `lib/features/medias/`) : `medias/{id}` (type audio|video|direct, titre/description FR/NL,
+  predicateur, date, url = fichier Storage `medias/{id}/…` (EnvoiFichiers) ou lien YouTube/Facebook (`lienExterne` :
+  ouvert dehors), visibilite, publie, notifier) et `versets/{id}` (reference, texte FR/NL, ordre ; `versetDuJour` :
+  un par jour en boucle, sur l'Accueil et dans Médias). Onglet Médias : verset, carte Direct (prochain direct ou
+  chaîne YouTube des paramètres), filtres Audios / Vidéos ; fiche `/medias/:id` (lecteurs, « Envoyer sur WhatsApp »
+  pour les médias publics via `DiffusionWhatsApp` → wa.me avec message prêt + lien `https://montagne-des-oliviers.web.app/m/{id}`).
+  Page web publique : fonction `pageMedia` (Hosting réécrit `/m/**`, aperçu Open Graph, lecteur, 404 si réservé aux
+  membres ou non publié). Responsables → Médias (secrétariat) : éditeur, versets du jour. Fonction `notifierMedia`.

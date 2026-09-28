@@ -763,5 +763,31 @@
       }
     }
   },
-  "refuser": "Refuser"
+  "refuser": "Refuser",
+  "versetDuJour": "Verset du jour",
+  "direct": "Direct",
+  "enDirectMaintenant": "En direct maintenant",
+  "regarderDirect": "Regarder le direct",
+  "audios": "Audios",
+  "videos": "Vidéos",
+  "aucunMedia": "Aucune prédication pour le moment.",
+  "mediaIndisponible": "Ce média n'est pas disponible.",
+  "regarderSurYoutube": "Regarder",
+  "envoyerSurWhatsApp": "Envoyer sur WhatsApp",
+  "gestionMedias": "Médias",
+  "gestionMediasSousTitre": "Prédications, exhortations, directs, versets",
+  "predicationsEtDirects": "Prédications et directs",
+  "versetsDuJour": "Versets du jour",
+  "nouveauMedia": "Nouveau média",
+  "versetsAide": "Un verset par jour, dans cet ordre, en boucle.",
+  "aucunVerset": "Aucun verset. Ajoutez-en quelques-uns.",
+  "ajouterVerset": "Ajouter un verset",
+  "referenceBiblique": "Référence",
+  "audio": "Audio",
+  "video": "Vidéo",
+  "predicateur": "Prédicateur",
+  "debutDirect": "Début du direct",
+  "lienDirect": "Lien du direct (YouTube ou Facebook)",
+  "ouLienYoutube": "Ou lien YouTube / Facebook (facultatif)",
+  "fichierOuLienRequis": "Envoyez un fichier ou indiquez un lien."
 }
