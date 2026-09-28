@@ -26,7 +26,7 @@ De verantwoordelijken van een groep kunnen een bericht wissen of iemand uit de g
 
 ## 4. Giften
 
-- Giften zijn vrijwillig. Ze gaan naar wat je kiest (tiende, offergave, zending, bouwproject, onderlinge hulp).
+- Giften zijn vrijwillig. Ze gaan naar wat je kiest (tiende, offergave, zending, project aankoop van het gebouw, huur, onderlinge hulp).
 - Gebruik bij een overschrijving de aangegeven gestructureerde mededeling: de penningmeester bevestigt de ontvangst.
 - Met Bancontact of kaart wordt de betaling verwerkt door Stripe. Een maandelijkse gift kan op elk moment in de app gestopt worden.
 - Een gift wordt niet terugbetaald, behalve bij een duidelijke vergissing die snel aan de penningmeester wordt gemeld.

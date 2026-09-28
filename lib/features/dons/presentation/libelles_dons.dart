@@ -9,6 +9,7 @@ extension LibellesDons on AppLocalizations {
     Affectation.offrande => affectationOffrande,
     Affectation.mission => affectationMission,
     Affectation.construction => affectationConstruction,
+    Affectation.loyer => affectationLoyer,
     Affectation.entraide => affectationEntraide,
   };
 

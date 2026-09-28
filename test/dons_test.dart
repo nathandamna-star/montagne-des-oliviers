@@ -46,7 +46,7 @@ Future<Banc> banc({
 }
 
 Future<void> ouvrirDons(WidgetTester tester) async {
-  await tester.tap(find.text('Donner'));
+  await tester.tap(find.text('Dîmes et offrandes'));
   await tester.pumpAndSettle();
 }
 
@@ -137,14 +137,18 @@ void main() {
     await lancer(tester, banc: b, taille: grand);
     await ouvrirDons(tester);
     await tester.tap(find.widgetWithText(ChoiceChip, eur('50 €')));
-    await tester.tap(find.widgetWithText(ChoiceChip, 'Mission'));
+    expect(
+      find.widgetWithText(ChoiceChip, 'Projet achat du bâtiment'),
+      findsOneWidget,
+    );
+    await tester.tap(find.widgetWithText(ChoiceChip, 'Loyer'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Virement (QR code)'));
     await tester.pumpAndSettle();
     final d = (await b.firestore.collection('dons').get()).docs.single;
     expect(d.id, matches(RegExp(r'^[1-9]\d{11}$')));
     expect(d['montant'], 50);
-    expect(d['affectation'], 'mission');
+    expect(d['affectation'], 'loyer');
     expect(d['statut'], 'en_attente');
     expect(find.text('BE71 0961 2345 6769'), findsOneWidget);
     expect(

@@ -135,7 +135,7 @@ class AccueilScreen extends ConsumerWidget {
                 child: Card(
                   child: ListTile(
                     leading: const Icon(Icons.savings_outlined),
-                    title: Text(l10n.donner),
+                    title: Text(l10n.dimesEtOffrandes),
                     onTap: () => context.push(Routes.dons),
                   ),
                 ),

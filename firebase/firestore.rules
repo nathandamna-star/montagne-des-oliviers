@@ -568,7 +568,7 @@ service cloud.firestore {
         && nouveau().montant is number
         && nouveau().montant > 0 && nouveau().montant <= 100000
         && nouveau().devise == 'EUR'
-        && nouveau().affectation in ['dime', 'offrande', 'mission', 'construction', 'entraide']
+        && nouveau().affectation in ['dime', 'offrande', 'mission', 'construction', 'loyer', 'entraide']
         && nouveau().mode == 'virement'
         && nouveau().statut == 'en_attente'
         && nouveau().createdAt == request.time;

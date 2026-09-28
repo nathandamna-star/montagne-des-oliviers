@@ -1963,7 +1963,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get affectationMission => 'Zending';
 
   @override
-  String get affectationConstruction => 'Bouwproject';
+  String get affectationConstruction => 'Project aankoop van het gebouw';
 
   @override
   String get affectationEntraide => 'Onderlinge hulp';
@@ -2393,4 +2393,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String releveEmisLe(String date) {
     return 'Overzicht opgemaakt op $date.';
   }
+
+  @override
+  String get affectationLoyer => 'Huur';
 }

@@ -3611,7 +3611,7 @@ abstract class AppLocalizations {
   /// No description provided for @affectationConstruction.
   ///
   /// In fr, this message translates to:
-  /// **'Construction'**
+  /// **'Projet achat du bâtiment'**
   String get affectationConstruction;
 
   /// No description provided for @affectationEntraide.
@@ -4363,6 +4363,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Relevé établi le {date}.'**
   String releveEmisLe(String date);
+
+  /// No description provided for @affectationLoyer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Loyer'**
+  String get affectationLoyer;
 }
 
 class _AppLocalizationsDelegate

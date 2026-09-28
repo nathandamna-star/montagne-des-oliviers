@@ -1962,7 +1962,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get affectationMission => 'Mission';
 
   @override
-  String get affectationConstruction => 'Construction';
+  String get affectationConstruction => 'Projet achat du bâtiment';
 
   @override
   String get affectationEntraide => 'Entraide';
@@ -2392,4 +2392,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String releveEmisLe(String date) {
     return 'Relevé établi le $date.';
   }
+
+  @override
+  String get affectationLoyer => 'Loyer';
 }

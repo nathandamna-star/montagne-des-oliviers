@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-enum Affectation { dime, offrande, mission, construction, entraide }
+/// Affectation d'un don. « construction » : projet d'achat du bâtiment.
+enum Affectation { dime, offrande, mission, construction, loyer, entraide }
 
 enum StatutDon {
   enAttente,

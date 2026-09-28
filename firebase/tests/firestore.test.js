@@ -491,6 +491,7 @@ describe('dîmes et offrandes', () => {
   it('un membre annonce un virement avec une communication valide', async () => {
     await semer(MEMBRES);
     await assertSucceeds(setDoc(doc(marie(), `dons/${COMM}`), don()));
+    await assertSucceeds(setDoc(doc(marie(), 'dons/100000001044'), don({ affectation: 'loyer' })));
     await assertFails(setDoc(doc(marie(), 'dons/100000000035'), don()));
     await assertFails(setDoc(doc(marie(), 'dons/200000000068'), don({ statut: 'recu' })));
     await assertFails(setDoc(doc(marie(), 'dons/200000000068'), don({ mode: 'carte' })));

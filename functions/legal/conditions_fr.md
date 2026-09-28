@@ -26,7 +26,7 @@ Les responsables d'un groupe peuvent effacer un message ou retirer une personne 
 
 ## 4. Dons
 
-- Les dons sont volontaires. Ils sont affectés à ce que vous choisissez (dîme, offrande, mission, construction, entraide).
+- Les dons sont volontaires. Ils sont affectés à ce que vous choisissez (dîme, offrande, mission, projet d'achat du bâtiment, loyer, entraide).
 - Par virement, utilisez la communication structurée indiquée : le trésorier confirme la réception.
 - Par Bancontact ou par carte, le paiement est traité par Stripe. Un don mensuel peut être arrêté à tout moment dans l'application.
 - Un don n'est pas remboursé, sauf erreur manifeste signalée rapidement au trésorier.

@@ -6,17 +6,17 @@
 // unique ; carte pour un don mensuel (abonnement).
 import { randomInt } from 'node:crypto';
 
-export const AFFECTATIONS = ['dime', 'offrande', 'mission', 'construction', 'entraide'];
+export const AFFECTATIONS = ['dime', 'offrande', 'mission', 'construction', 'loyer', 'entraide'];
 
 const l2 = (l) => (l === 'nl' ? 'nl' : 'fr');
 
 const LIBELLES = {
   fr: {
-    dime: 'Dîme', offrande: 'Offrande', mission: 'Mission', construction: 'Construction', entraide: 'Entraide',
+    dime: 'Dîme', offrande: 'Offrande', mission: 'Mission', construction: 'Projet achat du bâtiment', loyer: 'Loyer', entraide: 'Entraide',
     donMensuel: 'Don mensuel', commande: 'Commande de livres',
   },
   nl: {
-    dime: 'Tiende', offrande: 'Offergave', mission: 'Zending', construction: 'Bouwproject', entraide: 'Onderlinge hulp',
+    dime: 'Tiende', offrande: 'Offergave', mission: 'Zending', construction: 'Project aankoop van het gebouw', loyer: 'Huur', entraide: 'Onderlinge hulp',
     donMensuel: 'Maandelijkse gift', commande: 'Bestelling van boeken',
   },
 };

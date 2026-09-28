@@ -585,7 +585,7 @@
   "affectationDime": "Tiende",
   "affectationOffrande": "Offergave",
   "affectationMission": "Zending",
-  "affectationConstruction": "Bouwproject",
+  "affectationConstruction": "Project aankoop van het gebouw",
   "affectationEntraide": "Onderlinge hulp",
   "uneFois": "Eenmalig",
   "chaqueMois": "Elke maand",
@@ -710,5 +710,6 @@
   "emailInvalide": "Ongeldig e-mailadres.",
   "editeurReleve": "Centre Évangélique d'Hoegaarden vzw · KBO 0557.986.857 · Vroentestraat 100, 3320 Hoegaarden",
   "entetesReleve": "Datum,Bestemming,Wijze,Bedrag",
-  "releveEmisLe": "Overzicht opgemaakt op {date}."
+  "releveEmisLe": "Overzicht opgemaakt op {date}.",
+  "affectationLoyer": "Huur"
 }

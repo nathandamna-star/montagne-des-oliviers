@@ -804,7 +804,7 @@
   "affectationDime": "Dîme",
   "affectationOffrande": "Offrande",
   "affectationMission": "Mission",
-  "affectationConstruction": "Construction",
+  "affectationConstruction": "Projet achat du bâtiment",
   "affectationEntraide": "Entraide",
   "uneFois": "Une fois",
   "chaqueMois": "Chaque mois",
@@ -978,5 +978,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "affectationLoyer": "Loyer"
 }

@@ -33,6 +33,7 @@ describe('vérifications', () => {
     assert.deepEqual(verifierDon({ montant: 50, affectation: 'dime', mensuel: true }),
       { centimes: 5000, affectation: 'dime', mensuel: true });
     assert.equal(verifierDon({ montant: 50, affectation: 'autre' }), null);
+    assert.equal(verifierDon({ montant: 50, affectation: 'loyer' }).affectation, 'loyer');
   });
 
   it('commande : prix du catalogue, livres disponibles, pas de doublon', () => {
