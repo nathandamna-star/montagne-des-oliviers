@@ -13,7 +13,11 @@ import 'package:montagne_des_oliviers/core/horloge.dart';
 import 'package:montagne_des_oliviers/features/actualites/actualites_providers.dart';
 import 'package:montagne_des_oliviers/features/notifications/notifications_providers.dart';
 import 'package:montagne_des_oliviers/features/notifications/notifications_service.dart';
+import 'package:montagne_des_oliviers/core/preferences.dart';
+import 'package:montagne_des_oliviers/features/preparations/preparations_providers.dart';
+import 'package:montagne_des_oliviers/shared/data/envoi_fichiers.dart';
 import 'package:montagne_des_oliviers/shared/data/envoi_photos.dart';
+import 'package:montagne_des_oliviers/shared/lecteurs/lecteurs.dart';
 import 'package:montagne_des_oliviers/shared/services/lanceur.dart';
 import 'package:montagne_des_oliviers/shared/services/partage.dart';
 import 'package:montagne_des_oliviers/features/auth/auth_providers.dart';
@@ -103,6 +107,33 @@ class FauxLanceur implements Lanceur {
   }
 }
 
+/// Lecteurs simulés (pas de lecteur natif dans les tests).
+class FauxLecteurs implements FabriqueLecteurs {
+  @override
+  Widget audio({required String url, required String cle}) =>
+      Text('audio:$url');
+
+  @override
+  Widget video({required String url, required String cle}) =>
+      Text('video:$url');
+}
+
+/// Envoi de fichiers simulé : renvoie une adresse sans rien envoyer.
+class FauxEnvoiFichiers implements EnvoiFichiers {
+  final envois = <String>[];
+
+  @override
+  Future<String?> choisirEtEnvoyer({
+    required String dossier,
+    required GenreFichier genre,
+    void Function(double)? progression,
+  }) async {
+    envois.add('$dossier/${genre.name}');
+    progression?.call(1);
+    return 'https://exemple.be/$dossier/${genre.name}';
+  }
+}
+
 /// Heure fixe des tests : lundi 5 octobre 2026, 9 h.
 final maintenant = DateTime(2026, 10, 5, 9);
 
@@ -126,6 +157,7 @@ class Banc {
   final photos = FauxEnvoiPhotos();
   final partage = FauxPartage();
   final lanceur = FauxLanceur();
+  final fichiers = FauxEnvoiFichiers();
 
   /// Crée le profil (consentement déjà donné).
   Future<void> avecProfil([String nom = 'Marie']) =>
@@ -145,6 +177,8 @@ class Banc {
     envoiPhotosProvider.overrideWithValue(photos),
     partageProvider.overrideWithValue(partage),
     lanceurProvider.overrideWithValue(lanceur),
+    fabriqueLecteursProvider.overrideWithValue(FauxLecteurs()),
+    envoiFichiersProvider.overrideWithValue(fichiers),
     horlogeProvider.overrideWithValue(() => maintenant),
     rolesFutureProvider.overrideWith((ref) async {
       final user = ref.watch(utilisateurFirebaseProvider).value;
@@ -161,6 +195,7 @@ Future<Banc> lancer(
   Size taille = const Size(1080, 2400),
 }) async {
   SharedPreferences.setMockInitialValues({});
+  final preferences = await SharedPreferences.getInstance();
   final b = banc ?? Banc();
   tester.view.physicalSize = taille;
   tester.view.devicePixelRatio = 2.5;
@@ -169,7 +204,10 @@ Future<Banc> lancer(
   addTearDown(tester.platformDispatcher.clearLocalesTestValue);
   await tester.pumpWidget(
     ProviderScope(
-      overrides: b.overrides,
+      overrides: [
+        ...b.overrides,
+        sharedPreferencesProvider.overrideWithValue(preferences),
+      ],
       child: const MontagneDesOliviersApp(),
     ),
   );

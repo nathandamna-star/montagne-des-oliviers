@@ -95,3 +95,47 @@ export function notificationApport(feteId, fete, a, langue) {
     data: { type: 'fete', id: feteId },
   };
 }
+
+const PREP = {
+  fr: {
+    inscrit: 'Vous êtes inscrit à une préparation',
+    question: (nom) => `Question de ${nom}`,
+    reponse: 'Le pasteur a répondu à votre question',
+  },
+  nl: {
+    inscrit: 'Je bent ingeschreven voor een voorbereiding',
+    question: (nom) => `Vraag van ${nom}`,
+    reponse: 'De pastoor heeft je vraag beantwoord',
+  },
+};
+
+/** Au candidat : il vient d'être inscrit. */
+export function notificationInscription(prid, preparation, langue) {
+  const l = l2(langue);
+  return {
+    notification: { title: PREP[l].inscrit, body: preparation.titre?.[l] || preparation.titre?.fr || '' },
+    data: { type: 'preparation', id: prid },
+  };
+}
+
+/** Aux pasteurs : un candidat pose une question. */
+export function notificationQuestion(prid, uid, nom, q, langue) {
+  const l = l2(langue);
+  return {
+    notification: { title: PREP[l].question(nom), body: court(q.texte) },
+    data: { type: 'candidat', id: prid, uid },
+  };
+}
+
+/** Au candidat : réponse du pasteur. */
+export function notificationReponse(prid, q, langue) {
+  const l = l2(langue);
+  return {
+    notification: { title: PREP[l].reponse, body: court(q.reponse) },
+    data: { type: 'preparation', id: prid },
+  };
+}
+
+/** Une réponse vient d'être écrite ou modifiée ? */
+export const reponseDonnee = (avant, apres) =>
+  !!apres?.reponse && (apres.reponse ?? '') !== (avant?.reponse ?? '');

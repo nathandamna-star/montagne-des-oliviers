@@ -40,3 +40,25 @@ describe('prières et fêtes', () => {
     assert.equal(a.notification.body, 'Paul apporte : gâteau, boissons (au chocolat)');
   });
 });
+
+import {
+  notificationInscription, notificationQuestion, notificationReponse, reponseDonnee,
+} from '../../vie.js';
+
+describe('préparations', () => {
+  it('inscription, question, réponse', () => {
+    const i = notificationInscription('bap', { titre: { fr: 'Préparation au baptême', nl: 'Voorbereiding op de doop' } }, 'nl');
+    assert.equal(i.notification.body, 'Voorbereiding op de doop');
+    assert.deepEqual(i.data, { type: 'preparation', id: 'bap' });
+    const q = notificationQuestion('bap', 'u1', 'Marie', { texte: 'Faut-il un témoin ?' }, 'fr');
+    assert.equal(q.notification.title, 'Question de Marie');
+    assert.deepEqual(q.data, { type: 'candidat', id: 'bap', uid: 'u1' });
+    assert.equal(notificationReponse('bap', { reponse: 'Oui' }, 'fr').notification.body, 'Oui');
+  });
+
+  it('réponse : seulement quand elle est donnée ou change', () => {
+    assert.equal(reponseDonnee({}, { reponse: 'Oui' }), true);
+    assert.equal(reponseDonnee({ reponse: 'Oui' }, { reponse: 'Oui', reponduLe: 1 }), false);
+    assert.equal(reponseDonnee({}, { reponse: '' }), false);
+  });
+});

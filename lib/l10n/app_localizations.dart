@@ -2467,6 +2467,384 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Cuisine'**
   String get groupeCuisine;
+
+  /// No description provided for @erreurLecture.
+  ///
+  /// In fr, this message translates to:
+  /// **'Impossible de lire ce fichier. Vérifiez votre connexion.'**
+  String get erreurLecture;
+
+  /// No description provided for @reculer15.
+  ///
+  /// In fr, this message translates to:
+  /// **'Reculer de 15 secondes'**
+  String get reculer15;
+
+  /// No description provided for @avancer15.
+  ///
+  /// In fr, this message translates to:
+  /// **'Avancer de 15 secondes'**
+  String get avancer15;
+
+  /// No description provided for @pause.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pause'**
+  String get pause;
+
+  /// No description provided for @lecture.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lecture'**
+  String get lecture;
+
+  /// No description provided for @vitesse.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vitesse de lecture'**
+  String get vitesse;
+
+  /// No description provided for @pleinEcran.
+  ///
+  /// In fr, this message translates to:
+  /// **'Plein écran'**
+  String get pleinEcran;
+
+  /// No description provided for @ajouterLecon.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter une leçon'**
+  String get ajouterLecon;
+
+  /// No description provided for @aucunCandidat.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun candidat inscrit.'**
+  String get aucunCandidat;
+
+  /// No description provided for @aucunFichier.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun fichier'**
+  String get aucunFichier;
+
+  /// No description provided for @aucuneLecon.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pas encore de leçon.'**
+  String get aucuneLecon;
+
+  /// No description provided for @aucunePreparation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune préparation pour le moment.'**
+  String get aucunePreparation;
+
+  /// No description provided for @aucunePreparationType.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créez d\'abord une préparation de ce type (Accueil → Préparations).'**
+  String get aucunePreparationType;
+
+  /// No description provided for @aucuneQuestion.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune question.'**
+  String get aucuneQuestion;
+
+  /// No description provided for @aucuneRencontre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune rencontre planifiée.'**
+  String get aucuneRencontre;
+
+  /// No description provided for @candidatInscrit.
+  ///
+  /// In fr, this message translates to:
+  /// **'{nom} est inscrit à la préparation.'**
+  String candidatInscrit(String nom);
+
+  /// No description provided for @candidats.
+  ///
+  /// In fr, this message translates to:
+  /// **'Candidats'**
+  String get candidats;
+
+  /// No description provided for @choisirFichier.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisir un fichier'**
+  String get choisirFichier;
+
+  /// No description provided for @descendre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Descendre'**
+  String get descendre;
+
+  /// No description provided for @desinscrire.
+  ///
+  /// In fr, this message translates to:
+  /// **'Désinscrire'**
+  String get desinscrire;
+
+  /// No description provided for @enAttenteReponse.
+  ///
+  /// In fr, this message translates to:
+  /// **'En attente de la réponse du pasteur.'**
+  String get enAttenteReponse;
+
+  /// No description provided for @fichierAudio.
+  ///
+  /// In fr, this message translates to:
+  /// **'Audio'**
+  String get fichierAudio;
+
+  /// No description provided for @fichierDocument.
+  ///
+  /// In fr, this message translates to:
+  /// **'Document (PDF)'**
+  String get fichierDocument;
+
+  /// No description provided for @fichierEnvoye.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fichier envoyé'**
+  String get fichierEnvoye;
+
+  /// No description provided for @fichierVideo.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vidéo'**
+  String get fichierVideo;
+
+  /// No description provided for @inscrire.
+  ///
+  /// In fr, this message translates to:
+  /// **'Inscrire'**
+  String get inscrire;
+
+  /// No description provided for @inscrireCandidat.
+  ///
+  /// In fr, this message translates to:
+  /// **'Inscrire un candidat'**
+  String get inscrireCandidat;
+
+  /// No description provided for @inscrirePreparation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Inscrire à une préparation'**
+  String get inscrirePreparation;
+
+  /// No description provided for @lecon.
+  ///
+  /// In fr, this message translates to:
+  /// **'Leçon'**
+  String get lecon;
+
+  /// No description provided for @leconPublique.
+  ///
+  /// In fr, this message translates to:
+  /// **'Leçon publique'**
+  String get leconPublique;
+
+  /// No description provided for @leconPubliqueAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Visible par tous les membres. Sinon, seulement par les candidats inscrits.'**
+  String get leconPubliqueAide;
+
+  /// No description provided for @leconReservee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette leçon est réservée aux candidats inscrits.'**
+  String get leconReservee;
+
+  /// No description provided for @leconTerminee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Leçon terminée'**
+  String get leconTerminee;
+
+  /// No description provided for @lecons.
+  ///
+  /// In fr, this message translates to:
+  /// **'Leçons'**
+  String get lecons;
+
+  /// No description provided for @marquerTerminee.
+  ///
+  /// In fr, this message translates to:
+  /// **'J\'ai terminé cette leçon'**
+  String get marquerTerminee;
+
+  /// No description provided for @mesQuestions.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mes questions au pasteur'**
+  String get mesQuestions;
+
+  /// No description provided for @mesRencontres.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mes rencontres'**
+  String get mesRencontres;
+
+  /// No description provided for @monter.
+  ///
+  /// In fr, this message translates to:
+  /// **'Monter'**
+  String get monter;
+
+  /// No description provided for @nouvellePreparation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle préparation'**
+  String get nouvellePreparation;
+
+  /// No description provided for @ouvrirDocument.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ouvrir le document'**
+  String get ouvrirDocument;
+
+  /// No description provided for @pasInscritPreparation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les leçons sont réservées aux candidats. Faites une demande : le pasteur vous inscrira.'**
+  String get pasInscritPreparation;
+
+  /// No description provided for @planifier.
+  ///
+  /// In fr, this message translates to:
+  /// **'Planifier'**
+  String get planifier;
+
+  /// No description provided for @poserQuestion.
+  ///
+  /// In fr, this message translates to:
+  /// **'Poser une question au pasteur'**
+  String get poserQuestion;
+
+  /// No description provided for @preparationIndisponible.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette préparation n\'est pas accessible.'**
+  String get preparationIndisponible;
+
+  /// No description provided for @preparations.
+  ///
+  /// In fr, this message translates to:
+  /// **'Préparations'**
+  String get preparations;
+
+  /// No description provided for @preparationsGestionSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Leçons, candidats, entretiens'**
+  String get preparationsGestionSousTitre;
+
+  /// No description provided for @preparationsIntro.
+  ///
+  /// In fr, this message translates to:
+  /// **'Préparations au mariage et au baptême : leçons en texte, audio et vidéo.'**
+  String get preparationsIntro;
+
+  /// No description provided for @preparationsSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mariage et baptême'**
+  String get preparationsSousTitre;
+
+  /// No description provided for @progression.
+  ///
+  /// In fr, this message translates to:
+  /// **'{faites} leçon(s) terminée(s) sur {total}'**
+  String progression(int faites, int total);
+
+  /// No description provided for @publierPreparationAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Visible par les membres (les leçons restent réservées aux candidats).'**
+  String get publierPreparationAide;
+
+  /// No description provided for @publique.
+  ///
+  /// In fr, this message translates to:
+  /// **'publique'**
+  String get publique;
+
+  /// No description provided for @questionEnvoyee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Question envoyée au pasteur.'**
+  String get questionEnvoyee;
+
+  /// No description provided for @questions.
+  ///
+  /// In fr, this message translates to:
+  /// **'Questions'**
+  String get questions;
+
+  /// No description provided for @remplacerFichier.
+  ///
+  /// In fr, this message translates to:
+  /// **'Remplacer le fichier'**
+  String get remplacerFichier;
+
+  /// No description provided for @rencontreAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ex. : Entretien, Baptême, Répétition du mariage'**
+  String get rencontreAide;
+
+  /// No description provided for @rencontres.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rencontres'**
+  String get rencontres;
+
+  /// No description provided for @repondre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Répondre'**
+  String get repondre;
+
+  /// No description provided for @reponseEnvoyee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réponse envoyée.'**
+  String get reponseEnvoyee;
+
+  /// No description provided for @supprimerLecon.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer cette leçon ?'**
+  String get supprimerLecon;
+
+  /// No description provided for @voirPreparations.
+  ///
+  /// In fr, this message translates to:
+  /// **'Voir les préparations'**
+  String get voirPreparations;
+
+  /// No description provided for @votreQuestion.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre question'**
+  String get votreQuestion;
+
+  /// No description provided for @votreReponse.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre réponse'**
+  String get votreReponse;
+
+  /// No description provided for @vousEtesInscrit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous êtes inscrit'**
+  String get vousEtesInscrit;
 }
 
 class _AppLocalizationsDelegate

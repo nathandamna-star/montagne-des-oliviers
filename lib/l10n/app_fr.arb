@@ -544,5 +544,85 @@
   "apportGateau": "Gâteau",
   "apportBoisson": "Boissons",
   "apportAutre": "Autre",
-  "groupeCuisine": "Cuisine"
+  "groupeCuisine": "Cuisine",
+  "erreurLecture": "Impossible de lire ce fichier. Vérifiez votre connexion.",
+  "reculer15": "Reculer de 15 secondes",
+  "avancer15": "Avancer de 15 secondes",
+  "pause": "Pause",
+  "lecture": "Lecture",
+  "vitesse": "Vitesse de lecture",
+  "pleinEcran": "Plein écran",
+  "ajouterLecon": "Ajouter une leçon",
+  "aucunCandidat": "Aucun candidat inscrit.",
+  "aucunFichier": "Aucun fichier",
+  "aucuneLecon": "Pas encore de leçon.",
+  "aucunePreparation": "Aucune préparation pour le moment.",
+  "aucunePreparationType": "Créez d'abord une préparation de ce type (Accueil → Préparations).",
+  "aucuneQuestion": "Aucune question.",
+  "aucuneRencontre": "Aucune rencontre planifiée.",
+  "candidatInscrit": "{nom} est inscrit à la préparation.",
+  "@candidatInscrit": {
+    "placeholders": {
+      "nom": {
+        "type": "String"
+      }
+    }
+  },
+  "candidats": "Candidats",
+  "choisirFichier": "Choisir un fichier",
+  "descendre": "Descendre",
+  "desinscrire": "Désinscrire",
+  "enAttenteReponse": "En attente de la réponse du pasteur.",
+  "fichierAudio": "Audio",
+  "fichierDocument": "Document (PDF)",
+  "fichierEnvoye": "Fichier envoyé",
+  "fichierVideo": "Vidéo",
+  "inscrire": "Inscrire",
+  "inscrireCandidat": "Inscrire un candidat",
+  "inscrirePreparation": "Inscrire à une préparation",
+  "lecon": "Leçon",
+  "leconPublique": "Leçon publique",
+  "leconPubliqueAide": "Visible par tous les membres. Sinon, seulement par les candidats inscrits.",
+  "leconReservee": "Cette leçon est réservée aux candidats inscrits.",
+  "leconTerminee": "Leçon terminée",
+  "lecons": "Leçons",
+  "marquerTerminee": "J'ai terminé cette leçon",
+  "mesQuestions": "Mes questions au pasteur",
+  "mesRencontres": "Mes rencontres",
+  "monter": "Monter",
+  "nouvellePreparation": "Nouvelle préparation",
+  "ouvrirDocument": "Ouvrir le document",
+  "pasInscritPreparation": "Les leçons sont réservées aux candidats. Faites une demande : le pasteur vous inscrira.",
+  "planifier": "Planifier",
+  "poserQuestion": "Poser une question au pasteur",
+  "preparationIndisponible": "Cette préparation n'est pas accessible.",
+  "preparations": "Préparations",
+  "preparationsGestionSousTitre": "Leçons, candidats, entretiens",
+  "preparationsIntro": "Préparations au mariage et au baptême : leçons en texte, audio et vidéo.",
+  "preparationsSousTitre": "Mariage et baptême",
+  "progression": "{faites} leçon(s) terminée(s) sur {total}",
+  "@progression": {
+    "placeholders": {
+      "faites": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "publierPreparationAide": "Visible par les membres (les leçons restent réservées aux candidats).",
+  "publique": "publique",
+  "questionEnvoyee": "Question envoyée au pasteur.",
+  "questions": "Questions",
+  "remplacerFichier": "Remplacer le fichier",
+  "rencontreAide": "Ex. : Entretien, Baptême, Répétition du mariage",
+  "rencontres": "Rencontres",
+  "repondre": "Répondre",
+  "reponseEnvoyee": "Réponse envoyée.",
+  "supprimerLecon": "Supprimer cette leçon ?",
+  "voirPreparations": "Voir les préparations",
+  "votreQuestion": "Votre question",
+  "votreReponse": "Votre réponse",
+  "vousEtesInscrit": "Vous êtes inscrit"
 }

@@ -47,6 +47,11 @@ class _MontagneDesOliviersAppState
           );
         case 'priere':
           router.push(Routes.maPriere(id));
+        case 'preparation':
+          router.push(Routes.preparation(id));
+        case 'candidat':
+          final uid = d['uid'];
+          if (uid is String) router.push(Routes.candidat(id, uid));
         case 'fete':
           router.push(Routes.fete(id));
         case 'rencontre':

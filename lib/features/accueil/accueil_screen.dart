@@ -85,6 +85,18 @@ class AccueilScreen extends ConsumerWidget {
               ],
             ),
           ],
+          if (ref.watch(profilProvider).value != null) ...[
+            const SizedBox(height: 8),
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.menu_book_outlined),
+                title: Text(l10n.preparations),
+                subtitle: Text(l10n.preparationsSousTitre),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => context.push(Routes.preparations),
+              ),
+            ),
+          ],
           ..._reseaux(context, ref),
           const SizedBox(height: 24),
           _Section(

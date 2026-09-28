@@ -22,6 +22,12 @@ import '../../features/demandes/presentation/nouvelle_demande_screen.dart';
 import '../../features/divers/presentation/editeur_fete_screen.dart';
 import '../../features/divers/presentation/fete_screen.dart';
 import '../../features/parametres/parametres_eglise_screen.dart';
+import '../../features/preparations/presentation/candidat_screen.dart';
+import '../../features/preparations/presentation/editeur_lecon_screen.dart';
+import '../../features/preparations/presentation/editeur_preparation_screen.dart';
+import '../../features/preparations/presentation/lecon_screen.dart';
+import '../../features/preparations/presentation/preparation_screen.dart';
+import '../../features/preparations/presentation/preparations_screen.dart';
 import '../../features/prieres/presentation/listes_prieres.dart';
 import '../../features/prieres/presentation/nouvelle_priere_screen.dart';
 import '../../features/prieres/presentation/priere_screen.dart';
@@ -124,6 +130,47 @@ final routerProvider = Provider<GoRouter>((ref) {
 
 final _sousRoutes = <String, List<RouteBase>>{
   Routes.accueil: [
+    GoRoute(
+      path: 'preparations',
+      builder: (context, state) => const PreparationsScreen(),
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (context, state) =>
+              PreparationScreen(id: state.pathParameters['id']!),
+          routes: [
+            GoRoute(
+              path: 'modifier',
+              builder: (context, state) =>
+                  EditeurPreparationScreen(id: state.pathParameters['id']!),
+            ),
+            GoRoute(
+              path: 'lecons/:lid',
+              builder: (context, state) => LeconScreen(
+                preparationId: state.pathParameters['id']!,
+                id: state.pathParameters['lid']!,
+              ),
+              routes: [
+                GoRoute(
+                  path: 'modifier',
+                  builder: (context, state) => EditeurLeconScreen(
+                    preparationId: state.pathParameters['id']!,
+                    id: state.pathParameters['lid']!,
+                  ),
+                ),
+              ],
+            ),
+            GoRoute(
+              path: 'candidats/:uid',
+              builder: (context, state) => CandidatScreen(
+                preparationId: state.pathParameters['id']!,
+                uid: state.pathParameters['uid']!,
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
     GoRoute(
       path: 'actualites',
       builder: (context, state) => const ActualitesScreen(),

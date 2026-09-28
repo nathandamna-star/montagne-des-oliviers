@@ -10,6 +10,16 @@ abstract final class Routes {
   static const consentement = '/connexion/profil';
   static const roles = '/responsables/roles';
   static const actualites = '/accueil/actualites';
+  static const preparations = '/accueil/preparations';
+  static String preparation(String id) => '/accueil/preparations/$id';
+  static String editerPreparation(String id) =>
+      '/accueil/preparations/$id/modifier';
+  static String lecon(String id, String lid) =>
+      '/accueil/preparations/$id/lecons/$lid';
+  static String editerLecon(String id, String lid) =>
+      '/accueil/preparations/$id/lecons/$lid/modifier';
+  static String candidat(String id, String uid) =>
+      '/accueil/preparations/$id/candidats/$uid';
   static const gestionActualites = '/responsables/actualites';
   static const gestionAgenda = '/responsables/agenda';
   static const membres = '/responsables/membres';

@@ -48,7 +48,7 @@ void main() {
     expect(find.byType(NavigationBar), findsNothing);
     await tester.tap(find.text('Responsables'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('réservation des salles'), findsOneWidget);
+    expect(find.text('Fichier des membres'), findsOneWidget);
   });
 
   testWidgets('interface en néerlandais', (tester) async {

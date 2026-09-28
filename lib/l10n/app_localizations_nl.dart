@@ -1347,4 +1347,205 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get groupeCuisine => 'Keuken';
+
+  @override
+  String get erreurLecture =>
+      'Dit bestand kan niet worden afgespeeld. Controleer je verbinding.';
+
+  @override
+  String get reculer15 => '15 seconden terug';
+
+  @override
+  String get avancer15 => '15 seconden vooruit';
+
+  @override
+  String get pause => 'Pauze';
+
+  @override
+  String get lecture => 'Afspelen';
+
+  @override
+  String get vitesse => 'Afspeelsnelheid';
+
+  @override
+  String get pleinEcran => 'Volledig scherm';
+
+  @override
+  String get ajouterLecon => 'Les toevoegen';
+
+  @override
+  String get aucunCandidat => 'Geen kandidaten ingeschreven.';
+
+  @override
+  String get aucunFichier => 'Geen bestand';
+
+  @override
+  String get aucuneLecon => 'Nog geen lessen.';
+
+  @override
+  String get aucunePreparation => 'Nog geen voorbereidingen.';
+
+  @override
+  String get aucunePreparationType =>
+      'Maak eerst een voorbereiding van dit type (Home → Voorbereidingen).';
+
+  @override
+  String get aucuneQuestion => 'Geen vragen.';
+
+  @override
+  String get aucuneRencontre => 'Geen ontmoetingen gepland.';
+
+  @override
+  String candidatInscrit(String nom) {
+    return '$nom is ingeschreven voor de voorbereiding.';
+  }
+
+  @override
+  String get candidats => 'Kandidaten';
+
+  @override
+  String get choisirFichier => 'Bestand kiezen';
+
+  @override
+  String get descendre => 'Omlaag';
+
+  @override
+  String get desinscrire => 'Uitschrijven';
+
+  @override
+  String get enAttenteReponse => 'Wacht op het antwoord van de pastoor.';
+
+  @override
+  String get fichierAudio => 'Audio';
+
+  @override
+  String get fichierDocument => 'Document (PDF)';
+
+  @override
+  String get fichierEnvoye => 'Bestand verzonden';
+
+  @override
+  String get fichierVideo => 'Video';
+
+  @override
+  String get inscrire => 'Inschrijven';
+
+  @override
+  String get inscrireCandidat => 'Kandidaat inschrijven';
+
+  @override
+  String get inscrirePreparation => 'Inschrijven voor een voorbereiding';
+
+  @override
+  String get lecon => 'Les';
+
+  @override
+  String get leconPublique => 'Openbare les';
+
+  @override
+  String get leconPubliqueAide =>
+      'Zichtbaar voor alle leden. Anders alleen voor ingeschreven kandidaten.';
+
+  @override
+  String get leconReservee =>
+      'Deze les is voorbehouden aan ingeschreven kandidaten.';
+
+  @override
+  String get leconTerminee => 'Les afgerond';
+
+  @override
+  String get lecons => 'Lessen';
+
+  @override
+  String get marquerTerminee => 'Ik heb deze les afgerond';
+
+  @override
+  String get mesQuestions => 'Mijn vragen aan de pastoor';
+
+  @override
+  String get mesRencontres => 'Mijn ontmoetingen';
+
+  @override
+  String get monter => 'Omhoog';
+
+  @override
+  String get nouvellePreparation => 'Nieuwe voorbereiding';
+
+  @override
+  String get ouvrirDocument => 'Document openen';
+
+  @override
+  String get pasInscritPreparation =>
+      'De lessen zijn voorbehouden aan kandidaten. Doe een aanvraag: de pastoor schrijft je in.';
+
+  @override
+  String get planifier => 'Plannen';
+
+  @override
+  String get poserQuestion => 'Een vraag stellen aan de pastoor';
+
+  @override
+  String get preparationIndisponible =>
+      'Deze voorbereiding is niet toegankelijk.';
+
+  @override
+  String get preparations => 'Voorbereidingen';
+
+  @override
+  String get preparationsGestionSousTitre => 'Lessen, kandidaten, gesprekken';
+
+  @override
+  String get preparationsIntro =>
+      'Voorbereiding op het huwelijk en de doop: lessen in tekst, audio en video.';
+
+  @override
+  String get preparationsSousTitre => 'Huwelijk en doop';
+
+  @override
+  String progression(int faites, int total) {
+    return '$faites van $total les(sen) afgerond';
+  }
+
+  @override
+  String get publierPreparationAide =>
+      'Zichtbaar voor de leden (de lessen blijven voorbehouden aan kandidaten).';
+
+  @override
+  String get publique => 'openbaar';
+
+  @override
+  String get questionEnvoyee => 'Vraag verzonden naar de pastoor.';
+
+  @override
+  String get questions => 'Vragen';
+
+  @override
+  String get remplacerFichier => 'Bestand vervangen';
+
+  @override
+  String get rencontreAide => 'Bv.: Gesprek, Doop, Repetitie van het huwelijk';
+
+  @override
+  String get rencontres => 'Ontmoetingen';
+
+  @override
+  String get repondre => 'Antwoorden';
+
+  @override
+  String get reponseEnvoyee => 'Antwoord verzonden.';
+
+  @override
+  String get supprimerLecon => 'Deze les verwijderen?';
+
+  @override
+  String get voirPreparations => 'Voorbereidingen bekijken';
+
+  @override
+  String get votreQuestion => 'Je vraag';
+
+  @override
+  String get votreReponse => 'Je antwoord';
+
+  @override
+  String get vousEtesInscrit => 'Je bent ingeschreven';
 }

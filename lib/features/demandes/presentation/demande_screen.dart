@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/roles.dart';
+import '../../../core/router/routes.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../shared/domain_traduction.dart';
+import '../../preparations/domain/preparation.dart';
+import '../../preparations/preparations_providers.dart';
 import '../../../shared/format_date.dart';
 import '../../../shared/widgets/etat_vide.dart';
 import '../../auth/auth_providers.dart';
@@ -102,6 +107,27 @@ class DemandeScreen extends ConsumerWidget {
                           ),
                         ),
                       ],
+                      if (!gestion &&
+                          (d.type == TypeDemande.bapteme ||
+                              d.type == TypeDemande.mariage)) ...[
+                        const SizedBox(height: 16),
+                        OutlinedButton.icon(
+                          onPressed: () => context.push(Routes.preparations),
+                          icon: const Icon(Icons.menu_book_outlined),
+                          label: Text(l10n.voirPreparations),
+                        ),
+                      ],
+                      if (gestion &&
+                          ref.watch(estAdminProvider) &&
+                          (d.type == TypeDemande.bapteme ||
+                              d.type == TypeDemande.mariage)) ...[
+                        const SizedBox(height: 16),
+                        OutlinedButton.icon(
+                          onPressed: () => _inscrire(context, ref, d),
+                          icon: const Icon(Icons.how_to_reg_outlined),
+                          label: Text(l10n.inscrirePreparation),
+                        ),
+                      ],
                       if (!gestion && d.statut == StatutDemande.nouvelle) ...[
                         const SizedBox(height: 24),
                         OutlinedButton.icon(
@@ -125,6 +151,46 @@ class DemandeScreen extends ConsumerWidget {
               ),
       ),
     );
+  }
+}
+
+/// Pasteur : inscrire la personne à une préparation du même type.
+Future<void> _inscrire(BuildContext context, WidgetRef ref, Demande d) async {
+  final l10n = AppLocalizations.of(context);
+  final type = d.type == TypeDemande.mariage
+      ? TypePreparation.mariage
+      : TypePreparation.bapteme;
+  final repo = ref.read(preparationsRepositoryProvider);
+  final preparations = [
+    for (final p in await repo.toutes().first)
+      if (p.type == type) p,
+  ];
+  if (!context.mounted) return;
+  if (preparations.isEmpty) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(l10n.aucunePreparationType)));
+    return;
+  }
+  final choisie = preparations.length == 1
+      ? preparations.single
+      : await showDialog<Preparation>(
+          context: context,
+          builder: (context) => SimpleDialog(
+            title: Text(l10n.inscrirePreparation),
+            children: [
+              for (final p in preparations)
+                SimpleDialogOption(
+                  onPressed: () => Navigator.pop(context, p),
+                  child: Text(Traduction.dans(p.titre, context.langue)),
+                ),
+            ],
+          ),
+        );
+  if (choisie == null) return;
+  await repo.inscrire(choisie.id, uid: d.uid, nom: d.nom, demandeId: d.id);
+  if (context.mounted) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(l10n.candidatInscrit(d.nom))));
   }
 }
 

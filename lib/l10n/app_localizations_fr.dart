@@ -1346,4 +1346,205 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get groupeCuisine => 'Cuisine';
+
+  @override
+  String get erreurLecture =>
+      'Impossible de lire ce fichier. Vérifiez votre connexion.';
+
+  @override
+  String get reculer15 => 'Reculer de 15 secondes';
+
+  @override
+  String get avancer15 => 'Avancer de 15 secondes';
+
+  @override
+  String get pause => 'Pause';
+
+  @override
+  String get lecture => 'Lecture';
+
+  @override
+  String get vitesse => 'Vitesse de lecture';
+
+  @override
+  String get pleinEcran => 'Plein écran';
+
+  @override
+  String get ajouterLecon => 'Ajouter une leçon';
+
+  @override
+  String get aucunCandidat => 'Aucun candidat inscrit.';
+
+  @override
+  String get aucunFichier => 'Aucun fichier';
+
+  @override
+  String get aucuneLecon => 'Pas encore de leçon.';
+
+  @override
+  String get aucunePreparation => 'Aucune préparation pour le moment.';
+
+  @override
+  String get aucunePreparationType =>
+      'Créez d\'abord une préparation de ce type (Accueil → Préparations).';
+
+  @override
+  String get aucuneQuestion => 'Aucune question.';
+
+  @override
+  String get aucuneRencontre => 'Aucune rencontre planifiée.';
+
+  @override
+  String candidatInscrit(String nom) {
+    return '$nom est inscrit à la préparation.';
+  }
+
+  @override
+  String get candidats => 'Candidats';
+
+  @override
+  String get choisirFichier => 'Choisir un fichier';
+
+  @override
+  String get descendre => 'Descendre';
+
+  @override
+  String get desinscrire => 'Désinscrire';
+
+  @override
+  String get enAttenteReponse => 'En attente de la réponse du pasteur.';
+
+  @override
+  String get fichierAudio => 'Audio';
+
+  @override
+  String get fichierDocument => 'Document (PDF)';
+
+  @override
+  String get fichierEnvoye => 'Fichier envoyé';
+
+  @override
+  String get fichierVideo => 'Vidéo';
+
+  @override
+  String get inscrire => 'Inscrire';
+
+  @override
+  String get inscrireCandidat => 'Inscrire un candidat';
+
+  @override
+  String get inscrirePreparation => 'Inscrire à une préparation';
+
+  @override
+  String get lecon => 'Leçon';
+
+  @override
+  String get leconPublique => 'Leçon publique';
+
+  @override
+  String get leconPubliqueAide =>
+      'Visible par tous les membres. Sinon, seulement par les candidats inscrits.';
+
+  @override
+  String get leconReservee =>
+      'Cette leçon est réservée aux candidats inscrits.';
+
+  @override
+  String get leconTerminee => 'Leçon terminée';
+
+  @override
+  String get lecons => 'Leçons';
+
+  @override
+  String get marquerTerminee => 'J\'ai terminé cette leçon';
+
+  @override
+  String get mesQuestions => 'Mes questions au pasteur';
+
+  @override
+  String get mesRencontres => 'Mes rencontres';
+
+  @override
+  String get monter => 'Monter';
+
+  @override
+  String get nouvellePreparation => 'Nouvelle préparation';
+
+  @override
+  String get ouvrirDocument => 'Ouvrir le document';
+
+  @override
+  String get pasInscritPreparation =>
+      'Les leçons sont réservées aux candidats. Faites une demande : le pasteur vous inscrira.';
+
+  @override
+  String get planifier => 'Planifier';
+
+  @override
+  String get poserQuestion => 'Poser une question au pasteur';
+
+  @override
+  String get preparationIndisponible =>
+      'Cette préparation n\'est pas accessible.';
+
+  @override
+  String get preparations => 'Préparations';
+
+  @override
+  String get preparationsGestionSousTitre => 'Leçons, candidats, entretiens';
+
+  @override
+  String get preparationsIntro =>
+      'Préparations au mariage et au baptême : leçons en texte, audio et vidéo.';
+
+  @override
+  String get preparationsSousTitre => 'Mariage et baptême';
+
+  @override
+  String progression(int faites, int total) {
+    return '$faites leçon(s) terminée(s) sur $total';
+  }
+
+  @override
+  String get publierPreparationAide =>
+      'Visible par les membres (les leçons restent réservées aux candidats).';
+
+  @override
+  String get publique => 'publique';
+
+  @override
+  String get questionEnvoyee => 'Question envoyée au pasteur.';
+
+  @override
+  String get questions => 'Questions';
+
+  @override
+  String get remplacerFichier => 'Remplacer le fichier';
+
+  @override
+  String get rencontreAide => 'Ex. : Entretien, Baptême, Répétition du mariage';
+
+  @override
+  String get rencontres => 'Rencontres';
+
+  @override
+  String get repondre => 'Répondre';
+
+  @override
+  String get reponseEnvoyee => 'Réponse envoyée.';
+
+  @override
+  String get supprimerLecon => 'Supprimer cette leçon ?';
+
+  @override
+  String get voirPreparations => 'Voir les préparations';
+
+  @override
+  String get votreQuestion => 'Votre question';
+
+  @override
+  String get votreReponse => 'Votre réponse';
+
+  @override
+  String get vousEtesInscrit => 'Vous êtes inscrit';
 }

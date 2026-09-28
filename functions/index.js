@@ -22,7 +22,8 @@ import {
 } from './groupes.js';
 import {
   demandeAvancee, messagesFete, notificationApport, notificationNouvelleDemande, notificationPriere,
-  notificationSuiviDemande,
+  notificationInscription, notificationQuestion, notificationReponse, notificationSuiviDemande,
+  reponseDonnee,
 } from './vie.js';
 
 initializeApp();
@@ -342,3 +343,38 @@ export const nouvelApport = onDocumentWritten('fetes/{id}/apports/{uid}', async 
     (langue) => notificationApport(event.params.id, fete.data(), a, langue),
   );
 });
+
+/** Candidat inscrit à une préparation : il est prévenu. */
+export const inscriptionPreparation = onDocumentCreated(
+  'preparations/{prid}/inscrits/{uid}',
+  async (event) => {
+    const prep = (await getFirestore().doc(`preparations/${event.params.prid}`).get()).data();
+    if (!prep) return;
+    await envoyerAuxComptes([event.params.uid], (langue) =>
+      notificationInscription(event.params.prid, prep, langue));
+  },
+);
+
+/** Question d'un candidat : les pasteurs sont prévenus. */
+export const questionPreparation = onDocumentCreated(
+  'preparations/{prid}/inscrits/{uid}/questions/{qid}',
+  async (event) => {
+    const q = event.data?.data();
+    if (!q) return;
+    const inscrit = (await event.data.ref.parent.parent.get()).data();
+    await envoyerAuxComptes(await comptesAvecRoles(['admin']), (langue) =>
+      notificationQuestion(event.params.prid, event.params.uid, inscrit?.nom ?? '', q, langue));
+  },
+);
+
+/** Réponse du pasteur : le candidat est prévenu. */
+export const reponsePreparation = onDocumentUpdated(
+  'preparations/{prid}/inscrits/{uid}/questions/{qid}',
+  async (event) => {
+    const avant = event.data?.before.data();
+    const apres = event.data?.after.data();
+    if (!reponseDonnee(avant, apres)) return;
+    await envoyerAuxComptes([event.params.uid], (langue) =>
+      notificationReponse(event.params.prid, apres, langue));
+  },
+);

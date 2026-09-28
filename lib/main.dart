@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'app.dart';
+import 'core/preferences.dart';
 import 'core/firebase/firebase_options.dart';
 
 Future<void> main() async {
@@ -11,5 +14,11 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // Les polices sont incluses dans l'app (assets/google_fonts).
   GoogleFonts.config.allowRuntimeFetching = false;
-  runApp(const ProviderScope(child: MontagneDesOliviersApp()));
+  final preferences = await SharedPreferences.getInstance();
+  runApp(
+    ProviderScope(
+      overrides: [sharedPreferencesProvider.overrideWithValue(preferences)],
+      child: const MontagneDesOliviersApp(),
+    ),
+  );
 }

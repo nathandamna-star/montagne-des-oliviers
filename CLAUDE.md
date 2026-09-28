@@ -281,4 +281,15 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   ce qu'il apporte (`fetes/{id}/apports/{uid}` : nourriture|gateau|boisson|autre + précision) pour informer les
   **responsables cuisine** = groupe de type `cuisine` désigné dans les paramètres (`groupeCuisineId`), qui voient la
   liste et les totaux et sont notifiés (`nouvelApport`). Nouvelle fête → sujets `membres_fr|nl` (`nouvelleFete`).
-- Étape 7 bis à faire : Préparations au mariage et au baptême (règles déjà écrites).
+
+- Préparations (étape 7 bis, `lib/features/preparations/`) : `preparations/{id}` (type mariage|bapteme, titre/description
+  FR/NL, publie), `…/lecons/{lid}` (titre, texte, ordre, publique, audioUrl, videoUrl, documentUrl — fichiers envoyés
+  par `EnvoiFichiers` (file_picker, putFile sur téléphone / putData sur le web, vidéos recompressées) dans Storage
+  `preparations/{id}/{lid}/…`), `…/inscrits/{uid}` (nom, demandeId, faites, rencontres [{titre, date}]) et
+  `…/questions/{qid}`. Accès : Accueil / Profil / Responsables → Préparations (`/accueil/preparations`), et depuis une
+  demande de baptême ou de mariage (membre : « Voir les préparations » ; pasteur : « Inscrire à une préparation »).
+  Non inscrit : leçons publiques + « Faire une demande » (type pré-choisi `?type=`). Candidat : progression,
+  rencontres, « J'ai terminé cette leçon », questions. Pasteur : éditeurs, ordre (monter/descendre), candidats
+  (inscrire depuis l'annuaire, rencontres, réponses). Lecteurs audio/vidéo repris de NDAD (`lib/shared/lecteurs/`,
+  `FauxLecteurs` en test), `sharedPreferencesProvider` chargé dans main(). Fonctions `inscriptionPreparation`,
+  `questionPreparation`, `reponsePreparation`.
