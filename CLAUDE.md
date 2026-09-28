@@ -144,3 +144,14 @@ le porteur du projet doit vérifier sur son téléphone ou son ordinateur.
 Avant toute décision importante non prévue ici, pose la question au lieu de choisir seul.
 
 ## Notes techniques (tenues à jour au fil des étapes)
+- Identifiant de l'app : `be.montagnedesoliviers.montagne_des_oliviers` (généré par Flutter ; à fixer avant
+  l'enregistrement chez Apple/Google), nom affiché « Montagne des Oliviers ». Le nom de l'église n'est pas
+  traduit en néerlandais.
+- Structure : `lib/core/` (thème, navigation, rôles), `lib/features/<module>/`, `lib/shared/widgets/`.
+- Traductions : `lib/l10n/app_fr.arb` (modèle) et `app_nl.arb` ; langue du téléphone, sinon français.
+- Polices incluses dans `assets/google_fonts/` : Montserrat (titres, comme le logo) et Nunito Sans (texte),
+  licences OFL jointes ; `GoogleFonts.config.allowRuntimeFetching = false`.
+- Navigation : `StatefulShellRoute` à 5 onglets (Accueil, Agenda, Groupes, Médias, Profil) + Responsables si
+  `estResponsableProvider` (branché sur les custom claims à l'étape 2). Barre du bas sur téléphone,
+  `NavigationRail` à partir de 800 px de large (ordinateur, site web).
+- Vérifier avant chaque commit : `flutter analyze`, `flutter test` ; la CI construit aussi la version web.

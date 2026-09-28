@@ -1,0 +1,20 @@
+{
+  "@@locale": "fr",
+  "appTitle": "Montagne des Oliviers",
+  "nomEglise": "Centre Évangélique Montagne des Oliviers",
+  "slogan": "Une famille dans la foi, à Tienen",
+  "navAccueil": "Accueil",
+  "navAgenda": "Agenda",
+  "navGroupes": "Groupes",
+  "navMedias": "Médias",
+  "navProfil": "Profil",
+  "navResponsables": "Responsables",
+  "bientot": "Bientôt disponible",
+  "accueilBienvenue": "Bienvenue dans la famille de la Montagne des Oliviers.",
+  "accueilAVenir": "Ici : le verset du jour, les annonces de l'église, le prochain culte et le direct.",
+  "agendaAVenir": "Ici : les cultes, les réunions de prière, les cellules de maison et tous les événements, avec inscription.",
+  "groupesAVenir": "Ici : vos cellules de maison, les jeunes, la louange, l'entraide… avec une discussion privée par groupe.",
+  "mediasAVenir": "Ici : les prédications et exhortations en audio et en vidéo, le direct du culte et le verset du jour.",
+  "profilAVenir": "Ici : votre compte, vos demandes, vos sujets de prière, vos dons et la langue de l'application.",
+  "responsablesAVenir": "Ici : le fichier des membres, les dons, les plannings des services et la réservation des salles."
+}
