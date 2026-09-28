@@ -22,11 +22,11 @@ L'onglet Groupes montre vos groupes. Pour rejoindre un groupe, demandez à son r
 
 ## Comment faire un don ?
 
-Accueil → Donner. Vous pouvez donner par virement (avec un QR code à scanner dans l'application de votre banque), par Bancontact ou par carte, une fois ou chaque mois. Sur iPhone, le don se fait sur le site de l'église.
+Accueil → Dîmes et offrandes. Vous pouvez donner par virement (avec un QR code à scanner dans l'application de votre banque), par Bancontact ou par carte, une fois ou chaque mois. Sur iPhone, le don se fait sur le site de l'église.
 
 ## Où retrouver mes dons ?
 
-Profil → Mes dons. Le relevé annuel est disponible en haut de l'écran des dons.
+Profil → Mes dons. Le relevé annuel (PDF) est disponible en haut de l'écran des dons.
 
 ## Comment télécharger ou supprimer mes données ?
 
