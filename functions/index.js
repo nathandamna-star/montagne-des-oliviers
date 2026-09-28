@@ -378,3 +378,36 @@ export const reponsePreparation = onDocumentUpdated(
       notificationReponse(event.params.prid, apres, langue));
   },
 );
+
+/**
+ * Secrétariat / pasteurs : reconstruit l'annuaire (nom de chaque compte) à
+ * partir des profils, pour les comptes créés avant l'annuaire ou jamais mis à jour.
+ */
+export const reconstruireAnnuaire = onCall(async (requete) => {
+  const t = requete.auth?.token;
+  if (t?.admin !== true && t?.secretariat !== true) {
+    throw new HttpsError('permission-denied', 'Réservé au secrétariat.');
+  }
+  const db = getFirestore();
+  const [users, annuaire] = await Promise.all([
+    db.collection('users').get(), db.collection('annuaire').get(),
+  ]);
+  const actuels = new Map(annuaire.docs.map((d) => [d.id, d.data().nom]));
+  const lot = db.batch();
+  let n = 0;
+  for (const u of users.docs) {
+    const nom = u.data().nom ?? '';
+    if (actuels.get(u.id) !== nom) {
+      lot.set(db.doc(`annuaire/${u.id}`), { nom });
+      n += 1;
+    }
+    actuels.delete(u.id);
+  }
+  // Comptes supprimés : on retire leur nom.
+  for (const id of actuels.keys()) {
+    lot.delete(db.doc(`annuaire/${id}`));
+    n += 1;
+  }
+  if (n > 0) await lot.commit();
+  return { misAJour: n };
+});

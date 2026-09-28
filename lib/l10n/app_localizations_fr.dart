@@ -1547,4 +1547,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get vousEtesInscrit => 'Vous êtes inscrit';
+
+  @override
+  String get ajouterAdmin => 'Ajouter un administrateur';
 }

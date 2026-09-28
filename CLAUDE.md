@@ -293,3 +293,7 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   (inscrire depuis l'annuaire, rencontres, réponses). Lecteurs audio/vidéo repris de NDAD (`lib/shared/lecteurs/`,
   `FauxLecteurs` en test), `sharedPreferencesProvider` chargé dans main(). Fonctions `inscriptionPreparation`,
   `questionPreparation`, `reponsePreparation`.
+- Groupes (demande du porteur) : bouton « Ajouter un administrateur » sur la page du groupe (la personne devient
+  membre et administrateur, `ajouterAdmins`) ; à la création, recherche par nom et administrateurs choisis affichés en
+  haut. Fonction `reconstruireAnnuaire` (secrétariat/admin) appelée à l'ouverture de ces écrans : tous les comptes
+  apparaissent dans la liste, même anciens.

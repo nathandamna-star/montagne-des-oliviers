@@ -51,6 +51,10 @@ class FaussesFonctionsRoles implements FonctionsRoles {
   }
 
   @override
+  Future<void> reconstruireAnnuaire() async =>
+      appels.add('reconstruireAnnuaire');
+
+  @override
   Future<void> definirRoles(String email, Set<Role> roles) async {
     appels.add('definirRoles $email ${roles.map((r) => r.name).join(',')}');
     if (erreur != null) throw erreur!;

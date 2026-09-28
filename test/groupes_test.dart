@@ -296,4 +296,65 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Aucun message. Écrivez le premier !'), findsOneWidget);
   });
+
+  testWidgets('ajouter un administrateur directement (pas encore membre)', (
+    tester,
+  ) async {
+    final b = await banc();
+    await lancer(tester, banc: b, taille: grand);
+    await ouvrirGroupe(tester, 'Intercession du mardi');
+    await tester.tap(find.text('Ajouter un administrateur'));
+    await tester.pumpAndSettle();
+    // Marie est déjà administratrice : pas proposée ; Paul (membre) et Jean oui.
+    expect(find.widgetWithText(CheckboxListTile, 'Marie'), findsNothing);
+    expect(find.widgetWithText(CheckboxListTile, 'Paul'), findsOneWidget);
+    await tester.tap(find.widgetWithText(CheckboxListTile, 'Jean'));
+    await tester.pump();
+    await tester.tap(find.text('Ajouter 1 personne'));
+    await tester.pumpAndSettle();
+    final g = await b.firestore.doc('groupes/inter').get();
+    expect(g['admins'], ['u1', 'u4']);
+    expect(g['membres'], ['u1', 'u2', 'u4']);
+    expect(find.text('Administrateur du groupe'), findsNWidgets(2));
+  });
+
+  testWidgets('création : rechercher et choisir l\'administrateur', (
+    tester,
+  ) async {
+    final b = await banc(roles: {Role.secretariat});
+    await lancer(tester, banc: b, taille: grand);
+    await tester.tap(find.text('Responsables'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Groupes de l\'église'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Nouveau groupe'));
+    await tester.pumpAndSettle();
+    expect(b.fonctions.appels, contains('reconstruireAnnuaire'));
+    await tester.enterText(
+      find.widgetWithText(TextFormField, 'Nom du groupe'),
+      'Cellule de Tienen',
+    );
+    await tester.enterText(
+      find.widgetWithText(TextField, 'Rechercher une personne'),
+      'hel',
+    );
+    await tester.pumpAndSettle();
+    expect(find.widgetWithText(CheckboxListTile, 'Paul'), findsNothing);
+    await tester.tap(find.widgetWithText(CheckboxListTile, 'Hélène'));
+    await tester.pumpAndSettle();
+    // L'administratrice choisie apparaît en haut.
+    expect(find.widgetWithText(InputChip, 'Hélène'), findsOneWidget);
+    await tester.tap(find.text('Enregistrer'));
+    await tester.pumpAndSettle();
+    final g =
+        (await b.firestore
+                .collection('groupes')
+                .where('nom', isEqualTo: 'Cellule de Tienen')
+                .get())
+            .docs
+            .single
+            .data();
+    expect(g['admins'], ['u3']);
+    expect(g['membres'], ['u3']);
+  });
 }

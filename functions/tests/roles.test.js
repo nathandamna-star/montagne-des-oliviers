@@ -81,3 +81,18 @@ describe('rôles', () => {
     await refuse(definir({ email: 'pasteur@exemple.be', roles: [] }), 'failed-precondition');
   });
 });
+
+describe('annuaire', () => {
+  beforeEach(vider);
+
+  it('reconstruit par le secrétariat ou l\'administrateur seulement', async () => {
+    const reconstruire = httpsCallable(fonctions, 'reconstruireAnnuaire');
+    await compte('jean@exemple.be');
+    await refuse(reconstruire(), 'permission-denied');
+    await compte('pasteur@exemple.be');
+    await revendiquer();
+    await connecter('pasteur@exemple.be');
+    const res = await reconstruire();
+    assert.equal(typeof res.data.misAJour, 'number');
+  });
+});

@@ -79,6 +79,13 @@ class GroupesRepository {
   Future<void> ajouterMembres(String id, List<String> uids) =>
       _col.doc(id).update({'membres': FieldValue.arrayUnion(uids)});
 
+  /// Ajoute des administrateurs (ils deviennent aussi membres).
+  Future<void> ajouterAdmins(String id, List<String> uids) =>
+      _col.doc(id).update({
+        'membres': FieldValue.arrayUnion(uids),
+        'admins': FieldValue.arrayUnion(uids),
+      });
+
   /// Retire un membre (et son rôle d'administrateur du groupe).
   Future<void> retirerMembre(String id, String uid) => _col.doc(id).update({
     'membres': FieldValue.arrayRemove([uid]),

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/roles.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/domain/sans_accents.dart';
+import '../../auth/auth_providers.dart';
 import '../domain/groupe.dart';
 import '../groupes_providers.dart';
 import 'libelles_groupes.dart';
@@ -32,6 +33,7 @@ class _EditeurGroupeScreenState extends ConsumerState<EditeurGroupeScreen> {
   bool _charge = false;
   bool _occupe = false;
   String? _erreurAdmin;
+  String _recherche = '';
 
   bool get _nouveau => widget.id == null;
 
@@ -40,6 +42,11 @@ class _EditeurGroupeScreenState extends ConsumerState<EditeurGroupeScreen> {
     super.initState();
     if (_nouveau) {
       _charge = true;
+      // Liste des noms à jour (comptes créés récemment).
+      ref
+          .read(fonctionsRolesProvider)
+          .reconstruireAnnuaire()
+          .catchError((_) {});
     } else {
       ref.read(groupesRepositoryProvider).lire(widget.id!).then((g) {
         if (!mounted || g == null) return;
@@ -226,17 +233,48 @@ class _EditeurGroupeScreenState extends ConsumerState<EditeurGroupeScreen> {
                             _erreurAdmin!,
                             style: TextStyle(color: theme.colorScheme.error),
                           ),
-                        for (final e in comptes)
-                          CheckboxListTile(
-                            contentPadding: EdgeInsets.zero,
-                            value: _admins.contains(e.key),
-                            title: Text(e.value),
-                            onChanged: (v) => setState(
-                              () => v == true
-                                  ? _admins.add(e.key)
-                                  : _admins.remove(e.key),
-                            ),
+                        if (_admins.isNotEmpty) ...[
+                          const SizedBox(height: 8),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: [
+                              for (final u in _admins)
+                                InputChip(
+                                  avatar: const Icon(
+                                    Icons.admin_panel_settings_outlined,
+                                    size: 18,
+                                  ),
+                                  label: Text(noms[u] ?? l10n.compteInconnu),
+                                  onDeleted: () =>
+                                      setState(() => _admins.remove(u)),
+                                ),
+                            ],
                           ),
+                        ],
+                        const SizedBox(height: 8),
+                        TextField(
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.search),
+                            hintText: l10n.rechercherPersonne,
+                          ),
+                          onChanged: (v) => setState(() => _recherche = v),
+                        ),
+                        for (final e in comptes)
+                          if (sansAccents(_recherche)
+                              .split(' ')
+                              .where((m) => m.isNotEmpty)
+                              .every((m) => sansAccents(e.value).contains(m)))
+                            CheckboxListTile(
+                              contentPadding: EdgeInsets.zero,
+                              value: _admins.contains(e.key),
+                              title: Text(e.value),
+                              onChanged: (v) => setState(
+                                () => v == true
+                                    ? _admins.add(e.key)
+                                    : _admins.remove(e.key),
+                              ),
+                            ),
                       ],
                       const SizedBox(height: 16),
                       FilledButton(

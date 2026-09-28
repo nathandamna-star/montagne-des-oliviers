@@ -2845,6 +2845,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Vous êtes inscrit'**
   String get vousEtesInscrit;
+
+  /// No description provided for @ajouterAdmin.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un administrateur'**
+  String get ajouterAdmin;
 }
 
 class _AppLocalizationsDelegate

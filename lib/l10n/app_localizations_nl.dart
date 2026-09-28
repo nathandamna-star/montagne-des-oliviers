@@ -1548,4 +1548,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get vousEtesInscrit => 'Je bent ingeschreven';
+
+  @override
+  String get ajouterAdmin => 'Beheerder toevoegen';
 }

@@ -16,6 +16,10 @@ abstract interface class FonctionsRoles {
 
   /// Administrateur seulement : fixe les rôles du compte [email].
   Future<void> definirRoles(String email, Set<Role> roles);
+
+  /// Secrétariat / pasteurs : remet à jour la liste des noms (annuaire) à
+  /// partir de tous les comptes, pour pouvoir les ajouter aux groupes.
+  Future<void> reconstruireAnnuaire();
 }
 
 class FonctionsRolesFirebase implements FonctionsRoles {
@@ -38,6 +42,9 @@ class FonctionsRolesFirebase implements FonctionsRoles {
 
   @override
   Future<void> revendiquerAdmin() => _appeler('revendiquerAdmin');
+
+  @override
+  Future<void> reconstruireAnnuaire() => _appeler('reconstruireAnnuaire');
 
   @override
   Future<void> definirRoles(String email, Set<Role> roles) =>

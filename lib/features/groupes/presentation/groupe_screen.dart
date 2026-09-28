@@ -202,14 +202,25 @@ class _Groupe extends ConsumerWidget {
                       style: theme.textTheme.titleMedium,
                     ),
                   ),
-                  if (gere)
-                    TextButton.icon(
-                      onPressed: () => _ajouter(context, ref),
+                ],
+              ),
+              if (gere)
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    OutlinedButton.icon(
+                      onPressed: () => _ajouter(context, ref, admins: false),
                       icon: const Icon(Icons.person_add_alt),
                       label: Text(l10n.ajouterMembres),
                     ),
-                ],
-              ),
+                    OutlinedButton.icon(
+                      onPressed: () => _ajouter(context, ref, admins: true),
+                      icon: const Icon(Icons.admin_panel_settings_outlined),
+                      label: Text(l10n.ajouterAdmin),
+                    ),
+                  ],
+                ),
               for (final u in membres)
                 ListTile(
                   contentPadding: EdgeInsets.zero,
@@ -298,26 +309,46 @@ class _Groupe extends ConsumerWidget {
     return [for (final r in liste.take(3)) CarteRencontre(rencontre: r)];
   }
 
-  /// Choisir des personnes parmi les comptes de l'église.
-  Future<void> _ajouter(BuildContext context, WidgetRef ref) async {
+  /// Choisir des personnes parmi les comptes de l'église : nouveaux membres,
+  /// ou administrateurs (déjà membres ou non).
+  Future<void> _ajouter(
+    BuildContext context,
+    WidgetRef ref, {
+    required bool admins,
+  }) async {
+    final l10n = AppLocalizations.of(context);
+    if (ref.read(estSecretariatProvider)) {
+      // Liste des noms à jour (comptes créés récemment).
+      ref
+          .read(fonctionsRolesProvider)
+          .reconstruireAnnuaire()
+          .catchError((_) {});
+    }
     final choisis = await showModalBottomSheet<List<String>>(
       context: context,
       isScrollControlled: true,
       showDragHandle: true,
-      builder: (context) => _ChoixMembres(dejaMembres: groupe.membres.toSet()),
+      builder: (context) => _ChoixMembres(
+        titre: admins ? l10n.ajouterAdmin : l10n.ajouterMembres,
+        exclus: (admins ? groupe.admins : groupe.membres).toSet(),
+      ),
     );
     if (choisis == null || choisis.isEmpty) return;
-    await ref
-        .read(groupesRepositoryProvider)
-        .ajouterMembres(groupe.id, choisis);
+    final repo = ref.read(groupesRepositoryProvider);
+    await (admins
+        ? repo.ajouterAdmins(groupe.id, choisis)
+        : repo.ajouterMembres(groupe.id, choisis));
   }
 }
 
 /// Liste des comptes de l'église à cocher (recherche par nom).
 class _ChoixMembres extends ConsumerStatefulWidget {
-  const _ChoixMembres({required this.dejaMembres});
+  const _ChoixMembres({required this.titre, required this.exclus});
 
-  final Set<String> dejaMembres;
+  final String titre;
+
+  /// Déjà présents : pas proposés.
+  final Set<String> exclus;
 
   @override
   ConsumerState<_ChoixMembres> createState() => _ChoixMembresState();
@@ -334,7 +365,7 @@ class _ChoixMembresState extends ConsumerState<_ChoixMembres> {
     final mots = sansAccents(_recherche).split(' ').where((m) => m.isNotEmpty);
     final candidats = [
       for (final e in noms.entries)
-        if (!widget.dejaMembres.contains(e.key) &&
+        if (!widget.exclus.contains(e.key) &&
             mots.every((m) => sansAccents(e.value).contains(m)))
           e,
     ]..sort((a, b) => sansAccents(a.value).compareTo(sansAccents(b.value)));
@@ -343,6 +374,13 @@ class _ChoixMembresState extends ConsumerState<_ChoixMembres> {
       initialChildSize: 0.8,
       builder: (context, controleur) => Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              widget.titre,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
             child: TextField(
