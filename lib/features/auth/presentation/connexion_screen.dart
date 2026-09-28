@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/router/routes.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../shared/widgets/logo_eglise.dart';
 import '../auth_providers.dart';
 import 'message_erreur_auth.dart';
 
@@ -66,11 +67,7 @@ class _ConnexionScreenState extends ConsumerState<ConnexionScreen> {
                   ),
                   child: Column(
                     children: [
-                      const Icon(
-                        Icons.spa_outlined,
-                        color: Colors.white,
-                        size: 40,
-                      ),
+                      const LogoEglise(taille: 96),
                       const SizedBox(height: 12),
                       Text(
                         l10n.nomEglise,

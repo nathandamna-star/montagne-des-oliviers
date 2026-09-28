@@ -2,7 +2,6 @@
   "@@locale": "fr",
   "appTitle": "Montagne des Oliviers",
   "nomEglise": "Centre Évangélique Montagne des Oliviers",
-  "slogan": "Une famille dans la foi, à Tienen",
   "navAccueil": "Accueil",
   "navAgenda": "Agenda",
   "navGroupes": "Groupes",
@@ -92,5 +91,6 @@
   "erreurIdentifiantsIncorrects": "Adresse e-mail ou mot de passe incorrect.",
   "erreurTropDeTentatives": "Trop de tentatives. Réessayez dans quelques minutes.",
   "erreurReseau": "Pas de connexion internet. Vérifiez votre réseau et réessayez.",
-  "erreurInconnue": "Une erreur est survenue. Réessayez."
+  "erreurInconnue": "Une erreur est survenue. Réessayez.",
+  "devise": "Repentance · Délivrance · Sanctification"
 }

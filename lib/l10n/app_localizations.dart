@@ -110,12 +110,6 @@ abstract class AppLocalizations {
   /// **'Centre Évangélique Montagne des Oliviers'**
   String get nomEglise;
 
-  /// No description provided for @slogan.
-  ///
-  /// In fr, this message translates to:
-  /// **'Une famille dans la foi, à Tienen'**
-  String get slogan;
-
   /// No description provided for @navAccueil.
   ///
   /// In fr, this message translates to:
@@ -529,6 +523,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Une erreur est survenue. Réessayez.'**
   String get erreurInconnue;
+
+  /// No description provided for @devise.
+  ///
+  /// In fr, this message translates to:
+  /// **'Repentance · Délivrance · Sanctification'**
+  String get devise;
 }
 
 class _AppLocalizationsDelegate

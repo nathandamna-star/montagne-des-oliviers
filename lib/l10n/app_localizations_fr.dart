@@ -16,9 +16,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get nomEglise => 'Centre Évangélique Montagne des Oliviers';
 
   @override
-  String get slogan => 'Une famille dans la foi, à Tienen';
-
-  @override
   String get navAccueil => 'Accueil';
 
   @override
@@ -252,4 +249,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get erreurInconnue => 'Une erreur est survenue. Réessayez.';
+
+  @override
+  String get devise => 'Repentance · Délivrance · Sanctification';
 }

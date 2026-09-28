@@ -16,9 +16,6 @@ class AppLocalizationsNl extends AppLocalizations {
   String get nomEglise => 'Centre Évangélique Montagne des Oliviers';
 
   @override
-  String get slogan => 'Een familie in het geloof, in Tienen';
-
-  @override
   String get navAccueil => 'Home';
 
   @override
@@ -252,4 +249,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get erreurInconnue => 'Er ging iets mis. Probeer het opnieuw.';
+
+  @override
+  String get devise => 'Bekering · Bevrijding · Heiliging';
 }

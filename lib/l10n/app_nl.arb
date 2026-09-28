@@ -2,7 +2,6 @@
   "@@locale": "nl",
   "appTitle": "Montagne des Oliviers",
   "nomEglise": "Centre Évangélique Montagne des Oliviers",
-  "slogan": "Een familie in het geloof, in Tienen",
   "navAccueil": "Home",
   "navAgenda": "Agenda",
   "navGroupes": "Groepen",
@@ -71,5 +70,6 @@
   "erreurIdentifiantsIncorrects": "Onjuist e-mailadres of wachtwoord.",
   "erreurTropDeTentatives": "Te veel pogingen. Probeer het over enkele minuten opnieuw.",
   "erreurReseau": "Geen internetverbinding. Controleer je netwerk en probeer opnieuw.",
-  "erreurInconnue": "Er ging iets mis. Probeer het opnieuw."
+  "erreurInconnue": "Er ging iets mis. Probeer het opnieuw.",
+  "devise": "Bekering · Bevrijding · Heiliging"
 }

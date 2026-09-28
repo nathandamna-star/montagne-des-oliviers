@@ -12,8 +12,9 @@ void main() {
     expect(find.byType(NavigationBar), findsOneWidget);
     expect(find.byType(NavigationDestination), findsNWidgets(5));
     expect(find.text('Responsables'), findsNothing);
+    // Visiteur : la bannière « Rester connecté avec nous ».
     expect(
-      find.text('Centre Évangélique Montagne des Oliviers'),
+      find.image(const AssetImage('assets/images/banniere.jpg')),
       findsOneWidget,
     );
 

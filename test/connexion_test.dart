@@ -67,8 +67,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Bienvenue dans la famille !'), findsNothing);
+    // Membre : carte de l'église avec sa devise.
     expect(
-      find.text('Centre Évangélique Montagne des Oliviers'),
+      find.text('Repentance · Délivrance · Sanctification'),
       findsOneWidget,
     );
     final profil = await banc.firestore.collection('users').doc('u1').get();

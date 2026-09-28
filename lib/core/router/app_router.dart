@@ -8,6 +8,7 @@ import '../../features/auth/presentation/connexion_email_screen.dart';
 import '../../features/auth/presentation/connexion_screen.dart';
 import '../../features/auth/presentation/consentement_screen.dart';
 import '../../features/responsables/roles_screen.dart';
+import '../../shared/widgets/logo_eglise.dart';
 import '../../features/agenda/agenda_screen.dart';
 import '../../features/groupes/groupes_screen.dart';
 import '../../features/medias/medias_screen.dart';
@@ -137,11 +138,7 @@ class _Coquille extends ConsumerWidget {
               labelType: NavigationRailLabelType.all,
               leading: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
-                child: Icon(
-                  Icons.spa_outlined,
-                  size: 32,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
+                child: const LogoEglise(taille: 56),
               ),
               destinations: [
                 for (final (icone, iconeActive, libelle) in onglets)
