@@ -177,8 +177,8 @@ le porteur du projet doit vérifier sur son téléphone ou son ordinateur.
 Avant toute décision importante non prévue ici, pose la question au lieu de choisir seul.
 
 ## Notes techniques (tenues à jour au fil des étapes)
-- Identifiant de l'app : `be.montagnedesoliviers.montagne_des_oliviers` (généré par Flutter ; à fixer avant
-  l'enregistrement chez Apple/Google), nom affiché « Montagne des Oliviers ». Le nom de l'église n'est pas
+- Identifiant de l'app : `be.montagnedesoliviers.app` (iOS et Android), nom affiché « Montagne des Oliviers ».
+  Projet Firebase : `montagne-des-oliviers` (Firestore europe-west1, forfait Blaze ; connexion e-mail, Google, Apple). Le nom de l'église n'est pas
   traduit en néerlandais.
 - Structure : `lib/core/` (thème, navigation, rôles), `lib/features/<module>/`, `lib/shared/widgets/`.
 - Traductions : `lib/l10n/app_fr.arb` (modèle) et `app_nl.arb` ; langue du téléphone, sinon français.

@@ -1,4 +1,4 @@
-package be.montagnedesoliviers.montagne_des_oliviers
+package be.montagnedesoliviers.app
 
 import io.flutter.embedding.android.FlutterActivity
 
