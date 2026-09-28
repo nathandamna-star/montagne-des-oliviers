@@ -2321,4 +2321,75 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get total => 'Total';
+
+  @override
+  String get politiqueConfidentialite => 'Confidentialité';
+
+  @override
+  String get conditionsUtilisation => 'Conditions d\'utilisation';
+
+  @override
+  String get aideEtContact => 'Aide et contact';
+
+  @override
+  String get photoProfil => 'Photo de profil';
+
+  @override
+  String get langueApp => 'Langue de l\'app et des notifications';
+
+  @override
+  String get langueTelephone => 'Téléphone';
+
+  @override
+  String get telechargerMesDonnees => 'Télécharger mes données';
+
+  @override
+  String get telechargerMesDonneesAide =>
+      'Un fichier avec tout ce que l\'app sait de vous.';
+
+  @override
+  String get supprimerMonCompte => 'Supprimer mon compte';
+
+  @override
+  String get supprimerCompteTitre => 'Supprimer votre compte ?';
+
+  @override
+  String get supprimerCompteTexte =>
+      'Votre profil, vos messages, demandes, sujets de prière et inscriptions seront effacés définitivement. Vos dons restent dans la comptabilité de l\'église, sans votre nom ; un don mensuel sera arrêté. Votre fiche au registre des membres reste tenue par le secrétariat.';
+
+  @override
+  String get supprimerDefinitivement => 'Supprimer définitivement';
+
+  @override
+  String get compteSupprime => 'Votre compte a été supprimé.';
+
+  @override
+  String get suppressionDernierAdmin =>
+      'Vous êtes le seul administrateur : nommez d\'abord un autre administrateur (Responsables → Rôles).';
+
+  @override
+  String get suppressionCommandeARetirer =>
+      'Un livre payé attend encore d\'être retiré à l\'église. Retirez-le d\'abord, ou contactez le secrétariat.';
+
+  @override
+  String get emailContact => 'E-mail de contact de l\'église';
+
+  @override
+  String get emailContactAide =>
+      'Affichée dans la politique de confidentialité et la page d\'aide.';
+
+  @override
+  String get emailInvalide => 'Adresse e-mail invalide.';
+
+  @override
+  String get editeurReleve =>
+      'Centre Évangélique d\'Hoegaarden ASBL · BCE 0557.986.857 · Vroentestraat 100, 3320 Hoegaarden';
+
+  @override
+  String get entetesReleve => 'Date,Affectation,Mode,Montant';
+
+  @override
+  String releveEmisLe(String date) {
+    return 'Relevé établi le $date.';
+  }
 }

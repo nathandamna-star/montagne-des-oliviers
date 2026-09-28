@@ -2322,4 +2322,75 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get total => 'Totaal';
+
+  @override
+  String get politiqueConfidentialite => 'Privacy';
+
+  @override
+  String get conditionsUtilisation => 'Gebruiksvoorwaarden';
+
+  @override
+  String get aideEtContact => 'Hulp en contact';
+
+  @override
+  String get photoProfil => 'Profielfoto';
+
+  @override
+  String get langueApp => 'Taal van de app en de meldingen';
+
+  @override
+  String get langueTelephone => 'Telefoon';
+
+  @override
+  String get telechargerMesDonnees => 'Mijn gegevens downloaden';
+
+  @override
+  String get telechargerMesDonneesAide =>
+      'Een bestand met alles wat de app over jou weet.';
+
+  @override
+  String get supprimerMonCompte => 'Mijn account verwijderen';
+
+  @override
+  String get supprimerCompteTitre => 'Je account verwijderen?';
+
+  @override
+  String get supprimerCompteTexte =>
+      'Je profiel, berichten, aanvragen, gebedsintenties en inschrijvingen worden definitief gewist. Je giften blijven zonder je naam in de boekhouding van de kerk; een maandelijkse gift wordt gestopt. Je fiche in het ledenregister blijft bij het secretariaat.';
+
+  @override
+  String get supprimerDefinitivement => 'Definitief verwijderen';
+
+  @override
+  String get compteSupprime => 'Je account is verwijderd.';
+
+  @override
+  String get suppressionDernierAdmin =>
+      'Je bent de enige beheerder: stel eerst een andere beheerder aan (Leiding → Rollen).';
+
+  @override
+  String get suppressionCommandeARetirer =>
+      'Een betaald boek moet nog in de kerk afgehaald worden. Haal het eerst af of neem contact op met het secretariaat.';
+
+  @override
+  String get emailContact => 'Contact-e-mail van de kerk';
+
+  @override
+  String get emailContactAide =>
+      'Vermeld in het privacybeleid en de hulppagina.';
+
+  @override
+  String get emailInvalide => 'Ongeldig e-mailadres.';
+
+  @override
+  String get editeurReleve =>
+      'Centre Évangélique d\'Hoegaarden vzw · KBO 0557.986.857 · Vroentestraat 100, 3320 Hoegaarden';
+
+  @override
+  String get entetesReleve => 'Datum,Bestemming,Wijze,Bedrag';
+
+  @override
+  String releveEmisLe(String date) {
+    return 'Overzicht opgemaakt op $date.';
+  }
 }

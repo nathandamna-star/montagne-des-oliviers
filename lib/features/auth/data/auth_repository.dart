@@ -68,6 +68,18 @@ class AuthRepository {
     'createdAt': FieldValue.serverTimestamp(),
   });
 
+  /// Nom, langue (des notifications) ou photo du profil.
+  Future<void> modifierProfil(
+    String uid, {
+    String? nom,
+    String? langue,
+    String? photoUrl,
+  }) => firestore.collection('users').doc(uid).update({
+    'nom': ?nom?.trim(),
+    'langue': ?langue,
+    'photoUrl': ?photoUrl,
+  });
+
   Future<void> motDePasseOublie(String email) =>
       _executer(() => auth.sendPasswordResetEmail(email: email.trim()));
 

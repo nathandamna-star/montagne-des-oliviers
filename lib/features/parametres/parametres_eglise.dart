@@ -14,6 +14,7 @@ class ParametresEglise {
     this.titulaire = '',
     this.iban = '',
     this.bic = '',
+    this.emailContact = '',
   });
 
   /// Groupe qui reçoit les sujets de prière « partagés avec l'intercession ».
@@ -30,6 +31,9 @@ class ParametresEglise {
   final String iban;
   final String bic;
 
+  /// Adresse de contact affichée dans les pages légales.
+  final String emailContact;
+
   bool get virementPossible => titulaire.isNotEmpty && ibanValide(iban);
 
   factory ParametresEglise.depuis(Map<String, dynamic>? m) => ParametresEglise(
@@ -40,6 +44,7 @@ class ParametresEglise {
     titulaire: m?['titulaire'] as String? ?? '',
     iban: m?['iban'] as String? ?? '',
     bic: m?['bic'] as String? ?? '',
+    emailContact: m?['emailContact'] as String? ?? '',
   );
 }
 
@@ -57,7 +62,9 @@ Future<void> enregistrerParametresEglise(
   required String? groupeCuisineId,
   required String facebookUrl,
   required String youtubeUrl,
+  required String emailContact,
 }) => db.doc('parametres/eglise').set({
+  'emailContact': emailContact.trim(),
   'groupeIntercessionId': groupeIntercessionId,
   'groupeCuisineId': groupeCuisineId,
   'facebookUrl': facebookUrl.trim(),

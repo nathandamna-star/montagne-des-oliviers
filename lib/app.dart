@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'core/langue.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'features/auth/auth_providers.dart';
@@ -79,12 +80,17 @@ class _MontagneDesOliviersAppState
       final nouveau = apres.value?.uid;
       if (ancien == nouveau && avant != null) return;
       if (ancien != null && nouveau == null) notifications.desactiver(ancien);
-      notifications.activer(langue: _langue(), uid: nouveau);
+      notifications.activer(
+        langue: _langue(ref.read(langueAppProvider)),
+        uid: nouveau,
+      );
     }, fireImmediately: true);
   }
 
-  static String _langue() =>
-      PlatformDispatcher.instance.locale.languageCode == 'nl' ? 'nl' : 'fr';
+  /// Langue choisie dans le profil, sinon celle du téléphone.
+  static String _langue(String? choisie) =>
+      choisie ??
+      (PlatformDispatcher.instance.locale.languageCode == 'nl' ? 'nl' : 'fr');
 
   @override
   void dispose() {
@@ -107,6 +113,10 @@ class _MontagneDesOliviersAppState
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
+      locale: switch (ref.watch(langueAppProvider)) {
+        final String l => Locale(l),
+        null => null,
+      },
       // Néerlandais si le téléphone est en néerlandais, sinon français.
       localeResolutionCallback: (locale, supportees) {
         for (final l in supportees) {

@@ -11,6 +11,8 @@ import { HttpsError, onCall, onRequest } from 'firebase-functions/v2/https';
 import { onDocumentCreated, onDocumentUpdated, onDocumentWritten } from 'firebase-functions/v2/firestore';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 import { getMessaging } from 'firebase-admin/messaging';
+import { getStorage } from 'firebase-admin/storage';
+import { readFileSync } from 'node:fs';
 import { logger } from 'firebase-functions';
 import { nouveauxClaims, normaliser, rolesDe } from './roles.js';
 import {
@@ -39,6 +41,10 @@ import {
   actionsWebhook, checkoutCommande, checkoutDon, donVientDEtreRecu, genererCommunication, lignesCommande,
   notificationCommande, notificationDonRecu, pageRetourHtml, suiteCommande, verifierDon,
 } from './dons.js';
+import {
+  commandeAnonymisee, donAnonymise, profilExporte, refusSuppression, sansLaPersonne, versJson,
+} from './compte.js';
+import { PAGES_LEGALES, pageLegaleHtml } from './legal.js';
 
 initializeApp();
 
@@ -731,4 +737,179 @@ export const suiviCommande = onDocumentWritten('commandes/{id}', async (event) =
   if (!pour) return;
   const uids = pour === 'gestion' ? await comptesAvecRoles(['tresorier', 'secretariat', 'admin']) : [apres.uid];
   await envoyerAuxComptes(uids, (langue) => notificationCommande(event.params.id, apres, langue, pour));
+});
+
+// ----- Profil : export et suppression du compte (RGPD) -----
+
+const donnees = (snap) => snap.docs.map((d) => ({ id: d.id, ...versJson(d.data()) }));
+
+/** Sous-documents à l'identifiant de la personne (inscriptions, apports…) dans chaque parent. */
+async function sousDocuments(collection, sousCollection, uid) {
+  const parents = await getFirestore().collection(collection).get();
+  const trouves = [];
+  for (const parent of parents.docs) {
+    const d = await parent.ref.collection(sousCollection).doc(uid).get();
+    if (d.exists) trouves.push({ parent, doc: d });
+  }
+  return trouves;
+}
+
+/** Présences aux rencontres des groupes. */
+async function presences(uid) {
+  const trouvees = [];
+  for (const g of (await getFirestore().collection('groupes').get()).docs) {
+    for (const r of (await g.ref.collection('rencontres').get()).docs) {
+      const d = await r.ref.collection('presences').doc(uid).get();
+      if (d.exists) trouvees.push({ groupe: g, rencontre: r, doc: d });
+    }
+  }
+  return trouvees;
+}
+
+/** Télécharger mes données : tout ce qui concerne la personne, en JSON. */
+export const exporterMesDonnees = onCall({ timeoutSeconds: 120 }, async (requete) => {
+  if (!requete.auth) throw new HttpsError('unauthenticated', 'Connexion requise.');
+  const uid = requete.auth.uid;
+  const db = getFirestore();
+  const parUid = (col) => db.collection(col).where('uid', '==', uid).get();
+  const [profil, fiche, demandes, prieres, dons, donsMensuels, commandes, reservations, fetes, affectations, groupes] =
+    await Promise.all([
+      db.doc(`users/${uid}`).get(), parUid('membres'), parUid('demandes'), parUid('prieres'), parUid('dons'),
+      parUid('donsMensuels'), parUid('commandes'), parUid('reservations'), parUid('fetes'),
+      db.collectionGroup('affectations').where('uid', '==', uid).get(), db.collection('groupes').get(),
+    ]);
+  const messages = [];
+  for (const g of groupes.docs) {
+    const m = await g.ref.collection('messages').where('auteur', '==', uid).get();
+    messages.push(...m.docs.map((d) => ({ groupe: g.data().nom, id: d.id, ...versJson(d.data()) })));
+  }
+  const preparations = [];
+  for (const { parent, doc } of await sousDocuments('preparations', 'inscrits', uid)) {
+    const questions = await doc.ref.collection('questions').get();
+    preparations.push({ preparation: parent.id, ...versJson(doc.data()), questions: donnees(questions) });
+  }
+  const sous = async (col, sc) => (await sousDocuments(col, sc, uid))
+    .map(({ parent, doc }) => ({ [col]: parent.id, ...versJson(doc.data()) }));
+  return {
+    exporteLe: new Date().toISOString(),
+    compte: { uid, email: requete.auth.token.email ?? null },
+    profil: profilExporte(profil.data()),
+    ficheMembre: donnees(fiche),
+    groupes: groupes.docs.filter((g) => (g.data().membres ?? []).includes(uid))
+      .map((g) => ({ id: g.id, nom: g.data().nom })),
+    messagesGroupes: messages,
+    presences: (await presences(uid)).map(({ groupe, rencontre, doc }) =>
+      ({ groupe: groupe.id, rencontre: rencontre.id, ...versJson(doc.data()) })),
+    demandes: donnees(demandes),
+    prieres: donnees(prieres),
+    jaiPrie: (await sousDocuments('prieres', 'priants', uid)).map(({ parent }) => parent.id),
+    inscriptionsEvenements: await sous('evenements', 'inscriptions'),
+    fetes: donnees(fetes),
+    apportsFetes: await sous('fetes', 'apports'),
+    nettoyages: await sous('nettoyages', 'inscrits'),
+    preparations,
+    services: donnees(affectations),
+    reservations: donnees(reservations),
+    dons: donnees(dons),
+    donsMensuels: donnees(donsMensuels),
+    commandes: donnees(commandes),
+  };
+});
+
+async function supprimerFichiers(prefixe) {
+  if (emulateur()) return;
+  try {
+    await getStorage().bucket().deleteFiles({ prefix: prefixe });
+  } catch (e) {
+    logger.warn('Suppression de fichiers impossible', { prefixe, message: e.message });
+  }
+}
+
+/**
+ * Suppression du compte (RGPD, exigée par l'App Store et Google Play) :
+ * - refusée pour le dernier administrateur, et tant qu'un livre payé n'est pas retiré ;
+ * - dons et commandes : gardés pour la comptabilité, anonymisés ; dons mensuels arrêtés ;
+ * - la fiche du registre des membres (tenu par l'église) est seulement détachée du compte ;
+ * - tout le reste (profil, demandes, prières, messages, inscriptions…) est effacé.
+ */
+export const supprimerMonCompte = onCall({ timeoutSeconds: 300, secrets: [STRIPE_SECRET_KEY] }, async (requete) => {
+  if (!requete.auth) throw new HttpsError('unauthenticated', 'Connexion requise.');
+  const uid = requete.auth.uid;
+  const db = getFirestore();
+  const parUid = (col) => db.collection(col).where('uid', '==', uid).get();
+  const [commandes, dons, donsMensuels] = await Promise.all([parUid('commandes'), parUid('dons'), parUid('donsMensuels')]);
+  const refus = refusSuppression({
+    estAdmin: requete.auth.token.admin === true,
+    autresAdmins: (await comptesAvecRoles(['admin'])).filter((u) => u !== uid).length,
+    commandes: commandes.docs.map((d) => d.data()),
+  });
+  if (refus) throw new HttpsError('failed-precondition', refus, { code: refus });
+
+  // Paiements : anonymisés ; dons mensuels arrêtés chez Stripe.
+  for (const d of donsMensuels.docs) {
+    if (d.data().actif && !emulateur()) {
+      try {
+        await stripe().subscriptions.cancel(d.id);
+      } catch (e) {
+        logger.error('Arrêt du don mensuel impossible', { id: d.id, message: e.message });
+        throw new HttpsError('unavailable', 'Réessayez plus tard.');
+      }
+    }
+  }
+  const lot = db.batch();
+  dons.docs.forEach((d) => lot.update(d.ref, donAnonymise(d.data())));
+  commandes.docs.forEach((d) => lot.update(d.ref, commandeAnonymisee(d.data())));
+  donsMensuels.docs.forEach((d) => lot.update(d.ref, {
+    uid: 'compte-supprime', nom: '', actif: false, ...(d.data().actif ? { finLe: FieldValue.serverTimestamp() } : {}),
+  }));
+  (await parUid('membres')).docs.forEach((d) => lot.update(d.ref, { uid: FieldValue.delete() }));
+  await lot.commit();
+
+  // Ce que la personne a écrit ou demandé.
+  for (const col of ['demandes', 'prieres', 'reservations', 'fetes']) {
+    for (const d of (await parUid(col)).docs) await db.recursiveDelete(d.ref);
+  }
+  for (const d of (await db.collectionGroup('affectations').where('uid', '==', uid).get()).docs) {
+    await d.ref.delete();
+  }
+  for (const [col, sc] of [['evenements', 'inscriptions'], ['fetes', 'apports'], ['nettoyages', 'inscrits'],
+    ['prieres', 'priants'], ['preparations', 'inscrits']]) {
+    for (const { doc } of await sousDocuments(col, sc, uid)) await db.recursiveDelete(doc.ref);
+  }
+  for (const { doc } of await presences(uid)) await doc.ref.delete();
+
+  // Groupes et équipes : retirée des listes ; ses messages effacés.
+  for (const g of (await db.collection('groupes').get()).docs) {
+    const maj = sansLaPersonne(g.data(), uid, ['membres', 'admins']);
+    if (maj) await g.ref.update(maj);
+    const messages = await g.ref.collection('messages').where('auteur', '==', uid).get();
+    for (const m of messages.docs) await m.ref.delete();
+  }
+  for (const e of (await db.collection('equipes').get()).docs) {
+    const maj = sansLaPersonne(e.data(), uid, ['membres', 'responsables']);
+    if (maj) await e.ref.update(maj);
+  }
+
+  await supprimerFichiers(`users/${uid}/`);
+  await db.recursiveDelete(db.doc(`users/${uid}`));
+  await db.doc(`annuaire/${uid}`).delete();
+  await getAuth().deleteUser(uid);
+  logger.info('Compte supprimé', { uid });
+  return { supprime: true };
+});
+
+/**
+ * Pages légales publiques (adresses demandées par l'App Store et Google Play) :
+ * /legal/confidentialite, /legal/conditions, /legal/aide ; ?langue=nl pour le néerlandais.
+ * L'adresse e-mail de contact vient des paramètres de l'église.
+ */
+export const legal = onRequest(async (requete, reponse) => {
+  const page = requete.path.split('/').filter(Boolean).pop();
+  const nom = PAGES_LEGALES.includes(page) ? page : 'confidentialite';
+  const langue = requete.query.langue === 'nl' ? 'nl' : 'fr';
+  const texte = readFileSync(new URL(`./legal/${nom}_${langue}.md`, import.meta.url), 'utf8');
+  const email = (await getFirestore().doc('parametres/eglise').get()).data()?.emailContact ?? '';
+  reponse.set('Cache-Control', 'public, max-age=600')
+    .set('Content-Type', 'text/html; charset=utf-8')
+    .send(pageLegaleHtml(texte, { nom, langue, email }));
 });

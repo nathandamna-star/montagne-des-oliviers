@@ -6,6 +6,7 @@ import '../../core/router/routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../l10n/app_localizations.dart';
 import '../../shared/services/lanceur.dart';
+import '../../shared/widgets/liens_legaux.dart';
 import '../../shared/widgets/logo_eglise.dart';
 import '../actualites/actualites_providers.dart';
 import '../actualites/presentation/carte_actualite.dart';
@@ -165,6 +166,8 @@ class AccueilScreen extends ConsumerWidget {
             onAction: () => context.go(Routes.agenda),
           ),
           ..._evenements(context, ref),
+          const SizedBox(height: 24),
+          const LiensLegaux(),
         ],
       ),
     );

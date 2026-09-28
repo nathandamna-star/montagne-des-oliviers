@@ -113,6 +113,13 @@ void main() {
       findsOneWidget,
     );
 
+    // Le bouton est en bas du profil.
+    await tester.scrollUntilVisible(
+      find.text('Se déconnecter'),
+      300,
+      scrollable: find.byType(Scrollable).last,
+    );
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Se déconnecter'));
     await tester.pumpAndSettle();
     expect(b.auth.currentUser, isNull);

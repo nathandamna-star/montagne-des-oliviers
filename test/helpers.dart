@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,6 +16,7 @@ import 'package:montagne_des_oliviers/features/notifications/notifications_provi
 import 'package:montagne_des_oliviers/features/notifications/notifications_service.dart';
 import 'package:montagne_des_oliviers/core/preferences.dart';
 import 'package:montagne_des_oliviers/features/preparations/preparations_providers.dart';
+import 'package:montagne_des_oliviers/features/profil/data/fonctions_compte.dart';
 import 'package:montagne_des_oliviers/shared/data/envoi_fichiers.dart';
 import 'package:montagne_des_oliviers/shared/data/envoi_photos.dart';
 import 'package:montagne_des_oliviers/shared/lecteurs/lecteurs.dart';
@@ -99,6 +101,13 @@ class FauxPartage implements Partage {
     required String contenu,
     required String typeMime,
   }) async => fichiers.add((nom, contenu));
+
+  @override
+  Future<void> partagerOctets({
+    required String nom,
+    required Uint8List octets,
+    required String typeMime,
+  }) async => fichiers.add((nom, String.fromCharCodes(octets.take(5))));
 }
 
 /// Liens externes simulés.
@@ -198,6 +207,24 @@ class FauxPaiements implements PaiementsEnLigne {
   }
 }
 
+/// Export et suppression du compte simulés.
+class FaussesFonctionsCompte implements FonctionsCompte {
+  final appels = <String>[];
+  ErreurCompte? erreur;
+
+  @override
+  Future<String> exporterMesDonnees() async {
+    appels.add('exporter');
+    return '{"profil": {"nom": "Marie"}}';
+  }
+
+  @override
+  Future<void> supprimerMonCompte() async {
+    appels.add('supprimer');
+    if (erreur != null) throw erreur!;
+  }
+}
+
 /// Heure fixe des tests : lundi 5 octobre 2026, 9 h.
 final maintenant = DateTime(2026, 10, 5, 9);
 
@@ -226,6 +253,7 @@ class Banc {
   final lanceur = FauxLanceur();
   final fichiers = FauxEnvoiFichiers();
   late final paiements = FauxPaiements(firestore);
+  final compte = FaussesFonctionsCompte();
 
   /// Crée le profil (consentement déjà donné).
   Future<void> avecProfil([String nom = 'Marie']) =>
@@ -248,6 +276,7 @@ class Banc {
     fabriqueLecteursProvider.overrideWithValue(FauxLecteurs()),
     envoiFichiersProvider.overrideWithValue(fichiers),
     paiementsEnLigneProvider.overrideWithValue(paiements),
+    fonctionsCompteProvider.overrideWithValue(compte),
     donsDansLeNavigateurProvider.overrideWithValue(iPhone),
     horlogeProvider.overrideWithValue(() => maintenant),
     rolesFutureProvider.overrideWith((ref) async {

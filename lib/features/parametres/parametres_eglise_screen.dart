@@ -22,6 +22,7 @@ class _ParametresEgliseScreenState
   final _formulaire = GlobalKey<FormState>();
   final _facebook = TextEditingController();
   final _youtube = TextEditingController();
+  final _email = TextEditingController();
   String? _intercession;
   String? _cuisine;
   bool _charge = false;
@@ -38,6 +39,7 @@ class _ParametresEgliseScreenState
         _cuisine = p.groupeCuisineId;
         _facebook.text = p.facebookUrl;
         _youtube.text = p.youtubeUrl;
+        _email.text = p.emailContact;
         _charge = true;
       });
     });
@@ -47,6 +49,7 @@ class _ParametresEgliseScreenState
   void dispose() {
     _facebook.dispose();
     _youtube.dispose();
+    _email.dispose();
     super.dispose();
   }
 
@@ -62,6 +65,7 @@ class _ParametresEgliseScreenState
         groupeCuisineId: _cuisine,
         facebookUrl: _facebook.text,
         youtubeUrl: _youtube.text,
+        emailContact: _email.text,
       );
       messager.showSnackBar(SnackBar(content: Text(l10n.enregistre)));
       if (mounted) context.pop();
@@ -163,6 +167,24 @@ class _ParametresEgliseScreenState
                         ),
                         keyboardType: TextInputType.url,
                         validator: _lien,
+                      ),
+                      const SizedBox(height: 16),
+                      TextFormField(
+                        controller: _email,
+                        decoration: InputDecoration(
+                          labelText: l10n.emailContact,
+                          helperText: l10n.emailContactAide,
+                          helperMaxLines: 3,
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (v) {
+                          final t = (v ?? '').trim();
+                          return t.isEmpty ||
+                                  RegExp(r'^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$')
+                                      .hasMatch(t)
+                              ? null
+                              : l10n.emailInvalide;
+                        },
                       ),
                       const SizedBox(height: 16),
                       FilledButton(

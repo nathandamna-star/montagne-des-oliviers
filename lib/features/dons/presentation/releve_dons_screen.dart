@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../../../core/horloge.dart';
 import '../../../l10n/app_localizations.dart';
@@ -10,6 +11,7 @@ import '../../auth/auth_providers.dart';
 import '../dons_providers.dart';
 import '../domain/don.dart';
 import 'libelles_dons.dart';
+import 'releve_pdf.dart';
 
 /// Relevé annuel des dons reçus (ce n'est pas une attestation fiscale).
 class ReleveDonsScreen extends ConsumerStatefulWidget {
@@ -24,26 +26,33 @@ class _ReleveDonsScreenState extends ConsumerState<ReleveDonsScreen> {
 
   Future<void> _partager(List<Don> dons) async {
     final l10n = AppLocalizations.of(context);
+    final date = DateFormat.yMd(context.langue);
     final nom = ref.read(profilProvider).value?.nom ?? '';
-    final lignes = [
-      l10n.releveTitre('$_annee'),
-      l10n.nomEglise,
-      nom,
-      '',
-      for (final d in dons)
-        '${context.dateCourte(d.createdAt!)} ${d.createdAt!.year} · '
-            '${l10n.affectation(d.affectation)} · ${context.euros(d.montant)}',
-      '',
-      '${l10n.total} : ${context.euros(totalDons(dons))}',
-      '',
-      l10n.releveAvertissement,
-    ];
+    final octets = await relevePdf(
+      titre: l10n.releveTitre('$_annee'),
+      eglise: l10n.nomEglise,
+      editeur: l10n.editeurReleve,
+      donateur: nom,
+      entetes: l10n.entetesReleve.split(','),
+      lignes: [
+        for (final d in dons)
+          (
+            date.format(d.createdAt!),
+            l10n.affectation(d.affectation),
+            l10n.modeDon(d.mode),
+            context.euros(d.montant),
+          ),
+      ],
+      total: '${l10n.total} : ${context.euros(totalDons(dons))}',
+      avertissement: l10n.releveAvertissement,
+      emisLe: l10n.releveEmisLe(date.format(ref.read(horlogeProvider)())),
+    );
     await ref
         .read(partageProvider)
-        .partagerFichier(
-          nom: 'releve-dons-$_annee.txt',
-          contenu: '${lignes.join('\n')}\n',
-          typeMime: 'text/plain',
+        .partagerOctets(
+          nom: 'releve-dons-$_annee.pdf',
+          octets: octets,
+          typeMime: 'application/pdf',
         );
   }
 

@@ -4237,6 +4237,132 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Total'**
   String get total;
+
+  /// No description provided for @politiqueConfidentialite.
+  ///
+  /// In fr, this message translates to:
+  /// **'Confidentialité'**
+  String get politiqueConfidentialite;
+
+  /// No description provided for @conditionsUtilisation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Conditions d\'utilisation'**
+  String get conditionsUtilisation;
+
+  /// No description provided for @aideEtContact.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aide et contact'**
+  String get aideEtContact;
+
+  /// No description provided for @photoProfil.
+  ///
+  /// In fr, this message translates to:
+  /// **'Photo de profil'**
+  String get photoProfil;
+
+  /// No description provided for @langueApp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Langue de l\'app et des notifications'**
+  String get langueApp;
+
+  /// No description provided for @langueTelephone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Téléphone'**
+  String get langueTelephone;
+
+  /// No description provided for @telechargerMesDonnees.
+  ///
+  /// In fr, this message translates to:
+  /// **'Télécharger mes données'**
+  String get telechargerMesDonnees;
+
+  /// No description provided for @telechargerMesDonneesAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un fichier avec tout ce que l\'app sait de vous.'**
+  String get telechargerMesDonneesAide;
+
+  /// No description provided for @supprimerMonCompte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer mon compte'**
+  String get supprimerMonCompte;
+
+  /// No description provided for @supprimerCompteTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer votre compte ?'**
+  String get supprimerCompteTitre;
+
+  /// No description provided for @supprimerCompteTexte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre profil, vos messages, demandes, sujets de prière et inscriptions seront effacés définitivement. Vos dons restent dans la comptabilité de l\'église, sans votre nom ; un don mensuel sera arrêté. Votre fiche au registre des membres reste tenue par le secrétariat.'**
+  String get supprimerCompteTexte;
+
+  /// No description provided for @supprimerDefinitivement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer définitivement'**
+  String get supprimerDefinitivement;
+
+  /// No description provided for @compteSupprime.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre compte a été supprimé.'**
+  String get compteSupprime;
+
+  /// No description provided for @suppressionDernierAdmin.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous êtes le seul administrateur : nommez d\'abord un autre administrateur (Responsables → Rôles).'**
+  String get suppressionDernierAdmin;
+
+  /// No description provided for @suppressionCommandeARetirer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un livre payé attend encore d\'être retiré à l\'église. Retirez-le d\'abord, ou contactez le secrétariat.'**
+  String get suppressionCommandeARetirer;
+
+  /// No description provided for @emailContact.
+  ///
+  /// In fr, this message translates to:
+  /// **'E-mail de contact de l\'église'**
+  String get emailContact;
+
+  /// No description provided for @emailContactAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Affichée dans la politique de confidentialité et la page d\'aide.'**
+  String get emailContactAide;
+
+  /// No description provided for @emailInvalide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Adresse e-mail invalide.'**
+  String get emailInvalide;
+
+  /// No description provided for @editeurReleve.
+  ///
+  /// In fr, this message translates to:
+  /// **'Centre Évangélique d\'Hoegaarden ASBL · BCE 0557.986.857 · Vroentestraat 100, 3320 Hoegaarden'**
+  String get editeurReleve;
+
+  /// No description provided for @entetesReleve.
+  ///
+  /// In fr, this message translates to:
+  /// **'Date,Affectation,Mode,Montant'**
+  String get entetesReleve;
+
+  /// No description provided for @releveEmisLe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Relevé établi le {date}.'**
+  String releveEmisLe(String date);
 }
 
 class _AppLocalizationsDelegate

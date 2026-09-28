@@ -8,6 +8,7 @@ class Utilisateur {
     required this.email,
     required this.langue,
     this.consentementLe,
+    this.photoUrl,
   });
 
   final String uid;
@@ -18,6 +19,7 @@ class Utilisateur {
   /// Date du consentement au traitement des données (appartenance à l'église :
   /// donnée sensible, article 9 RGPD).
   final DateTime? consentementLe;
+  final String? photoUrl;
 
   factory Utilisateur.depuisFirestore(
     DocumentSnapshot<Map<String, dynamic>> doc,
@@ -29,6 +31,7 @@ class Utilisateur {
       email: d['email'] as String? ?? '',
       langue: d['langue'] as String? ?? 'fr',
       consentementLe: (d['consentementLe'] as Timestamp?)?.toDate(),
+      photoUrl: d['photoUrl'] as String?,
     );
   }
 }

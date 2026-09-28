@@ -950,5 +950,33 @@
       }
     }
   },
-  "total": "Total"
+  "total": "Total",
+  "politiqueConfidentialite": "Confidentialité",
+  "conditionsUtilisation": "Conditions d'utilisation",
+  "aideEtContact": "Aide et contact",
+  "photoProfil": "Photo de profil",
+  "langueApp": "Langue de l'app et des notifications",
+  "langueTelephone": "Téléphone",
+  "telechargerMesDonnees": "Télécharger mes données",
+  "telechargerMesDonneesAide": "Un fichier avec tout ce que l'app sait de vous.",
+  "supprimerMonCompte": "Supprimer mon compte",
+  "supprimerCompteTitre": "Supprimer votre compte ?",
+  "supprimerCompteTexte": "Votre profil, vos messages, demandes, sujets de prière et inscriptions seront effacés définitivement. Vos dons restent dans la comptabilité de l'église, sans votre nom ; un don mensuel sera arrêté. Votre fiche au registre des membres reste tenue par le secrétariat.",
+  "supprimerDefinitivement": "Supprimer définitivement",
+  "compteSupprime": "Votre compte a été supprimé.",
+  "suppressionDernierAdmin": "Vous êtes le seul administrateur : nommez d'abord un autre administrateur (Responsables → Rôles).",
+  "suppressionCommandeARetirer": "Un livre payé attend encore d'être retiré à l'église. Retirez-le d'abord, ou contactez le secrétariat.",
+  "emailContact": "E-mail de contact de l'église",
+  "emailContactAide": "Affichée dans la politique de confidentialité et la page d'aide.",
+  "emailInvalide": "Adresse e-mail invalide.",
+  "editeurReleve": "Centre Évangélique d'Hoegaarden ASBL · BCE 0557.986.857 · Vroentestraat 100, 3320 Hoegaarden",
+  "entetesReleve": "Date,Affectation,Mode,Montant",
+  "releveEmisLe": "Relevé établi le {date}.",
+  "@releveEmisLe": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  }
 }

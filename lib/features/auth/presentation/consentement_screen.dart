@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../l10n/app_localizations.dart';
+import '../../../shared/widgets/liens_legaux.dart';
 import '../auth_providers.dart';
 import 'message_erreur_auth.dart';
 
@@ -99,6 +100,9 @@ class _ConsentementScreenState extends ConsumerState<ConsentementScreen> {
                     l10n.consentementTexte,
                     style: theme.textTheme.bodySmall,
                   ),
+                ),
+                const LiensLegaux(
+                  pages: [PageLegale.confidentialite, PageLegale.conditions],
                 ),
                 if (_erreur != null) ...[
                   const SizedBox(height: 16),

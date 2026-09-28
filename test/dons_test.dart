@@ -238,10 +238,9 @@ void main() {
     expect(find.text(eur('50 €')), findsOneWidget);
     await tester.tap(find.byTooltip('Partager'));
     await tester.pumpAndSettle();
-    final (nom, contenu) = b.partage.fichiers.single;
-    expect(nom, 'releve-dons-2026.txt');
-    expect(contenu, contains(eur('Total : 50 €')));
-    expect(contenu, contains('pas une attestation fiscale'));
+    final (nom, debut) = b.partage.fichiers.single;
+    expect(nom, 'releve-dons-2026.pdf');
+    expect(debut, '%PDF-');
     await tester.tap(find.byTooltip('Année précédente'));
     await tester.pumpAndSettle();
     expect(find.text(eur('7 €')), findsWidgets);

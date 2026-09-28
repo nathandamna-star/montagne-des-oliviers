@@ -12,7 +12,7 @@ du secrétariat et du trésorier. Les administrateurs de groupe sont enregistré
 | `annuaire/{uid}` | nom seulement (recopié du profil par le serveur) | membres de l'église | serveur |
 | `membres/{id}` | fiche : nom, prénom, coordonnées, dateNaissance, familleId, baptemeLe, presentationLe, mariageLe, arriveeLe, statut visiteur/membre/actif, uid (compte lié), groupes, services, notes | secrétariat, la personne liée | secrétariat |
 | `familles/{id}` | nom, membres | secrétariat | secrétariat |
-| `parametres/eglise` | IBAN, BIC, titulaire, adresse, horaires, chaîne YouTube, groupe d'intercession par défaut | tous | trésorier, admin |
+| `parametres/eglise` | IBAN, BIC, titulaire, emailContact (pages légales), Facebook, YouTube, groupes d'intercession et de cuisine | tous | trésorier, admin |
 | `actualites/{id}` | titre, texte, photoUrl, epingle, visibilite public/membres, publie, publieLe | selon visibilité | secrétariat |
 | `evenements/{id}` | titre, description, type culte/priere/jeune/cellule/evenement/conference, debut, fin, lieu, visibilite, publie, inscription, placesMax, inscrits (serveur) | selon visibilité | secrétariat |
 | `evenements/{id}/inscriptions/{uid}` | nom, personnes (1–10) | soi, secrétariat | soi |
