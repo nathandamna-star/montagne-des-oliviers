@@ -26,38 +26,105 @@ class AccueilScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final connecte = ref.watch(estConnecteProvider);
     final membre = ref.watch(profilProvider).value != null;
-    final raccourcis = [
-      _Raccourci(Icons.savings_outlined, l10n.dimesEtOffrandes, Routes.dons),
-      _Raccourci(Icons.storefront_outlined, l10n.boutique, Routes.boutique),
-      _Raccourci(Icons.person_pin_outlined, l10n.notrePasteur, Routes.pasteur),
-      if (membre) ...[
-        _Raccourci(
-          Icons.outbox_outlined,
-          l10n.faireDemande,
-          Routes.nouvelleDemande,
+    final sections = <(String, List<_Raccourci>)>[
+      (
+        l10n.sectionDecouvrir,
+        [
+          _Raccourci(Icons.church_outlined, l10n.notreEglise, Routes.eglise),
+          _Raccourci(
+            Icons.person_pin_outlined,
+            l10n.notrePasteur,
+            Routes.pasteur,
+          ),
+          _Raccourci(
+            Icons.event_outlined,
+            l10n.navAgenda,
+            Routes.agenda,
+            onglet: true,
+          ),
+        ],
+      ),
+      (
+        l10n.sectionEcouter,
+        [
+          _Raccourci(
+            Icons.record_voice_over_outlined,
+            l10n.rubriquePredications,
+            Routes.mediasRubrique('predication'),
+            onglet: true,
+          ),
+          _Raccourci(
+            Icons.school_outlined,
+            l10n.rubriqueEnseignements,
+            Routes.mediasRubrique('enseignement'),
+            onglet: true,
+          ),
+          _Raccourci(
+            Icons.podcasts,
+            l10n.rubriquePodcasts,
+            Routes.mediasRubrique('podcast'),
+            onglet: true,
+          ),
+          _Raccourci(
+            Icons.forum_outlined,
+            l10n.rencontreDirect,
+            Routes.interaction,
+          ),
+        ],
+      ),
+      (
+        l10n.sectionParticiper,
+        [
+          _Raccourci(
+            Icons.groups_2_outlined,
+            l10n.communaute,
+            Routes.communaute,
+          ),
+          _Raccourci(Icons.mail_outline, l10n.nousContacter, Routes.contact),
+          _Raccourci(
+            Icons.savings_outlined,
+            l10n.dimesEtOffrandes,
+            Routes.dons,
+          ),
+          _Raccourci(Icons.storefront_outlined, l10n.boutique, Routes.boutique),
+        ],
+      ),
+      if (membre)
+        (
+          l10n.sectionMonEspace,
+          [
+            _Raccourci(
+              Icons.outbox_outlined,
+              l10n.faireDemande,
+              Routes.nouvelleDemande,
+            ),
+            _Raccourci(
+              Icons.volunteer_activism_outlined,
+              l10n.confierPriere,
+              Routes.nouvellePriere,
+            ),
+            _Raccourci(
+              Icons.event_note_outlined,
+              l10n.planning,
+              Routes.planning,
+            ),
+            _Raccourci(
+              Icons.meeting_room_outlined,
+              l10n.reserverSalle,
+              Routes.salles,
+            ),
+            _Raccourci(
+              Icons.cleaning_services_outlined,
+              l10n.entretienSalle,
+              Routes.entretien,
+            ),
+            _Raccourci(
+              Icons.menu_book_outlined,
+              l10n.preparations,
+              Routes.preparations,
+            ),
+          ],
         ),
-        _Raccourci(
-          Icons.volunteer_activism_outlined,
-          l10n.confierPriere,
-          Routes.nouvellePriere,
-        ),
-        _Raccourci(Icons.event_note_outlined, l10n.planning, Routes.planning),
-        _Raccourci(
-          Icons.meeting_room_outlined,
-          l10n.reserverSalle,
-          Routes.salles,
-        ),
-        _Raccourci(
-          Icons.cleaning_services_outlined,
-          l10n.entretienSalle,
-          Routes.entretien,
-        ),
-        _Raccourci(
-          Icons.menu_book_outlined,
-          l10n.preparations,
-          Routes.preparations,
-        ),
-      ],
     ];
     return Scaffold(
       appBar: AppBar(title: Text(l10n.appTitle)),
@@ -133,13 +200,12 @@ class AccueilScreen extends ConsumerWidget {
                       ),
                     ),
                   ],
-                  const SizedBox(height: 24),
-                  Text(
-                    l10n.accesRapide,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: 8),
-                  _GrilleRaccourcis(raccourcis),
+                  for (final (titre, raccourcis) in sections) ...[
+                    const SizedBox(height: 24),
+                    Text(titre, style: Theme.of(context).textTheme.titleLarge),
+                    const SizedBox(height: 8),
+                    _GrilleRaccourcis(raccourcis),
+                  ],
                   const SizedBox(height: 24),
                   const ReseauxSociaux(),
                   const SizedBox(height: 24),
@@ -170,11 +236,14 @@ class AccueilScreen extends ConsumerWidget {
 }
 
 class _Raccourci {
-  const _Raccourci(this.icone, this.libelle, this.route);
+  const _Raccourci(this.icone, this.libelle, this.route, {this.onglet = false});
 
   final IconData icone;
   final String libelle;
   final String route;
+
+  /// Ouvre un onglet (Agenda, Médias) plutôt qu'une page par-dessus.
+  final bool onglet;
 }
 
 /// Grandes tuiles faciles à toucher : 2 par ligne sur un petit téléphone,
@@ -204,7 +273,8 @@ class _GrilleRaccourcis extends StatelessWidget {
                   margin: EdgeInsets.zero,
                   clipBehavior: Clip.antiAlias,
                   child: InkWell(
-                    onTap: () => context.push(r.route),
+                    onTap: () =>
+                        r.onglet ? context.go(r.route) : context.push(r.route),
                     child: Padding(
                       padding: const EdgeInsets.all(10),
                       child: Column(

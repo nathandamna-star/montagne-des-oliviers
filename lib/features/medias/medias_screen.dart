@@ -15,18 +15,32 @@ import '../../shared/widgets/etat_vide.dart';
 import '../parametres/parametres_eglise.dart';
 import 'domain/media.dart';
 import 'medias_providers.dart';
+import 'presentation/libelles_medias.dart';
 import 'presentation/widgets_medias.dart';
 
 /// Onglet Médias : verset du jour, direct, prédications et exhortations.
 class MediasScreen extends ConsumerStatefulWidget {
-  const MediasScreen({super.key});
+  const MediasScreen({super.key, this.rubrique});
+
+  /// Rubrique ouverte au départ (depuis les raccourcis de l'Accueil).
+  final String? rubrique;
 
   @override
   ConsumerState<MediasScreen> createState() => _MediasScreenState();
 }
 
 class _MediasScreenState extends ConsumerState<MediasScreen> {
-  TypeMedia? _filtre;
+  late Rubrique _rubrique = Rubrique.depuis(widget.rubrique);
+  ThemeMedia? _theme;
+
+  @override
+  void didUpdateWidget(MediasScreen ancien) {
+    super.didUpdateWidget(ancien);
+    if (widget.rubrique != null && widget.rubrique != ancien.rubrique) {
+      _rubrique = Rubrique.depuis(widget.rubrique);
+      _theme = null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +60,8 @@ class _MediasScreenState extends ConsumerState<MediasScreen> {
     final liste = [
       for (final m in tous)
         if (m.type != TypeMedia.direct &&
-            (_filtre == null || m.type == _filtre))
+            m.rubrique == _rubrique &&
+            (_theme == null || m.theme == _theme))
           m,
     ];
     final gestion = ref.watch(estSecretariatProvider);
@@ -65,7 +80,9 @@ class _MediasScreenState extends ConsumerState<MediasScreen> {
       // Secrétariat et pasteurs : ajouter directement une prédication.
       floatingActionButton: gestion
           ? FloatingActionButton.extended(
-              onPressed: () => context.push(Routes.editerMedia('nouveau')),
+              onPressed: () => context.push(
+                '${Routes.editerMedia('nouveau')}?rubrique=${_rubrique.name}',
+              ),
               icon: const Icon(Icons.add),
               label: Text(l10n.ajouterAudioVideo),
             )
@@ -126,32 +143,45 @@ class _MediasScreenState extends ConsumerState<MediasScreen> {
             ),
           ],
           const SizedBox(height: 8),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                ChoiceChip(
-                  label: Text(l10n.tous),
-                  selected: _filtre == null,
-                  onSelected: (_) => setState(() => _filtre = null),
+          SegmentedButton<Rubrique>(
+            showSelectedIcon: false,
+            segments: [
+              for (final r in Rubrique.values)
+                ButtonSegment(
+                  value: r,
+                  icon: Icon(iconeRubrique(r)),
+                  label: Text(l10n.rubrique(r)),
                 ),
-                const SizedBox(width: 8),
-                ChoiceChip(
-                  avatar: const Icon(Icons.headphones, size: 18),
-                  label: Text(l10n.audios),
-                  selected: _filtre == TypeMedia.audio,
-                  onSelected: (_) => setState(() => _filtre = TypeMedia.audio),
-                ),
-                const SizedBox(width: 8),
-                ChoiceChip(
-                  avatar: const Icon(Icons.smart_display_outlined, size: 18),
-                  label: Text(l10n.videos),
-                  selected: _filtre == TypeMedia.video,
-                  onSelected: (_) => setState(() => _filtre = TypeMedia.video),
-                ),
-              ],
-            ),
+            ],
+            selected: {_rubrique},
+            onSelectionChanged: (s) => setState(() {
+              _rubrique = s.first;
+              _theme = null;
+            }),
           ),
+          if (_rubrique.themes.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  ChoiceChip(
+                    label: Text(l10n.tous),
+                    selected: _theme == null,
+                    onSelected: (_) => setState(() => _theme = null),
+                  ),
+                  for (final t in _rubrique.themes) ...[
+                    const SizedBox(width: 8),
+                    ChoiceChip(
+                      label: Text(l10n.themeMedia(t)),
+                      selected: _theme == t,
+                      onSelected: (_) => setState(() => _theme = t),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ],
           const SizedBox(height: 8),
           if (medias.isLoading)
             const Center(child: CircularProgressIndicator())

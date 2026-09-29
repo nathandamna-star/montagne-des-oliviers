@@ -139,3 +139,20 @@ export function notificationReponse(prid, q, langue) {
 /** Une réponse vient d'être écrite ou modifiée ? */
 export const reponseDonnee = (avant, apres) =>
   !!apres?.reponse && (apres.reponse ?? '') !== (avant?.reponse ?? '');
+
+const SUJETS_CONTACT = {
+  fr: { priere: 'Prière', delivrance: 'Délivrance', guerison: 'Guérison', accompagnement: 'Accompagnement', question: 'Question pour le direct', autre: 'Autre' },
+  nl: { priere: 'Gebed', delivrance: 'Bevrijding', guerison: 'Genezing', accompagnement: 'Begeleiding', question: 'Vraag voor de live', autre: 'Andere' },
+};
+
+/** Aux pasteurs : une personne a écrit via « Nous contacter ». */
+export function notificationContact(id, c, langue) {
+  const l = l2(langue);
+  return {
+    notification: {
+      title: l === 'nl' ? 'Nieuw bericht' : 'Nouveau message',
+      body: `${SUJETS_CONTACT[l][c.sujet] ?? c.sujet} · ${c.nom} : ${court(c.message, 80)}`,
+    },
+    data: { type: 'contact', id },
+  };
+}

@@ -16,7 +16,11 @@ Map<String, dynamic> media(
   String visibilite = 'public',
   int jour = 4,
   String? url,
+  String rubrique = 'predication',
+  String? theme,
 }) => {
+  'rubrique': rubrique,
+  'theme': theme,
   'type': type,
   'titre': {'fr': titre},
   'description': {'fr': 'Description de $titre'},
@@ -29,7 +33,9 @@ Map<String, dynamic> media(
 
 Future<void> semer(Banc b) async {
   final db = b.firestore;
-  await db.doc('medias/m1').set(media('La foi qui déplace'));
+  await db
+      .doc('medias/m1')
+      .set(media('La foi qui déplace', theme: 'repentance'));
   await db
       .doc('medias/m2')
       .set(
@@ -37,6 +43,8 @@ Future<void> semer(Banc b) async {
           'Culte en vidéo',
           type: 'video',
           jour: 3,
+          rubrique: 'enseignement',
+          theme: 'mariage',
           url: 'https://exemple.be/v.mp4',
         ),
       );
@@ -102,11 +110,32 @@ void main() {
       b.lanceur.ouverts.single.toString(),
       'https://www.youtube.com/live/abc',
     );
+    // Prédications, par thème.
     expect(find.text('La foi qui déplace'), findsOneWidget);
-    expect(find.text('Culte en vidéo'), findsOneWidget);
+    expect(find.text('Culte en vidéo'), findsNothing);
     expect(find.text('Réservé aux membres'), findsNothing);
-    await tester.tap(find.widgetWithText(ChoiceChip, 'Vidéos'));
+    await tester.tap(find.widgetWithText(ChoiceChip, 'Guérison'));
     await tester.pumpAndSettle();
+    expect(find.text('La foi qui déplace'), findsNothing);
+    await tester.tap(find.widgetWithText(ChoiceChip, 'Repentance'));
+    await tester.pumpAndSettle();
+    expect(find.text('La foi qui déplace'), findsOneWidget);
+    // Enseignements.
+    await tester.tap(find.text('Enseignements'));
+    await tester.pumpAndSettle();
+    expect(find.text('Culte en vidéo'), findsOneWidget);
+    expect(find.widgetWithText(ChoiceChip, 'Mariage'), findsOneWidget);
+  });
+
+  testWidgets('accueil : le raccourci « Enseignements » ouvre la rubrique', (
+    tester,
+  ) async {
+    final b = Banc();
+    await semer(b);
+    await lancer(tester, banc: b, taille: grand);
+    await tester.tap(find.text('Enseignements'));
+    await tester.pumpAndSettle();
+    expect(find.text('Culte en vidéo'), findsOneWidget);
     expect(find.text('La foi qui déplace'), findsNothing);
   });
 
@@ -207,6 +236,7 @@ void main() {
       expect(m['titre'], {'fr': 'Tenir ferme'});
       expect(m['url'], startsWith('https://exemple.be/medias/'));
       expect(m['notifier'], isTrue);
+      expect(m['rubrique'], 'predication');
       expect(m['publie'], isTrue);
 
       await tester.tap(find.text('Versets du jour'));

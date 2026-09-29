@@ -63,6 +63,8 @@ class _MontagneDesOliviersAppState
           );
         case 'media':
           router.push(Routes.media(id));
+        case 'contact':
+          router.push(Routes.messagesRecus);
         case 'don':
           router.push(Routes.dons);
         case 'commande':

@@ -988,5 +988,86 @@
   "presentation": "Présentation",
   "notrePasteurSousTitre": "Photo et présentation du pasteur principal",
   "ajouterAudioVideo": "Ajouter un audio ou une vidéo",
-  "gererMedias": "Gérer les médias (brouillons, versets)"
+  "gererMedias": "Gérer les médias (brouillons, versets)",
+  "rubriquePredications": "Prédications",
+  "rubriqueEnseignements": "Enseignements",
+  "rubriquePodcasts": "Podcasts",
+  "rubriqueMedia": "Rubrique",
+  "themeMediaTitre": "Thème",
+  "themeRepentance": "Repentance",
+  "themeDelivrance": "Délivrance",
+  "themeGuerison": "Guérison",
+  "themeCombatSpirituel": "Combat spirituel",
+  "themeLiensFamille": "Liens de famille",
+  "themeFoi": "Foi",
+  "themePriere": "Prière",
+  "themeMariage": "Mariage",
+  "themeBapteme": "Baptême",
+  "themeAutre": "Autre",
+  "sujetAccompagnement": "Accompagnement",
+  "sujetQuestionDirect": "Question pour le direct",
+  "nousContacter": "Nous contacter",
+  "contactIntro": "Écrivez-nous en toute confiance : décrivez votre situation et laissez vos coordonnées. Un pasteur vous recontactera. Votre message reste confidentiel.",
+  "contactSujet": "Votre demande concerne",
+  "contactMessage": "Votre message",
+  "email": "E-mail",
+  "telephone": "Téléphone",
+  "envoyer": "Envoyer",
+  "contactCoordonneesRequises": "Indiquez au moins un e-mail ou un numéro de téléphone.",
+  "contactConsentement": "J'accepte que l'église garde ce message et mes coordonnées pour me recontacter. Seuls les pasteurs les lisent.",
+  "contactMerci": "Merci, votre message est bien envoyé. Un pasteur vous recontactera.",
+  "messagesRecus": "Messages reçus",
+  "messagesRecusSousTitre": "Prises de contact (pasteurs seulement)",
+  "aucunMessage": "Aucun message.",
+  "marquerTraite": "Marquer comme traité",
+  "remettreATraiter": "Remettre à traiter",
+  "contenuEglise": "Contenu de l'église",
+  "contenuEgliseSousTitre": "Présentation, rencontre en direct, liens WhatsApp",
+  "notreEglise": "Notre église",
+  "presentationEgliseAide": "Laissez vide pour garder le texte proposé par l'app.",
+  "presentationEgliseDefaut": "Le Centre Évangélique Montagne des Oliviers, à Tienen, est une église qui annonce Jésus-Christ, le Sauveur, le Libérateur et le Guérisseur. Nous croyons que la Parole de Dieu transforme les vies : elle conduit à la repentance, apporte la délivrance et la guérison, et forme des disciples solides dans le combat spirituel. Chacun est le bienvenu, quelle que soit son histoire.",
+  "nosDomaines": "Nos domaines",
+  "domaineDelivrance": "Par la puissance du nom de Jésus, nous accompagnons chacun vers la liberté : briser les liens, les chaînes du passé et les oppressions.",
+  "domaineGuerison": "Nous prions pour les malades et croyons que Dieu guérit encore aujourd'hui, le corps, l'âme et les blessures du cœur.",
+  "domaineCombat": "Nous enseignons à tenir ferme dans la prière et la Parole, revêtus de toutes les armes de Dieu (Éphésiens 6).",
+  "rencontreDirect": "Rencontre en direct",
+  "rencontreDirectDefaut": "Chaque semaine, un moment d'échange en direct avec le pasteur : enseignement, prière et réponses à vos questions.",
+  "rencontreBientot": "Le jour et l'heure de la rencontre seront bientôt annoncés.",
+  "rejoindreRencontre": "Rejoindre la rencontre",
+  "envoyerQuestionAvance": "Envoyer une question à l'avance",
+  "jour": "Jour",
+  "heure": "Heure",
+  "heureInvalide": "Heure au format 20:00.",
+  "lienRencontre": "Lien de la rencontre (YouTube, Zoom, WhatsApp…)",
+  "communaute": "Communauté",
+  "communauteWhatsApp": "Communauté WhatsApp",
+  "communauteIntro": "Rejoignez la communauté de la Montagne des Oliviers sur WhatsApp pour recevoir les annonces, les exhortations et rester en lien.",
+  "communauteBientot": "Les liens WhatsApp seront bientôt ajoutés.",
+  "rejoindreWhatsApp": "Rejoindre sur WhatsApp",
+  "nomDuLien": "Nom (ex. : Communauté, Jeunes, Prière)",
+  "lienWhatsApp": "Lien d'invitation WhatsApp",
+  "ajouterLien": "Ajouter un lien",
+  "sectionDecouvrir": "Découvrir",
+  "sectionEcouter": "Écouter et apprendre",
+  "sectionParticiper": "Participer",
+  "sectionMonEspace": "Mon espace",
+  "chaqueSemaine": "Chaque {jour} à {heure}",
+  "@chaqueSemaine": {
+    "placeholders": {
+      "jour": {
+        "type": "String"
+      },
+      "heure": {
+        "type": "String"
+      }
+    }
+  },
+  "prochaineRencontre": "Prochaine rencontre : {date}",
+  "@prochaineRencontre": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import {
-  demandeAvancee, messagesFete, notificationApport, notificationNouvelleDemande, notificationPriere,
+  demandeAvancee, messagesFete, notificationApport, notificationContact, notificationNouvelleDemande, notificationPriere,
   notificationSuiviDemande,
 } from '../../vie.js';
 
@@ -60,5 +60,13 @@ describe('préparations', () => {
     assert.equal(reponseDonnee({}, { reponse: 'Oui' }), true);
     assert.equal(reponseDonnee({ reponse: 'Oui' }, { reponse: 'Oui', reponduLe: 1 }), false);
     assert.equal(reponseDonnee({}, { reponse: '' }), false);
+  });
+});
+
+describe('prise de contact', () => {
+  it('notification aux pasteurs, sujet traduit', () => {
+    const n = notificationContact('c1', { sujet: 'guerison', nom: 'Luc', message: 'Je souffre du dos' }, 'fr');
+    assert.equal(n.notification.body, 'Guérison · Luc : Je souffre du dos');
+    assert.deepEqual(n.data, { type: 'contact', id: 'c1' });
   });
 });

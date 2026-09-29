@@ -538,6 +538,9 @@ service cloud.firestore {
       allow read: if visible(resource.data) || estSecretariat();
       allow create, update: if estSecretariat()
         && nouveau().type in ['audio', 'video', 'direct']
+        && nouveau().get('rubrique', 'predication') in ['predication', 'enseignement', 'podcast']
+        && (nouveau().get('theme', null) == null || nouveau().theme in ['repentance', 'delivrance',
+            'guerison', 'combatSpirituel', 'liensFamille', 'foi', 'priere', 'mariage', 'bapteme', 'autre'])
         && traduit(nouveau().titre, 200)
         && nouveau().visibilite in ['public', 'membres']
         && nouveau().publie is bool
@@ -578,6 +581,24 @@ service cloud.firestore {
           && nouveau().statut in ['recu', 'annule'])
         || (connecte() && resource.data.uid == moi() && resource.data.statut == 'en_attente'
           && seulement(['statut']) && nouveau().statut == 'annule');
+    }
+
+    // ----- Prise de contact (visiteurs compris) : lue par les pasteurs seulement -----
+    match /contacts/{id} {
+      allow create: if nouveau().keys().hasOnly(['nom', 'email', 'telephone', 'sujet', 'message',
+                                                 'consentement', 'uid', 'traite', 'createdAt'])
+        && texte(nouveau().nom, 100)
+        && texteFacultatif(nouveau().get('email', null), 200)
+        && texteFacultatif(nouveau().get('telephone', null), 40)
+        && (nouveau().get('email', '') != '' || nouveau().get('telephone', '') != '')
+        && nouveau().sujet in ['priere', 'delivrance', 'guerison', 'accompagnement', 'question', 'autre']
+        && texte(nouveau().message, 3000)
+        && nouveau().consentement == true
+        && nouveau().traite == false
+        && (nouveau().get('uid', null) == null || (connecte() && nouveau().uid == moi()))
+        && nouveau().createdAt == request.time;
+      allow read, delete: if estAdmin();
+      allow update: if estAdmin() && seulement(['traite', 'traitePar', 'traiteLe']);
     }
 
     // Dons mensuels (abonnements Stripe) : écrits par le serveur seulement.

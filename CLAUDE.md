@@ -339,3 +339,19 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   Responsables).
 - **Réseaux sociaux** : `youtubeUrl`, `facebookUrl`, `tiktokUrl`, `instagramUrl` (Paramètres de l'église) ; widget
   `ReseauxSociaux` (logos font_awesome_flutter) sur l'Accueil et dans Médias, seulement les comptes renseignés.
+- Réorganisation (demande du porteur) : Accueil en sections **Découvrir** (Notre église, Notre pasteur, Agenda),
+  **Écouter et apprendre** (Prédications, Enseignements, Podcasts, Rencontre en direct), **Participer** (Communauté,
+  Nous contacter, Dîmes et offrandes, Boutique), **Mon espace** (membres).
+- Médias : `rubrique` predication|enseignement|podcast et `theme` (repentance, delivrance, guerison, combatSpirituel,
+  liensFamille, foi, priere ; enseignements : mariage, delivrance, bapteme ; autre). Onglet Médias : rubriques +
+  thèmes ; `/medias?rubrique=…` depuis l'Accueil ; l'éditeur reçoit `?rubrique=`.
+- **Notre église** (`/accueil/eglise`) : présentation (`parametres/eglise.eglisePresentation`, texte par défaut sinon),
+  domaines délivrance / guérison / combat spirituel, pasteur, réseaux, contact.
+- **Rencontre en direct** (`/accueil/direct`) : `interactionJour` (1 = lundi), `interactionHeure` « 20:00 »,
+  `interactionLien`, `interactionDescription` ; prochaine date calculée ; question à l'avance → contact `?sujet=question`.
+- **Communauté** (`/accueil/communaute`) : `liensCommunaute` [{titre, url}] (WhatsApp) + réseaux.
+  Édition : Responsables → Contenu de l'église (`/responsables/contenu`, admin).
+- **Nous contacter** (`/accueil/contact`, visiteurs compris) : `contacts/{id}` (nom, email/telephone, sujet, message,
+  consentement, uid facultatif, traite) ; lus par les pasteurs seulement (Responsables → Messages reçus) ; fonction
+  `nouveauContact` ; inclus dans l'export / la suppression du compte.
+- Facebook et YouTube de l'église par défaut (`facebookEglise`, `youtubeEglise`) tant que le champ n'existe pas.

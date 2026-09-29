@@ -26,7 +26,7 @@ import {
 import {
   demandeAvancee, messagesFete, notificationApport, notificationNouvelleDemande, notificationPriere,
   notificationInscription, notificationQuestion, notificationReponse, notificationSuiviDemande,
-  reponseDonnee,
+  reponseDonnee, notificationContact,
 } from './vie.js';
 import {
   changementService, notificationAffectation, notificationChangement, notificationRappelService,
@@ -813,6 +813,7 @@ export const exporterMesDonnees = onCall({ timeoutSeconds: 120 }, async (requete
     dons: donnees(dons),
     donsMensuels: donnees(donsMensuels),
     commandes: donnees(commandes),
+    messagesContact: donnees(await parUid('contacts')),
   };
 });
 
@@ -866,7 +867,7 @@ export const supprimerMonCompte = onCall({ timeoutSeconds: 300, secrets: [STRIPE
   await lot.commit();
 
   // Ce que la personne a écrit ou demandé.
-  for (const col of ['demandes', 'prieres', 'reservations', 'fetes']) {
+  for (const col of ['demandes', 'prieres', 'reservations', 'fetes', 'contacts']) {
     for (const d of (await parUid(col)).docs) await db.recursiveDelete(d.ref);
   }
   for (const d of (await db.collectionGroup('affectations').where('uid', '==', uid).get()).docs) {
@@ -912,4 +913,11 @@ export const legal = onRequest(async (requete, reponse) => {
   reponse.set('Cache-Control', 'public, max-age=600')
     .set('Content-Type', 'text/html; charset=utf-8')
     .send(pageLegaleHtml(texte, { nom, langue, email }));
+});
+
+/** Prise de contact (visiteur ou membre) : les pasteurs sont prévenus. */
+export const nouveauContact = onDocumentCreated('contacts/{id}', async (event) => {
+  const c = event.data?.data();
+  if (!c) return;
+  await envoyerAuxComptes(await comptesAvecRoles(['admin']), (langue) => notificationContact(event.params.id, c, langue));
 });

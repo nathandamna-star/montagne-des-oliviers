@@ -20,6 +20,7 @@ Faire partie d'une église, confier un sujet de prière ou demander un baptême 
 - Le registre des membres tenu par le secrétariat : coordonnées, date de naissance, famille, dates d'arrivée, de baptême, de présentation d'enfant ou de mariage, services rendus, notes.
 - Votre participation : groupes, messages, photos et documents partagés dans les groupes, réponses aux rencontres, inscriptions aux événements et au nettoyage de la salle, ce que vous apportez aux fêtes, services prévus au planning, réservations de salles.
 - Vos demandes (baptême, présentation d'enfant, mariage, rendez-vous, visite) et le suivi des préparations (leçons faites, questions posées).
+- Les messages envoyés par « Nous contacter », même sans compte : nom, e-mail ou téléphone, sujet et message. Seuls les pasteurs les lisent.
 - Vos sujets de prière et témoignages. Vous pouvez les confier de façon anonyme pour l'équipe d'intercession.
 - Vos dons et commandes de livres : montant, affectation, communication, état du paiement. Nous ne voyons jamais vos coordonnées bancaires ni votre numéro de carte.
 - Un identifiant technique de votre téléphone, pour vous envoyer des notifications, si vous les acceptez.

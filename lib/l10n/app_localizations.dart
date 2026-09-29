@@ -4423,6 +4423,390 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Gérer les médias (brouillons, versets)'**
   String get gererMedias;
+
+  /// No description provided for @rubriquePredications.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prédications'**
+  String get rubriquePredications;
+
+  /// No description provided for @rubriqueEnseignements.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enseignements'**
+  String get rubriqueEnseignements;
+
+  /// No description provided for @rubriquePodcasts.
+  ///
+  /// In fr, this message translates to:
+  /// **'Podcasts'**
+  String get rubriquePodcasts;
+
+  /// No description provided for @rubriqueMedia.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rubrique'**
+  String get rubriqueMedia;
+
+  /// No description provided for @themeMediaTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Thème'**
+  String get themeMediaTitre;
+
+  /// No description provided for @themeRepentance.
+  ///
+  /// In fr, this message translates to:
+  /// **'Repentance'**
+  String get themeRepentance;
+
+  /// No description provided for @themeDelivrance.
+  ///
+  /// In fr, this message translates to:
+  /// **'Délivrance'**
+  String get themeDelivrance;
+
+  /// No description provided for @themeGuerison.
+  ///
+  /// In fr, this message translates to:
+  /// **'Guérison'**
+  String get themeGuerison;
+
+  /// No description provided for @themeCombatSpirituel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Combat spirituel'**
+  String get themeCombatSpirituel;
+
+  /// No description provided for @themeLiensFamille.
+  ///
+  /// In fr, this message translates to:
+  /// **'Liens de famille'**
+  String get themeLiensFamille;
+
+  /// No description provided for @themeFoi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Foi'**
+  String get themeFoi;
+
+  /// No description provided for @themePriere.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prière'**
+  String get themePriere;
+
+  /// No description provided for @themeMariage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mariage'**
+  String get themeMariage;
+
+  /// No description provided for @themeBapteme.
+  ///
+  /// In fr, this message translates to:
+  /// **'Baptême'**
+  String get themeBapteme;
+
+  /// No description provided for @themeAutre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autre'**
+  String get themeAutre;
+
+  /// No description provided for @sujetAccompagnement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Accompagnement'**
+  String get sujetAccompagnement;
+
+  /// No description provided for @sujetQuestionDirect.
+  ///
+  /// In fr, this message translates to:
+  /// **'Question pour le direct'**
+  String get sujetQuestionDirect;
+
+  /// No description provided for @nousContacter.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nous contacter'**
+  String get nousContacter;
+
+  /// No description provided for @contactIntro.
+  ///
+  /// In fr, this message translates to:
+  /// **'Écrivez-nous en toute confiance : décrivez votre situation et laissez vos coordonnées. Un pasteur vous recontactera. Votre message reste confidentiel.'**
+  String get contactIntro;
+
+  /// No description provided for @contactSujet.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre demande concerne'**
+  String get contactSujet;
+
+  /// No description provided for @contactMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre message'**
+  String get contactMessage;
+
+  /// No description provided for @email.
+  ///
+  /// In fr, this message translates to:
+  /// **'E-mail'**
+  String get email;
+
+  /// No description provided for @telephone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Téléphone'**
+  String get telephone;
+
+  /// No description provided for @envoyer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyer'**
+  String get envoyer;
+
+  /// No description provided for @contactCoordonneesRequises.
+  ///
+  /// In fr, this message translates to:
+  /// **'Indiquez au moins un e-mail ou un numéro de téléphone.'**
+  String get contactCoordonneesRequises;
+
+  /// No description provided for @contactConsentement.
+  ///
+  /// In fr, this message translates to:
+  /// **'J\'accepte que l\'église garde ce message et mes coordonnées pour me recontacter. Seuls les pasteurs les lisent.'**
+  String get contactConsentement;
+
+  /// No description provided for @contactMerci.
+  ///
+  /// In fr, this message translates to:
+  /// **'Merci, votre message est bien envoyé. Un pasteur vous recontactera.'**
+  String get contactMerci;
+
+  /// No description provided for @messagesRecus.
+  ///
+  /// In fr, this message translates to:
+  /// **'Messages reçus'**
+  String get messagesRecus;
+
+  /// No description provided for @messagesRecusSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prises de contact (pasteurs seulement)'**
+  String get messagesRecusSousTitre;
+
+  /// No description provided for @aucunMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun message.'**
+  String get aucunMessage;
+
+  /// No description provided for @marquerTraite.
+  ///
+  /// In fr, this message translates to:
+  /// **'Marquer comme traité'**
+  String get marquerTraite;
+
+  /// No description provided for @remettreATraiter.
+  ///
+  /// In fr, this message translates to:
+  /// **'Remettre à traiter'**
+  String get remettreATraiter;
+
+  /// No description provided for @contenuEglise.
+  ///
+  /// In fr, this message translates to:
+  /// **'Contenu de l\'église'**
+  String get contenuEglise;
+
+  /// No description provided for @contenuEgliseSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Présentation, rencontre en direct, liens WhatsApp'**
+  String get contenuEgliseSousTitre;
+
+  /// No description provided for @notreEglise.
+  ///
+  /// In fr, this message translates to:
+  /// **'Notre église'**
+  String get notreEglise;
+
+  /// No description provided for @presentationEgliseAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Laissez vide pour garder le texte proposé par l\'app.'**
+  String get presentationEgliseAide;
+
+  /// No description provided for @presentationEgliseDefaut.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le Centre Évangélique Montagne des Oliviers, à Tienen, est une église qui annonce Jésus-Christ, le Sauveur, le Libérateur et le Guérisseur. Nous croyons que la Parole de Dieu transforme les vies : elle conduit à la repentance, apporte la délivrance et la guérison, et forme des disciples solides dans le combat spirituel. Chacun est le bienvenu, quelle que soit son histoire.'**
+  String get presentationEgliseDefaut;
+
+  /// No description provided for @nosDomaines.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nos domaines'**
+  String get nosDomaines;
+
+  /// No description provided for @domaineDelivrance.
+  ///
+  /// In fr, this message translates to:
+  /// **'Par la puissance du nom de Jésus, nous accompagnons chacun vers la liberté : briser les liens, les chaînes du passé et les oppressions.'**
+  String get domaineDelivrance;
+
+  /// No description provided for @domaineGuerison.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nous prions pour les malades et croyons que Dieu guérit encore aujourd\'hui, le corps, l\'âme et les blessures du cœur.'**
+  String get domaineGuerison;
+
+  /// No description provided for @domaineCombat.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nous enseignons à tenir ferme dans la prière et la Parole, revêtus de toutes les armes de Dieu (Éphésiens 6).'**
+  String get domaineCombat;
+
+  /// No description provided for @rencontreDirect.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rencontre en direct'**
+  String get rencontreDirect;
+
+  /// No description provided for @rencontreDirectDefaut.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chaque semaine, un moment d\'échange en direct avec le pasteur : enseignement, prière et réponses à vos questions.'**
+  String get rencontreDirectDefaut;
+
+  /// No description provided for @rencontreBientot.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le jour et l\'heure de la rencontre seront bientôt annoncés.'**
+  String get rencontreBientot;
+
+  /// No description provided for @rejoindreRencontre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rejoindre la rencontre'**
+  String get rejoindreRencontre;
+
+  /// No description provided for @envoyerQuestionAvance.
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyer une question à l\'avance'**
+  String get envoyerQuestionAvance;
+
+  /// No description provided for @jour.
+  ///
+  /// In fr, this message translates to:
+  /// **'Jour'**
+  String get jour;
+
+  /// No description provided for @heure.
+  ///
+  /// In fr, this message translates to:
+  /// **'Heure'**
+  String get heure;
+
+  /// No description provided for @heureInvalide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Heure au format 20:00.'**
+  String get heureInvalide;
+
+  /// No description provided for @lienRencontre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lien de la rencontre (YouTube, Zoom, WhatsApp…)'**
+  String get lienRencontre;
+
+  /// No description provided for @communaute.
+  ///
+  /// In fr, this message translates to:
+  /// **'Communauté'**
+  String get communaute;
+
+  /// No description provided for @communauteWhatsApp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Communauté WhatsApp'**
+  String get communauteWhatsApp;
+
+  /// No description provided for @communauteIntro.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rejoignez la communauté de la Montagne des Oliviers sur WhatsApp pour recevoir les annonces, les exhortations et rester en lien.'**
+  String get communauteIntro;
+
+  /// No description provided for @communauteBientot.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les liens WhatsApp seront bientôt ajoutés.'**
+  String get communauteBientot;
+
+  /// No description provided for @rejoindreWhatsApp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rejoindre sur WhatsApp'**
+  String get rejoindreWhatsApp;
+
+  /// No description provided for @nomDuLien.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom (ex. : Communauté, Jeunes, Prière)'**
+  String get nomDuLien;
+
+  /// No description provided for @lienWhatsApp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lien d\'invitation WhatsApp'**
+  String get lienWhatsApp;
+
+  /// No description provided for @ajouterLien.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un lien'**
+  String get ajouterLien;
+
+  /// No description provided for @sectionDecouvrir.
+  ///
+  /// In fr, this message translates to:
+  /// **'Découvrir'**
+  String get sectionDecouvrir;
+
+  /// No description provided for @sectionEcouter.
+  ///
+  /// In fr, this message translates to:
+  /// **'Écouter et apprendre'**
+  String get sectionEcouter;
+
+  /// No description provided for @sectionParticiper.
+  ///
+  /// In fr, this message translates to:
+  /// **'Participer'**
+  String get sectionParticiper;
+
+  /// No description provided for @sectionMonEspace.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mon espace'**
+  String get sectionMonEspace;
+
+  /// No description provided for @chaqueSemaine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chaque {jour} à {heure}'**
+  String chaqueSemaine(String jour, String heure);
+
+  /// No description provided for @prochaineRencontre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prochaine rencontre : {date}'**
+  String prochaineRencontre(String date);
 }
 
 class _AppLocalizationsDelegate

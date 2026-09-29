@@ -25,13 +25,17 @@ import '../../features/boutique/presentation/editeur_livre_screen.dart';
 import '../../features/boutique/presentation/gestion_boutique_screen.dart';
 import '../../features/boutique/presentation/livre_screen.dart';
 import '../../features/boutique/presentation/panier_screen.dart';
+import '../../features/contact/contact_screens.dart';
 import '../../features/divers/presentation/editeur_fete_screen.dart';
+import '../../features/eglise/editeur_rubriques_screen.dart';
+import '../../features/eglise/eglise_screens.dart';
 import '../../features/dons/presentation/dons_screen.dart';
 import '../../features/dons/presentation/releve_dons_screen.dart';
 import '../../features/dons/presentation/tresorerie_screen.dart';
 import '../../features/dons/presentation/virement_don_screen.dart';
 import '../../features/divers/presentation/fete_screen.dart';
 import '../../features/entretien/entretien_screen.dart';
+import '../../features/medias/domain/media.dart';
 import '../../features/medias/presentation/editeur_media_screen.dart';
 import '../../features/medias/presentation/gestion_medias_screen.dart';
 import '../../features/medias/presentation/media_screen.dart';
@@ -144,7 +148,11 @@ final routerProvider = Provider<GoRouter>((ref) {
               routes: [
                 GoRoute(
                   path: chemin,
-                  builder: (context, state) => ecran,
+                  builder: (context, state) => chemin == Routes.medias
+                      ? MediasScreen(
+                          rubrique: state.uri.queryParameters['rubrique'],
+                        )
+                      : ecran,
                   routes: _sousRoutes[chemin] ?? const [],
                 ),
               ],
@@ -157,6 +165,20 @@ final routerProvider = Provider<GoRouter>((ref) {
 
 final _sousRoutes = <String, List<RouteBase>>{
   Routes.accueil: [
+    GoRoute(path: 'eglise', builder: (context, state) => const EgliseScreen()),
+    GoRoute(
+      path: 'direct',
+      builder: (context, state) => const InteractionScreen(),
+    ),
+    GoRoute(
+      path: 'communaute',
+      builder: (context, state) => const CommunauteScreen(),
+    ),
+    GoRoute(
+      path: 'contact',
+      builder: (context, state) =>
+          ContactScreen(sujet: state.uri.queryParameters['sujet']),
+    ),
     GoRoute(
       path: 'pasteur',
       builder: (context, state) => const PasteurScreen(),
@@ -427,6 +449,14 @@ final _sousRoutes = <String, List<RouteBase>>{
   ],
   Routes.responsables: [
     GoRoute(
+      path: 'contenu',
+      builder: (context, state) => const EditeurRubriquesScreen(),
+    ),
+    GoRoute(
+      path: 'messages',
+      builder: (context, state) => const MessagesRecusScreen(),
+    ),
+    GoRoute(
       path: 'tresorerie',
       builder: (context, state) => const TresorerieScreen(),
       routes: [
@@ -454,8 +484,12 @@ final _sousRoutes = <String, List<RouteBase>>{
       routes: [
         GoRoute(
           path: ':id',
-          builder: (context, state) =>
-              EditeurMediaScreen(id: state.pathParameters['id']!),
+          builder: (context, state) => EditeurMediaScreen(
+            id: state.pathParameters['id']!,
+            rubrique: Rubrique.values
+                .where((r) => r.name == state.uri.queryParameters['rubrique'])
+                .firstOrNull,
+          ),
         ),
       ],
     ),

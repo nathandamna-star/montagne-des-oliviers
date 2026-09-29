@@ -2426,4 +2426,215 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get gererMedias => 'Media beheren (concepten, verzen)';
+
+  @override
+  String get rubriquePredications => 'Prediking';
+
+  @override
+  String get rubriqueEnseignements => 'Onderwijs';
+
+  @override
+  String get rubriquePodcasts => 'Podcasts';
+
+  @override
+  String get rubriqueMedia => 'Rubriek';
+
+  @override
+  String get themeMediaTitre => 'Thema';
+
+  @override
+  String get themeRepentance => 'Bekering';
+
+  @override
+  String get themeDelivrance => 'Bevrijding';
+
+  @override
+  String get themeGuerison => 'Genezing';
+
+  @override
+  String get themeCombatSpirituel => 'Geestelijke strijd';
+
+  @override
+  String get themeLiensFamille => 'Familiebanden';
+
+  @override
+  String get themeFoi => 'Geloof';
+
+  @override
+  String get themePriere => 'Gebed';
+
+  @override
+  String get themeMariage => 'Huwelijk';
+
+  @override
+  String get themeBapteme => 'Doop';
+
+  @override
+  String get themeAutre => 'Andere';
+
+  @override
+  String get sujetAccompagnement => 'Begeleiding';
+
+  @override
+  String get sujetQuestionDirect => 'Vraag voor de live';
+
+  @override
+  String get nousContacter => 'Contact';
+
+  @override
+  String get contactIntro =>
+      'Schrijf ons in vertrouwen: beschrijf je situatie en laat je gegevens achter. Een pastoor neemt contact met je op. Je bericht blijft vertrouwelijk.';
+
+  @override
+  String get contactSujet => 'Je vraag gaat over';
+
+  @override
+  String get contactMessage => 'Je bericht';
+
+  @override
+  String get email => 'E-mail';
+
+  @override
+  String get telephone => 'Telefoon';
+
+  @override
+  String get envoyer => 'Versturen';
+
+  @override
+  String get contactCoordonneesRequises =>
+      'Geef minstens een e-mailadres of telefoonnummer.';
+
+  @override
+  String get contactConsentement =>
+      'Ik ga ermee akkoord dat de kerk dit bericht en mijn gegevens bewaart om mij te contacteren. Alleen de pastoors lezen ze.';
+
+  @override
+  String get contactMerci =>
+      'Dank je, je bericht is verzonden. Een pastoor neemt contact met je op.';
+
+  @override
+  String get messagesRecus => 'Ontvangen berichten';
+
+  @override
+  String get messagesRecusSousTitre => 'Contactnames (alleen pastoors)';
+
+  @override
+  String get aucunMessage => 'Geen berichten.';
+
+  @override
+  String get marquerTraite => 'Als behandeld markeren';
+
+  @override
+  String get remettreATraiter => 'Opnieuw te behandelen';
+
+  @override
+  String get contenuEglise => 'Inhoud van de kerk';
+
+  @override
+  String get contenuEgliseSousTitre =>
+      'Voorstelling, live-ontmoeting, WhatsApp-links';
+
+  @override
+  String get notreEglise => 'Onze kerk';
+
+  @override
+  String get presentationEgliseAide =>
+      'Laat leeg om de voorgestelde tekst te behouden.';
+
+  @override
+  String get presentationEgliseDefaut =>
+      'Het Evangelisch Centrum Montagne des Oliviers in Tienen is een kerk die Jezus Christus verkondigt: de Redder, de Bevrijder en de Genezer. Wij geloven dat Gods Woord levens verandert: het leidt tot bekering, brengt bevrijding en genezing, en vormt sterke discipelen in de geestelijke strijd. Iedereen is welkom, wat zijn verhaal ook is.';
+
+  @override
+  String get nosDomaines => 'Onze domeinen';
+
+  @override
+  String get domaineDelivrance =>
+      'Door de kracht van de naam van Jezus begeleiden we ieder naar vrijheid: banden, ketenen uit het verleden en onderdrukking verbreken.';
+
+  @override
+  String get domaineGuerison =>
+      'We bidden voor zieken en geloven dat God vandaag nog geneest: lichaam, ziel en wonden van het hart.';
+
+  @override
+  String get domaineCombat =>
+      'We leren standhouden in gebed en in het Woord, bekleed met de hele wapenrusting van God (Efeziërs 6).';
+
+  @override
+  String get rencontreDirect => 'Live-ontmoeting';
+
+  @override
+  String get rencontreDirectDefaut =>
+      'Elke week een live-moment met de pastoor: onderwijs, gebed en antwoorden op je vragen.';
+
+  @override
+  String get rencontreBientot =>
+      'De dag en het uur van de ontmoeting worden binnenkort bekendgemaakt.';
+
+  @override
+  String get rejoindreRencontre => 'Deelnemen aan de ontmoeting';
+
+  @override
+  String get envoyerQuestionAvance => 'Een vraag vooraf sturen';
+
+  @override
+  String get jour => 'Dag';
+
+  @override
+  String get heure => 'Uur';
+
+  @override
+  String get heureInvalide => 'Uur in de vorm 20:00.';
+
+  @override
+  String get lienRencontre =>
+      'Link van de ontmoeting (YouTube, Zoom, WhatsApp…)';
+
+  @override
+  String get communaute => 'Gemeenschap';
+
+  @override
+  String get communauteWhatsApp => 'WhatsApp-gemeenschap';
+
+  @override
+  String get communauteIntro =>
+      'Word lid van de gemeenschap van Montagne des Oliviers op WhatsApp om aankondigingen en aanmoedigingen te ontvangen en verbonden te blijven.';
+
+  @override
+  String get communauteBientot =>
+      'De WhatsApp-links worden binnenkort toegevoegd.';
+
+  @override
+  String get rejoindreWhatsApp => 'Deelnemen via WhatsApp';
+
+  @override
+  String get nomDuLien => 'Naam (bv. Gemeenschap, Jongeren, Gebed)';
+
+  @override
+  String get lienWhatsApp => 'WhatsApp-uitnodigingslink';
+
+  @override
+  String get ajouterLien => 'Link toevoegen';
+
+  @override
+  String get sectionDecouvrir => 'Ontdekken';
+
+  @override
+  String get sectionEcouter => 'Luisteren en leren';
+
+  @override
+  String get sectionParticiper => 'Meedoen';
+
+  @override
+  String get sectionMonEspace => 'Mijn ruimte';
+
+  @override
+  String chaqueSemaine(String jour, String heure) {
+    return 'Elke $jour om $heure';
+  }
+
+  @override
+  String prochaineRencontre(String date) {
+    return 'Volgende ontmoeting: $date';
+  }
 }

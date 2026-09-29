@@ -7,6 +7,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../../shared/domain_traduction.dart';
 import '../../../shared/format_date.dart';
 import '../domain/media.dart';
+import 'libelles_medias.dart';
 import '../medias_providers.dart';
 
 IconData iconeMedia(TypeMedia t) => switch (t) {
@@ -77,6 +78,8 @@ class CarteMedia extends StatelessWidget {
         title: Text(Traduction.dans(m.titre, context.langue)),
         subtitle: Text(
           [
+            if (m.theme != null)
+              AppLocalizations.of(context).themeMedia(m.theme!),
             if (m.predicateur.isNotEmpty) m.predicateur,
             context.dateCourte(m.date),
             if (!m.publie) l10n.brouillon,

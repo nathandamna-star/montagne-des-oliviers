@@ -13,13 +13,17 @@ import '../../groupes/domain/groupe.dart';
 import '../../preparations/preparations_providers.dart';
 import '../domain/media.dart';
 import '../medias_providers.dart';
+import 'libelles_medias.dart';
 import 'widgets_medias.dart';
 
 /// Secrétariat : publier une prédication, une exhortation ou un direct.
 class EditeurMediaScreen extends ConsumerStatefulWidget {
-  const EditeurMediaScreen({super.key, required this.id});
+  const EditeurMediaScreen({super.key, required this.id, this.rubrique});
 
   final String id;
+
+  /// Rubrique proposée pour un nouveau média.
+  final Rubrique? rubrique;
 
   @override
   ConsumerState<EditeurMediaScreen> createState() => _EditeurMediaScreenState();
@@ -38,6 +42,8 @@ class _EditeurMediaScreenState extends ConsumerState<EditeurMediaScreen> {
   bool _charge = false;
   bool _occupe = false;
   TypeMedia _type = TypeMedia.audio;
+  late Rubrique _rubrique = widget.rubrique ?? Rubrique.predication;
+  ThemeMedia? _theme;
   late DateTime _date;
   String? _fichier;
   double? _progression;
@@ -61,6 +67,8 @@ class _EditeurMediaScreenState extends ConsumerState<EditeurMediaScreen> {
         if (!mounted || m == null) return;
         setState(() {
           _type = m.type;
+          _rubrique = m.rubrique;
+          _theme = m.theme;
           _titreFr.text = m.titre['fr'] ?? '';
           _titreNl.text = m.titre['nl'] ?? '';
           _descFr.text = m.description['fr'] ?? '';
@@ -171,6 +179,8 @@ class _EditeurMediaScreenState extends ConsumerState<EditeurMediaScreen> {
               visibilite: _visibilite,
               publie: _publie,
               notifier: _publie && _notifier && !_dejaPublie,
+              rubrique: _rubrique,
+              theme: _rubrique.themes.contains(_theme) ? _theme : null,
             ),
           );
       messager.showSnackBar(SnackBar(content: Text(l10n.enregistre)));
@@ -232,6 +242,46 @@ class _EditeurMediaScreenState extends ConsumerState<EditeurMediaScreen> {
                         onSelectionChanged: (s) =>
                             setState(() => _type = s.first),
                       ),
+                      const SizedBox(height: 16),
+                      Text(
+                        l10n.rubriqueMedia,
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                      const SizedBox(height: 8),
+                      SegmentedButton<Rubrique>(
+                        segments: [
+                          for (final r in Rubrique.values)
+                            ButtonSegment(
+                              value: r,
+                              icon: Icon(iconeRubrique(r)),
+                              label: Text(l10n.rubrique(r)),
+                            ),
+                        ],
+                        selected: {_rubrique},
+                        onSelectionChanged: (s) =>
+                            setState(() => _rubrique = s.first),
+                      ),
+                      if (_rubrique.themes.isNotEmpty) ...[
+                        const SizedBox(height: 12),
+                        Text(
+                          l10n.themeMediaTitre,
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                        const SizedBox(height: 8),
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: [
+                            for (final t in _rubrique.themes)
+                              ChoiceChip(
+                                label: Text(l10n.themeMedia(t)),
+                                selected: _theme == t,
+                                onSelected: (oui) =>
+                                    setState(() => _theme = oui ? t : null),
+                              ),
+                          ],
+                        ),
+                      ],
                       const SizedBox(height: 16),
                       ChampsTraduits(
                         libelle: l10n.champTitre,

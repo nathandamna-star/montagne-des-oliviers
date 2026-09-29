@@ -512,6 +512,28 @@ describe('dîmes et offrandes', () => {
   });
 });
 
+describe('prise de contact', () => {
+  const contact = (extra = {}) => ({
+    nom: 'Luc', email: 'luc@x.be', telephone: '', sujet: 'delivrance',
+    message: 'J\'aimerais parler à un pasteur.', consentement: true, traite: false,
+    createdAt: serverTimestamp(), ...extra,
+  });
+
+  it('un visiteur écrit ; seuls les pasteurs lisent', async () => {
+    await assertSucceeds(setDoc(doc(visiteur(), 'contacts/c1'), contact()));
+    await assertSucceeds(setDoc(doc(marie(), 'contacts/c2'), contact({ uid: 'marie' })));
+    await assertFails(setDoc(doc(visiteur(), 'contacts/c3'), contact({ uid: 'paul' })));
+    await assertFails(setDoc(doc(visiteur(), 'contacts/c3'), contact({ email: '', telephone: '' })));
+    await assertFails(setDoc(doc(visiteur(), 'contacts/c3'), contact({ consentement: false })));
+    await assertFails(setDoc(doc(visiteur(), 'contacts/c3'), contact({ traite: true })));
+    await assertFails(getDoc(doc(visiteur(), 'contacts/c1')));
+    await assertFails(getDoc(doc(secretariat(), 'contacts/c1')));
+    await assertSucceeds(getDoc(doc(admin(), 'contacts/c1')));
+    await assertSucceeds(updateDoc(doc(admin(), 'contacts/c1'), { traite: true, traitePar: 'pasteur' }));
+    await assertFails(updateDoc(doc(admin(), 'contacts/c1'), { message: 'x' }));
+  });
+});
+
 describe('dons mensuels et boutique', () => {
   const livre = (extra = {}) => ({
     titre: 'La prière', auteur: 'Pasteur Jean', description: { fr: 'Un guide' }, prix: 12.5,
@@ -537,6 +559,15 @@ describe('dons mensuels et boutique', () => {
     await assertSucceeds(setDoc(doc(tresorier(), 'livres/l1'), livre()));
     await assertSucceeds(setDoc(doc(secretariat(), 'livres/l2'), livre({ auteur: null, description: null })));
     await assertFails(setDoc(doc(marie(), 'livres/l3'), livre()));
+    // Médias : rubrique et thème vérifiés.
+    const media = (extra = {}) => ({
+      type: 'audio', titre: { fr: 'La foi' }, visibilite: 'public', publie: true,
+      url: 'https://x.be/a.m4a', ...extra,
+    });
+    await assertSucceeds(setDoc(doc(secretariat(), 'medias/m1'), media({ rubrique: 'enseignement', theme: 'mariage' })));
+    await assertSucceeds(setDoc(doc(secretariat(), 'medias/m2'), media({ rubrique: 'podcast', theme: null })));
+    await assertFails(setDoc(doc(secretariat(), 'medias/m3'), media({ rubrique: 'film' })));
+    await assertFails(setDoc(doc(secretariat(), 'medias/m3'), media({ theme: 'politique' })));
     await assertFails(setDoc(doc(tresorier(), 'livres/l3'), livre({ prix: 0 })));
     await assertFails(setDoc(doc(tresorier(), 'livres/l3'), livre({ stock: 3 })));
     await assertSucceeds(getDoc(doc(visiteur(), 'livres/l1')));

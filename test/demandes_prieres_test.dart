@@ -206,7 +206,8 @@ void main() {
   ) async {
     final b = await membre(roles: {Role.admin}, intercession: false);
     await lancer(tester, banc: b, taille: grand);
-    expect(find.text('YouTube'), findsNothing);
+    // Chaîne de l'église par défaut.
+    expect(find.text('YouTube'), findsOneWidget);
     await tester.tap(find.text('Responsables'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Paramètres de l\'église'));

@@ -2424,4 +2424,213 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get gererMedias => 'Gérer les médias (brouillons, versets)';
+
+  @override
+  String get rubriquePredications => 'Prédications';
+
+  @override
+  String get rubriqueEnseignements => 'Enseignements';
+
+  @override
+  String get rubriquePodcasts => 'Podcasts';
+
+  @override
+  String get rubriqueMedia => 'Rubrique';
+
+  @override
+  String get themeMediaTitre => 'Thème';
+
+  @override
+  String get themeRepentance => 'Repentance';
+
+  @override
+  String get themeDelivrance => 'Délivrance';
+
+  @override
+  String get themeGuerison => 'Guérison';
+
+  @override
+  String get themeCombatSpirituel => 'Combat spirituel';
+
+  @override
+  String get themeLiensFamille => 'Liens de famille';
+
+  @override
+  String get themeFoi => 'Foi';
+
+  @override
+  String get themePriere => 'Prière';
+
+  @override
+  String get themeMariage => 'Mariage';
+
+  @override
+  String get themeBapteme => 'Baptême';
+
+  @override
+  String get themeAutre => 'Autre';
+
+  @override
+  String get sujetAccompagnement => 'Accompagnement';
+
+  @override
+  String get sujetQuestionDirect => 'Question pour le direct';
+
+  @override
+  String get nousContacter => 'Nous contacter';
+
+  @override
+  String get contactIntro =>
+      'Écrivez-nous en toute confiance : décrivez votre situation et laissez vos coordonnées. Un pasteur vous recontactera. Votre message reste confidentiel.';
+
+  @override
+  String get contactSujet => 'Votre demande concerne';
+
+  @override
+  String get contactMessage => 'Votre message';
+
+  @override
+  String get email => 'E-mail';
+
+  @override
+  String get telephone => 'Téléphone';
+
+  @override
+  String get envoyer => 'Envoyer';
+
+  @override
+  String get contactCoordonneesRequises =>
+      'Indiquez au moins un e-mail ou un numéro de téléphone.';
+
+  @override
+  String get contactConsentement =>
+      'J\'accepte que l\'église garde ce message et mes coordonnées pour me recontacter. Seuls les pasteurs les lisent.';
+
+  @override
+  String get contactMerci =>
+      'Merci, votre message est bien envoyé. Un pasteur vous recontactera.';
+
+  @override
+  String get messagesRecus => 'Messages reçus';
+
+  @override
+  String get messagesRecusSousTitre => 'Prises de contact (pasteurs seulement)';
+
+  @override
+  String get aucunMessage => 'Aucun message.';
+
+  @override
+  String get marquerTraite => 'Marquer comme traité';
+
+  @override
+  String get remettreATraiter => 'Remettre à traiter';
+
+  @override
+  String get contenuEglise => 'Contenu de l\'église';
+
+  @override
+  String get contenuEgliseSousTitre =>
+      'Présentation, rencontre en direct, liens WhatsApp';
+
+  @override
+  String get notreEglise => 'Notre église';
+
+  @override
+  String get presentationEgliseAide =>
+      'Laissez vide pour garder le texte proposé par l\'app.';
+
+  @override
+  String get presentationEgliseDefaut =>
+      'Le Centre Évangélique Montagne des Oliviers, à Tienen, est une église qui annonce Jésus-Christ, le Sauveur, le Libérateur et le Guérisseur. Nous croyons que la Parole de Dieu transforme les vies : elle conduit à la repentance, apporte la délivrance et la guérison, et forme des disciples solides dans le combat spirituel. Chacun est le bienvenu, quelle que soit son histoire.';
+
+  @override
+  String get nosDomaines => 'Nos domaines';
+
+  @override
+  String get domaineDelivrance =>
+      'Par la puissance du nom de Jésus, nous accompagnons chacun vers la liberté : briser les liens, les chaînes du passé et les oppressions.';
+
+  @override
+  String get domaineGuerison =>
+      'Nous prions pour les malades et croyons que Dieu guérit encore aujourd\'hui, le corps, l\'âme et les blessures du cœur.';
+
+  @override
+  String get domaineCombat =>
+      'Nous enseignons à tenir ferme dans la prière et la Parole, revêtus de toutes les armes de Dieu (Éphésiens 6).';
+
+  @override
+  String get rencontreDirect => 'Rencontre en direct';
+
+  @override
+  String get rencontreDirectDefaut =>
+      'Chaque semaine, un moment d\'échange en direct avec le pasteur : enseignement, prière et réponses à vos questions.';
+
+  @override
+  String get rencontreBientot =>
+      'Le jour et l\'heure de la rencontre seront bientôt annoncés.';
+
+  @override
+  String get rejoindreRencontre => 'Rejoindre la rencontre';
+
+  @override
+  String get envoyerQuestionAvance => 'Envoyer une question à l\'avance';
+
+  @override
+  String get jour => 'Jour';
+
+  @override
+  String get heure => 'Heure';
+
+  @override
+  String get heureInvalide => 'Heure au format 20:00.';
+
+  @override
+  String get lienRencontre => 'Lien de la rencontre (YouTube, Zoom, WhatsApp…)';
+
+  @override
+  String get communaute => 'Communauté';
+
+  @override
+  String get communauteWhatsApp => 'Communauté WhatsApp';
+
+  @override
+  String get communauteIntro =>
+      'Rejoignez la communauté de la Montagne des Oliviers sur WhatsApp pour recevoir les annonces, les exhortations et rester en lien.';
+
+  @override
+  String get communauteBientot => 'Les liens WhatsApp seront bientôt ajoutés.';
+
+  @override
+  String get rejoindreWhatsApp => 'Rejoindre sur WhatsApp';
+
+  @override
+  String get nomDuLien => 'Nom (ex. : Communauté, Jeunes, Prière)';
+
+  @override
+  String get lienWhatsApp => 'Lien d\'invitation WhatsApp';
+
+  @override
+  String get ajouterLien => 'Ajouter un lien';
+
+  @override
+  String get sectionDecouvrir => 'Découvrir';
+
+  @override
+  String get sectionEcouter => 'Écouter et apprendre';
+
+  @override
+  String get sectionParticiper => 'Participer';
+
+  @override
+  String get sectionMonEspace => 'Mon espace';
+
+  @override
+  String chaqueSemaine(String jour, String heure) {
+    return 'Chaque $jour à $heure';
+  }
+
+  @override
+  String prochaineRencontre(String date) {
+    return 'Prochaine rencontre : $date';
+  }
 }

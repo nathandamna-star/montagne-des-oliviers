@@ -15,9 +15,18 @@ abstract final class Routes {
   static const entretien = '/accueil/entretien';
   static const gestionMedias = '/responsables/medias';
   static String media(String id) => '/medias/$id';
+
+  /// Onglet Médias ouvert sur une rubrique (predication, enseignement, podcast).
+  static String mediasRubrique(String rubrique) => '/medias?rubrique=$rubrique';
   static String editerMedia(String id) => '/responsables/medias/$id';
   static const salles = '/accueil/salles';
   static const pasteur = '/accueil/pasteur';
+  static const eglise = '/accueil/eglise';
+  static const interaction = '/accueil/direct';
+  static const communaute = '/accueil/communaute';
+  static const contact = '/accueil/contact';
+  static const contenuEglise = '/responsables/contenu';
+  static const messagesRecus = '/responsables/messages';
   static const editerPasteur = '/accueil/pasteur/modifier';
   static const dons = '/accueil/dons';
   static const releveDons = '/accueil/dons/releve';

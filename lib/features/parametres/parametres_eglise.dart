@@ -5,6 +5,15 @@ import '../../shared/domain/virement.dart';
 import '../../shared/domain_traduction.dart';
 import '../auth/auth_providers.dart';
 
+/// Pages Facebook et YouTube de l'église (valeurs de départ).
+const facebookEglise =
+    'https://www.facebook.com/share/1JGvbmGdQk/?mibextid=wwXIfret';
+const youtubeEglise = 'https://www.youtube.com/@montagnedesolivierstienen';
+
+/// « 20:00 », « 9:30 ».
+bool heureValide(String h) =>
+    RegExp(r'^([01]?\d|2[0-3]):[0-5]\d$').hasMatch(h.trim());
+
 /// Paramètres de l'église (`parametres/eglise`), lisibles par tous.
 class ParametresEglise {
   const ParametresEglise({
@@ -21,6 +30,12 @@ class ParametresEglise {
     this.pasteurNom = '',
     this.pasteurPhotoUrl,
     this.pasteurPresentation = const {},
+    this.eglisePresentation = const {},
+    this.interactionJour,
+    this.interactionHeure = '',
+    this.interactionLien = '',
+    this.interactionDescription = const {},
+    this.liensCommunaute = const [],
   });
 
   /// Groupe qui reçoit les sujets de prière « partagés avec l'intercession ».
@@ -47,13 +62,48 @@ class ParametresEglise {
   final String? pasteurPhotoUrl;
   final Map<String, String> pasteurPresentation;
 
+  /// Présentation de l'église (page « Notre église ») ; texte par défaut si vide.
+  final Map<String, String> eglisePresentation;
+
+  /// Rencontre en direct chaque semaine : jour (1 = lundi … 7 = dimanche),
+  /// heure « 20:00 », lien (YouTube, Zoom, WhatsApp…), description.
+  final int? interactionJour;
+  final String interactionHeure;
+  final String interactionLien;
+  final Map<String, String> interactionDescription;
+
+  /// Liens de la communauté WhatsApp : (titre, lien).
+  final List<(String, String)> liensCommunaute;
+
+  bool get interactionPrevue =>
+      interactionJour != null && heureValide(interactionHeure);
+
+  /// Prochaine rencontre en direct à partir de [maintenant].
+  DateTime? prochaineInteraction(DateTime maintenant) {
+    if (!interactionPrevue) return null;
+    final [h, m] = interactionHeure.split(':').map(int.parse).toList();
+    var jour = DateTime(
+      maintenant.year,
+      maintenant.month,
+      maintenant.day,
+      h,
+      m,
+    );
+    while (jour.weekday != interactionJour ||
+        jour.isBefore(maintenant.subtract(const Duration(hours: 2)))) {
+      jour = DateTime(jour.year, jour.month, jour.day + 1, h, m);
+    }
+    return jour;
+  }
+
   bool get virementPossible => titulaire.isNotEmpty && ibanValide(iban);
 
   factory ParametresEglise.depuis(Map<String, dynamic>? m) => ParametresEglise(
     groupeIntercessionId: m?['groupeIntercessionId'] as String?,
     groupeCuisineId: m?['groupeCuisineId'] as String?,
-    facebookUrl: m?['facebookUrl'] as String? ?? '',
-    youtubeUrl: m?['youtubeUrl'] as String? ?? '',
+    // Comptes de l'église, tant que l'administrateur n'a rien changé.
+    facebookUrl: m?['facebookUrl'] as String? ?? facebookEglise,
+    youtubeUrl: m?['youtubeUrl'] as String? ?? youtubeEglise,
     titulaire: m?['titulaire'] as String? ?? '',
     iban: m?['iban'] as String? ?? '',
     bic: m?['bic'] as String? ?? '',
@@ -63,6 +113,16 @@ class ParametresEglise {
     pasteurNom: m?['pasteurNom'] as String? ?? '',
     pasteurPhotoUrl: m?['pasteurPhotoUrl'] as String?,
     pasteurPresentation: Traduction.lire(m?['pasteurPresentation']),
+    eglisePresentation: Traduction.lire(m?['eglisePresentation']),
+    interactionJour: (m?['interactionJour'] as num?)?.toInt(),
+    interactionHeure: m?['interactionHeure'] as String? ?? '',
+    interactionLien: m?['interactionLien'] as String? ?? '',
+    interactionDescription: Traduction.lire(m?['interactionDescription']),
+    liensCommunaute: [
+      for (final l in (m?['liensCommunaute'] as List? ?? const []))
+        if (l is Map && l['url'] is String)
+          ((l['titre'] as String?) ?? '', l['url'] as String),
+    ],
   );
 }
 
@@ -115,4 +175,25 @@ Future<void> enregistrerPasteur(
   'pasteurNom': nom.trim(),
   'pasteurPhotoUrl': photoUrl,
   'pasteurPresentation': presentation,
+}, SetOptions(merge: true));
+
+/// Administrateur : présentation de l'église, rencontre en direct, communauté.
+Future<void> enregistrerRubriques(
+  FirebaseFirestore db, {
+  required Map<String, String> eglisePresentation,
+  required int? interactionJour,
+  required String interactionHeure,
+  required String interactionLien,
+  required Map<String, String> interactionDescription,
+  required List<(String, String)> liensCommunaute,
+}) => db.doc('parametres/eglise').set({
+  'eglisePresentation': eglisePresentation,
+  'interactionJour': interactionJour,
+  'interactionHeure': interactionHeure.trim(),
+  'interactionLien': interactionLien.trim(),
+  'interactionDescription': interactionDescription,
+  'liensCommunaute': [
+    for (final (titre, url) in liensCommunaute)
+      {'titre': titre.trim(), 'url': url.trim()},
+  ],
 }, SetOptions(merge: true));

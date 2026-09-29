@@ -112,7 +112,7 @@ void main() {
     testWidgets('ordinateur : menu latéral déplié', (tester) async {
       await lancer(tester, taille: const Size(3600, 2200));
       expect(rail(tester)!.extended, isTrue);
-      expect(find.text('Dîmes et offrandes'), findsOneWidget);
+      expect(find.text('Notre église'), findsOneWidget);
     });
   });
 }

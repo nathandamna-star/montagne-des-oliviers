@@ -5,6 +5,54 @@ import '../../actualites/domain/actualite.dart';
 
 enum TypeMedia { audio, video, direct }
 
+/// Rubrique d'un média : prédications (par thème), enseignements
+/// (mariage, délivrance, baptême…) ou podcasts.
+enum Rubrique {
+  predication,
+  enseignement,
+  podcast;
+
+  static Rubrique depuis(Object? v) =>
+      values.firstWhere((r) => r.name == v, orElse: () => predication);
+
+  /// Thèmes proposés dans la rubrique (aucun pour les podcasts).
+  List<ThemeMedia> get themes => switch (this) {
+    predication => const [
+      ThemeMedia.repentance,
+      ThemeMedia.delivrance,
+      ThemeMedia.guerison,
+      ThemeMedia.combatSpirituel,
+      ThemeMedia.liensFamille,
+      ThemeMedia.foi,
+      ThemeMedia.priere,
+      ThemeMedia.autre,
+    ],
+    enseignement => const [
+      ThemeMedia.mariage,
+      ThemeMedia.delivrance,
+      ThemeMedia.bapteme,
+      ThemeMedia.autre,
+    ],
+    podcast => const [],
+  };
+}
+
+enum ThemeMedia {
+  repentance,
+  delivrance,
+  guerison,
+  combatSpirituel,
+  liensFamille,
+  foi,
+  priere,
+  mariage,
+  bapteme,
+  autre;
+
+  static ThemeMedia? depuis(Object? v) =>
+      values.where((t) => t.name == v).firstOrNull;
+}
+
 /// Prédication, exhortation ou direct (`medias/{id}`).
 class Media {
   const Media({
@@ -18,6 +66,8 @@ class Media {
     this.visibilite = Visibilite.public,
     this.publie = false,
     this.notifier = false,
+    this.rubrique = Rubrique.predication,
+    this.theme,
   });
 
   final String id;
@@ -32,6 +82,8 @@ class Media {
   final Visibilite visibilite;
   final bool publie;
   final bool notifier;
+  final Rubrique rubrique;
+  final ThemeMedia? theme;
 
   /// Lien YouTube ou Facebook : ouvert dans l'app correspondante.
   bool get lienExterne {
@@ -60,6 +112,8 @@ class Media {
           : Visibilite.public,
       publie: m['publie'] == true,
       notifier: m['notifier'] == true,
+      rubrique: Rubrique.depuis(m['rubrique']),
+      theme: ThemeMedia.depuis(m['theme']),
     );
   }
 
@@ -73,6 +127,8 @@ class Media {
     'visibilite': visibilite.name,
     'publie': publie,
     'notifier': notifier,
+    'rubrique': rubrique.name,
+    'theme': theme?.name,
   };
 }
 

@@ -20,6 +20,7 @@ Deel uitmaken van een kerk, een gebedsintentie toevertrouwen of een doop aanvrag
 - Het ledenregister van het secretariaat: contactgegevens, geboortedatum, gezin, data van aankomst, doop, opdracht van een kind of huwelijk, diensten, notities.
 - Je deelname: groepen, berichten, foto's en documenten gedeeld in de groepen, antwoorden op bijeenkomsten, inschrijvingen voor activiteiten en voor het poetsen van de zaal, wat je meebrengt naar feesten, geplande diensten, reservaties van zalen.
 - Je aanvragen (doop, opdracht van een kind, huwelijk, afspraak, bezoek) en de opvolging van de voorbereidingen (gevolgde lessen, gestelde vragen).
+- Berichten via „Contact”, ook zonder account: naam, e-mail of telefoon, onderwerp en bericht. Alleen de pastoors lezen ze.
 - Je gebedsintenties en getuigenissen. Je kunt ze anoniem toevertrouwen aan het voorbedeteam.
 - Je giften en boekbestellingen: bedrag, bestemming, mededeling, stand van de betaling. We zien nooit je bankgegevens of kaartnummer.
 - Een technische code van je telefoon om meldingen te sturen, als je die aanvaardt.
