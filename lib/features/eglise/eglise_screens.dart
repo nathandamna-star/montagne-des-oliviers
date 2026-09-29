@@ -218,8 +218,60 @@ class InteractionScreen extends ConsumerWidget {
       titre: l10n.rencontreDirect,
       actions: _modifier(context, ref),
       enfants: [
-        Icon(Icons.forum_outlined, size: 64, color: theme.colorScheme.primary),
-        const SizedBox(height: 12),
+        // Bandeau : le pasteur (photo détourée) sur le dégradé de l'église.
+        Container(
+          height: 220,
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            gradient: const LinearGradient(
+              colors: [AppColors.bleu, AppColors.turquoise],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Icon(Icons.forum_outlined, color: Colors.white),
+                      const SizedBox(height: 8),
+                      Text(
+                        l10n.rencontreDirect,
+                        style: theme.textTheme.headlineSmall?.copyWith(
+                          color: Colors.white,
+                        ),
+                      ),
+                      if (prochaine != null)
+                        Text(
+                          l10n.chaqueSemaine(
+                            DateFormat.EEEE(context.langue).format(prochaine),
+                            context.heure(prochaine),
+                          ),
+                          style: theme.textTheme.titleSmall?.copyWith(
+                            color: Colors.white.withValues(alpha: 0.9),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+              Image.asset(
+                'assets/images/pasteur-2.png',
+                fit: BoxFit.fitHeight,
+                alignment: Alignment.bottomRight,
+                semanticLabel: l10n.notrePasteur,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
         Text(
           description,
           style: theme.textTheme.bodyLarge?.copyWith(height: 1.5),

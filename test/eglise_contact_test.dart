@@ -152,7 +152,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('Rencontre en direct'));
       await tester.pumpAndSettle();
-      expect(find.text('Chaque jeudi à 20:00'), findsOneWidget);
+      expect(find.text('Chaque jeudi à 20:00'), findsWidgets);
       await tester.tap(find.text('Rejoindre la rencontre'));
       await tester.tap(find.byType(BackButton));
       await tester.pumpAndSettle();
