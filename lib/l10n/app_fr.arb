@@ -493,7 +493,7 @@
   "nouvelleDemande": "Nouvelle demande",
   "pageFacebook": "Page Facebook",
   "parametresEglise": "Paramètres de l'église",
-  "parametresEgliseSousTitre": "Intercession, cuisine, Facebook, YouTube",
+  "parametresEgliseSousTitre": "Intercession, cuisine, réseaux sociaux, e-mail de contact",
   "partageIntercession": "Aussi l'équipe d'intercession",
   "partageIntercessionAide": "Les membres du groupe d'intercession prient avec vous.",
   "partagePasteurs": "Les pasteurs seulement",
@@ -979,5 +979,12 @@
       }
     }
   },
-  "affectationLoyer": "Loyer"
+  "affectationLoyer": "Loyer",
+  "suivezNous": "Suivez-nous",
+  "accesRapide": "Accès rapide",
+  "notrePasteur": "Notre pasteur",
+  "pasteurPrincipal": "Pasteur principal",
+  "pasteurBientot": "La présentation du pasteur sera bientôt disponible.",
+  "presentation": "Présentation",
+  "notrePasteurSousTitre": "Photo et présentation du pasteur principal"
 }

@@ -82,6 +82,13 @@ service firebase.storage {
       allow delete: if estAdmin();
     }
 
+    // Photo du pasteur principal (page « Notre pasteur ») : publique.
+    match /parametres/{fichier} {
+      allow read: if true;
+      allow write: if estAdmin() && image(10);
+      allow delete: if estAdmin();
+    }
+
     // Couvertures des livres de la boutique : publiques.
     match /livres/{id}/{fichier} {
       allow read: if true;

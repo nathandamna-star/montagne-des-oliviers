@@ -39,6 +39,8 @@ import '../../features/salles/reservations_a_valider_screen.dart';
 import '../../features/salles/salle_screen.dart';
 import '../../features/salles/salles_screen.dart';
 import '../../features/parametres/parametres_eglise_screen.dart';
+import '../../features/pasteur/editeur_pasteur_screen.dart';
+import '../../features/pasteur/pasteur_screen.dart';
 import '../../features/planning/presentation/editeur_affectation_screen.dart';
 import '../../features/planning/presentation/editeur_equipe_screen.dart';
 import '../../features/planning/presentation/equipe_screen.dart';
@@ -76,9 +78,12 @@ import 'routes.dart';
 
 export 'routes.dart';
 
-/// Largeur à partir de laquelle on affiche le menu latéral (ordinateur,
-/// tablette) au lieu de la barre du bas.
-const largeurMenuLateral = 800.0;
+/// Largeur à partir de laquelle on affiche le menu latéral (tablette,
+/// ordinateur) au lieu de la barre du bas (téléphone).
+const largeurMenuLateral = 600.0;
+
+/// Largeur à partir de laquelle le menu latéral est déplié (ordinateur).
+const largeurMenuDeplie = 1100.0;
 
 final routerProvider = Provider<GoRouter>((ref) {
   // Relance les redirections quand la connexion, le profil ou les rôles changent.
@@ -152,6 +157,16 @@ final routerProvider = Provider<GoRouter>((ref) {
 
 final _sousRoutes = <String, List<RouteBase>>{
   Routes.accueil: [
+    GoRoute(
+      path: 'pasteur',
+      builder: (context, state) => const PasteurScreen(),
+      routes: [
+        GoRoute(
+          path: 'modifier',
+          builder: (context, state) => const EditeurPasteurScreen(),
+        ),
+      ],
+    ),
     GoRoute(
       path: 'dons',
       builder: (context, state) => const DonsScreen(),
@@ -557,17 +572,34 @@ class _Coquille extends ConsumerWidget {
     void aller(int i) =>
         shell.goBranch(i, initialLocation: i == shell.currentIndex);
 
-    if (MediaQuery.sizeOf(context).width >= largeurMenuLateral) {
+    final largeur = MediaQuery.sizeOf(context).width;
+    if (largeur >= largeurMenuLateral) {
+      final deplie = largeur >= largeurMenuDeplie;
       return Scaffold(
         body: Row(
           children: [
             NavigationRail(
               selectedIndex: index,
               onDestinationSelected: aller,
-              labelType: NavigationRailLabelType.all,
+              extended: deplie,
+              minExtendedWidth: 230,
+              labelType: deplie
+                  ? NavigationRailLabelType.none
+                  : NavigationRailLabelType.all,
               leading: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
-                child: const LogoEglise(taille: 56),
+                child: deplie
+                    ? Row(
+                        children: [
+                          const LogoEglise(taille: 48),
+                          const SizedBox(width: 12),
+                          Text(
+                            l10n.appTitle,
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                        ],
+                      )
+                    : const LogoEglise(taille: 56),
               ),
               destinations: [
                 for (final (icone, iconeActive, libelle) in onglets)

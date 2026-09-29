@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/horloge.dart';
 import '../../l10n/app_localizations.dart';
+import '../../shared/widgets/reseaux_sociaux.dart';
 import '../../shared/domain_traduction.dart';
 import '../../shared/format_date.dart';
 import '../../shared/services/lanceur.dart';
@@ -50,6 +51,8 @@ class _MediasScreenState extends ConsumerState<MediasScreen> {
         padding: const EdgeInsets.all(16),
         children: [
           const CarteVersetDuJour(),
+          const SizedBox(height: 8),
+          const ReseauxSociaux(),
           if (directs.isNotEmpty || youtube.isNotEmpty) ...[
             const SizedBox(height: 8),
             Card(

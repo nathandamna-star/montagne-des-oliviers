@@ -17,6 +17,8 @@ abstract final class Routes {
   static String media(String id) => '/medias/$id';
   static String editerMedia(String id) => '/responsables/medias/$id';
   static const salles = '/accueil/salles';
+  static const pasteur = '/accueil/pasteur';
+  static const editerPasteur = '/accueil/pasteur/modifier';
   static const dons = '/accueil/dons';
   static const releveDons = '/accueil/dons/releve';
   static String virementDon(String id) => '/accueil/dons/virement/$id';

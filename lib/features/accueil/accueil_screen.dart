@@ -5,20 +5,19 @@ import 'package:go_router/go_router.dart';
 import '../../core/router/routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../l10n/app_localizations.dart';
-import '../../shared/services/lanceur.dart';
 import '../../shared/widgets/liens_legaux.dart';
 import '../../shared/widgets/logo_eglise.dart';
+import '../../shared/widgets/reseaux_sociaux.dart';
 import '../actualites/actualites_providers.dart';
 import '../actualites/presentation/carte_actualite.dart';
 import '../agenda/agenda_providers.dart';
 import '../agenda/presentation/carte_evenement.dart';
 import '../auth/auth_providers.dart';
 import '../medias/presentation/widgets_medias.dart';
-import '../parametres/parametres_eglise.dart';
 
-/// Accueil : bannière (visiteurs) ou carte de l'église (membres), dernières
-/// annonces et prochains événements. et, plus tard, verset du jour, annonces,
-/// prochain culte et direct.
+/// Accueil : bannière (visiteurs) ou carte de l'église (membres), verset du
+/// jour, raccourcis vers chaque rubrique, réseaux sociaux, dernières annonces
+/// et prochains événements. S'adapte au téléphone, à la tablette et à l'ordinateur.
 class AccueilScreen extends ConsumerWidget {
   const AccueilScreen({super.key});
 
@@ -26,183 +25,215 @@ class AccueilScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final connecte = ref.watch(estConnecteProvider);
+    final membre = ref.watch(profilProvider).value != null;
+    final raccourcis = [
+      _Raccourci(Icons.savings_outlined, l10n.dimesEtOffrandes, Routes.dons),
+      _Raccourci(Icons.storefront_outlined, l10n.boutique, Routes.boutique),
+      _Raccourci(Icons.person_pin_outlined, l10n.notrePasteur, Routes.pasteur),
+      if (membre) ...[
+        _Raccourci(
+          Icons.outbox_outlined,
+          l10n.faireDemande,
+          Routes.nouvelleDemande,
+        ),
+        _Raccourci(
+          Icons.volunteer_activism_outlined,
+          l10n.confierPriere,
+          Routes.nouvellePriere,
+        ),
+        _Raccourci(Icons.event_note_outlined, l10n.planning, Routes.planning),
+        _Raccourci(
+          Icons.meeting_room_outlined,
+          l10n.reserverSalle,
+          Routes.salles,
+        ),
+        _Raccourci(
+          Icons.cleaning_services_outlined,
+          l10n.entretienSalle,
+          Routes.entretien,
+        ),
+        _Raccourci(
+          Icons.menu_book_outlined,
+          l10n.preparations,
+          Routes.preparations,
+        ),
+      ],
+    ];
     return Scaffold(
       appBar: AppBar(title: Text(l10n.appTitle)),
-      body: ListView(
-        padding: const EdgeInsets.all(20),
-        children: [
-          if (connecte)
-            const _CarteEglise()
-          else
-            // Visuel « Rester connecté avec nous » de l'église.
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: AspectRatio(
-                aspectRatio: 16 / 9,
-                child: Image.asset(
-                  'assets/images/banniere.jpg',
-                  fit: BoxFit.cover,
-                  semanticLabel: '${l10n.nomEglise} — ${l10n.devise}',
-                ),
+      body: LayoutBuilder(
+        builder: (context, contraintes) {
+          final large = contraintes.maxWidth >= 900;
+          final marge = contraintes.maxWidth >= 600 ? 24.0 : 16.0;
+          final annonces = Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _Section(
+                titre: l10n.annonces,
+                action: l10n.voirTout,
+                onAction: () => context.push(Routes.actualites),
               ),
-            ),
-          const SizedBox(height: 12),
-          const CarteVersetDuJour(),
-          if (!connecte) ...[
-            const SizedBox(height: 16),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(l10n.accueilConnexionTexte),
-                    const SizedBox(height: 12),
-                    FilledButton(
-                      onPressed: () => context.push(Routes.connexion),
-                      child: Text(l10n.seConnecter),
+              ..._annonces(context, ref),
+            ],
+          );
+          final evenements = Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _Section(
+                titre: l10n.prochainement,
+                action: l10n.toutLAgenda,
+                onAction: () => context.go(Routes.agenda),
+              ),
+              ..._evenements(context, ref),
+            ],
+          );
+          return Align(
+            alignment: Alignment.topCenter,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1200),
+              child: ListView(
+                padding: EdgeInsets.all(marge),
+                children: [
+                  if (connecte)
+                    const _CarteEglise()
+                  else
+                    // Visuel « Rester connecté avec nous » de l'église.
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxHeight: 380),
+                        child: AspectRatio(
+                          aspectRatio: 16 / 9,
+                          child: Image.asset(
+                            'assets/images/banniere.jpg',
+                            fit: BoxFit.cover,
+                            semanticLabel: '${l10n.nomEglise} — ${l10n.devise}',
+                          ),
+                        ),
+                      ),
+                    ),
+                  const SizedBox(height: 12),
+                  const CarteVersetDuJour(),
+                  if (!connecte) ...[
+                    const SizedBox(height: 16),
+                    Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(l10n.accueilConnexionTexte),
+                            const SizedBox(height: 12),
+                            FilledButton(
+                              onPressed: () => context.push(Routes.connexion),
+                              child: Text(l10n.seConnecter),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
-                ),
-              ),
-            ),
-          ],
-          if (ref.watch(profilProvider).value != null) ...[
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: () => context.push(Routes.nouvelleDemande),
-                    icon: const Icon(Icons.outbox_outlined),
-                    label: Text(l10n.faireDemande),
+                  const SizedBox(height: 24),
+                  Text(
+                    l10n.accesRapide,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: () => context.push(Routes.nouvellePriere),
-                    icon: const Icon(Icons.volunteer_activism_outlined),
-                    label: Text(l10n.confierPriere),
-                  ),
-                ),
-              ],
-            ),
-          ],
-          if (ref.watch(profilProvider).value != null) ...[
-            const SizedBox(height: 8),
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.event_note_outlined),
-                title: Text(l10n.planning),
-                subtitle: Text(l10n.planningSousTitre),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () => context.push(Routes.planning),
+                  const SizedBox(height: 8),
+                  _GrilleRaccourcis(raccourcis),
+                  const SizedBox(height: 24),
+                  const ReseauxSociaux(),
+                  const SizedBox(height: 24),
+                  if (large)
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(child: annonces),
+                        const SizedBox(width: 24),
+                        Expanded(child: evenements),
+                      ],
+                    )
+                  else ...[
+                    annonces,
+                    const SizedBox(height: 24),
+                    evenements,
+                  ],
+                  const SizedBox(height: 24),
+                  const LiensLegaux(),
+                ],
               ),
             ),
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.meeting_room_outlined),
-                title: Text(l10n.reserverSalle),
-                subtitle: Text(l10n.reserverSalleSousTitre),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () => context.push(Routes.salles),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.cleaning_services_outlined),
-                title: Text(l10n.entretienSalle),
-                subtitle: Text(l10n.entretienSousTitre),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () => context.push(Routes.entretien),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.menu_book_outlined),
-                title: Text(l10n.preparations),
-                subtitle: Text(l10n.preparationsSousTitre),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () => context.push(Routes.preparations),
-              ),
-            ),
-          ],
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(
-                child: Card(
-                  child: ListTile(
-                    leading: const Icon(Icons.savings_outlined),
-                    title: Text(l10n.dimesEtOffrandes),
-                    onTap: () => context.push(Routes.dons),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Card(
-                  child: ListTile(
-                    leading: const Icon(Icons.storefront_outlined),
-                    title: Text(l10n.boutique),
-                    onTap: () => context.push(Routes.boutique),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          ..._reseaux(context, ref),
-          const SizedBox(height: 24),
-          _Section(
-            titre: l10n.annonces,
-            action: l10n.voirTout,
-            onAction: () => context.push(Routes.actualites),
-          ),
-          ..._annonces(context, ref),
-          const SizedBox(height: 24),
-          _Section(
-            titre: l10n.prochainement,
-            action: l10n.toutLAgenda,
-            onAction: () => context.go(Routes.agenda),
-          ),
-          ..._evenements(context, ref),
-          const SizedBox(height: 24),
-          const LiensLegaux(),
-        ],
+          );
+        },
       ),
     );
   }
 }
 
-/// Boutons Facebook et YouTube, quand l'église les a renseignés.
-List<Widget> _reseaux(BuildContext context, WidgetRef ref) {
-  final l10n = AppLocalizations.of(context);
-  final p = ref.watch(parametresEgliseProvider).value;
-  if (p == null || (p.facebookUrl.isEmpty && p.youtubeUrl.isEmpty)) {
-    return const [];
+class _Raccourci {
+  const _Raccourci(this.icone, this.libelle, this.route);
+
+  final IconData icone;
+  final String libelle;
+  final String route;
+}
+
+/// Grandes tuiles faciles à toucher : 2 par ligne sur un petit téléphone,
+/// jusqu'à 6 sur un ordinateur.
+class _GrilleRaccourcis extends StatelessWidget {
+  const _GrilleRaccourcis(this.raccourcis);
+
+  final List<_Raccourci> raccourcis;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return LayoutBuilder(
+      builder: (context, c) {
+        final colonnes = (c.maxWidth / 170).floor().clamp(2, 6);
+        const espace = 10.0;
+        final largeur = (c.maxWidth - espace * (colonnes - 1)) / colonnes;
+        return Wrap(
+          spacing: espace,
+          runSpacing: espace,
+          children: [
+            for (final r in raccourcis)
+              SizedBox(
+                width: largeur,
+                height: 112,
+                child: Card(
+                  margin: EdgeInsets.zero,
+                  clipBehavior: Clip.antiAlias,
+                  child: InkWell(
+                    onTap: () => context.push(r.route),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            r.icone,
+                            size: 32,
+                            color: theme.colorScheme.primary,
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            r.libelle,
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.textTheme.labelLarge,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        );
+      },
+    );
   }
-  final lanceur = ref.read(lanceurProvider);
-  return [
-    const SizedBox(height: 16),
-    Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: [
-        if (p.youtubeUrl.isNotEmpty)
-          ActionChip(
-            avatar: const Icon(Icons.smart_display_outlined),
-            label: Text(l10n.suivreYoutube),
-            onPressed: () => lanceur.ouvrir(Uri.parse(p.youtubeUrl)),
-          ),
-        if (p.facebookUrl.isNotEmpty)
-          ActionChip(
-            avatar: const Icon(Icons.facebook_outlined),
-            label: Text(l10n.suivreFacebook),
-            onPressed: () => lanceur.ouvrir(Uri.parse(p.facebookUrl)),
-          ),
-      ],
-    ),
-  ];
 }
 
 List<Widget> _annonces(BuildContext context, WidgetRef ref) {

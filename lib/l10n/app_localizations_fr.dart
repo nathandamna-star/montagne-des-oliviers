@@ -1186,7 +1186,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get parametresEgliseSousTitre =>
-      'Intercession, cuisine, Facebook, YouTube';
+      'Intercession, cuisine, réseaux sociaux, e-mail de contact';
 
   @override
   String get partageIntercession => 'Aussi l\'équipe d\'intercession';
@@ -2395,4 +2395,27 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get affectationLoyer => 'Loyer';
+
+  @override
+  String get suivezNous => 'Suivez-nous';
+
+  @override
+  String get accesRapide => 'Accès rapide';
+
+  @override
+  String get notrePasteur => 'Notre pasteur';
+
+  @override
+  String get pasteurPrincipal => 'Pasteur principal';
+
+  @override
+  String get pasteurBientot =>
+      'La présentation du pasteur sera bientôt disponible.';
+
+  @override
+  String get presentation => 'Présentation';
+
+  @override
+  String get notrePasteurSousTitre =>
+      'Photo et présentation du pasteur principal';
 }

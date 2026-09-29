@@ -330,3 +330,12 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   pour les médias publics via `DiffusionWhatsApp` → wa.me avec message prêt + lien `https://montagne-des-oliviers.web.app/m/{id}`).
   Page web publique : fonction `pageMedia` (Hosting réécrit `/m/**`, aperçu Open Graph, lecteur, 404 si réservé aux
   membres ou non publié). Responsables → Médias (secrétariat) : éditeur, versets du jour. Fonction `notifierMedia`.
+- Présentation (demande du porteur) : Accueil en **grille de raccourcis** (2 à 6 tuiles par ligne selon la largeur :
+  Dîmes et offrandes, Boutique, Notre pasteur ; + pour les membres : demande, prière, planning, salles, entretien,
+  préparations), annonces et agenda côte à côte sur grand écran, contenu limité à 1200 px. Navigation : barre du bas
+  < 600 px (téléphone), menu latéral compact 600–1100 px (tablette), menu latéral déplié ≥ 1100 px (ordinateur).
+- **Notre pasteur** (`/accueil/pasteur`) : `parametres/eglise.pasteurNom`, `pasteurPhotoUrl` (Storage `parametres/…`,
+  admin), `pasteurPresentation` {fr, nl} ; édition par l'administrateur (`/accueil/pasteur/modifier`, aussi dans
+  Responsables).
+- **Réseaux sociaux** : `youtubeUrl`, `facebookUrl`, `tiktokUrl`, `instagramUrl` (Paramètres de l'église) ; widget
+  `ReseauxSociaux` (logos font_awesome_flutter) sur l'Accueil et dans Médias, seulement les comptes renseignés.

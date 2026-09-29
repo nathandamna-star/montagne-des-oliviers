@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../shared/domain/virement.dart';
+import '../../shared/domain_traduction.dart';
 import '../auth/auth_providers.dart';
 
 /// Paramètres de l'église (`parametres/eglise`), lisibles par tous.
@@ -15,6 +16,11 @@ class ParametresEglise {
     this.iban = '',
     this.bic = '',
     this.emailContact = '',
+    this.tiktokUrl = '',
+    this.instagramUrl = '',
+    this.pasteurNom = '',
+    this.pasteurPhotoUrl,
+    this.pasteurPresentation = const {},
   });
 
   /// Groupe qui reçoit les sujets de prière « partagés avec l'intercession ».
@@ -33,6 +39,13 @@ class ParametresEglise {
 
   /// Adresse de contact affichée dans les pages légales.
   final String emailContact;
+  final String tiktokUrl;
+  final String instagramUrl;
+
+  /// Présentation du pasteur principal (page « Notre pasteur »).
+  final String pasteurNom;
+  final String? pasteurPhotoUrl;
+  final Map<String, String> pasteurPresentation;
 
   bool get virementPossible => titulaire.isNotEmpty && ibanValide(iban);
 
@@ -45,6 +58,11 @@ class ParametresEglise {
     iban: m?['iban'] as String? ?? '',
     bic: m?['bic'] as String? ?? '',
     emailContact: m?['emailContact'] as String? ?? '',
+    tiktokUrl: m?['tiktokUrl'] as String? ?? '',
+    instagramUrl: m?['instagramUrl'] as String? ?? '',
+    pasteurNom: m?['pasteurNom'] as String? ?? '',
+    pasteurPhotoUrl: m?['pasteurPhotoUrl'] as String?,
+    pasteurPresentation: Traduction.lire(m?['pasteurPresentation']),
   );
 }
 
@@ -63,7 +81,11 @@ Future<void> enregistrerParametresEglise(
   required String facebookUrl,
   required String youtubeUrl,
   required String emailContact,
+  required String tiktokUrl,
+  required String instagramUrl,
 }) => db.doc('parametres/eglise').set({
+  'tiktokUrl': tiktokUrl.trim(),
+  'instagramUrl': instagramUrl.trim(),
   'emailContact': emailContact.trim(),
   'groupeIntercessionId': groupeIntercessionId,
   'groupeCuisineId': groupeCuisineId,
@@ -81,4 +103,16 @@ Future<void> enregistrerCoordonnees(
   'titulaire': titulaire.trim(),
   'iban': nettoyerIban(iban),
   'bic': bic.trim().toUpperCase(),
+}, SetOptions(merge: true));
+
+/// Administrateur : présentation du pasteur principal.
+Future<void> enregistrerPasteur(
+  FirebaseFirestore db, {
+  required String nom,
+  required String? photoUrl,
+  required Map<String, String> presentation,
+}) => db.doc('parametres/eglise').set({
+  'pasteurNom': nom.trim(),
+  'pasteurPhotoUrl': photoUrl,
+  'pasteurPresentation': presentation,
 }, SetOptions(merge: true));

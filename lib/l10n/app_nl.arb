@@ -343,7 +343,7 @@
   "nouvelleDemande": "Nieuwe aanvraag",
   "pageFacebook": "Facebookpagina",
   "parametresEglise": "Instellingen van de kerk",
-  "parametresEgliseSousTitre": "Voorbede, keuken, Facebook, YouTube",
+  "parametresEgliseSousTitre": "Voorbede, keuken, sociale media, contact-e-mail",
   "partageIntercession": "Ook het voorbedeteam",
   "partageIntercessionAide": "De leden van de voorbedegroep bidden met je mee.",
   "partagePasteurs": "Alleen de pastoors",
@@ -711,5 +711,12 @@
   "editeurReleve": "Centre Évangélique d'Hoegaarden vzw · KBO 0557.986.857 · Vroentestraat 100, 3320 Hoegaarden",
   "entetesReleve": "Datum,Bestemming,Wijze,Bedrag",
   "releveEmisLe": "Overzicht opgemaakt op {date}.",
-  "affectationLoyer": "Huur"
+  "affectationLoyer": "Huur",
+  "suivezNous": "Volg ons",
+  "accesRapide": "Snel naar",
+  "notrePasteur": "Onze pastoor",
+  "pasteurPrincipal": "Hoofdpastoor",
+  "pasteurBientot": "De voorstelling van de pastoor volgt binnenkort.",
+  "presentation": "Voorstelling",
+  "notrePasteurSousTitre": "Foto en voorstelling van de hoofdpastoor"
 }

@@ -2159,7 +2159,7 @@ abstract class AppLocalizations {
   /// No description provided for @parametresEgliseSousTitre.
   ///
   /// In fr, this message translates to:
-  /// **'Intercession, cuisine, Facebook, YouTube'**
+  /// **'Intercession, cuisine, réseaux sociaux, e-mail de contact'**
   String get parametresEgliseSousTitre;
 
   /// No description provided for @partageIntercession.
@@ -4369,6 +4369,48 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Loyer'**
   String get affectationLoyer;
+
+  /// No description provided for @suivezNous.
+  ///
+  /// In fr, this message translates to:
+  /// **'Suivez-nous'**
+  String get suivezNous;
+
+  /// No description provided for @accesRapide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Accès rapide'**
+  String get accesRapide;
+
+  /// No description provided for @notrePasteur.
+  ///
+  /// In fr, this message translates to:
+  /// **'Notre pasteur'**
+  String get notrePasteur;
+
+  /// No description provided for @pasteurPrincipal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pasteur principal'**
+  String get pasteurPrincipal;
+
+  /// No description provided for @pasteurBientot.
+  ///
+  /// In fr, this message translates to:
+  /// **'La présentation du pasteur sera bientôt disponible.'**
+  String get pasteurBientot;
+
+  /// No description provided for @presentation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Présentation'**
+  String get presentation;
+
+  /// No description provided for @notrePasteurSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Photo et présentation du pasteur principal'**
+  String get notrePasteurSousTitre;
 }
 
 class _AppLocalizationsDelegate

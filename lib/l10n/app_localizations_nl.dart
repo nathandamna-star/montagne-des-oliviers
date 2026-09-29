@@ -1187,7 +1187,8 @@ class AppLocalizationsNl extends AppLocalizations {
   String get parametresEglise => 'Instellingen van de kerk';
 
   @override
-  String get parametresEgliseSousTitre => 'Voorbede, keuken, Facebook, YouTube';
+  String get parametresEgliseSousTitre =>
+      'Voorbede, keuken, sociale media, contact-e-mail';
 
   @override
   String get partageIntercession => 'Ook het voorbedeteam';
@@ -2396,4 +2397,27 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get affectationLoyer => 'Huur';
+
+  @override
+  String get suivezNous => 'Volg ons';
+
+  @override
+  String get accesRapide => 'Snel naar';
+
+  @override
+  String get notrePasteur => 'Onze pastoor';
+
+  @override
+  String get pasteurPrincipal => 'Hoofdpastoor';
+
+  @override
+  String get pasteurBientot =>
+      'De voorstelling van de pastoor volgt binnenkort.';
+
+  @override
+  String get presentation => 'Voorstelling';
+
+  @override
+  String get notrePasteurSousTitre =>
+      'Foto en voorstelling van de hoofdpastoor';
 }

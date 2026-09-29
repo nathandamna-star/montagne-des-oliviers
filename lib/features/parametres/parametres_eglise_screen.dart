@@ -23,6 +23,8 @@ class _ParametresEgliseScreenState
   final _facebook = TextEditingController();
   final _youtube = TextEditingController();
   final _email = TextEditingController();
+  final _tiktok = TextEditingController();
+  final _instagram = TextEditingController();
   String? _intercession;
   String? _cuisine;
   bool _charge = false;
@@ -40,6 +42,8 @@ class _ParametresEgliseScreenState
         _facebook.text = p.facebookUrl;
         _youtube.text = p.youtubeUrl;
         _email.text = p.emailContact;
+        _tiktok.text = p.tiktokUrl;
+        _instagram.text = p.instagramUrl;
         _charge = true;
       });
     });
@@ -50,6 +54,8 @@ class _ParametresEgliseScreenState
     _facebook.dispose();
     _youtube.dispose();
     _email.dispose();
+    _tiktok.dispose();
+    _instagram.dispose();
     super.dispose();
   }
 
@@ -66,6 +72,8 @@ class _ParametresEgliseScreenState
         facebookUrl: _facebook.text,
         youtubeUrl: _youtube.text,
         emailContact: _email.text,
+        tiktokUrl: _tiktok.text,
+        instagramUrl: _instagram.text,
       );
       messager.showSnackBar(SnackBar(content: Text(l10n.enregistre)));
       if (mounted) context.pop();
@@ -164,6 +172,26 @@ class _ParametresEgliseScreenState
                         decoration: InputDecoration(
                           labelText: l10n.chaineYoutube,
                           hintText: 'https://www.youtube.com/@…',
+                        ),
+                        keyboardType: TextInputType.url,
+                        validator: _lien,
+                      ),
+                      const SizedBox(height: 16),
+                      TextFormField(
+                        controller: _tiktok,
+                        decoration: const InputDecoration(
+                          labelText: 'TikTok',
+                          hintText: 'https://www.tiktok.com/@…',
+                        ),
+                        keyboardType: TextInputType.url,
+                        validator: _lien,
+                      ),
+                      const SizedBox(height: 16),
+                      TextFormField(
+                        controller: _instagram,
+                        decoration: const InputDecoration(
+                          labelText: 'Instagram',
+                          hintText: 'https://www.instagram.com/…',
                         ),
                         keyboardType: TextInputType.url,
                         validator: _lien,

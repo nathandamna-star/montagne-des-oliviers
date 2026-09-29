@@ -76,6 +76,12 @@ describe('fichiers', () => {
     await assertSucceeds(getBytes(ref(visiteur(), 'livres/l1/couverture.jpg')));
   });
 
+  it('photo du pasteur : envoyée par un administrateur, publique', async () => {
+    await assertSucceeds(envoyer(admin(), 'parametres/pasteur.jpg', 'image/jpeg'));
+    await assertFails(envoyer(secretariat(), 'parametres/pasteur.jpg', 'image/jpeg'));
+    await assertSucceeds(getBytes(ref(visiteur(), 'parametres/pasteur.jpg')));
+  });
+
   it('groupes : les membres partagent photos, documents, audios', async () => {
     await assertSucceeds(envoyer(paul(), 'groupes/g1/partition.pdf', 'application/pdf'));
     await assertFails(envoyer(ctx('luc'), 'groupes/g1/x.pdf', 'application/pdf'));
