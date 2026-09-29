@@ -2418,4 +2418,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get notrePasteurSousTitre =>
       'Photo et présentation du pasteur principal';
+
+  @override
+  String get ajouterAudioVideo => 'Ajouter un audio ou une vidéo';
+
+  @override
+  String get gererMedias => 'Gérer les médias (brouillons, versets)';
 }

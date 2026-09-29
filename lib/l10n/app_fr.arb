@@ -986,5 +986,7 @@
   "pasteurPrincipal": "Pasteur principal",
   "pasteurBientot": "La présentation du pasteur sera bientôt disponible.",
   "presentation": "Présentation",
-  "notrePasteurSousTitre": "Photo et présentation du pasteur principal"
+  "notrePasteurSousTitre": "Photo et présentation du pasteur principal",
+  "ajouterAudioVideo": "Ajouter un audio ou une vidéo",
+  "gererMedias": "Gérer les médias (brouillons, versets)"
 }

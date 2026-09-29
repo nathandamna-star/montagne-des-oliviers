@@ -4411,6 +4411,18 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Photo et présentation du pasteur principal'**
   String get notrePasteurSousTitre;
+
+  /// No description provided for @ajouterAudioVideo.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un audio ou une vidéo'**
+  String get ajouterAudioVideo;
+
+  /// No description provided for @gererMedias.
+  ///
+  /// In fr, this message translates to:
+  /// **'Gérer les médias (brouillons, versets)'**
+  String get gererMedias;
 }
 
 class _AppLocalizationsDelegate

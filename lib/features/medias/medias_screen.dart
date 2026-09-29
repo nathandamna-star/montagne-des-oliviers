@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:go_router/go_router.dart';
+
 import '../../core/horloge.dart';
+import '../../core/roles.dart';
+import '../../core/router/routes.dart';
 import '../../l10n/app_localizations.dart';
 import '../../shared/widgets/reseaux_sociaux.dart';
 import '../../shared/domain_traduction.dart';
@@ -45,8 +49,27 @@ class _MediasScreenState extends ConsumerState<MediasScreen> {
             (_filtre == null || m.type == _filtre))
           m,
     ];
+    final gestion = ref.watch(estSecretariatProvider);
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.navMedias)),
+      appBar: AppBar(
+        title: Text(l10n.navMedias),
+        actions: [
+          if (gestion)
+            IconButton(
+              tooltip: l10n.gererMedias,
+              onPressed: () => context.push(Routes.gestionMedias),
+              icon: const Icon(Icons.edit_note),
+            ),
+        ],
+      ),
+      // Secrétariat et pasteurs : ajouter directement une prédication.
+      floatingActionButton: gestion
+          ? FloatingActionButton.extended(
+              onPressed: () => context.push(Routes.editerMedia('nouveau')),
+              icon: const Icon(Icons.add),
+              label: Text(l10n.ajouterAudioVideo),
+            )
+          : null,
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [

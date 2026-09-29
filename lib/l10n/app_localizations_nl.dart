@@ -2420,4 +2420,10 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get notrePasteurSousTitre =>
       'Foto en voorstelling van de hoofdpastoor';
+
+  @override
+  String get ajouterAudioVideo => 'Audio of video toevoegen';
+
+  @override
+  String get gererMedias => 'Media beheren (concepten, verzen)';
 }

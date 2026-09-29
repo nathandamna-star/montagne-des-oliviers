@@ -149,6 +149,28 @@ void main() {
     expect(find.text('Envoyer sur WhatsApp'), findsNothing);
   });
 
+  testWidgets('secrétariat : bouton « Ajouter » dans l\'onglet Médias', (
+    tester,
+  ) async {
+    final b = Banc(connecte: true, roles: {Role.secretariat});
+    await b.avecProfil();
+    await lancer(tester, banc: b, taille: grand);
+    await tester.tap(find.text('Médias').last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Ajouter un audio ou une vidéo'));
+    await tester.pumpAndSettle();
+    expect(find.widgetWithText(TextFormField, 'Titre (FR)'), findsOneWidget);
+  });
+
+  testWidgets('membre : pas de bouton « Ajouter »', (tester) async {
+    final b = Banc(connecte: true);
+    await b.avecProfil();
+    await lancer(tester, banc: b, taille: grand);
+    await tester.tap(find.text('Médias').last);
+    await tester.pumpAndSettle();
+    expect(find.text('Ajouter un audio ou une vidéo'), findsNothing);
+  });
+
   testWidgets(
     'secrétariat : publier une exhortation audio et ajouter un verset',
     (tester) async {

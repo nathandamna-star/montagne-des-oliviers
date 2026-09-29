@@ -718,5 +718,7 @@
   "pasteurPrincipal": "Hoofdpastoor",
   "pasteurBientot": "De voorstelling van de pastoor volgt binnenkort.",
   "presentation": "Voorstelling",
-  "notrePasteurSousTitre": "Foto en voorstelling van de hoofdpastoor"
+  "notrePasteurSousTitre": "Foto en voorstelling van de hoofdpastoor",
+  "ajouterAudioVideo": "Audio of video toevoegen",
+  "gererMedias": "Media beheren (concepten, verzen)"
 }
