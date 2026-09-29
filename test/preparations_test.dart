@@ -6,7 +6,7 @@ import 'package:montagne_des_oliviers/features/auth/domain/role.dart';
 
 import 'helpers.dart';
 
-const grand = Size(1080, 6000);
+const grand = Size(1080, 14000);
 
 /// Préparation au baptême avec 2 leçons (la 2e est publique). [inscrit] :
 /// Marie (u1) est candidate.

@@ -5,7 +5,7 @@ import 'package:montagne_des_oliviers/features/profil/data/fonctions_compte.dart
 
 import 'helpers.dart';
 
-const grand = Size(1080, 6000);
+const grand = Size(1080, 14000);
 
 Future<Banc> ouvrirProfil(WidgetTester tester) async {
   final b = Banc(connecte: true);

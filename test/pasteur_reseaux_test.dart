@@ -5,7 +5,7 @@ import 'package:montagne_des_oliviers/features/auth/domain/role.dart';
 
 import 'helpers.dart';
 
-const grand = Size(1080, 6000);
+const grand = Size(1080, 14000);
 
 void main() {
   setUpAll(() => GoogleFonts.config.allowRuntimeFetching = false);
@@ -17,10 +17,9 @@ void main() {
     await lancer(tester, banc: b, taille: grand);
     await tester.tap(find.text('Notre pasteur'));
     await tester.pumpAndSettle();
-    expect(
-      find.text('La présentation du pasteur sera bientôt disponible.'),
-      findsOneWidget,
-    );
+    // Présentation de départ, reprise du site de l'église.
+    expect(find.text('Pasteur Claude Lumbala'), findsOneWidget);
+    expect(find.textContaining('prière de délivrance'), findsOneWidget);
     await tester.tap(find.byTooltip('Modifier'));
     await tester.pumpAndSettle();
     await tester.enterText(
@@ -112,7 +111,7 @@ void main() {
     testWidgets('ordinateur : menu latéral déplié', (tester) async {
       await lancer(tester, taille: const Size(3600, 2200));
       expect(rail(tester)!.extended, isTrue);
-      expect(find.text('Notre église'), findsOneWidget);
+      expect(find.text('MONTAGNE\nDES OLIVIERS'), findsOneWidget);
     });
   });
 }

@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'helpers.dart';
 
-const grand = Size(1080, 6000);
+const grand = Size(1080, 14000);
 
 /// [cuisine] : Marie (u1) fait partie du groupe Cuisine.
 Future<Banc> banc({bool cuisine = false}) async {

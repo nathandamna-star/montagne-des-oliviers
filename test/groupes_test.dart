@@ -7,7 +7,7 @@ import 'package:montagne_des_oliviers/features/groupes/domain/groupe.dart';
 
 import 'helpers.dart';
 
-const grand = Size(1080, 6000);
+const grand = Size(1080, 14000);
 
 /// Marie (u1) : administratrice de « Intercession du mardi », membre de
 /// « Louange ». « Jeunes » est un groupe ouvert.

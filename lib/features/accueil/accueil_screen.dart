@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/router/routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../l10n/app_localizations.dart';
 import '../../shared/widgets/liens_legaux.dart';
+import '../eglise/blocs_eglise.dart';
 import '../../shared/widgets/logo_eglise.dart';
 import '../../shared/widgets/reseaux_sociaux.dart';
 import '../actualites/actualites_providers.dart';
@@ -127,7 +129,18 @@ class AccueilScreen extends ConsumerWidget {
         ),
     ];
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.appTitle)),
+      appBar: AppBar(
+        title: Text(l10n.appTitle),
+        actions: [
+          // Visiteurs : se connecter, toujours visible en haut.
+          if (!connecte)
+            IconButton(
+              tooltip: l10n.seConnecter,
+              onPressed: () => context.push(Routes.connexion),
+              icon: const Icon(Icons.login),
+            ),
+        ],
+      ),
       body: LayoutBuilder(
         builder: (context, contraintes) {
           final large = contraintes.maxWidth >= 900;
@@ -161,24 +174,8 @@ class AccueilScreen extends ConsumerWidget {
               child: ListView(
                 padding: EdgeInsets.all(marge),
                 children: [
-                  if (connecte)
-                    const _CarteEglise()
-                  else
-                    // Visuel « Rester connecté avec nous » de l'église.
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxHeight: 380),
-                        child: AspectRatio(
-                          aspectRatio: 16 / 9,
-                          child: Image.asset(
-                            'assets/images/banniere.jpg',
-                            fit: BoxFit.cover,
-                            semanticLabel: '${l10n.nomEglise} — ${l10n.devise}',
-                          ),
-                        ),
-                      ),
-                    ),
+                  const _EnTete(),
+                  const SizedBox(height: 24),
                   const SizedBox(height: 12),
                   const CarteVersetDuJour(),
                   if (!connecte) ...[
@@ -207,6 +204,8 @@ class AccueilScreen extends ConsumerWidget {
                     _GrilleRaccourcis(raccourcis),
                   ],
                   const SizedBox(height: 24),
+                  const ProgrammeEglise(),
+                  const SizedBox(height: 24),
                   const ReseauxSociaux(),
                   const SizedBox(height: 24),
                   if (large)
@@ -223,6 +222,10 @@ class AccueilScreen extends ConsumerWidget {
                     const SizedBox(height: 24),
                     evenements,
                   ],
+                  const SizedBox(height: 24),
+                  const NousTrouver(),
+                  const SizedBox(height: 12),
+                  const WhatsAppDirect(),
                   const SizedBox(height: 24),
                   const LiensLegaux(),
                 ],
@@ -374,50 +377,106 @@ class _Vide extends StatelessWidget {
   }
 }
 
-/// Logo, nom et devise de l'église sur le dégradé de l'app.
-class _CarteEglise extends StatelessWidget {
-  const _CarteEglise();
+/// En-tête, comme sur le site de l'église : logo, nom, devise et accueil au
+/// culte d'enseignement, avec deux boutons.
+class _EnTete extends StatelessWidget {
+  const _EnTete();
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        gradient: const LinearGradient(
-          colors: [AppColors.bleu, AppColors.turquoise],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+    final devise = l10n.devise.toUpperCase().split(' · ');
+    return Column(
+      children: [
+        const SizedBox(height: 8),
+        const LogoEglise(taille: 150),
+        const SizedBox(height: 20),
+        Surtitre(l10n.centreEvangelique),
+        const SizedBox(height: 8),
+        Text(
+          'MONTAGNE\nDES OLIVIERS',
+          textAlign: TextAlign.center,
+          style: GoogleFonts.cormorantGaramond(
+            textStyle: theme.textTheme.displaySmall?.copyWith(height: 1.05),
+            fontWeight: FontWeight.w700,
+          ),
         ),
-      ),
-      child: Row(
-        children: [
-          const LogoEglise(),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        const SizedBox(height: 16),
+        Semantics(
+          label: l10n.devise,
+          child: ExcludeSemantics(
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 12,
+              runSpacing: 8,
               children: [
-                Text(
-                  l10n.nomEglise,
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    color: Colors.white,
+                for (final (i, mot) in devise.indexed) ...[
+                  if (i > 0)
+                    Container(width: 32, height: 1.5, color: AppColors.olive),
+                  Text(
+                    mot,
+                    style: theme.textTheme.labelLarge?.copyWith(
+                      letterSpacing: 4,
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  l10n.devise,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: Colors.white.withValues(alpha: 0.9),
-                  ),
-                ),
+                ],
               ],
             ),
           ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 24),
+        Container(width: 160, height: 1.5, color: AppColors.olive),
+        const SizedBox(height: 24),
+        Text(
+          l10n.bienvenue.toUpperCase(),
+          textAlign: TextAlign.center,
+          style: GoogleFonts.cormorantGaramond(
+            textStyle: theme.textTheme.headlineMedium,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        Text(
+          l10n.aNotreCulte.toUpperCase(),
+          textAlign: TextAlign.center,
+          style: GoogleFonts.cormorantGaramond(
+            textStyle: theme.textTheme.headlineMedium?.copyWith(
+              color: theme.colorScheme.primary,
+            ),
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        Text(
+          l10n.dEnseignement,
+          textAlign: TextAlign.center,
+          style: theme.textTheme.headlineSmall?.copyWith(
+            fontStyle: FontStyle.italic,
+          ),
+        ),
+        const SizedBox(height: 24),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 420),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              FilledButton.icon(
+                iconAlignment: IconAlignment.end,
+                onPressed: () =>
+                    context.go(Routes.mediasRubrique('enseignement')),
+                icon: const Icon(Icons.arrow_forward),
+                label: Text(l10n.ecouterEnseignements),
+              ),
+              const SizedBox(height: 10),
+              OutlinedButton(
+                onPressed: () => context.push('${Routes.contact}?sujet=priere'),
+                child: Text(l10n.demanderPriere),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

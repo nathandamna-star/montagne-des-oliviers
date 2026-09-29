@@ -6,7 +6,7 @@ import 'package:montagne_des_oliviers/features/auth/domain/role.dart';
 
 import 'helpers.dart';
 
-const grand = Size(1080, 6000);
+const grand = Size(1080, 14000);
 
 Future<void> semer(Banc b) async {
   final db = b.firestore;

@@ -6,7 +6,7 @@ import 'package:montagne_des_oliviers/features/groupes/domain/rencontre.dart';
 
 import 'helpers.dart';
 
-const grand = Size(1080, 6000);
+const grand = Size(1080, 14000);
 
 /// Marie (u1) administre « Louange » et « Modération » ; Paul (u2) est membre.
 Future<Banc> banc({String uid = 'u1'}) async {

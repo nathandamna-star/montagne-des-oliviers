@@ -6,7 +6,7 @@ import 'package:montagne_des_oliviers/features/parametres/parametres_eglise.dart
 
 import 'helpers.dart';
 
-const grand = Size(1080, 6000);
+const grand = Size(1080, 14000);
 
 void main() {
   setUpAll(() => GoogleFonts.config.allowRuntimeFetching = false);

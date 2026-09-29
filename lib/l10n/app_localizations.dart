@@ -4394,12 +4394,6 @@ abstract class AppLocalizations {
   /// **'Pasteur principal'**
   String get pasteurPrincipal;
 
-  /// No description provided for @pasteurBientot.
-  ///
-  /// In fr, this message translates to:
-  /// **'La présentation du pasteur sera bientôt disponible.'**
-  String get pasteurBientot;
-
   /// No description provided for @presentation.
   ///
   /// In fr, this message translates to:
@@ -4813,6 +4807,162 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Découvrir notre pasteur'**
   String get decouvrirPasteur;
+
+  /// No description provided for @centreEvangelique.
+  ///
+  /// In fr, this message translates to:
+  /// **'Centre Évangélique'**
+  String get centreEvangelique;
+
+  /// No description provided for @bienvenue.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bienvenue'**
+  String get bienvenue;
+
+  /// No description provided for @aNotreCulte.
+  ///
+  /// In fr, this message translates to:
+  /// **'à notre culte'**
+  String get aNotreCulte;
+
+  /// No description provided for @dEnseignement.
+  ///
+  /// In fr, this message translates to:
+  /// **'d\'enseignement'**
+  String get dEnseignement;
+
+  /// No description provided for @ecouterEnseignements.
+  ///
+  /// In fr, this message translates to:
+  /// **'Écouter les enseignements'**
+  String get ecouterEnseignements;
+
+  /// No description provided for @demanderPriere.
+  ///
+  /// In fr, this message translates to:
+  /// **'Demander une prière'**
+  String get demanderPriere;
+
+  /// No description provided for @notreProgramme.
+  ///
+  /// In fr, this message translates to:
+  /// **'Notre programme'**
+  String get notreProgramme;
+
+  /// No description provided for @programmePriere.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prière'**
+  String get programmePriere;
+
+  /// No description provided for @programmeCulte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Culte dominical'**
+  String get programmeCulte;
+
+  /// No description provided for @programmeVeillee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Veillée de prière'**
+  String get programmeVeillee;
+
+  /// No description provided for @programmeMercredi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mercredi à 18h00 — 19h30'**
+  String get programmeMercredi;
+
+  /// No description provided for @programmeVendredi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vendredi à 18h00 — 19h30'**
+  String get programmeVendredi;
+
+  /// No description provided for @programmeDimanche.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dimanche à 12h30 — 14h30'**
+  String get programmeDimanche;
+
+  /// No description provided for @programmeVeilleeHoraire.
+  ///
+  /// In fr, this message translates to:
+  /// **'1er vendredi du mois · 22h00 — 06h00'**
+  String get programmeVeilleeHoraire;
+
+  /// No description provided for @nousTrouver.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nous trouver'**
+  String get nousTrouver;
+
+  /// No description provided for @belgique.
+  ///
+  /// In fr, this message translates to:
+  /// **'Belgique'**
+  String get belgique;
+
+  /// No description provided for @whatsappDirect.
+  ///
+  /// In fr, this message translates to:
+  /// **'WhatsApp direct'**
+  String get whatsappDirect;
+
+  /// No description provided for @whatsappDirectAide.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pour une demande urgente'**
+  String get whatsappDirectAide;
+
+  /// No description provided for @domaineRepentance.
+  ///
+  /// In fr, this message translates to:
+  /// **'Revenir à Dieu de tout son cœur, recevoir son pardon et commencer une vie nouvelle.'**
+  String get domaineRepentance;
+
+  /// No description provided for @sanctification.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sanctification'**
+  String get sanctification;
+
+  /// No description provided for @domaineSanctification.
+  ///
+  /// In fr, this message translates to:
+  /// **'Marcher dans la sainteté, jour après jour, conduit par le Saint-Esprit.'**
+  String get domaineSanctification;
+
+  /// No description provided for @pasteurPresentationDefaut.
+  ///
+  /// In fr, this message translates to:
+  /// **'Conduit par le Saint-Esprit, le Pasteur Claude Lumbala consacre son ministère à l\'enseignement de la Parole, à la prière de délivrance et à l\'accompagnement spirituel des fidèles.'**
+  String get pasteurPresentationDefaut;
+
+  /// No description provided for @activite.
+  ///
+  /// In fr, this message translates to:
+  /// **'Activité (ex. : Prière)'**
+  String get activite;
+
+  /// No description provided for @horaire.
+  ///
+  /// In fr, this message translates to:
+  /// **'Horaire (ex. : Mercredi à 18h00 — 19h30)'**
+  String get horaire;
+
+  /// No description provided for @ajouterActivite.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter une activité'**
+  String get ajouterActivite;
+
+  /// No description provided for @adresse.
+  ///
+  /// In fr, this message translates to:
+  /// **'Adresse'**
+  String get adresse;
 }
 
 class _AppLocalizationsDelegate

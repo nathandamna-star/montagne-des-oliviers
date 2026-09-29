@@ -10,6 +10,12 @@ const facebookEglise =
     'https://www.facebook.com/share/1JGvbmGdQk/?mibextid=wwXIfret';
 const youtubeEglise = 'https://www.youtube.com/@montagnedesolivierstienen';
 
+/// Coordonnées de l'église (valeurs de départ, modifiables dans l'app).
+const adresseEglise = 'Sint-Truidensesteenweg 340, 3300 Tienen';
+const telephoneEglise = '0466 31 74 20';
+const whatsappEglise = 'https://wa.me/32466317420';
+const pasteurEglise = 'Pasteur Claude Lumbala';
+
 /// « 20:00 », « 9:30 ».
 bool heureValide(String h) =>
     RegExp(r'^([01]?\d|2[0-3]):[0-5]\d$').hasMatch(h.trim());
@@ -36,6 +42,10 @@ class ParametresEglise {
     this.interactionLien = '',
     this.interactionDescription = const {},
     this.liensCommunaute = const [],
+    this.programme,
+    this.adresse = adresseEglise,
+    this.telephone = telephoneEglise,
+    this.whatsappDirect = whatsappEglise,
   });
 
   /// Groupe qui reçoit les sujets de prière « partagés avec l'intercession ».
@@ -75,6 +85,16 @@ class ParametresEglise {
   /// Liens de la communauté WhatsApp : (titre, lien).
   final List<(String, String)> liensCommunaute;
 
+  /// Programme de la semaine : (activité, horaire). Null : programme habituel
+  /// de l'église (textes de l'app, en français et en néerlandais).
+  final List<(String, String)>? programme;
+
+  final String adresse;
+  final String telephone;
+
+  /// Lien WhatsApp pour une demande urgente (wa.me/…).
+  final String whatsappDirect;
+
   bool get interactionPrevue =>
       interactionJour != null && heureValide(interactionHeure);
 
@@ -110,7 +130,7 @@ class ParametresEglise {
     emailContact: m?['emailContact'] as String? ?? '',
     tiktokUrl: m?['tiktokUrl'] as String? ?? '',
     instagramUrl: m?['instagramUrl'] as String? ?? '',
-    pasteurNom: m?['pasteurNom'] as String? ?? '',
+    pasteurNom: m?['pasteurNom'] as String? ?? pasteurEglise,
     pasteurPhotoUrl: m?['pasteurPhotoUrl'] as String?,
     pasteurPresentation: Traduction.lire(m?['pasteurPresentation']),
     eglisePresentation: Traduction.lire(m?['eglisePresentation']),
@@ -123,6 +143,19 @@ class ParametresEglise {
         if (l is Map && l['url'] is String)
           ((l['titre'] as String?) ?? '', l['url'] as String),
     ],
+    programme: m?['programme'] is List
+        ? [
+            for (final l in m!['programme'] as List)
+              if (l is Map)
+                (
+                  (l['titre'] as String?) ?? '',
+                  (l['horaire'] as String?) ?? '',
+                ),
+          ]
+        : null,
+    adresse: m?['adresse'] as String? ?? adresseEglise,
+    telephone: m?['telephone'] as String? ?? telephoneEglise,
+    whatsappDirect: m?['whatsappDirect'] as String? ?? whatsappEglise,
   );
 }
 
@@ -186,7 +219,18 @@ Future<void> enregistrerRubriques(
   required String interactionLien,
   required Map<String, String> interactionDescription,
   required List<(String, String)> liensCommunaute,
+  required List<(String, String)> programme,
+  required String adresse,
+  required String telephone,
+  required String whatsappDirect,
 }) => db.doc('parametres/eglise').set({
+  'programme': [
+    for (final (titre, horaire) in programme)
+      {'titre': titre.trim(), 'horaire': horaire.trim()},
+  ],
+  'adresse': adresse.trim(),
+  'telephone': telephone.trim(),
+  'whatsappDirect': whatsappDirect.trim(),
   'eglisePresentation': eglisePresentation,
   'interactionJour': interactionJour,
   'interactionHeure': interactionHeure.trim(),

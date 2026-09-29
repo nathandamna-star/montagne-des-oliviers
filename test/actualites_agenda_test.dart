@@ -97,7 +97,7 @@ Future<void> semer(Banc b) async {
 }
 
 /// Écran haut : tout le contenu des listes est construit.
-const grand = Size(1080, 6000);
+const grand = Size(1080, 14000);
 
 void main() {
   setUpAll(() => GoogleFonts.config.allowRuntimeFetching = false);

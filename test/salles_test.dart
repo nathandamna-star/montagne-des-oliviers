@@ -7,7 +7,7 @@ import 'package:montagne_des_oliviers/features/salles/salles.dart';
 
 import 'helpers.dart';
 
-const grand = Size(1080, 6000);
+const grand = Size(1080, 14000);
 
 Timestamp le6(int h) => Timestamp.fromDate(DateTime(2026, 10, 6, h));
 

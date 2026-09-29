@@ -7,6 +7,7 @@ import '../../shared/services/lanceur.dart';
 import '../../shared/widgets/etat_vide.dart';
 import '../../shared/widgets/liens_legaux.dart';
 import '../auth/auth_providers.dart';
+import '../eglise/blocs_eglise.dart';
 import 'contact.dart';
 
 extension LibellesContact on AppLocalizations {
@@ -191,6 +192,10 @@ class _ContactScreenState extends ConsumerState<ContactScreen> {
                         icon: const Icon(Icons.send),
                         label: Text(l10n.envoyer),
                       ),
+                      const SizedBox(height: 24),
+                      const NousTrouver(),
+                      const SizedBox(height: 12),
+                      const WhatsAppDirect(),
                     ],
                   ),
                 ),

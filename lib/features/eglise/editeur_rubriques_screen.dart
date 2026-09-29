@@ -10,6 +10,7 @@ import '../../shared/widgets/champs_traduits.dart';
 import '../auth/auth_providers.dart';
 import '../groupes/domain/groupe.dart';
 import '../parametres/parametres_eglise.dart';
+import 'blocs_eglise.dart';
 
 /// Administrateur : présentation de l'église, rencontre en direct de la
 /// semaine et liens WhatsApp de la communauté.
@@ -31,6 +32,10 @@ class _EditeurRubriquesScreenState
   final _descFr = TextEditingController();
   final _descNl = TextEditingController();
   final _liens = <(TextEditingController, TextEditingController)>[];
+  final _programme = <(TextEditingController, TextEditingController)>[];
+  final _adresse = TextEditingController();
+  final _telephone = TextEditingController();
+  final _whatsapp = TextEditingController();
   int? _jour;
   bool _charge = false;
   bool _occupe = false;
@@ -49,6 +54,18 @@ class _EditeurRubriquesScreenState
         _lien.text = p.interactionLien;
         _descFr.text = p.interactionDescription['fr'] ?? '';
         _descNl.text = p.interactionDescription['nl'] ?? '';
+        for (final (titre, horaire) in programmeEffectif(
+          p,
+          AppLocalizations.of(context),
+        )) {
+          _programme.add((
+            TextEditingController(text: titre),
+            TextEditingController(text: horaire),
+          ));
+        }
+        _adresse.text = p.adresse;
+        _telephone.text = p.telephone;
+        _whatsapp.text = p.whatsappDirect;
         for (final (titre, url) in p.liensCommunaute) {
           _liens.add((
             TextEditingController(text: titre),
@@ -65,9 +82,12 @@ class _EditeurRubriquesScreenState
     for (final c in [_egliseFr, _egliseNl, _heure, _lien, _descFr, _descNl]) {
       c.dispose();
     }
-    for (final (a, b) in _liens) {
+    for (final (a, b) in [..._liens, ..._programme]) {
       a.dispose();
       b.dispose();
+    }
+    for (final c in [_adresse, _telephone, _whatsapp]) {
+      c.dispose();
     }
     super.dispose();
   }
@@ -98,6 +118,13 @@ class _EditeurRubriquesScreenState
           for (final (titre, url) in _liens)
             if (url.text.trim().isNotEmpty) (titre.text, url.text),
         ],
+        programme: [
+          for (final (titre, horaire) in _programme)
+            if (titre.text.trim().isNotEmpty) (titre.text, horaire.text),
+        ],
+        adresse: _adresse.text,
+        telephone: _telephone.text,
+        whatsappDirect: _whatsapp.text,
       );
       messager.showSnackBar(SnackBar(content: Text(l10n.enregistre)));
       if (mounted) context.pop();
@@ -138,6 +165,79 @@ class _EditeurRubriquesScreenState
                       Text(
                         l10n.presentationEgliseAide,
                         style: theme.textTheme.bodySmall,
+                      ),
+                      const SizedBox(height: 24),
+                      Text(
+                        l10n.notreProgramme,
+                        style: theme.textTheme.titleLarge,
+                      ),
+                      const SizedBox(height: 8),
+                      for (final (i, (titre, horaire)) in _programme.indexed)
+                        Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: Column(
+                              children: [
+                                TextFormField(
+                                  controller: titre,
+                                  decoration: InputDecoration(
+                                    labelText: l10n.activite,
+                                  ),
+                                ),
+                                TextFormField(
+                                  controller: horaire,
+                                  decoration: InputDecoration(
+                                    labelText: l10n.horaire,
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: TextButton.icon(
+                                    onPressed: () => setState(() {
+                                      final (a, b) = _programme.removeAt(i);
+                                      a.dispose();
+                                      b.dispose();
+                                    }),
+                                    icon: const Icon(Icons.delete_outline),
+                                    label: Text(l10n.retirer),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      OutlinedButton.icon(
+                        onPressed: () => setState(
+                          () => _programme.add((
+                            TextEditingController(),
+                            TextEditingController(),
+                          )),
+                        ),
+                        icon: const Icon(Icons.add),
+                        label: Text(l10n.ajouterActivite),
+                      ),
+                      const SizedBox(height: 24),
+                      Text(l10n.nousTrouver, style: theme.textTheme.titleLarge),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        controller: _adresse,
+                        decoration: InputDecoration(labelText: l10n.adresse),
+                      ),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        controller: _telephone,
+                        keyboardType: TextInputType.phone,
+                        decoration: InputDecoration(labelText: l10n.telephone),
+                      ),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        controller: _whatsapp,
+                        keyboardType: TextInputType.url,
+                        decoration: InputDecoration(
+                          labelText: l10n.whatsappDirect,
+                          hintText: 'https://wa.me/32…',
+                        ),
+                        validator: _valideLien,
                       ),
                       const SizedBox(height: 24),
                       Text(

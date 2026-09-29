@@ -8,7 +8,7 @@ import 'package:montagne_des_oliviers/features/medias/domain/media.dart';
 
 import 'helpers.dart';
 
-const grand = Size(1080, 6000);
+const grand = Size(1080, 14000);
 
 Map<String, dynamic> media(
   String titre, {

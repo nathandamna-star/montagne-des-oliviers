@@ -16,6 +16,7 @@ import '../../shared/widgets/logo_eglise.dart';
 import '../../shared/widgets/reseaux_sociaux.dart';
 import '../parametres/parametres_eglise.dart';
 import '../pasteur/pasteur_screen.dart';
+import 'blocs_eglise.dart';
 
 /// Mise en page commune : contenu centré, lisible sur tous les écrans.
 class _Page extends StatelessWidget {
@@ -62,9 +63,11 @@ class EgliseScreen extends ConsumerWidget {
         ? l10n.presentationEgliseDefaut
         : Traduction.dans(p.eglisePresentation, context.langue);
     final domaines = [
+      (Icons.replay_outlined, l10n.themeRepentance, l10n.domaineRepentance),
       (Icons.lock_open_outlined, l10n.themeDelivrance, l10n.domaineDelivrance),
       (Icons.healing_outlined, l10n.themeGuerison, l10n.domaineGuerison),
       (Icons.shield_outlined, l10n.themeCombatSpirituel, l10n.domaineCombat),
+      (Icons.arrow_forward, l10n.sanctification, l10n.domaineSanctification),
     ];
     return _Page(
       titre: l10n.notreEglise,
@@ -193,6 +196,12 @@ class EgliseScreen extends ConsumerWidget {
           icon: const Icon(Icons.mail_outline),
           label: Text(l10n.nousContacter),
         ),
+        const SizedBox(height: 24),
+        const ProgrammeEglise(),
+        const SizedBox(height: 24),
+        const NousTrouver(),
+        const SizedBox(height: 12),
+        const WhatsAppDirect(),
         const SizedBox(height: 24),
         const ReseauxSociaux(),
       ],

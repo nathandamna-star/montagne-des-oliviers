@@ -55,7 +55,7 @@ class PasteurScreen extends ConsumerWidget {
               const SizedBox(height: 24),
               Text(
                 p == null || p.pasteurPresentation.isEmpty
-                    ? l10n.pasteurBientot
+                    ? l10n.pasteurPresentationDefaut
                     : Traduction.dans(p.pasteurPresentation, context.langue),
                 style: theme.textTheme.bodyLarge?.copyWith(height: 1.5),
               ),

@@ -2409,10 +2409,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get pasteurPrincipal => 'Pasteur principal';
 
   @override
-  String get pasteurBientot =>
-      'La présentation du pasteur sera bientôt disponible.';
-
-  @override
   String get presentation => 'Présentation';
 
   @override
@@ -2636,4 +2632,85 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get decouvrirPasteur => 'Découvrir notre pasteur';
+
+  @override
+  String get centreEvangelique => 'Centre Évangélique';
+
+  @override
+  String get bienvenue => 'Bienvenue';
+
+  @override
+  String get aNotreCulte => 'à notre culte';
+
+  @override
+  String get dEnseignement => 'd\'enseignement';
+
+  @override
+  String get ecouterEnseignements => 'Écouter les enseignements';
+
+  @override
+  String get demanderPriere => 'Demander une prière';
+
+  @override
+  String get notreProgramme => 'Notre programme';
+
+  @override
+  String get programmePriere => 'Prière';
+
+  @override
+  String get programmeCulte => 'Culte dominical';
+
+  @override
+  String get programmeVeillee => 'Veillée de prière';
+
+  @override
+  String get programmeMercredi => 'Mercredi à 18h00 — 19h30';
+
+  @override
+  String get programmeVendredi => 'Vendredi à 18h00 — 19h30';
+
+  @override
+  String get programmeDimanche => 'Dimanche à 12h30 — 14h30';
+
+  @override
+  String get programmeVeilleeHoraire => '1er vendredi du mois · 22h00 — 06h00';
+
+  @override
+  String get nousTrouver => 'Nous trouver';
+
+  @override
+  String get belgique => 'Belgique';
+
+  @override
+  String get whatsappDirect => 'WhatsApp direct';
+
+  @override
+  String get whatsappDirectAide => 'Pour une demande urgente';
+
+  @override
+  String get domaineRepentance =>
+      'Revenir à Dieu de tout son cœur, recevoir son pardon et commencer une vie nouvelle.';
+
+  @override
+  String get sanctification => 'Sanctification';
+
+  @override
+  String get domaineSanctification =>
+      'Marcher dans la sainteté, jour après jour, conduit par le Saint-Esprit.';
+
+  @override
+  String get pasteurPresentationDefaut =>
+      'Conduit par le Saint-Esprit, le Pasteur Claude Lumbala consacre son ministère à l\'enseignement de la Parole, à la prière de délivrance et à l\'accompagnement spirituel des fidèles.';
+
+  @override
+  String get activite => 'Activité (ex. : Prière)';
+
+  @override
+  String get horaire => 'Horaire (ex. : Mercredi à 18h00 — 19h30)';
+
+  @override
+  String get ajouterActivite => 'Ajouter une activité';
+
+  @override
+  String get adresse => 'Adresse';
 }

@@ -182,8 +182,9 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   traduit en néerlandais.
 - Structure : `lib/core/` (thème, navigation, rôles), `lib/features/<module>/`, `lib/shared/widgets/`.
 - Traductions : `lib/l10n/app_fr.arb` (modèle) et `app_nl.arb` ; langue du téléphone, sinon français.
-- Polices incluses dans `assets/google_fonts/` : Montserrat (titres, comme le logo) et Nunito Sans (texte),
-  licences OFL jointes ; `GoogleFonts.config.allowRuntimeFetching = false`.
+- Polices incluses dans `assets/google_fonts/` : Cormorant Garamond SemiBold/Bold (titres, comme le site Lovable de
+  l'église) et Nunito Sans Regular/Medium/SemiBold/Bold (texte), licences OFL ; `allowRuntimeFetching = false` : chaque
+  graisse utilisée doit avoir son fichier (titres via `GoogleFonts.cormorantGaramond(fontWeight: …)`).
 - Navigation : `StatefulShellRoute` à 5 onglets (Accueil, Agenda, Groupes, Médias, Profil) + Responsables si
   `estResponsableProvider` (branché sur les custom claims à l'étape 2). Barre du bas sur téléphone,
   `NavigationRail` à partir de 800 px de large (ordinateur, site web).
@@ -355,3 +356,11 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   consentement, uid facultatif, traite) ; lus par les pasteurs seulement (Responsables → Messages reçus) ; fonction
   `nouveauContact` ; inclus dans l'export / la suppression du compte.
 - Facebook et YouTube de l'église par défaut (`facebookEglise`, `youtubeEglise`) tant que le champ n'existe pas.
+- Style repris du site Lovable de l'église (demande du porteur) : fond crème `#FBF9F4`, bleu `#23548F`, marine
+  `#0B1A33`, olive `#9DC454` ; Accueil : en-tête (logo, « MONTAGNE DES OLIVIERS », devise espacée, « Bienvenue à notre
+  culte d'enseignement », boutons Écouter les enseignements / Demander une prière), sections, **Notre programme**
+  (bloc marine, pastilles vertes ; `parametres/eglise.programme` [{titre, horaire}], sinon programme habituel :
+  prière mercredi et vendredi 18h–19h30, culte dimanche 12h30–14h30, veillée 1er vendredi 22h–6h), **Nous trouver**
+  (`adresse` Sint-Truidensesteenweg 340, 3300 Tienen ; `telephone` 0466 31 74 20) et **WhatsApp direct**
+  (`whatsappDirect` wa.me/32466317420). Pasteur par défaut : « Pasteur Claude Lumbala ». Visiteurs : bouton de
+  connexion dans la barre du haut de l'Accueil.

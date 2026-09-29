@@ -2411,10 +2411,6 @@ class AppLocalizationsNl extends AppLocalizations {
   String get pasteurPrincipal => 'Hoofdpastoor';
 
   @override
-  String get pasteurBientot =>
-      'De voorstelling van de pastoor volgt binnenkort.';
-
-  @override
   String get presentation => 'Voorstelling';
 
   @override
@@ -2640,4 +2636,86 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get decouvrirPasteur => 'Maak kennis met onze pastoor';
+
+  @override
+  String get centreEvangelique => 'Evangelisch Centrum';
+
+  @override
+  String get bienvenue => 'Welkom';
+
+  @override
+  String get aNotreCulte => 'op onze eredienst';
+
+  @override
+  String get dEnseignement => 'van onderwijs';
+
+  @override
+  String get ecouterEnseignements => 'Het onderwijs beluisteren';
+
+  @override
+  String get demanderPriere => 'Om gebed vragen';
+
+  @override
+  String get notreProgramme => 'Ons programma';
+
+  @override
+  String get programmePriere => 'Gebed';
+
+  @override
+  String get programmeCulte => 'Zondagse eredienst';
+
+  @override
+  String get programmeVeillee => 'Gebedswake';
+
+  @override
+  String get programmeMercredi => 'Woensdag 18.00 — 19.30 uur';
+
+  @override
+  String get programmeVendredi => 'Vrijdag 18.00 — 19.30 uur';
+
+  @override
+  String get programmeDimanche => 'Zondag 12.30 — 14.30 uur';
+
+  @override
+  String get programmeVeilleeHoraire =>
+      '1e vrijdag van de maand · 22.00 — 06.00 uur';
+
+  @override
+  String get nousTrouver => 'Waar vind je ons';
+
+  @override
+  String get belgique => 'België';
+
+  @override
+  String get whatsappDirect => 'WhatsApp rechtstreeks';
+
+  @override
+  String get whatsappDirectAide => 'Voor een dringende vraag';
+
+  @override
+  String get domaineRepentance =>
+      'Met heel je hart terugkeren naar God, zijn vergeving ontvangen en een nieuw leven beginnen.';
+
+  @override
+  String get sanctification => 'Heiliging';
+
+  @override
+  String get domaineSanctification =>
+      'Dag na dag in heiligheid wandelen, geleid door de Heilige Geest.';
+
+  @override
+  String get pasteurPresentationDefaut =>
+      'Geleid door de Heilige Geest wijdt pastoor Claude Lumbala zijn bediening aan het onderwijs van het Woord, het gebed om bevrijding en de geestelijke begeleiding van de gelovigen.';
+
+  @override
+  String get activite => 'Activiteit (bv. Gebed)';
+
+  @override
+  String get horaire => 'Uurrooster (bv. woensdag 18.00 — 19.30 uur)';
+
+  @override
+  String get ajouterActivite => 'Activiteit toevoegen';
+
+  @override
+  String get adresse => 'Adres';
 }

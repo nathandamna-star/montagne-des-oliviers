@@ -3,7 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'app_colors.dart';
 
-/// Thème : Montserrat pour les titres (comme le logo), Nunito Sans pour le texte.
+/// Thème : Cormorant Garamond (titres à empattements, comme sur le site de
+/// l'église), Nunito Sans pour le texte.
 abstract final class AppTheme {
   static const rayonCarte = 20.0;
   static const rayonBouton = 14.0;
@@ -52,19 +53,22 @@ abstract final class AppTheme {
   static ThemeData _construire(ColorScheme couleurs) {
     final base = ThemeData(colorScheme: couleurs, useMaterial3: true);
     final texte = GoogleFonts.nunitoSansTextTheme(base.textTheme);
-    final titres = GoogleFonts.montserratTextTheme(base.textTheme);
-    TextStyle? titre(TextStyle? s) => s?.copyWith(fontWeight: FontWeight.w600);
+    // La graisse est donnée à GoogleFonts pour charger le bon fichier inclus
+    // dans l'app (assets/google_fonts : SemiBold et Bold).
+    TextStyle titre(TextStyle? s, {FontWeight poids = FontWeight.w600}) =>
+        GoogleFonts.cormorantGaramond(textStyle: s, fontWeight: poids);
+    final b = base.textTheme;
     final textTheme = texte
         .copyWith(
-          displayLarge: titre(titres.displayLarge),
-          displayMedium: titre(titres.displayMedium),
-          displaySmall: titre(titres.displaySmall),
-          headlineLarge: titre(titres.headlineLarge),
-          headlineMedium: titre(titres.headlineMedium),
-          headlineSmall: titre(titres.headlineSmall),
-          titleLarge: titres.titleLarge?.copyWith(
-            fontWeight: FontWeight.w700,
-            fontSize: 20,
+          displayLarge: titre(b.displayLarge),
+          displayMedium: titre(b.displayMedium),
+          displaySmall: titre(b.displaySmall),
+          headlineLarge: titre(b.headlineLarge),
+          headlineMedium: titre(b.headlineMedium),
+          headlineSmall: titre(b.headlineSmall),
+          titleLarge: titre(
+            b.titleLarge?.copyWith(fontSize: 24),
+            poids: FontWeight.w700,
           ),
         )
         .apply(bodyColor: couleurs.onSurface, displayColor: couleurs.onSurface);

@@ -10,7 +10,7 @@ void main() {
   setUpAll(() => GoogleFonts.config.allowRuntimeFetching = false);
 
   Future<void> ouvrirConnexion(WidgetTester tester) async {
-    await tester.tap(find.text('Se connecter'));
+    await tester.tap(find.byTooltip('Se connecter'));
     await tester.pumpAndSettle();
   }
 
@@ -21,7 +21,7 @@ void main() {
     expect(find.text('Continuer avec Apple'), findsNothing);
     await tester.tap(find.text('Continuer sans compte'));
     await tester.pumpAndSettle();
-    expect(find.text('Se connecter'), findsOneWidget);
+    expect(find.byTooltip('Se connecter'), findsOneWidget);
   });
 
   testWidgets('inscription par e-mail : consentement obligatoire', (
@@ -67,11 +67,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Bienvenue dans la famille !'), findsNothing);
-    // Membre : carte de l'église avec sa devise.
-    expect(
-      find.text('Repentance · Délivrance · Sanctification'),
-      findsOneWidget,
-    );
+    // Connecté : de retour sur l'Accueil, sans bouton de connexion.
+    expect(find.text('MONTAGNE\nDES OLIVIERS'), findsOneWidget);
+    expect(find.byTooltip('Se connecter'), findsNothing);
     final profil = await banc.firestore.collection('users').doc('u1').get();
     expect(profil['nom'], 'Marie Dubois');
   });
@@ -82,7 +80,7 @@ void main() {
     await tester.tap(find.text('Annuler'));
     await tester.pumpAndSettle();
     expect(banc.auth.currentUser, isNull);
-    expect(find.text('Se connecter'), findsOneWidget);
+    expect(find.byTooltip('Se connecter'), findsOneWidget);
   });
 
   testWidgets('profil : nom, e-mail, devenir administrateur, déconnexion', (
