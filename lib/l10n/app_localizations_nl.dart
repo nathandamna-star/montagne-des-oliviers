@@ -2637,4 +2637,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String prochaineRencontre(String date) {
     return 'Volgende ontmoeting: $date';
   }
+
+  @override
+  String get decouvrirPasteur => 'Maak kennis met onze pastoor';
 }

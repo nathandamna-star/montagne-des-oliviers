@@ -7,7 +7,6 @@ import '../../core/router/routes.dart';
 import '../../l10n/app_localizations.dart';
 import '../../shared/domain_traduction.dart';
 import '../../shared/format_date.dart';
-import '../../shared/widgets/etat_vide.dart';
 import '../parametres/parametres_eglise.dart';
 
 /// « Notre pasteur » : courte présentation du pasteur principal.
@@ -20,8 +19,6 @@ class PasteurScreen extends ConsumerWidget {
     final theme = Theme.of(context);
     final p = ref.watch(parametresEgliseProvider).value;
     final admin = ref.watch(estAdminProvider);
-    final vide =
-        p == null || (p.pasteurNom.isEmpty && p.pasteurPresentation.isEmpty);
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.notrePasteur),
@@ -34,52 +31,76 @@ class PasteurScreen extends ConsumerWidget {
             ),
         ],
       ),
-      body: vide
-          ? EtatVide(icone: Icons.person_outline, texte: l10n.pasteurBientot)
-          : Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 720),
-                child: ListView(
-                  padding: const EdgeInsets.all(24),
-                  children: [
-                    Center(
-                      child: CircleAvatar(
-                        radius: 72,
-                        backgroundColor: theme.colorScheme.primaryContainer,
-                        foregroundImage: p.pasteurPhotoUrl == null
-                            ? null
-                            : NetworkImage(p.pasteurPhotoUrl!),
-                        onForegroundImageError: p.pasteurPhotoUrl == null
-                            ? null
-                            : (_, _) {},
-                        child: Icon(
-                          Icons.person,
-                          size: 72,
-                          color: theme.colorScheme.onPrimaryContainer,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      p.pasteurNom,
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.headlineSmall,
-                    ),
-                    Text(
-                      l10n.pasteurPrincipal,
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        color: theme.colorScheme.primary,
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      Traduction.dans(p.pasteurPresentation, context.langue),
-                      style: theme.textTheme.bodyLarge?.copyWith(height: 1.5),
-                    ),
-                  ],
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 720),
+          child: ListView(
+            padding: const EdgeInsets.all(24),
+            children: [
+              PhotoPasteur(url: p?.pasteurPhotoUrl, hauteur: 440),
+              const SizedBox(height: 16),
+              if (p != null && p.pasteurNom.isNotEmpty)
+                Text(
+                  p.pasteurNom,
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.headlineSmall,
+                ),
+              Text(
+                l10n.pasteurPrincipal,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  color: theme.colorScheme.primary,
                 ),
               ),
+              const SizedBox(height: 24),
+              Text(
+                p == null || p.pasteurPresentation.isEmpty
+                    ? l10n.pasteurBientot
+                    : Traduction.dans(p.pasteurPresentation, context.langue),
+                style: theme.textTheme.bodyLarge?.copyWith(height: 1.5),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Photo du pasteur : celle choisie par l'administrateur, sinon la photo de
+/// l'église (le pasteur en train de prêcher), en plan large.
+class PhotoPasteur extends StatelessWidget {
+  const PhotoPasteur({super.key, this.url, this.hauteur = 440, this.largeur});
+
+  final String? url;
+  final double hauteur;
+  final double? largeur;
+
+  static const parDefaut = 'assets/images/pasteur-1.jpg';
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final locale = Image.asset(
+      parDefaut,
+      height: hauteur,
+      width: largeur ?? double.infinity,
+      fit: BoxFit.cover,
+      alignment: const Alignment(0, -0.4),
+      semanticLabel: l10n.notrePasteur,
+    );
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: url == null
+          ? locale
+          : Image.network(
+              url!,
+              height: hauteur,
+              width: largeur ?? double.infinity,
+              fit: BoxFit.cover,
+              alignment: const Alignment(0, -0.4),
+              semanticLabel: l10n.notrePasteur,
+              errorBuilder: (_, _, _) => locale,
             ),
     );
   }

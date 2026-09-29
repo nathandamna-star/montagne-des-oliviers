@@ -1069,5 +1069,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "decouvrirPasteur": "Découvrir notre pasteur"
 }

@@ -784,5 +784,6 @@
   "sectionParticiper": "Meedoen",
   "sectionMonEspace": "Mijn ruimte",
   "chaqueSemaine": "Elke {jour} om {heure}",
-  "prochaineRencontre": "Volgende ontmoeting: {date}"
+  "prochaineRencontre": "Volgende ontmoeting: {date}",
+  "decouvrirPasteur": "Maak kennis met onze pastoor"
 }

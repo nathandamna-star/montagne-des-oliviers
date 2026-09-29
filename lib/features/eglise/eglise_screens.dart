@@ -15,6 +15,7 @@ import '../../shared/services/lanceur.dart';
 import '../../shared/widgets/logo_eglise.dart';
 import '../../shared/widgets/reseaux_sociaux.dart';
 import '../parametres/parametres_eglise.dart';
+import '../pasteur/pasteur_screen.dart';
 
 /// Mise en page commune : contenu centré, lisible sur tous les écrans.
 class _Page extends StatelessWidget {
@@ -146,26 +147,46 @@ class EgliseScreen extends ConsumerWidget {
           },
         ),
         const SizedBox(height: 24),
-        if (p != null && p.pasteurNom.isNotEmpty)
-          Card(
-            child: ListTile(
-              contentPadding: const EdgeInsets.all(12),
-              leading: CircleAvatar(
-                radius: 28,
-                foregroundImage: p.pasteurPhotoUrl == null
-                    ? null
-                    : NetworkImage(p.pasteurPhotoUrl!),
-                onForegroundImageError: p.pasteurPhotoUrl == null
-                    ? null
-                    : (_, _) {},
-                child: const Icon(Icons.person),
+        Text(l10n.notrePasteur, style: theme.textTheme.titleLarge),
+        const SizedBox(height: 8),
+        Card(
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            onTap: () => context.push(Routes.pasteur),
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Row(
+                children: [
+                  PhotoPasteur(
+                    url: p?.pasteurPhotoUrl,
+                    hauteur: 120,
+                    largeur: 90,
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (p != null && p.pasteurNom.isNotEmpty)
+                          Text(
+                            p.pasteurNom,
+                            style: theme.textTheme.titleMedium,
+                          ),
+                        Text(l10n.pasteurPrincipal),
+                        const SizedBox(height: 8),
+                        Text(
+                          l10n.decouvrirPasteur,
+                          style: TextStyle(color: theme.colorScheme.primary),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Icon(Icons.chevron_right),
+                ],
               ),
-              title: Text(p.pasteurNom),
-              subtitle: Text(l10n.pasteurPrincipal),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => context.push(Routes.pasteur),
             ),
           ),
+        ),
         const SizedBox(height: 16),
         FilledButton.icon(
           onPressed: () => context.push(Routes.contact),

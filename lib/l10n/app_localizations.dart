@@ -4807,6 +4807,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Prochaine rencontre : {date}'**
   String prochaineRencontre(String date);
+
+  /// No description provided for @decouvrirPasteur.
+  ///
+  /// In fr, this message translates to:
+  /// **'Découvrir notre pasteur'**
+  String get decouvrirPasteur;
 }
 
 class _AppLocalizationsDelegate

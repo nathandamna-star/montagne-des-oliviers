@@ -2633,4 +2633,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String prochaineRencontre(String date) {
     return 'Prochaine rencontre : $date';
   }
+
+  @override
+  String get decouvrirPasteur => 'Découvrir notre pasteur';
 }
