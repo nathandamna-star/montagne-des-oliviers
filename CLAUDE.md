@@ -203,10 +203,10 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   `cd firebase && npm install && npm test` ; fonctions : `functions/` (Node 22, europe-west1), logique pure dans
   `roles.js`, tests `cd functions && npm install && npm test` (Java 21 requis pour l'émulateur).
 - Identité : fichiers d'origine dans `docs/identite/` (logo 1024 px sur fond noir, bannière « Rester connecté avec
-  nous » 1920×1080, vidéo pub 16 s). Dans l'app : `assets/images/logo.png` (widget `LogoEglise`, disque noir) et
+  nous » 1920×1080, vidéo pub 16 s). Dans l'app : `assets/images/logo.png` (logo sur fond blanc, demande du porteur ; original `docs/identite/logo-fond-blanc.png` ; widget `LogoEglise`, disque blanc) et
   `assets/images/banniere.jpg` (Accueil des visiteurs) ; membres : carte dégradé + logo + devise
   « Repentance · Délivrance · Sanctification » (clé `devise`, traduite en néerlandais). Icônes iOS, Android et web
-  générées depuis le logo (maskable : logo à 80 %). La vidéo servira dans Médias / partage (étapes suivantes).
+  générées depuis le logo sur fond blanc (maskable : logo à 80 %). La vidéo servira dans Médias / partage (étapes suivantes).
 - Modèle de données (étape 3) : `docs/modele-donnees.md` (toutes les collections, qui lit, qui écrit).
   Membre de l'église = compte avec profil (consentement). Règles Firestore + Storage testées dans
   `firebase/tests/` (Storage lit Firestore : `firestore.get`). Dans cet environnement cloud, lancer les tests

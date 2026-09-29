@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../l10n/app_localizations.dart';
 
-/// Logo de l'église (sur son disque noir d'origine).
+/// Logo de l'église, sur un disque blanc.
 class LogoEglise extends StatelessWidget {
   const LogoEglise({super.key, this.taille = 72});
 
