@@ -292,6 +292,31 @@ describe('groupes', () => {
     await assertSucceeds(deleteDoc(doc(marie(), 'groupes/g1/messages/m1')));
   });
 
+  it('signaler un message : membre du groupe, à son nom ; lu et traité par le secrétariat', async () => {
+    await semer({ ...MEMBRES, 'users/luc': { nom: 'Luc', email: 'l@x.be', langue: 'fr' }, 'groupes/g1': grp() });
+    const sig = (par, extra = {}) => ({
+      groupeId: 'g1', groupeNom: 'Intercession', messageId: 'm1', auteur: 'paul', auteurNom: 'Paul',
+      extrait: 'Texte', motif: '', signalePar: par, createdAt: serverTimestamp(), ...extra,
+    });
+    await assertSucceeds(setDoc(doc(marie(), 'signalements/s1'), sig('marie')));
+    await assertFails(setDoc(doc(marie(), 'signalements/s2'), sig('paul')));
+    const luc = env.authenticatedContext('luc').firestore();
+    await assertFails(setDoc(doc(luc, 'signalements/s3'), sig('luc')));
+    await assertFails(setDoc(doc(marie(), 'signalements/s4'), sig('marie', { pirate: true })));
+    await assertFails(getDoc(doc(marie(), 'signalements/s1')));
+    await assertSucceeds(getDoc(doc(secretariat(), 'signalements/s1')));
+    await assertSucceeds(deleteDoc(doc(secretariat(), 'signalements/s1')));
+    // Le secrétariat peut effacer un message signalé.
+    await semer({ 'groupes/g1/messages/m1': { auteur: 'paul', nom: 'Paul', texte: 'X' } });
+    await assertSucceeds(deleteDoc(doc(secretariat(), 'groupes/g1/messages/m1')));
+  });
+
+  it('bloquer : liste des personnes bloquées dans son profil', async () => {
+    await existant();
+    await assertSucceeds(updateDoc(doc(marie(), 'users/marie'), { bloques: ['paul'] }));
+    await assertFails(updateDoc(doc(marie(), 'users/marie'), { bloques: 'paul' }));
+  });
+
   it('calendrier : répétitions, présences, modération et remplacement', async () => {
     await semer({ 'groupes/g1': grp({ type: 'moderation', membres: ['marie', 'paul', 'luc'] }) });
     const rencontre = {

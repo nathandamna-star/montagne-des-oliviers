@@ -61,6 +61,8 @@ import '../../features/prieres/presentation/nouvelle_priere_screen.dart';
 import '../../features/prieres/presentation/priere_screen.dart';
 import '../../features/groupes/presentation/calendrier_groupe_screen.dart';
 import '../../features/groupes/presentation/discussion_screen.dart';
+import '../../features/groupes/presentation/personnes_bloquees_screen.dart';
+import '../../features/groupes/presentation/signalements_screen.dart';
 import '../../features/groupes/presentation/editeur_rencontre_screen.dart';
 import '../../features/groupes/presentation/rencontre_screen.dart';
 import '../../features/groupes/presentation/editeur_groupe_screen.dart';
@@ -377,6 +379,10 @@ final _sousRoutes = <String, List<RouteBase>>{
   ],
   Routes.profil: [
     GoRoute(
+      path: 'bloques',
+      builder: (context, state) => const PersonnesBloqueesScreen(),
+    ),
+    GoRoute(
       path: 'commandes',
       builder: (context, state) => const MesCommandesScreen(),
       routes: [
@@ -455,6 +461,10 @@ final _sousRoutes = <String, List<RouteBase>>{
     GoRoute(
       path: 'messages',
       builder: (context, state) => const MessagesRecusScreen(),
+    ),
+    GoRoute(
+      path: 'signalements',
+      builder: (context, state) => const SignalementsScreen(),
     ),
     GoRoute(
       path: 'tresorerie',

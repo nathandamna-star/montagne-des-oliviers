@@ -19,6 +19,7 @@ Deel uitmaken van een kerk, een gebedsintentie toevertrouwen of een doop aanvrag
 - Je account: naam, e-mailadres, taal, foto als je er een toevoegt, datum van je toestemming. Je wachtwoord wordt beheerd door onze dienstverlener: wij zien het nooit. Als je je aanmeldt met Google of Apple, krijgen we alleen je naam en e-mailadres.
 - Het ledenregister van het secretariaat: contactgegevens, geboortedatum, gezin, data van aankomst, doop, opdracht van een kind of huwelijk, diensten, notities.
 - Je deelname: groepen, berichten, foto's en documenten gedeeld in de groepen, antwoorden op bijeenkomsten, inschrijvingen voor activiteiten en voor het poetsen van de zaal, wat je meebrengt naar feesten, geplande diensten, reservaties van zalen.
+- Groepsberichten die je meldt (uittreksel, reden, je identificatie), alleen gelezen door het secretariaat en de pastors, en de lijst van personen die je hebt geblokkeerd (alleen voor jou zichtbaar).
 - Je aanvragen (doop, opdracht van een kind, huwelijk, afspraak, bezoek) en de opvolging van de voorbereidingen (gevolgde lessen, gestelde vragen).
 - Berichten via „Contact”, ook zonder account: naam, e-mail of telefoon, onderwerp en bericht. Alleen de pastoors lezen ze.
 - Je gebedsintenties en getuigenissen. Je kunt ze anoniem toevertrouwen aan het voorbedeteam.

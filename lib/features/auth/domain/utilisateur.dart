@@ -9,6 +9,7 @@ class Utilisateur {
     required this.langue,
     this.consentementLe,
     this.photoUrl,
+    this.bloques = const [],
   });
 
   final String uid;
@@ -21,6 +22,10 @@ class Utilisateur {
   final DateTime? consentementLe;
   final String? photoUrl;
 
+  /// Personnes bloquées : leurs messages de groupe sont masqués (règle 1.2 de
+  /// l'App Store).
+  final List<String> bloques;
+
   factory Utilisateur.depuisFirestore(
     DocumentSnapshot<Map<String, dynamic>> doc,
   ) {
@@ -32,6 +37,7 @@ class Utilisateur {
       langue: d['langue'] as String? ?? 'fr',
       consentementLe: (d['consentementLe'] as Timestamp?)?.toDate(),
       photoUrl: d['photoUrl'] as String?,
+      bloques: [for (final u in d['bloques'] as List? ?? const []) '$u'],
     );
   }
 }

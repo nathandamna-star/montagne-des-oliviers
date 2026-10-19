@@ -2718,4 +2718,70 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get adresse => 'Adres';
+
+  @override
+  String get signalerMessage => 'Dit bericht melden';
+
+  @override
+  String get signaler => 'Melden';
+
+  @override
+  String get signalerTexte =>
+      'Het bericht wordt naar het secretariaat en de pastors gestuurd, die beslissen of het verwijderd wordt. De persoon weet niet wie het gemeld heeft.';
+
+  @override
+  String get motifSignalement => 'Waarom? (optioneel)';
+
+  @override
+  String get messageSignale =>
+      'Bedankt. Het bericht is gemeld aan de verantwoordelijken.';
+
+  @override
+  String get bloquer => 'Blokkeren';
+
+  @override
+  String get bloquerTexte =>
+      'Je ziet de berichten van deze persoon niet meer in de groepen en krijgt er geen meldingen meer van. Deblokkeren kan via Profiel › Geblokkeerde personen.';
+
+  @override
+  String get debloquer => 'Deblokkeren';
+
+  @override
+  String get personnesBloquees => 'Geblokkeerde personen';
+
+  @override
+  String get aucunePersonneBloquee => 'Je hebt niemand geblokkeerd.';
+
+  @override
+  String get personneInconnue => 'Onbekende persoon';
+
+  @override
+  String get signalements => 'Gemelde berichten';
+
+  @override
+  String get signalementsSousTitre => 'Groepsberichten gemeld door leden';
+
+  @override
+  String get aucunSignalement => 'Geen gemelde berichten.';
+
+  @override
+  String get effacerLeMessage => 'Bericht verwijderen';
+
+  @override
+  String get classerSignalement => 'Bericht behouden';
+
+  @override
+  String bloquerPersonne(String nom) {
+    return '$nom blokkeren';
+  }
+
+  @override
+  String personneBloquee(String nom) {
+    return '$nom is geblokkeerd.';
+  }
+
+  @override
+  String motifDuSignalement(String motif) {
+    return 'Reden: $motif';
+  }
 }

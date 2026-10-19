@@ -22,6 +22,20 @@ export function notificationMessage(groupe, groupeId, message, langue) {
   };
 }
 
+/** Destinataires qui n'ont pas bloqué l'auteur (règle 1.2 de l'App Store). */
+export const sansBloqueurs = (uids, profils, auteur) =>
+  uids.filter((u) => !(profils[u]?.bloques ?? []).includes(auteur));
+
+/** Au secrétariat et aux pasteurs : un message de groupe a été signalé. */
+export function notificationSignalement(id, s, langue) {
+  const l = langue === 'nl' ? 'nl' : 'fr';
+  const titre = l === 'nl' ? 'Gemeld bericht' : 'Message signalé';
+  return {
+    notification: { title: titre, body: `${s.auteurNom ?? ''} · ${s.groupeNom ?? ''}` },
+    data: { type: 'signalement', id },
+  };
+}
+
 const TYPES = {
   fr: { reunion: 'Réunion', repetition: 'Répétition', moderation: 'Modération', appel: 'Appel de groupe' },
   nl: { reunion: 'Samenkomst', repetition: 'Repetitie', moderation: 'Leiding van de dienst', appel: 'Groepsoproep' },

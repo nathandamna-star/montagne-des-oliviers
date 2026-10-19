@@ -1,8 +1,22 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { apercu, destinataires, notificationMessage } from '../../groupes.js';
+import {
+  apercu, destinataires, notificationMessage, notificationSignalement, sansBloqueurs,
+} from '../../groupes.js';
 
 describe('groupes', () => {
+  it('sansBloqueurs : pas de notification à qui a bloqué l\'auteur', () => {
+    const profils = { a: { bloques: ['x'] }, b: {}, c: { bloques: ['y'] } };
+    assert.deepEqual(sansBloqueurs(['a', 'b', 'c', 'd'], profils, 'x'), ['b', 'c', 'd']);
+  });
+
+  it('notificationSignalement : en français et en néerlandais', () => {
+    const s = { auteurNom: 'Paul', groupeNom: 'Jeunes' };
+    assert.equal(notificationSignalement('s1', s, 'fr').notification.title, 'Message signalé');
+    assert.equal(notificationSignalement('s1', s, 'nl').notification.body, 'Paul · Jeunes');
+    assert.deepEqual(notificationSignalement('s1', s, 'fr').data, { type: 'signalement', id: 's1' });
+  });
+
   it('destinataires : membres sauf l\'auteur, sans doublon', () => {
     assert.deepEqual(destinataires(['a', 'b', 'c', 'b'], 'b'), ['a', 'c']);
     assert.deepEqual(destinataires(undefined, 'a'), []);

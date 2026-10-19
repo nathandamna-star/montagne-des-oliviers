@@ -4963,6 +4963,120 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Adresse'**
   String get adresse;
+
+  /// No description provided for @signalerMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Signaler ce message'**
+  String get signalerMessage;
+
+  /// No description provided for @signaler.
+  ///
+  /// In fr, this message translates to:
+  /// **'Signaler'**
+  String get signaler;
+
+  /// No description provided for @signalerTexte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le message sera envoyé au secrétariat et aux pasteurs, qui décideront de l\'effacer. La personne ne saura pas qui l\'a signalé.'**
+  String get signalerTexte;
+
+  /// No description provided for @motifSignalement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pourquoi ? (facultatif)'**
+  String get motifSignalement;
+
+  /// No description provided for @messageSignale.
+  ///
+  /// In fr, this message translates to:
+  /// **'Merci. Le message a été signalé aux responsables.'**
+  String get messageSignale;
+
+  /// No description provided for @bloquer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bloquer'**
+  String get bloquer;
+
+  /// No description provided for @bloquerTexte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous ne verrez plus ses messages dans les groupes et ne recevrez plus de notifications pour ses messages. Vous pourrez la débloquer dans Profil › Personnes bloquées.'**
+  String get bloquerTexte;
+
+  /// No description provided for @debloquer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Débloquer'**
+  String get debloquer;
+
+  /// No description provided for @personnesBloquees.
+  ///
+  /// In fr, this message translates to:
+  /// **'Personnes bloquées'**
+  String get personnesBloquees;
+
+  /// No description provided for @aucunePersonneBloquee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous n\'avez bloqué personne.'**
+  String get aucunePersonneBloquee;
+
+  /// No description provided for @personneInconnue.
+  ///
+  /// In fr, this message translates to:
+  /// **'Personne inconnue'**
+  String get personneInconnue;
+
+  /// No description provided for @signalements.
+  ///
+  /// In fr, this message translates to:
+  /// **'Messages signalés'**
+  String get signalements;
+
+  /// No description provided for @signalementsSousTitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Messages de groupe signalés par des membres'**
+  String get signalementsSousTitre;
+
+  /// No description provided for @aucunSignalement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun message signalé.'**
+  String get aucunSignalement;
+
+  /// No description provided for @effacerLeMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Effacer le message'**
+  String get effacerLeMessage;
+
+  /// No description provided for @classerSignalement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Garder le message'**
+  String get classerSignalement;
+
+  /// No description provided for @bloquerPersonne.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bloquer {nom}'**
+  String bloquerPersonne(String nom);
+
+  /// No description provided for @personneBloquee.
+  ///
+  /// In fr, this message translates to:
+  /// **'{nom} est bloqué(e).'**
+  String personneBloquee(String nom);
+
+  /// No description provided for @motifDuSignalement.
+  ///
+  /// In fr, this message translates to:
+  /// **'Motif : {motif}'**
+  String motifDuSignalement(String motif);
 }
 
 class _AppLocalizationsDelegate

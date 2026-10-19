@@ -6,6 +6,7 @@ import '../auth/auth_providers.dart';
 import 'data/groupes_repository.dart';
 import 'domain/groupe.dart';
 import 'domain/rencontre.dart';
+import 'domain/signalement.dart';
 
 final groupesRepositoryProvider = Provider<GroupesRepository>(
   (ref) => GroupesRepository(ref.watch(firestoreProvider)),
@@ -114,3 +115,13 @@ final presencesProvider =
       (ref, ids) =>
           ref.watch(groupesRepositoryProvider).presences(ids.$1, ids.$2),
     );
+
+/// Signalements à traiter (secrétariat et pasteurs).
+final signalementsProvider = StreamProvider<List<Signalement>>(
+  (ref) => ref.watch(groupesRepositoryProvider).signalements(),
+);
+
+/// Personnes que le compte connecté a bloquées.
+final bloquesProvider = Provider<List<String>>(
+  (ref) => ref.watch(profilProvider).value?.bloques ?? const [],
+);

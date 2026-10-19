@@ -88,14 +88,34 @@ service cloud.firestore {
 
       // Modification par soi-même : jamais les rôles ni le consentement.
       allow update: if connecte() && uid == moi()
-        && seulement(['nom', 'langue', 'photoUrl', 'jetonsNotif', 'decalageMin'])
+        && seulement(['nom', 'langue', 'photoUrl', 'jetonsNotif', 'decalageMin', 'bloques'])
         && texte(nouveau().nom, 100)
         && nouveau().langue in ['fr', 'nl']
         && nouveau().get('jetonsNotif', []) is list
         && nouveau().get('jetonsNotif', []).size() <= 20
+        && nouveau().get('bloques', []) is list
+        && nouveau().get('bloques', []).size() <= 500
         && lien(nouveau().get('photoUrl', null));
 
       allow delete: if connecte() && uid == moi();
+    }
+
+    // ----- Signalements (règle 1.2 de l'App Store) : un membre signale un message de
+    // groupe ; le secrétariat et les pasteurs le lisent et le traitent. -----
+    match /signalements/{id} {
+      allow read, delete: if estSecretariat();
+      allow create: if estMembre()
+        && nouveau().keys().hasOnly(['groupeId', 'groupeNom', 'messageId', 'auteur', 'auteurNom',
+                                     'extrait', 'motif', 'signalePar', 'createdAt'])
+        && nouveau().signalePar == moi()
+        && membreGroupe(nouveau().groupeId)
+        && texte(nouveau().messageId, 100)
+        && texte(nouveau().auteur, 128)
+        && texteFacultatif(nouveau().auteurNom, 100)
+        && texteFacultatif(nouveau().groupeNom, 100)
+        && texteFacultatif(nouveau().extrait, 400)
+        && texteFacultatif(nouveau().motif, 1000)
+        && nouveau().createdAt == request.time;
     }
 
     // ----- Annuaire : nom des comptes (pour composer les groupes), tenu par le serveur -----
@@ -242,7 +262,9 @@ service cloud.firestore {
           && texteFacultatif(nouveau().texte, 5000)
           && lien(nouveau().get('fichierUrl', null))
           && nouveau().createdAt == request.time;
-        allow delete: if (membreGroupe(gid) && resource.data.auteur == moi()) || adminGroupe(gid);
+        // L'auteur, l'administrateur du groupe, ou le secrétariat (message signalé).
+        allow delete: if (membreGroupe(gid) && resource.data.auteur == moi()) || adminGroupe(gid)
+          || estSecretariat();
       }
 
       // Calendrier du groupe : réunions, répétitions (louange), modérations, appels programmés.

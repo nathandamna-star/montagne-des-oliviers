@@ -19,6 +19,7 @@ Faire partie d'une église, confier un sujet de prière ou demander un baptême 
 - Votre compte : nom, adresse e-mail, langue, photo si vous en ajoutez une, date de votre consentement. Votre mot de passe est géré par notre prestataire : nous ne le voyons jamais. Si vous vous connectez avec Google ou Apple, nous recevons seulement votre nom et votre adresse e-mail.
 - Le registre des membres tenu par le secrétariat : coordonnées, date de naissance, famille, dates d'arrivée, de baptême, de présentation d'enfant ou de mariage, services rendus, notes.
 - Votre participation : groupes, messages, photos et documents partagés dans les groupes, réponses aux rencontres, inscriptions aux événements et au nettoyage de la salle, ce que vous apportez aux fêtes, services prévus au planning, réservations de salles.
+- Les messages de groupe que vous signalez (extrait, motif, votre identifiant), lus seulement par le secrétariat et les pasteurs, et la liste des personnes que vous avez bloquées (visible par vous seul).
 - Vos demandes (baptême, présentation d'enfant, mariage, rendez-vous, visite) et le suivi des préparations (leçons faites, questions posées).
 - Les messages envoyés par « Nous contacter », même sans compte : nom, e-mail ou téléphone, sujet et message. Seuls les pasteurs les lisent.
 - Vos sujets de prière et témoignages. Vous pouvez les confier de façon anonyme pour l'équipe d'intercession.

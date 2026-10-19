@@ -368,4 +368,11 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   `3WHNDT7LP4` dans le projet Xcode), **iPhone et iPad** ; transfert possible plus tard vers le compte de l'ASBL.
   Droits : notifications + Connexion avec Apple (`Runner.entitlements`). Dons sur iOS : site de l'église dans Safari
   (règle 3.2.2). Guide pas à pas : `docs/publication-app-store.md` (clé APNs, archive Xcode, fiche, compte de
-  démonstration dédié, réponse à Apple). Risque : signaler / bloquer (règle 1.2) pas encore fait.
+  démonstration dédié, réponse à Apple).
+- **Signaler / bloquer** (règle 1.2 de l'App Store, demande du porteur) : appui long sur un message de groupe →
+  « Signaler ce message » (`signalements/{id}` : groupeId, groupeNom, messageId, auteur, auteurNom, extrait ≤ 400,
+  motif, signalePar, createdAt ; créé par un membre du groupe, lu et effacé par le secrétariat ; fonction
+  `nouveauSignalement` prévient admin + secrétariat ; Responsables › Messages signalés : effacer le message — le
+  secrétariat peut effacer un message de groupe — ou le garder) ; « Bloquer » → `users.bloques` (≤ 500) : messages
+  masqués dans les discussions, pas de notification de ses messages (`sansBloqueurs`) ; Profil › Personnes bloquées.
+  Signalements faits par un compte supprimés avec lui. Messages en `Text` (plus `SelectableText`, qui prenait l'appui long).

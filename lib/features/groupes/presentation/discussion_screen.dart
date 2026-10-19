@@ -95,14 +95,124 @@ class _DiscussionScreenState extends ConsumerState<DiscussionScreen> {
     }
   }
 
+  /// Appui long sur un message : effacer (auteur, administrateur du groupe),
+  /// signaler ou bloquer son auteur (messages des autres).
+  Future<void> _actions(MessageGroupe m, {required bool peutEffacer}) async {
+    final l10n = AppLocalizations.of(context);
+    final uid = ref.read(utilisateurFirebaseProvider).value?.uid;
+    final moi = m.auteur == uid;
+    final choix = await showModalBottomSheet<String>(
+      context: context,
+      showDragHandle: true,
+      builder: (context) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (!moi) ...[
+              ListTile(
+                leading: const Icon(Icons.flag_outlined),
+                title: Text(l10n.signalerMessage),
+                onTap: () => Navigator.pop(context, 'signaler'),
+              ),
+              ListTile(
+                leading: const Icon(Icons.block),
+                title: Text(l10n.bloquerPersonne(m.nom)),
+                onTap: () => Navigator.pop(context, 'bloquer'),
+              ),
+            ],
+            if (peutEffacer)
+              ListTile(
+                leading: const Icon(Icons.delete_outline),
+                title: Text(l10n.effacerLeMessage),
+                onTap: () => Navigator.pop(context, 'effacer'),
+              ),
+          ],
+        ),
+      ),
+    );
+    if (!mounted) return;
+    switch (choix) {
+      case 'signaler':
+        await _signaler(m);
+      case 'bloquer':
+        await _bloquer(m);
+      case 'effacer':
+        await _effacer(m);
+    }
+  }
+
+  Future<void> _signaler(MessageGroupe m) async {
+    final l10n = AppLocalizations.of(context);
+    final messager = ScaffoldMessenger.of(context);
+    final texteMotif = await showDialog<String>(
+      context: context,
+      builder: (context) => const _DialogueSignalement(),
+    );
+    if (texteMotif == null) return;
+    final uid = ref.read(utilisateurFirebaseProvider).value?.uid;
+    if (uid == null) return;
+    try {
+      await ref
+          .read(groupesRepositoryProvider)
+          .signaler(
+            groupeId: widget.id,
+            groupeNom: ref.read(groupeProvider(widget.id)).value?.nom ?? '',
+            message: m,
+            motif: texteMotif,
+            par: uid,
+          );
+      messager.showSnackBar(SnackBar(content: Text(l10n.messageSignale)));
+    } catch (_) {
+      messager.showSnackBar(SnackBar(content: Text(l10n.envoiEchoue)));
+    }
+  }
+
+  Future<void> _bloquer(MessageGroupe m) async {
+    final l10n = AppLocalizations.of(context);
+    final messager = ScaffoldMessenger.of(context);
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.bloquerPersonne(m.nom)),
+        content: Text(l10n.bloquerTexte),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text(l10n.annuler),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(l10n.bloquer),
+          ),
+        ],
+      ),
+    );
+    if (ok != true) return;
+    final uid = ref.read(utilisateurFirebaseProvider).value?.uid;
+    if (uid == null) return;
+    try {
+      await ref.read(groupesRepositoryProvider).bloquer(uid, m.auteur);
+      messager.showSnackBar(
+        SnackBar(content: Text(l10n.personneBloquee(m.nom))),
+      );
+    } catch (_) {
+      messager.showSnackBar(SnackBar(content: Text(l10n.envoiEchoue)));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final uid = ref.watch(utilisateurFirebaseProvider).value?.uid;
     final groupe = ref.watch(groupeProvider(widget.id)).value;
-    final messages =
-        ref.watch(messagesGroupeProvider(widget.id)).value ?? const [];
+    // Les messages des personnes bloquées sont masqués.
+    final bloques = ref.watch(bloquesProvider);
+    final messages = [
+      for (final m
+          in ref.watch(messagesGroupeProvider(widget.id)).value ?? const [])
+        if (!bloques.contains(m.auteur)) m,
+    ];
     final admin = groupe?.estAdmin(uid) ?? false;
 
     // Discussion ouverte : tout est lu.
@@ -148,7 +258,8 @@ class _DiscussionScreenState extends ConsumerState<DiscussionScreen> {
                             ? Alignment.centerRight
                             : Alignment.centerLeft,
                         child: GestureDetector(
-                          onLongPress: moi || admin ? () => _effacer(m) : null,
+                          onLongPress: () =>
+                              _actions(m, peutEffacer: moi || admin),
                           child: ConstrainedBox(
                             constraints: BoxConstraints(
                               maxWidth: MediaQuery.sizeOf(context).width * 0.78,
@@ -191,7 +302,9 @@ class _DiscussionScreenState extends ConsumerState<DiscussionScreen> {
                                       ),
                                     ),
                                   if (m.texte.isNotEmpty)
-                                    SelectableText(
+                                    // Texte simple : l'appui long ouvre les
+                                    // actions (signaler, bloquer, effacer).
+                                    Text(
                                       m.texte,
                                       style: TextStyle(color: couleurTexte),
                                     ),
@@ -257,6 +370,58 @@ class _DiscussionScreenState extends ConsumerState<DiscussionScreen> {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// Motif du signalement (facultatif) ; renvoie null si l'on annule.
+class _DialogueSignalement extends StatefulWidget {
+  const _DialogueSignalement();
+
+  @override
+  State<_DialogueSignalement> createState() => _DialogueSignalementState();
+}
+
+class _DialogueSignalementState extends State<_DialogueSignalement> {
+  final _motif = TextEditingController();
+
+  @override
+  void dispose() {
+    _motif.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return AlertDialog(
+      title: Text(l10n.signalerMessage),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(l10n.signalerTexte),
+          const SizedBox(height: 12),
+          TextField(
+            key: const Key('motifSignalement'),
+            controller: _motif,
+            decoration: InputDecoration(labelText: l10n.motifSignalement),
+            maxLength: 1000,
+            maxLines: 3,
+            minLines: 1,
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text(l10n.annuler),
+        ),
+        FilledButton(
+          onPressed: () => Navigator.pop(context, _motif.text),
+          child: Text(l10n.signaler),
+        ),
+      ],
     );
   }
 }

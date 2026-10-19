@@ -79,9 +79,12 @@ le rôle **membre**, jamais un compte personnel ni administrateur. Remarques (en
 Puis : version 1.0 › ajouter le build › **Ajouter pour vérification** › Brouillons de soumissions ›
 Soumettre.
 
-## Risque connu
+## Signaler et bloquer (règle 1.2)
 
-Les **groupes** (discussion avec photos) et les sujets de prière sont du contenu publié par les membres.
-La règle 1.2 d'Apple demande de pouvoir **signaler** un contenu et **bloquer** une personne. Ce n'est pas
-encore dans l'app : Apple peut le demander. À ajouter si Apple refuse (ou avant l'envoi, au choix du
-porteur).
+Dans une discussion de groupe, **appui long sur un message** : « Signaler ce message » (motif facultatif,
+envoyé au secrétariat et aux pasteurs : Responsables › Messages signalés › effacer ou garder) et
+« Bloquer <nom> » (ses messages sont masqués, plus de notifications ; Profil › Personnes bloquées ›
+Débloquer). À ajouter aux remarques pour Apple :
+
+> User-generated content (group chats): long-press any message to report it (reviewed by the church
+> office, who can delete it) or to block its author (Profile > Personnes bloquées to unblock).

@@ -134,6 +134,106 @@ void main() {
     expect(find.text('Prions pour la famille Mbala'), findsOneWidget);
   });
 
+  testWidgets('discussion : signaler un message et bloquer son auteur', (
+    tester,
+  ) async {
+    final b = await banc();
+    final db = b.firestore;
+    await db.doc('groupes/inter/messages/m1').set({
+      'auteur': 'u2',
+      'nom': 'Paul',
+      'texte': 'Message déplacé',
+      'createdAt': Timestamp.fromDate(DateTime(2026, 10, 5)),
+    });
+    await lancer(tester, banc: b, taille: grand);
+    await ouvrirGroupe(tester, 'Intercession du mardi');
+    await tester.tap(find.text('Discussion'));
+    await tester.pumpAndSettle();
+
+    // Signaler.
+    await tester.longPress(find.text('Message déplacé'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Signaler ce message'));
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.byKey(const Key('motifSignalement')),
+      'Insulte',
+    );
+    await tester.tap(find.text('Signaler'));
+    await tester.pumpAndSettle();
+    final sig = (await db.collection('signalements').get()).docs.single;
+    expect(sig['messageId'], 'm1');
+    expect(sig['auteur'], 'u2');
+    expect(sig['signalePar'], 'u1');
+    expect(sig['motif'], 'Insulte');
+    expect(sig['groupeNom'], 'Intercession du mardi');
+
+    // Bloquer : le message disparaît.
+    await tester.longPress(find.text('Message déplacé'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Bloquer Paul'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Bloquer'));
+    await tester.pumpAndSettle();
+    expect((await db.doc('users/u1').get())['bloques'], ['u2']);
+    expect(find.text('Message déplacé'), findsNothing);
+  });
+
+  testWidgets('secrétariat : messages signalés, effacer ou garder', (
+    tester,
+  ) async {
+    final b = await banc(roles: {Role.secretariat});
+    final db = b.firestore;
+    await db.doc('groupes/inter/messages/m1').set({
+      'auteur': 'u2',
+      'nom': 'Paul',
+      'texte': 'Message déplacé',
+    });
+    for (final (id, m) in [('s1', 'm1'), ('s2', 'm9')]) {
+      await db.doc('signalements/$id').set({
+        'groupeId': 'inter',
+        'groupeNom': 'Intercession du mardi',
+        'messageId': m,
+        'auteur': 'u2',
+        'auteurNom': 'Paul',
+        'extrait': id == 's1' ? 'Message déplacé' : 'Autre message',
+        'motif': '',
+        'signalePar': 'u1',
+        'createdAt': Timestamp.fromDate(DateTime(2026, 10, id == 's1' ? 6 : 5)),
+      });
+    }
+    await lancer(tester, banc: b, taille: grand);
+    await tester.tap(find.text('Responsables'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Messages signalés'));
+    await tester.pumpAndSettle();
+    expect(find.text('Autre message'), findsOneWidget);
+    await tester.tap(find.text('Effacer le message').first);
+    await tester.pumpAndSettle();
+    expect((await db.doc('groupes/inter/messages/m1').get()).exists, isFalse);
+    await tester.tap(find.text('Garder le message'));
+    await tester.pumpAndSettle();
+    expect((await db.collection('signalements').get()).docs, isEmpty);
+    expect(find.text('Aucun message signalé.'), findsOneWidget);
+  });
+
+  testWidgets('profil : personnes bloquées, débloquer', (tester) async {
+    final b = await banc();
+    await b.firestore.doc('users/u1').update({
+      'bloques': ['u2'],
+    });
+    await lancer(tester, banc: b, taille: grand);
+    await tester.tap(find.text('Profil').last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Personnes bloquées'));
+    await tester.pumpAndSettle();
+    expect(find.text('Paul'), findsOneWidget);
+    await tester.tap(find.text('Débloquer'));
+    await tester.pumpAndSettle();
+    expect((await b.firestore.doc('users/u1').get())['bloques'], isEmpty);
+    expect(find.text('Vous n\'avez bloqué personne.'), findsOneWidget);
+  });
+
   testWidgets(
     'administrateur du groupe : ajouter, nommer, retirer ; lien d\'appel',
     (tester) async {

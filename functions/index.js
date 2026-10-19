@@ -21,7 +21,8 @@ import {
 } from './notifications.js';
 import {
   apercu, destinataires, destinatairesRappel, notificationMessage, notificationRappel,
-  notificationRemplacement, notificationRencontre, rappelsDus, remplacementVientDEtreDemande,
+  notificationRemplacement, notificationRencontre, notificationSignalement, rappelsDus,
+  remplacementVientDEtreDemande, sansBloqueurs,
 } from './groupes.js';
 import {
   demandeAvancee, messagesFete, notificationApport, notificationNouvelleDemande, notificationPriere,
@@ -208,12 +209,27 @@ export const nouveauMessageGroupe = onDocumentCreated(
         le: message.createdAt ?? FieldValue.serverTimestamp(),
       },
     });
+    // Pas de notification à ceux qui ont bloqué l'auteur.
+    const uids = destinataires(groupe.membres, message.auteur);
+    const profils = Object.fromEntries(await Promise.all(
+      uids.map(async (u) => [u, (await db.doc(`users/${u}`).get()).data()]),
+    ));
     await envoyerAuxComptes(
-      destinataires(groupe.membres, message.auteur),
+      sansBloqueurs(uids, profils, message.auteur),
       (langue) => notificationMessage(groupe, event.params.gid, message, langue),
     );
   },
 );
+
+/** Message signalé : le secrétariat et les pasteurs sont prévenus. */
+export const nouveauSignalement = onDocumentCreated('signalements/{id}', async (event) => {
+  const s = event.data?.data();
+  if (!s) return;
+  await envoyerAuxComptes(
+    await comptesAvecRoles(['admin', 'secretariat']),
+    (langue) => notificationSignalement(event.params.id, s, langue),
+  );
+});
 
 /**
  * Envoie une notification sur les téléphones de chaque compte, dans sa langue
@@ -871,6 +887,9 @@ export const supprimerMonCompte = onCall({ timeoutSeconds: 300, secrets: [STRIPE
     for (const d of (await parUid(col)).docs) await db.recursiveDelete(d.ref);
   }
   for (const d of (await db.collectionGroup('affectations').where('uid', '==', uid).get()).docs) {
+    await d.ref.delete();
+  }
+  for (const d of (await db.collection('signalements').where('signalePar', '==', uid).get()).docs) {
     await d.ref.delete();
   }
   for (const [col, sc] of [['evenements', 'inscriptions'], ['fetes', 'apports'], ['nettoyages', 'inscrits'],

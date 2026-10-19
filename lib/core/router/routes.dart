@@ -70,6 +70,8 @@ abstract final class Routes {
   static String prieresGroupe(String id) => '/groupes/$id/prieres';
   static String priereGroupe(String id, String pid) =>
       '/groupes/$id/prieres/$pid';
+  static const personnesBloquees = '/profil/bloques';
+  static const signalements = '/responsables/signalements';
   static const mesDemandes = '/profil/demandes';
   static const nouvelleDemande = '/profil/demandes/nouvelle';
   static String maDemande(String id) => '/profil/demandes/$id';

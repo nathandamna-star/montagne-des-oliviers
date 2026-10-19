@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../domain/groupe.dart';
 import '../domain/rencontre.dart';
+import '../domain/signalement.dart';
 
 class GroupesRepository {
   GroupesRepository(this.firestore);
@@ -134,6 +135,62 @@ class GroupesRepository {
 
   Future<void> effacerMessage(String id, String messageId) =>
       _messages(id).doc(messageId).delete();
+
+  // ----- Signaler et bloquer (règle 1.2 de l'App Store) -----
+
+  CollectionReference<Map<String, dynamic>> get _signalements =>
+      firestore.collection('signalements');
+
+  /// Signale un message au secrétariat et aux pasteurs.
+  Future<void> signaler({
+    required String groupeId,
+    required String groupeNom,
+    required MessageGroupe message,
+    required String motif,
+    required String par,
+  }) {
+    final texte = message.texte.trim();
+    return _signalements.add({
+      'groupeId': groupeId,
+      'groupeNom': groupeNom,
+      'messageId': message.id,
+      'auteur': message.auteur,
+      'auteurNom': message.nom,
+      'extrait': texte.isEmpty
+          ? '[photo]'
+          : texte.length > 300
+          ? '${texte.substring(0, 299)}…'
+          : texte,
+      'motif': motif.trim(),
+      'signalePar': par,
+      'createdAt': FieldValue.serverTimestamp(),
+    });
+  }
+
+  /// Signalements à traiter (secrétariat et pasteurs), les plus récents d'abord.
+  Stream<List<Signalement>> signalements() => _signalements
+      .orderBy('createdAt', descending: true)
+      .limit(200)
+      .snapshots()
+      .map((s) => s.docs.map(Signalement.depuisFirestore).toList());
+
+  Future<void> classerSignalement(String id) => _signalements.doc(id).delete();
+
+  /// Efface le message signalé, puis le signalement.
+  Future<void> effacerMessageSignale(Signalement s) async {
+    await _messages(s.groupeId).doc(s.messageId).delete();
+    await classerSignalement(s.id);
+  }
+
+  Future<void> bloquer(String moi, String uid) =>
+      firestore.doc('users/$moi').update({
+        'bloques': FieldValue.arrayUnion([uid]),
+      });
+
+  Future<void> debloquer(String moi, String uid) =>
+      firestore.doc('users/$moi').update({
+        'bloques': FieldValue.arrayRemove([uid]),
+      });
 
   // ----- Calendrier du groupe -----
 

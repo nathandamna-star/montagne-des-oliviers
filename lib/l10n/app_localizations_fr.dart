@@ -2713,4 +2713,71 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get adresse => 'Adresse';
+
+  @override
+  String get signalerMessage => 'Signaler ce message';
+
+  @override
+  String get signaler => 'Signaler';
+
+  @override
+  String get signalerTexte =>
+      'Le message sera envoyé au secrétariat et aux pasteurs, qui décideront de l\'effacer. La personne ne saura pas qui l\'a signalé.';
+
+  @override
+  String get motifSignalement => 'Pourquoi ? (facultatif)';
+
+  @override
+  String get messageSignale =>
+      'Merci. Le message a été signalé aux responsables.';
+
+  @override
+  String get bloquer => 'Bloquer';
+
+  @override
+  String get bloquerTexte =>
+      'Vous ne verrez plus ses messages dans les groupes et ne recevrez plus de notifications pour ses messages. Vous pourrez la débloquer dans Profil › Personnes bloquées.';
+
+  @override
+  String get debloquer => 'Débloquer';
+
+  @override
+  String get personnesBloquees => 'Personnes bloquées';
+
+  @override
+  String get aucunePersonneBloquee => 'Vous n\'avez bloqué personne.';
+
+  @override
+  String get personneInconnue => 'Personne inconnue';
+
+  @override
+  String get signalements => 'Messages signalés';
+
+  @override
+  String get signalementsSousTitre =>
+      'Messages de groupe signalés par des membres';
+
+  @override
+  String get aucunSignalement => 'Aucun message signalé.';
+
+  @override
+  String get effacerLeMessage => 'Effacer le message';
+
+  @override
+  String get classerSignalement => 'Garder le message';
+
+  @override
+  String bloquerPersonne(String nom) {
+    return 'Bloquer $nom';
+  }
+
+  @override
+  String personneBloquee(String nom) {
+    return '$nom est bloqué(e).';
+  }
+
+  @override
+  String motifDuSignalement(String motif) {
+    return 'Motif : $motif';
+  }
 }
