@@ -3527,7 +3527,7 @@ abstract class AppLocalizations {
   /// No description provided for @dimesEtOffrandes.
   ///
   /// In fr, this message translates to:
-  /// **'Dîmes et offrandes'**
+  /// **'Nous soutenir'**
   String get dimesEtOffrandes;
 
   /// No description provided for @donner.
@@ -3551,13 +3551,13 @@ abstract class AppLocalizations {
   /// No description provided for @donsSurLeSiteTexte.
   ///
   /// In fr, this message translates to:
-  /// **'Sur iPhone, les dons se font sur le site de l\'église. Connectez-vous avec le même compte : vos dons apparaîtront ici.'**
+  /// **'Sur iPhone et iPad, vous pouvez nous soutenir sur le site de l\'église. Connectez-vous avec le même compte : vos dons apparaîtront ici.'**
   String get donsSurLeSiteTexte;
 
   /// No description provided for @donnerSurLeSite.
   ///
   /// In fr, this message translates to:
-  /// **'Donner sur le site de l\'église'**
+  /// **'Nous soutenir sur le site de l\'église'**
   String get donnerSurLeSite;
 
   /// No description provided for @montant.

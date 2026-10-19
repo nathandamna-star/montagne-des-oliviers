@@ -23,7 +23,7 @@ final pageDonsWeb = Uri.parse(
 
 const _montantsProposes = [10.0, 20.0, 50.0, 100.0];
 
-/// Dîmes et offrandes : donner (virement avec QR code, carte ou Bancontact,
+/// Nous soutenir (dîmes et offrandes) : donner (virement avec QR code, carte ou Bancontact,
 /// don mensuel), suivre ses dons, relevé annuel.
 class DonsScreen extends ConsumerStatefulWidget {
   const DonsScreen({super.key});

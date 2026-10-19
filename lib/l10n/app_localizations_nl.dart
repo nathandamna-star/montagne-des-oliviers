@@ -1919,7 +1919,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get fichierOuLienRequis => 'Stuur een bestand of geef een link op.';
 
   @override
-  String get dimesEtOffrandes => 'Tienden en giften';
+  String get dimesEtOffrandes => 'Steun ons';
 
   @override
   String get donner => 'Geven';
@@ -1934,10 +1934,10 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get donsSurLeSiteTexte =>
-      'Op iPhone geef je via de website van de kerk. Meld je aan met hetzelfde account: je giften verschijnen hier.';
+      'Op iPhone en iPad kun je ons steunen via de website van de kerk. Meld je aan met hetzelfde account: je giften verschijnen hier.';
 
   @override
-  String get donnerSurLeSite => 'Geven op de website van de kerk';
+  String get donnerSurLeSite => 'Steun ons via de website van de kerk';
 
   @override
   String get montant => 'Bedrag';

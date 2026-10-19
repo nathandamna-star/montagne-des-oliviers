@@ -1917,7 +1917,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get fichierOuLienRequis => 'Envoyez un fichier ou indiquez un lien.';
 
   @override
-  String get dimesEtOffrandes => 'Dîmes et offrandes';
+  String get dimesEtOffrandes => 'Nous soutenir';
 
   @override
   String get donner => 'Donner';
@@ -1932,10 +1932,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get donsSurLeSiteTexte =>
-      'Sur iPhone, les dons se font sur le site de l\'église. Connectez-vous avec le même compte : vos dons apparaîtront ici.';
+      'Sur iPhone et iPad, vous pouvez nous soutenir sur le site de l\'église. Connectez-vous avec le même compte : vos dons apparaîtront ici.';
 
   @override
-  String get donnerSurLeSite => 'Donner sur le site de l\'église';
+  String get donnerSurLeSite => 'Nous soutenir sur le site de l\'église';
 
   @override
   String get montant => 'Montant';

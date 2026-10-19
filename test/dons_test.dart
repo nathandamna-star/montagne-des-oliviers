@@ -46,7 +46,7 @@ Future<Banc> banc({
 }
 
 Future<void> ouvrirDons(WidgetTester tester) async {
-  await tester.tap(find.text('Dîmes et offrandes'));
+  await tester.tap(find.text('Nous soutenir'));
   await tester.pumpAndSettle();
 }
 
@@ -231,7 +231,7 @@ void main() {
     await lancer(tester, banc: b, taille: grand);
     await ouvrirDons(tester);
     expect(find.text('Bancontact ou carte'), findsNothing);
-    await tester.tap(find.text('Donner sur le site de l\'église'));
+    await tester.tap(find.text('Nous soutenir sur le site de l\'église'));
     expect(
       b.lanceur.ouverts.single.toString(),
       'https://montagne-des-oliviers.web.app/#/accueil/dons',
