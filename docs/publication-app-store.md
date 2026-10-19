@@ -88,3 +88,7 @@ Débloquer). À ajouter aux remarques pour Apple :
 
 > User-generated content (group chats): long-press any message to report it (reviewed by the church
 > office, who can delete it) or to block its author (Profile > Personnes bloquées to unblock).
+> Background audio: Médias tab > open an audio sermon > Play, then lock the screen: the sermon keeps playing.
+
+Avant l'envoi : publier au moins **une prédication audio** dans Médias (visible des membres), sinon Apple ne
+trouve pas l'audio en arrière-plan et refuse (règle 2.5.4, comme pour Nous deux avec Dieu).
