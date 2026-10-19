@@ -364,3 +364,8 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   (`adresse` Sint-Truidensesteenweg 340, 3300 Tienen ; `telephone` 0466 31 74 20) et **WhatsApp direct**
   (`whatsappDirect` wa.me/32466317420). Pasteur par défaut : « Pasteur Claude Lumbala ». Visiteurs : bouton de
   connexion dans la barre du haut de l'Accueil.
+- **App Store** (choix du porteur, 19/10/2026) : publiée avec le compte Apple Developer de **Nathan Damna** (équipe
+  `3WHNDT7LP4` dans le projet Xcode), **iPhone et iPad** ; transfert possible plus tard vers le compte de l'ASBL.
+  Droits : notifications + Connexion avec Apple (`Runner.entitlements`). Dons sur iOS : site de l'église dans Safari
+  (règle 3.2.2). Guide pas à pas : `docs/publication-app-store.md` (clé APNs, archive Xcode, fiche, compte de
+  démonstration dédié, réponse à Apple). Risque : signaler / bloquer (règle 1.2) pas encore fait.
