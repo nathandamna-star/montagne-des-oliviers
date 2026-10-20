@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../core/router/routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../l10n/app_localizations.dart';
+import '../../shared/services/paiements_en_ligne.dart';
 import '../../shared/widgets/liens_legaux.dart';
 import '../eglise/blocs_eglise.dart';
 import '../../shared/widgets/logo_eglise.dart';
@@ -28,6 +29,7 @@ class AccueilScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final connecte = ref.watch(estConnecteProvider);
     final membre = ref.watch(profilProvider).value != null;
+    final dons = ref.watch(donsVisiblesProvider);
     final sections = <(String, List<_Raccourci>)>[
       (
         l10n.sectionDecouvrir,
@@ -83,11 +85,12 @@ class AccueilScreen extends ConsumerWidget {
             Routes.communaute,
           ),
           _Raccourci(Icons.mail_outline, l10n.nousContacter, Routes.contact),
-          _Raccourci(
-            Icons.savings_outlined,
-            l10n.dimesEtOffrandes,
-            Routes.dons,
-          ),
+          if (dons)
+            _Raccourci(
+              Icons.savings_outlined,
+              l10n.dimesEtOffrandes,
+              Routes.dons,
+            ),
           _Raccourci(Icons.storefront_outlined, l10n.boutique, Routes.boutique),
         ],
       ),

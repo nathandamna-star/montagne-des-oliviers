@@ -366,8 +366,8 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   connexion dans la barre du haut de l'Accueil.
 - **App Store** (choix du porteur, 19/10/2026) : publiée avec le compte Apple Developer de **Nathan Damna** (équipe
   `3WHNDT7LP4` dans le projet Xcode), **iPhone et iPad** ; transfert possible plus tard vers le compte de l'ASBL.
-  Droits : notifications + Connexion avec Apple (`Runner.entitlements`). Dons sur iOS : site de l'église dans Safari
-  (règle 3.2.2). Guide pas à pas : `docs/publication-app-store.md` (clé APNs, archive Xcode, fiche, compte de
+  Droits : notifications + Connexion avec Apple (`Runner.entitlements`). Dons sur iOS : rubrique masquée, aucune mention
+  (`donsVisiblesProvider`, règles 3.1.1 / 3.2.2). Guide pas à pas : `docs/publication-app-store.md` (clé APNs, archive Xcode, fiche, compte de
   démonstration dédié, réponse à Apple).
 - **Signaler / bloquer** (règle 1.2 de l'App Store, demande du porteur) : appui long sur un message de groupe →
   « Signaler ce message » (`signalements/{id}` : groupeId, groupeNom, messageId, auteur, auteurNom, extrait ≤ 400,

@@ -10,8 +10,8 @@ Déjà prêt dans le code :
   (`ios/Runner/Runner.entitlements`) ;
 - iPhone et iPad (toutes les orientations sur iPad), iOS 15 minimum ;
 - textes d'autorisation (photos, appareil photo), chiffrement déclaré « non » (`ITSAppUsesNonExemptEncryption`) ;
-- **dons** : sur iPhone / iPad, le bouton ouvre le **site de l'église** dans Safari (règle 3.2.2 d'Apple :
-  une organisation non reconnue par Apple ne collecte pas de dons dans l'app) ; la **boutique** vend des
+- **dons** : sur iPhone / iPad, **aucune mention** (rubrique « Nous soutenir » et « Mes dons » masquées,
+  `donsVisiblesProvider` ; refus 3.1.1 de Nous deux avec Dieu) : les membres donnent sur le site ; la **boutique** vend des
   livres papier (bien physique : paiement Stripe autorisé) ;
 - suppression du compte depuis l'app (Profil), pages légales en ligne.
 
@@ -72,8 +72,7 @@ le rôle **membre**, jamais un compte personnel ni administrateur. Remarques (en
 > This is the private app of the Centre Évangélique Montagne des Oliviers, a church in Tienen (Belgium).
 > Members read news, the church calendar, sermons, join private groups, send prayer requests and
 > requests (baptism, wedding, appointment). The demo account is a regular member.
-> Donations: on iPhone and iPad the app does not collect donations; the "Donner sur le site de l'église"
-> button opens the church website in Safari (guideline 3.2.2). The bookshop sells printed books picked
+> Donations: the iPhone and iPad app does not offer or mention donations. The bookshop sells printed books picked
 > up at the church (physical goods). Account deletion: Profil > Supprimer mon compte.
 
 Puis : version 1.0 › ajouter le build › **Ajouter pour vérification** › Brouillons de soumissions ›

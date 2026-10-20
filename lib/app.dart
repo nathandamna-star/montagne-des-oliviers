@@ -11,6 +11,7 @@ import 'core/theme/app_theme.dart';
 import 'features/auth/auth_providers.dart';
 import 'features/notifications/notifications_providers.dart';
 import 'l10n/app_localizations.dart';
+import 'shared/services/paiements_en_ligne.dart';
 
 class MontagneDesOliviersApp extends ConsumerStatefulWidget {
   const MontagneDesOliviersApp({super.key});
@@ -68,7 +69,7 @@ class _MontagneDesOliviersAppState
         case 'signalement':
           router.push(Routes.signalements);
         case 'don':
-          router.push(Routes.dons);
+          if (ref.read(donsVisiblesProvider)) router.push(Routes.dons);
         case 'commande':
           router.push(Routes.commande(id));
         case 'fete':

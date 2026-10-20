@@ -17,6 +17,7 @@ import '../auth/data/fonctions_roles.dart';
 import '../auth/domain/role.dart';
 import 'data/fonctions_compte.dart';
 import 'libelles_roles.dart';
+import '../../shared/services/paiements_en_ligne.dart';
 
 class ProfilScreen extends ConsumerStatefulWidget {
   const ProfilScreen({super.key});
@@ -280,13 +281,15 @@ class _ProfilScreenState extends ConsumerState<ProfilScreen> {
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () => context.push(Routes.mesPrieres),
                 ),
-                const Divider(height: 1),
-                ListTile(
-                  leading: const Icon(Icons.savings_outlined),
-                  title: Text(l10n.mesDons),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () => context.push(Routes.dons),
-                ),
+                if (ref.watch(donsVisiblesProvider)) ...[
+                  const Divider(height: 1),
+                  ListTile(
+                    leading: const Icon(Icons.savings_outlined),
+                    title: Text(l10n.mesDons),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () => context.push(Routes.dons),
+                  ),
+                ],
                 const Divider(height: 1),
                 ListTile(
                   leading: const Icon(Icons.shopping_bag_outlined),

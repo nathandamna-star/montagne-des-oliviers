@@ -22,7 +22,7 @@ L'onglet Groupes montre vos groupes. Pour rejoindre un groupe, demandez à son r
 
 ## Comment faire un don ?
 
-Accueil → Nous soutenir. Vous pouvez donner par virement (avec un QR code à scanner dans l'application de votre banque), par Bancontact ou par carte, une fois ou chaque mois. Sur iPhone et iPad, on nous soutient sur le site de l'église.
+Accueil → Nous soutenir (site de l'église et application Android). Vous pouvez donner par virement (avec un QR code à scanner dans l'application de votre banque), par Bancontact ou par carte, une fois ou chaque mois.
 
 ## Où retrouver mes dons ?
 

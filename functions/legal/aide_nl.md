@@ -22,7 +22,7 @@ Het tabblad Groepen toont je groepen. Vraag de verantwoordelijke of het secretar
 
 ## Hoe geef ik een gift?
 
-Home → Steun ons. Je kunt geven via overschrijving (met een QR-code om te scannen in je bankapp), met Bancontact of met een kaart, eenmalig of elke maand. Op iPhone en iPad steun je ons via de website van de kerk.
+Home → Steun ons (website van de kerk en Android-app). Je kunt geven via overschrijving (met een QR-code om te scannen in je bankapp), met Bancontact of met een kaart, eenmalig of elke maand.
 
 ## Waar vind ik mijn giften?
 

@@ -210,10 +210,19 @@ void main() {
     expect(find.text(eur('25 € par mois')), findsNothing);
   });
 
-  testWidgets('iPhone : les dons se font sur le site ; relevé annuel', (
+  testWidgets('iPhone / iPad : aucune mention des dons (règle 3.1.1)', (
     tester,
   ) async {
     final b = await banc(iPhone: true);
+    await lancer(tester, banc: b, taille: grand);
+    expect(find.text('Nous soutenir'), findsNothing);
+    await tester.tap(find.text('Profil').last);
+    await tester.pumpAndSettle();
+    expect(find.text('Mes dons'), findsNothing);
+  });
+
+  testWidgets('relevé annuel', (tester) async {
+    final b = await banc();
     await b.firestore
         .doc('dons/cs_1')
         .set(
@@ -230,12 +239,6 @@ void main() {
         .set(don('u1', 'Marie', 7, le: DateTime(2025, 6, 1)));
     await lancer(tester, banc: b, taille: grand);
     await ouvrirDons(tester);
-    expect(find.text('Bancontact ou carte'), findsNothing);
-    await tester.tap(find.text('Nous soutenir sur le site de l\'église'));
-    expect(
-      b.lanceur.ouverts.single.toString(),
-      'https://montagne-des-oliviers.web.app/#/accueil/dons',
-    );
 
     await tester.tap(find.byTooltip('Relevé annuel'));
     await tester.pumpAndSettle();
