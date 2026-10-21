@@ -1,0 +1,213 @@
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'helpers.dart';
+
+const sortie = String.fromEnvironment(
+  'SORTIE',
+  defaultValue: '/tmp/captures-mdo',
+);
+
+Future<void> police(String famille, List<String> fichiers) async {
+  final l = FontLoader(famille);
+  for (final f in fichiers) {
+    l.addFont(File(f).readAsBytes().then((b) => ByteData.view(b.buffer)));
+  }
+  await l.load();
+}
+
+Timestamp t(DateTime d) => Timestamp.fromDate(d);
+
+Future<void> remplir(Banc b) async {
+  final db = b.firestore;
+  Future<void> annonce(String id, String titre, String texte, int jour,
+          {bool epingle = false}) =>
+      db.doc('actualites/$id').set({
+        'titre': {'fr': titre},
+        'texte': {'fr': texte},
+        'visibilite': 'public',
+        'publie': true,
+        'epingle': epingle,
+        'publieLe': t(DateTime(2026, 10, jour)),
+        'modifieLe': t(DateTime(2026, 10, jour)),
+      });
+  await annonce('a1', 'Baptêmes le 25 octobre',
+      'Vous souhaitez être baptisé ? Inscrivez-vous auprès du pasteur avant le 18 octobre.', 4,
+      epingle: true);
+  await annonce('a2', 'Retraite des couples',
+      'Un week-end pour se ressourcer à deux, du 14 au 16 novembre.', 3);
+  await annonce('a3', 'Nouvelle série de prédications',
+      'Tout le mois d\'octobre : « Marcher par l\'Esprit » (Galates 5).', 2);
+  Future<void> evt(String id, String titre, String type, DateTime debut,
+          {bool inscription = false, int? places, int inscrits = 0}) =>
+      db.doc('evenements/$id').set({
+        'titre': {'fr': titre},
+        'description': {'fr': 'Au Centre Évangélique Montagne des Oliviers.'},
+        'type': type,
+        'debut': t(debut),
+        'fin': t(debut.add(const Duration(hours: 2))),
+        'lieu': 'Tienen',
+        'visibilite': 'public',
+        'publie': true,
+        'inscription': inscription,
+        'placesMax': places,
+        'inscrits': inscrits,
+      });
+  await evt('e1', 'Soirée de prière', 'priere', DateTime(2026, 10, 7, 19));
+  await evt('e2', 'Culte du dimanche', 'culte', DateTime(2026, 10, 11, 10));
+  await evt('e3', 'Conférence jeunesse', 'conference', DateTime(2026, 10, 17, 14),
+      inscription: true, places: 80, inscrits: 34);
+  await evt('e4', 'Culte de baptêmes', 'culte', DateTime(2026, 10, 25, 10));
+  await evt('e5', 'Repas fraternel', 'evenement', DateTime(2026, 10, 18, 12),
+      inscription: true, places: 60, inscrits: 22);
+  Future<void> media(String id, String titre, String rubrique, int jour,
+          {String type = 'audio', String? theme}) =>
+      db.doc('medias/$id').set({
+        'rubrique': rubrique,
+        'theme': theme,
+        'type': type,
+        'titre': {'fr': titre},
+        'description': {
+          'fr': 'Prédication du Pasteur Claude Lumbala au culte du dimanche.',
+        },
+        'predicateur': 'Pasteur Claude Lumbala',
+        'date': t(DateTime(2026, 10, jour, 10)),
+        'url': 'https://exemple.be/$id.m4a',
+        'visibilite': 'public',
+        'publie': true,
+      });
+  await media('m1', 'Marcher par l\'Esprit', 'predication', 4, theme: 'sanctification');
+  await media('m2', 'La repentance qui libère', 'predication', 1, theme: 'repentance');
+  await media('m3', 'Le fruit de l\'Esprit', 'enseignement', 2, theme: 'sanctification');
+  await media('m4', 'Prier en famille', 'podcast', 3);
+  await db.doc('versets/v1').set({
+    'reference': 'Psaume 121:1-2',
+    'texte': {
+      'fr': 'Je lève mes yeux vers les montagnes… Le secours me vient de l\'Éternel, qui a fait les cieux et la terre.',
+    },
+    'ordre': 1,
+  });
+  for (final (uid, nom) in [('u1', 'Marie'), ('u2', 'Paul'), ('u3', 'Esther'), ('u4', 'David')]) {
+    await db.doc('annuaire/$uid').set({'nom': nom});
+  }
+  await db.doc('groupes/louange').set({
+    'nom': 'Équipe de louange',
+    'type': 'louange',
+    'description': 'Répétitions le jeudi à 19 h.',
+    'prive': true,
+    'membres': ['u1', 'u2', 'u3', 'u4'],
+    'admins': ['u3'],
+    'dernierMessage': {
+      'auteur': 'u3',
+      'nom': 'Esther',
+      'texte': 'Merci à tous, à jeudi !',
+      'le': t(DateTime(2026, 10, 5, 8)),
+    },
+  });
+  await db.doc('groupes/cellule').set({
+    'nom': 'Cellule de Tienen',
+    'type': 'cellule',
+    'description': 'Étude biblique le mercredi soir.',
+    'prive': true,
+    'membres': ['u1', 'u2'],
+    'admins': ['u2'],
+  });
+  final msgs = [
+    ('u3', 'Esther', 'Bonjour à tous ! Pour dimanche : « Tu es saint », « Grâce infinie » et « À toi la gloire ».'),
+    ('u2', 'Paul', 'Parfait, je prépare les accords ce soir.'),
+    ('u1', 'Marie', 'Je serai là jeudi pour la répétition.'),
+    ('u4', 'David', 'Moi aussi. Je m\'occupe du son.'),
+    ('u3', 'Esther', 'Merci à tous, à jeudi !'),
+  ];
+  for (final (i, (a, n, txt)) in msgs.indexed) {
+    await db.doc('groupes/louange/messages/m$i').set({
+      'auteur': a,
+      'nom': n,
+      'texte': txt,
+      'createdAt': t(DateTime(2026, 10, 4, 18).add(Duration(minutes: 20 * i))),
+    });
+  }
+}
+
+void main() {
+  setUpAll(() async {
+    GoogleFonts.config.allowRuntimeFetching = false;
+    const g = 'assets/google_fonts';
+    await police('CormorantGaramond', [
+      '$g/CormorantGaramond-SemiBold.ttf',
+      '$g/CormorantGaramond-Bold.ttf',
+    ]);
+    await police('NunitoSans', [
+      '$g/NunitoSans-Regular.ttf',
+      '$g/NunitoSans-Medium.ttf',
+      '$g/NunitoSans-SemiBold.ttf',
+      '$g/NunitoSans-Bold.ttf',
+    ]);
+    const fa = '/root/.pub-cache/hosted/pub.dev/font_awesome_flutter-11.0.0/lib/fonts';
+    await police('packages/font_awesome_flutter/FontAwesomeBrands', [
+      '$fa/Font-Awesome-7-Brands-Regular-400.otf',
+    ]);
+    await police('packages/font_awesome_flutter/FontAwesomeSolid', [
+      '$fa/Font-Awesome-7-Free-Solid-900.otf',
+    ]);
+    await police('packages/font_awesome_flutter/FontAwesomeRegular', [
+      '$fa/Font-Awesome-7-Free-Regular-400.otf',
+    ]);
+    await police('MaterialIcons', [
+      '/opt/flutter/bin/cache/artifacts/material_fonts/MaterialIcons-Regular.otf',
+    ]);
+  });
+
+  const tailles = {
+    'iphone-6.9': (Size(1320, 2868), 3.0),
+    'ipad-13': (Size(2048, 2732), 2.0),
+  };
+  for (final e in tailles.entries) {
+    testWidgets('captures ${e.key}', (tester) async {
+      final b = Banc(connecte: true, iPhone: true);
+      await b.avecProfil();
+      await remplir(b);
+      await lancer(tester, banc: b, taille: e.value.$1);
+      tester.view.devicePixelRatio = e.value.$2;
+      await tester.pumpAndSettle();
+      await tester.runAsync(() => GoogleFonts.pendingFonts());
+      await tester.pumpAndSettle();
+      Future<void> cap(String n) async {
+        // Images (logo, photos) décodées avant la capture.
+        await tester.runAsync(() async {
+          for (final el in find.byType(Image).evaluate()) {
+            await precacheImage((el.widget as Image).image, el);
+          }
+        });
+        await tester.pumpAndSettle();
+        await expectLater(
+          find.byType(MaterialApp),
+          matchesGoldenFile('$sortie/${e.key}/$n.png'),
+        );
+      }
+      Future<void> onglet(String nom) async {
+        await tester.tap(find.text(nom).last);
+        await tester.pumpAndSettle();
+      }
+
+      await cap('1-accueil');
+      await onglet('Agenda');
+      await cap('2-agenda');
+      await onglet('Médias');
+      await cap('3-medias');
+      await onglet('Groupes');
+      await cap('4-groupes');
+      await tester.tap(find.text('Équipe de louange'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Discussion'));
+      await tester.pumpAndSettle();
+      await cap('5-discussion');
+    });
+  }
+}
