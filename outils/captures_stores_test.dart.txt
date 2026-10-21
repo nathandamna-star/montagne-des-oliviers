@@ -167,6 +167,7 @@ void main() {
   const tailles = {
     'iphone-6.9': (Size(1320, 2868), 3.0),
     'ipad-13': (Size(2048, 2732), 2.0),
+    'iphone-6.3': (Size(1206, 2622), 3.0),
   };
   for (final e in tailles.entries) {
     testWidgets('captures ${e.key}', (tester) async {
