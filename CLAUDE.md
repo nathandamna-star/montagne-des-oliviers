@@ -376,3 +376,7 @@ Avant toute décision importante non prévue ici, pose la question au lieu de ch
   secrétariat peut effacer un message de groupe — ou le garder) ; « Bloquer » → `users.bloques` (≤ 500) : messages
   masqués dans les discussions, pas de notification de ses messages (`sansBloqueurs`) ; Profil › Personnes bloquées.
   Signalements faits par un compte supprimés avec lui. Messages en `Text` (plus `SelectableText`, qui prenait l'appui long).
+- **Google Play** (choix du porteur, 26/10/2026) : compte personnel de Nathan Damna ; dons masqués sur Android aussi
+  (`donsVisiblesProvider` = `kIsWeb`, remplacé en test par `Banc`) ; signature de publication par `android/key.properties`
+  (hors dépôt) dans `android/app/build.gradle.kts`. Guide : `docs/publication-google-play.md` (test fermé 12 testeurs /
+  14 jours, keytool, appbundle, fiche, SHA-1 dans Firebase pour Google).

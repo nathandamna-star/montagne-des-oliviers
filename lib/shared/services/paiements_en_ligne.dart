@@ -95,9 +95,8 @@ final donsDansLeNavigateurProvider = Provider<bool>(
   (ref) => !kIsWeb && defaultTargetPlatform == TargetPlatform.iOS,
 );
 
-/// Rubrique « Nous soutenir » visible : pas sur iPhone / iPad, où Apple
-/// refuse toute mention de dons hors achat intégré (refus 3.1.1 de « Nous
-/// deux avec Dieu », 20/10/2026) ; les membres donnent sur le site.
-final donsVisiblesProvider = Provider<bool>(
-  (ref) => !ref.watch(donsDansLeNavigateurProvider),
-);
+/// Rubrique « Nous soutenir » visible sur le site seulement : pas dans les
+/// apps iPhone / iPad (refus Apple 3.1.1 de « Nous deux avec Dieu »,
+/// 20/10/2026) ni Android (même prudence pour Google Play, choix du
+/// porteur) ; les membres donnent sur le site.
+final donsVisiblesProvider = Provider<bool>((ref) => kIsWeb);

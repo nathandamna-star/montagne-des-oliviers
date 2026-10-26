@@ -278,6 +278,7 @@ class Banc {
     paiementsEnLigneProvider.overrideWithValue(paiements),
     fonctionsCompteProvider.overrideWithValue(compte),
     donsDansLeNavigateurProvider.overrideWithValue(iPhone),
+    donsVisiblesProvider.overrideWithValue(!iPhone),
     horlogeProvider.overrideWithValue(() => maintenant),
     rolesFutureProvider.overrideWith((ref) async {
       final user = ref.watch(utilisateurFirebaseProvider).value;
